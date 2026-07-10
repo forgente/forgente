@@ -50,36 +50,35 @@ secrets needed. Gitea-specific automation (giteabot, crowdin translations,
 renovate, license crons) is guarded by `if: github.repository == 'go-gitea/gitea'`
 upstream and skips automatically here.
 
-The release pipeline is adapted from Gitea's:
+The release pipeline is upstream Gitea's with Forgente substitutions:
 
 - **Nightly** (`release-nightly`): every push to `main` or `release/v*` builds
-  cross-platform binaries (uploaded as workflow artifacts) and pushes container
-  images `ghcr.io/forgente/forgente:{nightly,<major.minor>-nightly}` plus
-  `-rootless` variants.
+  cross-platform binaries (signed, uploaded to S3) and pushes container images
+  `forgente/forgente` (Docker Hub) and `ghcr.io/forgente/forgente` tagged
+  `{nightly,<major.minor>-nightly}` plus `-rootless` variants.
 - **Release candidate** (`release-tag-rc`): pushing a `v1*-rc*` tag builds
   binaries, creates a draft GitHub release, and pushes rc container images.
 - **Version release** (`release-tag-version`): pushing a `v1.*` tag builds
   binaries, creates a GitHub release with them attached, and pushes container
   images tagged `latest`, `<major>`, `<major.minor>`, `<version>`.
 
-The pipeline mirrors upstream's; external integrations activate automatically as
-soon as the matching repository secrets are added (Settings → Secrets and
-variables → Actions), and are skipped cleanly while unset:
+Configured repository secrets (Settings → Secrets and variables → Actions):
+`GPGSIGN_KEY`/`GPGSIGN_PASSPHRASE` (release signing key
+`67129BAD57A2C8D2186032489D6FD2FD6E0B9BA5`, `Forgente <maintainers@forgente.com>`),
+`DOCKERHUB_USERNAME`/`DOCKERHUB_TOKEN` (Docker Hub account `forgente`),
+`AWS_REGION`/`AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY`/`AWS_S3_BUCKET`
+(bucket `forgente-dl` in `eu-central-1`, IAM user `forgente-release-ci`,
+binaries land under `s3://forgente-dl/forgente/<version or branch-nightly>`),
+and `RELEASE_TOKEN` (PAT used to create GitHub releases, as upstream does).
 
-| External account | Secrets to add | What activates |
-| ------------------ | ---------------- | ---------------- |
-| GPG release key | `GPGSIGN_KEY`, `GPGSIGN_PASSPHRASE` | `.asc` detached signatures on release binaries (cosign/sigstore signing always runs) |
-| AWS S3 bucket (dl.forgente.com) | `AWS_REGION`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_S3_BUCKET` | binary uploads to `s3://<bucket>/forgente/<version>` (or `<branch>-nightly`) |
-| Docker Hub org `forgente` | `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN` | container images also pushed to `docker.io/forgente/forgente` |
-| Release PAT (optional) | `RELEASE_TOKEN` | GitHub releases created by that identity instead of the built-in token |
-| Snap store (register name `forgente`) | `SNAPCRAFT_STORE_CREDENTIALS` | then enable the workflow: `gh workflow enable release-nightly-snapcraft.yml` (currently disabled; the snap is renamed to `forgente` in `snap/snapcraft.yaml`) |
-
-Remaining differences from upstream: release jobs run on GitHub-hosted
-`ubuntu-latest` runners instead of Gitea's Namespace runners, so container
-images are `linux/amd64` + `linux/arm64` (riscv64 is too slow under QEMU on
-standard runners — restore it in the `release-*` workflows if faster runners
-are ever configured), and nightly binaries are additionally uploaded as
-workflow artifacts so they are downloadable without S3.
+Differences from upstream: release jobs run on GitHub-hosted `ubuntu-latest`
+runners instead of Gitea's Namespace runners, so container images are
+`linux/amd64` + `linux/arm64` (riscv64 is too slow under QEMU on standard
+runners — restore it in the `release-*` workflows if faster runners are ever
+configured). The snapcraft workflow is disabled and the snap renamed to
+`forgente`; register the name on the Snap store, add
+`SNAPCRAFT_STORE_CREDENTIALS`, then run
+`gh workflow enable release-nightly-snapcraft.yml`.
 
 After the first container publish, make the `forgente` package public once under
 https://github.com/orgs/forgente/packages (GHCR packages start private).
