@@ -67,9 +67,9 @@ soon as the matching repository secrets are added (Settings → Secrets and
 variables → Actions), and are skipped cleanly while unset:
 
 | External account | Secrets to add | What activates |
-|------------------|----------------|----------------|
+| ------------------ | ---------------- | ---------------- |
 | GPG release key | `GPGSIGN_KEY`, `GPGSIGN_PASSPHRASE` | `.asc` detached signatures on release binaries (cosign/sigstore signing always runs) |
-| AWS S3 bucket (dl.forgente.com) | `AWS_REGION`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_S3_BUCKET` | binary uploads to `s3://<bucket>/forgente/<version|branch-nightly>` |
+| AWS S3 bucket (dl.forgente.com) | `AWS_REGION`, `AWS_ACCESS_KEY_ID`, `AWS_SECRET_ACCESS_KEY`, `AWS_S3_BUCKET` | binary uploads to `s3://<bucket>/forgente/<version>` (or `<branch>-nightly`) |
 | Docker Hub org `forgente` | `DOCKERHUB_USERNAME`, `DOCKERHUB_TOKEN` | container images also pushed to `docker.io/forgente/forgente` |
 | Release PAT (optional) | `RELEASE_TOKEN` | GitHub releases created by that identity instead of the built-in token |
 | Snap store (register name `forgente`) | `SNAPCRAFT_STORE_CREDENTIALS` | then enable the workflow: `gh workflow enable release-nightly-snapcraft.yml` (currently disabled; the snap is renamed to `forgente` in `snap/snapcraft.yaml`) |
