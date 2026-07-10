@@ -87,6 +87,9 @@ jobs:
     permissions:
       contents: read
       packages: write # to publish to ghcr.io
+    env:
+      # optional secret: Docker Hub publishing is skipped when unset
+      HAS_DOCKERHUB: ${{ secrets.DOCKERHUB_USERNAME != '' }}
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
       # fetch all commits instead of only the last as some branches are long lived and could have many between versions
@@ -106,6 +109,7 @@ jobs:
         with:
           images: |-
             ghcr.io/forgente/forgente
+            ${{ env.HAS_DOCKERHUB == 'true' && 'forgente/forgente' || '' }}
           tags: |
             type=raw,value=${{ steps.clean_name.outputs.branch }}
           annotations: |
@@ -115,6 +119,7 @@ jobs:
         with:
           images: |-
             ghcr.io/forgente/forgente
+            ${{ env.HAS_DOCKERHUB == 'true' && 'forgente/forgente' || '' }}
           # each tag below will have the suffix of -rootless
           flavor: |
             suffix=-rootless
@@ -122,6 +127,12 @@ jobs:
             type=raw,value=${{ steps.clean_name.outputs.branch }}
           annotations: |
             org.opencontainers.image.authors="maintainers@forgente.com"
+      - name: Login to Docker Hub
+        if: env.HAS_DOCKERHUB == 'true'
+        uses: docker/login-action@c99871dec2022cc055c062a10cc1a1310835ceb4 # v4.3.0
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
       - name: Login to GHCR using PAT
         uses: docker/login-action@c99871dec2022cc055c062a10cc1a1310835ceb4 # v4.3.0
         with:
