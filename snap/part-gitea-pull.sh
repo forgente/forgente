@@ -33,6 +33,9 @@ fi
 [ -z "$last_committed_tag" ] && last_committed_tag="$(git for-each-ref --sort=taggerdate --format '%(tag)' refs/tags | tail -n 1)"
 # tolerate "snap not found" until the first forgente snap is published
 [ -z "$last_released_tag" ] && last_released_tag="$(snap info forgente 2>/dev/null | awk '$1 == "latest/candidate:" { print $2 }' || true)"
+# no released forgente snap yet: build the current branch, never an upstream tag
+# (a tag checkout would use that commit's build script and binary name)
+[ -z "$last_released_tag" ] && last_released_tag="$last_committed_tag"
 
 if [ "${last_committed_tag}" != "${last_released_tag}" ]; then
   # if the latest tag has not been released to stable, build that tag instead of default branch.
