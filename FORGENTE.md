@@ -107,10 +107,12 @@ each), `.air.toml`, `.gitignore` (`/forgente`), `snap/*`.
 
 ## Gitea ecosystem tools
 
-The Gitea ecosystem (hosted at [gitea.com/gitea](https://gitea.com/gitea), not
-the GitHub org) talks to the server through its API. Because Forgente stays
-API-compatible with Gitea, **upstream tools work against Forgente unforked** —
-the strategy is fork-on-divergence, not fork-in-advance. Per tool:
+The Gitea ecosystem is hosted mostly at [gitea.com/gitea](https://gitea.com/gitea)
+(exception: [giteabot](https://github.com/go-gitea/giteabot) lives on GitHub,
+since it operates on GitHub's PR/label APIs) and talks to the server through
+its API. Because Forgente stays API-compatible with Gitea, **upstream tools
+work against Forgente unforked** — the strategy is fork-on-divergence, not
+fork-in-advance. Per tool:
 
 | Tool | Works with Forgente today | Fork trigger |
 | ---- | ---- | ---- |
