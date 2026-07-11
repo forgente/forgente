@@ -25,22 +25,25 @@ git remote add upstream https://github.com/go-gitea/gitea.git
 
 ## Syncing from upstream Gitea
 
-Run the helper script:
+Syncing is automated: a daily scheduled cloud agent fetches `upstream`, opens a
+`chore: sync upstream gitea` PR when `main` has new upstream commits, merges it
+with a **merge commit once checks pass — sync PRs are never squashed** (squashing
+flattens upstream history and makes every future sync re-conflict), fast-forwards
+`release/v*` branches and tags, and cancels release-branch nightlies stuck on
+upstream's private runners. Feature/fix PRs, by contrast, are squash-merged with
+the `(#N)` title suffix, matching upstream convention.
+
+For a manual sync, the helper script does the same:
 
 ```bash
 contrib/forgente/sync-upstream.sh
-```
-
-It fetches `upstream`, merges `upstream/main` into `main`, and syncs tags and
-release branches. Resolve any merge conflicts (they will be in files Forgente has
-modified), then push:
-
-```bash
 git push origin main --tags
 ```
 
-To keep merges tractable, prefer additive changes (new files under `contrib/forgente/`,
-new packages) over edits to upstream files where possible.
+Merge conflicts, when they happen, are in the files Forgente has modified — the
+list is at the end of the "Rebranding state" section. To keep merges tractable,
+prefer additive changes (new files under `contrib/forgente/`, new packages) over
+edits to upstream files where possible.
 
 ## CI/CD and releases
 
@@ -69,19 +72,57 @@ Configured repository secrets (Settings → Secrets and variables → Actions):
 `AWS_REGION`/`AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY`/`AWS_S3_BUCKET`
 (bucket `forgente-dl` in `eu-central-1`, IAM user `forgente-release-ci`,
 binaries land under `s3://forgente-dl/forgente/<version or branch-nightly>`),
-and `RELEASE_TOKEN` (PAT used to create GitHub releases, as upstream does).
+`RELEASE_TOKEN` (PAT used to create GitHub releases, as upstream does), and
+`SNAPCRAFT_STORE_CREDENTIALS` (publishes the `forgente` snap to `latest/edge`;
+the store name is registered, listing goes public after Canonical's review).
 
 Differences from upstream: release jobs run on GitHub-hosted `ubuntu-latest`
 runners instead of Gitea's Namespace runners, so container images are
 `linux/amd64` + `linux/arm64` (riscv64 is too slow under QEMU on standard
 runners — restore it in the `release-*` workflows if faster runners are ever
-configured). The snapcraft workflow is disabled and the snap renamed to
-`forgente`; register the name on the Snap store, add
-`SNAPCRAFT_STORE_CREDENTIALS`, then run
-`gh workflow enable release-nightly-snapcraft.yml`.
+configured).
 
-After the first container publish, make the `forgente` package public once under
-https://github.com/orgs/forgente/packages (GHCR packages start private).
+### Shipping a tagged release
+
+Forgente versions are `v<upstream version>-<forgente release>`, e.g.
+`v1.26.4-1` is the first Forgente release of Gitea 1.26.4 (the Forgejo
+convention). Upstream's own tags are mirrored into this repository by the
+daily sync, so plain `vX.Y.Z` names are taken — and pushing a mirrored
+upstream tag is harmless by design: it runs the workflow file *at that tag*,
+which targets upstream's private runners and just queues (cancel it).
+
+Release procedure:
+
+1. Branch `forgente/vX.Y` from the upstream tag being shipped (NOT
+   `release/vX.Y*` — the sync routine owns `release/v*` as pure upstream
+   mirrors, and `release-nightly` triggers on that pattern). Cherry-pick the
+   rebrand commits (the conflict-file list below is the checklist) onto it.
+2. Dry-run with an rc tag first (`vX.Y.Z-N-rc1`): `release-tag-rc` builds
+   binaries and rc images and creates a *draft* GitHub release — delete the
+   draft after verifying.
+3. Push an **annotated** tag `vX.Y.Z-N` whose message is the release notes
+   (`gh release create --notes-from-tag`): "based on Gitea X.Y.Z" + link to
+   upstream's changelog + the Forgente delta.
+4. `release-tag-version` publishes binaries to GitHub + S3 and container
+   images tagged `latest`, `<major>`, `<major.minor>`, `<upstream version>`,
+   `<full version>` (+ `-rootless`). The workflow uses `type=match` docker
+   tag patterns because semver types would treat the `-N` suffix as a
+   prerelease and skip `latest`/major/minor.
+5. Fan out: `forgente/deployment` version.json (update checker),
+   `homebrew-forgente` versioned formula, `helm-forgente` chart pin. Snap
+   promotion to stable once the store listing is public.
+
+## Live properties
+
+| URL | What | Source of truth |
+| ---- | ---- | ---- |
+| https://forgente.com | hosted instance (anonymous visitors redirect to about) | forgente/infra (private runbook) |
+| https://about.forgente.com | landing page | served from the instance host |
+| https://docs.forgente.com | documentation | [forgente/docs](https://github.com/forgente/docs) |
+| https://dl.forgente.com | signed binaries + `forgente/version.json` (update checker) | release workflows + [forgente/deployment](https://github.com/forgente/deployment) |
+
+The private [forgente/infra](https://github.com/forgente/infra) repo holds the
+server provisioning, CDN/DNS/cert inventory, and operational lessons.
 
 ## Rebranding state
 
@@ -97,9 +138,13 @@ Gitea's:
   unchanged, and `docker/` needs no fork-side edits.
 - Default `APP_NAME` and `[ui.meta]` author/description/keywords are Forgente
   (`modules/setting/server.go`, `modules/setting/ui.go`, `app.example.ini`).
-- Not yet rebranded: logo and UI branding (needs a Forgente logo — note
-  Gitea's name/logo are upstream trademarks), Go module path
-  (`code.gitea.io/gitea` — deep fork territory, avoid).
+- Logo/favicon are a placeholder Forgente mark (`assets/logo.svg`,
+  `assets/favicon.svg`; regenerate derived files with `make generate-images`).
+  Replace with a real brand design later — same two files + regenerate.
+  `public/assets/img/gitea.svg` stays Gitea's mark on purpose (it represents
+  Gitea as an external service in migration screens).
+- Not yet rebranded: Go module path (`code.gitea.io/gitea` — deep fork
+  territory, avoid).
 
 Files that now differ from upstream and may conflict on sync (re-apply the
 same renames): the 3 `release-*` workflows (see above), `Makefile`
@@ -108,23 +153,52 @@ same renames): the 3 `release-*` workflows (see above), `Makefile`
 each), `.air.toml`, `.gitignore` (`/forgente`), `snap/*`,
 `modules/setting/testenv.go` (AppPath), `modules/setting/server.go`
 (APP_NAME default), `modules/setting/ui.go` (meta defaults),
-`custom/conf/app.example.ini`.
+`custom/conf/app.example.ini`, `services/cron/tasks_extended.go`
+(update-checker endpoint).
 
 ## Gitea ecosystem tools
 
-The Gitea ecosystem (hosted at [gitea.com/gitea](https://gitea.com/gitea), not
-the GitHub org) talks to the server through its API. Because Forgente stays
-API-compatible with Gitea, **upstream tools work against Forgente unforked** —
-the strategy is fork-on-divergence, not fork-in-advance. Per tool:
+The Gitea ecosystem is hosted mostly at [gitea.com/gitea](https://gitea.com/gitea)
+(exception: [giteabot](https://github.com/go-gitea/giteabot) lives on GitHub,
+since it operates on GitHub's PR/label APIs) and talks to the server through
+its API. Because Forgente stays API-compatible with Gitea, **upstream tools
+work against Forgente unforked** — the strategy is fork-on-divergence, not
+fork-in-advance. Per tool:
 
-| Tool | Works with Forgente today | Fork trigger |
-| ---- | ---- | ---- |
-| `tea` (CLI) | yes — point it at a Forgente instance | Forgente-specific API additions or branding requirements |
-| `runner` (act_runner) | yes — registers against Forgente Actions | changes to the Actions protocol |
-| `helm-gitea` | yes — override `image.repository=forgente/forgente` in values | wanting a published `forgente` chart with our defaults (earliest sensible fork) |
-| `go-sdk` | yes — API-compatible | API divergence (also implies maintaining a `code.forgente.com`-style module path) |
-| `terraform-provider-gitea` | yes | API divergence |
-| `giteabot` | n/a — automates go-gitea/gitea team workflow (backports, merge queue, labels); its in-repo workflows skip here via repo guard | own release branches + contributor-scale PR volume; interim: a generic backport GitHub Action; prerequisites: bot account + hosting (it is a deployed service, not just a repo) |
+Complete disposition of all active gitea.com/gitea repos (audited 2026-07-11):
+
+**Forked under the forgente org:** `gitea` (this repo),
+`docs` → [forgente/docs](https://github.com/forgente/docs) (docs.forgente.com),
+`helm-gitea` → [forgente/helm-forgente](https://github.com/forgente/helm-forgente),
+`homebrew-gitea` → [forgente/homebrew-forgente](https://github.com/forgente/homebrew-forgente),
+and `infrastructure`/`deployment` → forgente/infra (private; includes the
+dl CDN, mirroring upstream's `infrastructure/dl-gitea-com`).
+
+**Work against Forgente unforked (fork trigger: API divergence):** `tea`,
+`go-sdk`, `sdk.js`, `terraform-provider-gitea` (can also terraform the
+forgente.com instance itself), `gitea-mcp`, `runner` (act_runner — Actions
+protocol change is its trigger), `git-lfs-transfer`, `gitea-mirror`,
+`importer`, `daggerverse-gitea`.
+
+**Internal build deps, consumed as-is:** `actions-proto-def`,
+`actions-proto-go`, `go-xsd-duration`, `go-fed-activity`, `runner-images`,
+`renovate-config`.
+
+**Trigger-based, not yet forked:**
+
+| Repo | Trigger |
+| ---- | ---- |
+| `changelog` | first tagged Forgente release (generates release notes from PR labels) |
+| `design` | a real Forgente logo/brand exists |
+| `blog` | first blog post |
+| `awesome-gitea` | community exists |
+| `government` | enterprise/compliance docs needed |
+| `giteabot` (GitHub) | own release branches + contributor-scale PR volume; interim: generic backport action; needs bot account + hosting |
+
+**Site plumbing where Forgente differs by design:** `gitea.com`, `redirects`,
+`website-pr-preview`, `pr-deployer` — replaced by our CloudFront
+distributions and the docs repo's publish Action. Test fixtures
+(`test-openldap`, `test_repo`, `*-skill`) are consumed by CI as-is.
 
 When a trigger fires, follow the same soft-fork playbook as this repository:
 regular repo (no fork relation), `origin` = forgente, `upstream` = gitea.com
