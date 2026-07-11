@@ -10,7 +10,7 @@ concurrency:
 
 jobs:
   nightly-binary:
-    runs-on: namespace-profile-gitea-release-binary
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       id-token: write
@@ -66,10 +66,10 @@ jobs:
           AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
           BRANCH: ${{ steps.clean_name.outputs.branch }}
         run: |
-          aws s3 sync dist/release "s3://$AWS_S3_BUCKET/gitea/$BRANCH" --no-progress
+          aws s3 sync dist/release "s3://$AWS_S3_BUCKET/forgente/$BRANCH" --no-progress
 
   nightly-container:
-    runs-on: namespace-profile-gitea-release-docker
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write # to publish to ghcr.io
@@ -91,25 +91,25 @@ jobs:
         id: meta
         with:
           images: |-
-            gitea/gitea
-            ghcr.io/go-gitea/gitea
+            forgente/forgente
+            ghcr.io/forgente/forgente
           tags: |
             type=raw,value=${{ steps.clean_name.outputs.branch }}
           annotations: |
-            org.opencontainers.image.authors="maintainers@gitea.io"
+            org.opencontainers.image.authors="maintainers@forgente.com"
       - uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
         id: meta_rootless
         with:
           images: |-
-            gitea/gitea
-            ghcr.io/go-gitea/gitea
+            forgente/forgente
+            ghcr.io/forgente/forgente
           # each tag below will have the suffix of -rootless
           flavor: |
             suffix=-rootless
           tags: |
             type=raw,value=${{ steps.clean_name.outputs.branch }}
           annotations: |
-            org.opencontainers.image.authors="maintainers@gitea.io"
+            org.opencontainers.image.authors="maintainers@forgente.com"
       - name: Login to Docker Hub
         uses: docker/login-action@c99871dec2022cc055c062a10cc1a1310835ceb4 # v4.3.0
         with:
@@ -125,20 +125,20 @@ jobs:
         uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
         with:
           context: .
-          platforms: linux/amd64,linux/arm64,linux/riscv64
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           annotations: ${{ steps.meta.outputs.annotations }}
-          cache-from: type=registry,ref=ghcr.io/go-gitea/gitea:buildcache-rootful
-          cache-to: type=registry,ref=ghcr.io/go-gitea/gitea:buildcache-rootful,mode=max
+          cache-from: type=registry,ref=ghcr.io/forgente/forgente:buildcache-rootful
+          cache-to: type=registry,ref=ghcr.io/forgente/forgente:buildcache-rootful,mode=max
       - name: build rootless docker image
         uses: docker/build-push-action@53b7df96c91f9c12dcc8a07bcb9ccacbed38856a # v7.3.0
         with:
           context: .
-          platforms: linux/amd64,linux/arm64,linux/riscv64
+          platforms: linux/amd64,linux/arm64
           push: true
           file: Dockerfile.rootless
           tags: ${{ steps.meta_rootless.outputs.tags }}
           annotations: ${{ steps.meta_rootless.outputs.annotations }}
-          cache-from: type=registry,ref=ghcr.io/go-gitea/gitea:buildcache-rootless
-          cache-to: type=registry,ref=ghcr.io/go-gitea/gitea:buildcache-rootless,mode=max
+          cache-from: type=registry,ref=ghcr.io/forgente/forgente:buildcache-rootless
+          cache-to: type=registry,ref=ghcr.io/forgente/forgente:buildcache-rootless,mode=max

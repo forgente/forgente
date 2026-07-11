@@ -18,7 +18,7 @@ fi
 # How it works:
 # * snapcraft.io checks out the default branch (e.g.: main during 1.27 dev period)
 # * "override-pull" step gets the latest tag by date (e.g.: v1.26.1)
-# * use "snap info gitea" to get the latest released tag
+# * use "snap info forgente" to get the latest released tag
 #   * if the latest tag is not released to stable, checkout that tag and build it for "stable"
 #   * otherwise, build the main branch for "devel"
 # * "override-build" step uses build script from the checked out commit to build
@@ -31,7 +31,8 @@ fi
 #   it will still use the current branch, and build it for "devel"
 
 [ -z "$last_committed_tag" ] && last_committed_tag="$(git for-each-ref --sort=taggerdate --format '%(tag)' refs/tags | tail -n 1)"
-[ -z "$last_released_tag" ] && last_released_tag="$(snap info gitea | awk '$1 == "latest/candidate:" { print $2 }')"
+# tolerate "snap not found" until the first forgente snap is published
+[ -z "$last_released_tag" ] && last_released_tag="$(snap info forgente 2>/dev/null | awk '$1 == "latest/candidate:" { print $2 }' || true)"
 
 if [ "${last_committed_tag}" != "${last_released_tag}" ]; then
   # if the latest tag has not been released to stable, build that tag instead of default branch.
