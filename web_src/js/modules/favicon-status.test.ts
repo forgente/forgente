@@ -3,7 +3,7 @@ import {buildStatusFaviconSvg, resetActionFavicon, syncActionRunFavicon} from '.
 test('buildStatusFaviconSvg uses action status icons', () => {
   const success = buildStatusFaviconSvg('success');
   expect(success).toContain('viewBox="0 0 640 640"');
-  expect(success).toContain('fill:#609926');
+  expect(success).toContain('stop-color="#f97316"'); // Forgente placeholder logo gradient
   expect(success).toContain('data-actions-status-name="success"');
 
   const running = buildStatusFaviconSvg('running');

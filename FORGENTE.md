@@ -154,7 +154,8 @@ each), `.air.toml`, `.gitignore` (`/forgente`), `snap/*`,
 `modules/setting/testenv.go` (AppPath), `modules/setting/server.go`
 (APP_NAME default), `modules/setting/ui.go` (meta defaults),
 `custom/conf/app.example.ini`, `services/cron/tasks_extended.go`
-(update-checker endpoint).
+(update-checker endpoint), `web_src/js/modules/favicon-status.test.ts`
+(asserts the Forgente favicon color).
 
 ## Gitea ecosystem tools
 
