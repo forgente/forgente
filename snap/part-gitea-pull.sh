@@ -31,8 +31,9 @@ fi
 #   it will still use the current branch, and build it for "devel"
 
 [ -z "$last_committed_tag" ] && last_committed_tag="$(git for-each-ref --sort=taggerdate --format '%(tag)' refs/tags | tail -n 1)"
-# tolerate "snap not found" until the first forgente snap is published
-[ -z "$last_released_tag" ] && last_released_tag="$(snap info forgente 2>/dev/null | awk '$1 == "latest/candidate:" { print $2 }' || true)"
+# tolerate "snap not found" until the first forgente snap is published;
+# a closed channel prints "--" so only accept version-shaped values
+[ -z "$last_released_tag" ] && last_released_tag="$(snap info forgente 2>/dev/null | awk '$1 == "latest/candidate:" && $2 ~ /^v?[0-9]/ { print $2 }' || true)"
 # no released forgente snap yet: build the current branch, never an upstream tag
 # (a tag checkout would use that commit's build script and binary name)
 [ -z "$last_released_tag" ] && last_released_tag="$last_committed_tag"
