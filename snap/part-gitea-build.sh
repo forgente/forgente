@@ -15,5 +15,5 @@ command -v pnpm >/dev/null 2>&1 || npm install -g pnpm
 
 TAGS="bindata sqlite sqlite_unlock_notify pam cert" make build
 
-install -D gitea "${SNAPCRAFT_PART_INSTALL}/gitea"
+install -D forgente "${SNAPCRAFT_PART_INSTALL}/forgente"
 cp -r options "${SNAPCRAFT_PART_INSTALL}/"

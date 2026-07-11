@@ -37,7 +37,7 @@ func SetupGiteaTestEnv() {
 
 	appWorkPathBuiltin = giteaRoot
 	AppWorkPath = giteaRoot
-	AppPath = filepath.Join(giteaRoot, "gitea") + util.Iif(IsWindows, ".exe", "")
+	AppPath = filepath.Join(giteaRoot, "forgente") + util.Iif(IsWindows, ".exe", "")
 	StaticRootPath = giteaRoot // need to load assets (options, public) from the source code directory for testing
 
 	// giteaConf (GITEA_CONF) must be relative because it is used in the git hooks as "$GITEA_ROOT/$GITEA_CONF"
