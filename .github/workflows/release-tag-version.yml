@@ -100,15 +100,22 @@ jobs:
           images: |-
             forgente/forgente
             ghcr.io/forgente/forgente
-          # this will generate tags in the following format:
+          # Forgente tags are v<upstream>-<forgente release>, e.g. v1.2.3-1.
+          # semver types treat the -1 suffix as a prerelease and would skip
+          # latest/major/minor, so match on the tag name instead. This will
+          # generate tags in the following format:
           # latest
           # 1
           # 1.2
           # 1.2.3
+          # 1.2.3-1
+          flavor: |
+            latest=true
           tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}
-            type=semver,pattern={{major}}.{{minor}}
+            type=match,pattern=v(.+),group=1
+            type=match,pattern=v(\d+\.\d+\.\d+),group=1
+            type=match,pattern=v(\d+\.\d+),group=1
+            type=match,pattern=v(\d+),group=1
           annotations: |
             org.opencontainers.image.authors="maintainers@forgente.com"
       - uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
@@ -119,16 +126,19 @@ jobs:
             ghcr.io/forgente/forgente
           # each tag below will have the suffix of -rootless
           flavor: |
+            latest=true
             suffix=-rootless,onlatest=true
-          # this will generate tags in the following format (with -rootless suffix added):
-          # latest
-          # 1
-          # 1.2
-          # 1.2.3
+          # same tag set as the regular image (see above), with -rootless added:
+          # latest-rootless
+          # 1-rootless
+          # 1.2-rootless
+          # 1.2.3-rootless
+          # 1.2.3-1-rootless
           tags: |
-            type=semver,pattern={{version}}
-            type=semver,pattern={{major}}
-            type=semver,pattern={{major}}.{{minor}}
+            type=match,pattern=v(.+),group=1
+            type=match,pattern=v(\d+\.\d+\.\d+),group=1
+            type=match,pattern=v(\d+\.\d+),group=1
+            type=match,pattern=v(\d+),group=1
           annotations: |
             org.opencontainers.image.authors="maintainers@forgente.com"
       - name: Login to Docker Hub

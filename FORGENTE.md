@@ -82,6 +82,36 @@ runners instead of Gitea's Namespace runners, so container images are
 runners — restore it in the `release-*` workflows if faster runners are ever
 configured).
 
+### Shipping a tagged release
+
+Forgente versions are `v<upstream version>-<forgente release>`, e.g.
+`v1.26.4-1` is the first Forgente release of Gitea 1.26.4 (the Forgejo
+convention). Upstream's own tags are mirrored into this repository by the
+daily sync, so plain `vX.Y.Z` names are taken — and pushing a mirrored
+upstream tag is harmless by design: it runs the workflow file *at that tag*,
+which targets upstream's private runners and just queues (cancel it).
+
+Release procedure:
+
+1. Branch `forgente/vX.Y` from the upstream tag being shipped (NOT
+   `release/vX.Y*` — the sync routine owns `release/v*` as pure upstream
+   mirrors, and `release-nightly` triggers on that pattern). Cherry-pick the
+   rebrand commits (the conflict-file list below is the checklist) onto it.
+2. Dry-run with an rc tag first (`vX.Y.Z-N-rc1`): `release-tag-rc` builds
+   binaries and rc images and creates a *draft* GitHub release — delete the
+   draft after verifying.
+3. Push an **annotated** tag `vX.Y.Z-N` whose message is the release notes
+   (`gh release create --notes-from-tag`): "based on Gitea X.Y.Z" + link to
+   upstream's changelog + the Forgente delta.
+4. `release-tag-version` publishes binaries to GitHub + S3 and container
+   images tagged `latest`, `<major>`, `<major.minor>`, `<upstream version>`,
+   `<full version>` (+ `-rootless`). The workflow uses `type=match` docker
+   tag patterns because semver types would treat the `-N` suffix as a
+   prerelease and skip `latest`/major/minor.
+5. Fan out: `forgente/deployment` version.json (update checker),
+   `homebrew-forgente` versioned formula, `helm-forgente` chart pin. Snap
+   promotion to stable once the store listing is public.
+
 ## Live properties
 
 | URL | What | Source of truth |
@@ -123,7 +153,8 @@ same renames): the 3 `release-*` workflows (see above), `Makefile`
 each), `.air.toml`, `.gitignore` (`/forgente`), `snap/*`,
 `modules/setting/testenv.go` (AppPath), `modules/setting/server.go`
 (APP_NAME default), `modules/setting/ui.go` (meta defaults),
-`custom/conf/app.example.ini`.
+`custom/conf/app.example.ini`, `services/cron/tasks_extended.go`
+(update-checker endpoint).
 
 ## Gitea ecosystem tools
 
