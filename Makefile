@@ -517,6 +517,8 @@ ifneq ($(and $(STATIC),$(findstring pam,$(TAGS))),)
   $(error pam support set via TAGS does not support static builds)
 endif
 	CGO_ENABLED="$(CGO_ENABLED)" CGO_CFLAGS="$(CGO_CFLAGS)" $(GO) build $(GOFLAGS) $(EXTRA_GOFLAGS) -tags '$(TAGS)' -ldflags '-s -w $(EXTLDFLAGS) $(LDFLAGS)' -o $@
+	# fixture repo hooks in tests/gitea-repositories-meta call "$$GITEA_ROOT/gitea"
+	@[ "$(EXECUTABLE)" = "gitea" ] || ln -sf $(EXECUTABLE) gitea
 
 .PHONY: release
 release: frontend generate release-windows release-linux release-darwin release-freebsd release-copy release-compress vendor release-sources release-check
