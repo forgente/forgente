@@ -42,7 +42,7 @@ RUN chmod 755 /tmp/local/usr/bin/entrypoint \
               /tmp/local/etc/s6/gitea/* \
               /tmp/local/etc/s6/openssh/* \
               /tmp/local/etc/s6/.s6-svscan/* \
-              /go/src/gitea.dev/gitea
+              /go/src/gitea.dev/forgente
 
 FROM docker.io/library/alpine:3.24 AS gitea
 
@@ -74,7 +74,7 @@ RUN addgroup \
   echo "git:*" | chpasswd -e
 
 COPY --from=build-env /tmp/local /
-COPY --from=build-env /go/src/gitea.dev/gitea /app/gitea/gitea
+COPY --from=build-env /go/src/gitea.dev/forgente /app/gitea/gitea
 
 ENV USER=git
 ENV GITEA_CUSTOM=/data/gitea

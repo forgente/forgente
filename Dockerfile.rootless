@@ -37,7 +37,7 @@ COPY docker/rootless /tmp/local
 
 # Set permissions for builds that made under windows which strips the executable bit from file
 RUN chmod 755 /tmp/local/usr/local/bin/* \
-              /go/src/gitea.dev/gitea
+              /go/src/gitea.dev/forgente
 
 FROM docker.io/library/alpine:3.24 AS gitea-rootless
 
@@ -68,7 +68,7 @@ RUN mkdir -p /var/lib/gitea /etc/gitea
 RUN chown git:git /var/lib/gitea /etc/gitea
 
 COPY --from=build-env /tmp/local /
-COPY --from=build-env --chown=root:root /go/src/gitea.dev/gitea /app/gitea/gitea
+COPY --from=build-env --chown=root:root /go/src/gitea.dev/forgente /app/gitea/gitea
 
 # git:git
 USER 1000:1000
