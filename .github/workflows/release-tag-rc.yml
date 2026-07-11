@@ -11,7 +11,7 @@ concurrency:
 
 jobs:
   binary:
-    runs-on: namespace-profile-gitea-release-binary
+    runs-on: ubuntu-latest
     permissions:
       contents: read
     steps:
@@ -60,7 +60,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       - name: upload binaries to s3
         run: |
-          aws s3 sync dist/release s3://${{ secrets.AWS_S3_BUCKET }}/gitea/${{ steps.clean_name.outputs.branch }} --no-progress
+          aws s3 sync dist/release s3://${{ secrets.AWS_S3_BUCKET }}/forgente/${{ steps.clean_name.outputs.branch }} --no-progress
       - name: Install GH CLI
         uses: dev-hanz-ops/install-gh-cli-action@v0.2.1
         with:
@@ -72,7 +72,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }}
 
   container:
-    runs-on: namespace-profile-gitea-release-docker
+    runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write # to publish to ghcr.io
@@ -87,21 +87,21 @@ jobs:
         id: meta
         with:
           images: |-
-            gitea/gitea
-            ghcr.io/go-gitea/gitea
+            forgente/forgente
+            ghcr.io/forgente/forgente
           flavor: |
             latest=false
           # 1.2.3-rc0
           tags: |
             type=semver,pattern={{version}}
           annotations: |
-            org.opencontainers.image.authors="maintainers@gitea.io"
+            org.opencontainers.image.authors="maintainers@forgente.com"
       - uses: docker/metadata-action@v6
         id: meta_rootless
         with:
           images: |-
-            gitea/gitea
-            ghcr.io/go-gitea/gitea
+            forgente/forgente
+            ghcr.io/forgente/forgente
           # each tag below will have the suffix of -rootless
           flavor: |
             latest=false
@@ -110,7 +110,7 @@ jobs:
           tags: |
             type=semver,pattern={{version}}
           annotations: |
-            org.opencontainers.image.authors="maintainers@gitea.io"
+            org.opencontainers.image.authors="maintainers@forgente.com"
       - name: Login to Docker Hub
         uses: docker/login-action@v4
         with:
@@ -126,7 +126,7 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           context: .
-          platforms: linux/amd64,linux/arm64,linux/riscv64
+          platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           annotations: ${{ steps.meta.outputs.annotations }}
@@ -134,7 +134,7 @@ jobs:
         uses: docker/build-push-action@v7
         with:
           context: .
-          platforms: linux/amd64,linux/arm64,linux/riscv64
+          platforms: linux/amd64,linux/arm64
           push: true
           file: Dockerfile.rootless
           tags: ${{ steps.meta_rootless.outputs.tags }}
