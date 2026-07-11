@@ -27,17 +27,21 @@ credit belongs to the Gitea maintainers and contributors — see
 **Container** (recommended):
 
 ```bash
-docker run -p 3000:3000 -p 2222:22 forgente/forgente:main-nightly
+docker run -p 3000:3000 -p 2222:22 forgente/forgente:latest
 ```
 
 Images are published to [Docker Hub](https://hub.docker.com/r/forgente/forgente)
 and [GHCR](https://github.com/forgente/forgente/pkgs/container/forgente) as
-`main-nightly` (plus `-rootless` variants). Existing Gitea container setups
-(volumes, `GITEA_*` environment variables) work unchanged.
+`latest`, `<major>`, `<major.minor>`, `<version>` per release plus a
+`main-nightly` development build (all with `-rootless` variants). Existing
+Gitea container setups (volumes, `GITEA_*` environment variables) work
+unchanged.
 
-**Binaries**: signed builds for every platform are at
-[dl.forgente.com](https://dl.forgente.com/forgente/main-nightly/) —
-each with SHA-256 checksum, GPG signature (key
+**Binaries**: signed builds for every platform are attached to
+[GitHub releases](https://github.com/forgente/forgente/releases) and mirrored
+at [dl.forgente.com](https://dl.forgente.com/forgente/) (nightlies under
+[`main-nightly`](https://dl.forgente.com/forgente/main-nightly/)) — each with
+SHA-256 checksum, GPG signature (key
 `67129BAD57A2C8D2186032489D6FD2FD6E0B9BA5`), and sigstore bundle.
 
 **Snap**:
