@@ -189,7 +189,7 @@ protocol change is its trigger), `git-lfs-transfer`, `gitea-mirror`,
 
 | Repo | Trigger |
 | ---- | ---- |
-| `changelog` | first tagged Forgente release (generates release notes from PR labels) |
+| `changelog` | consciously deferred at v1.26.4-1: release notes live in the annotated tag; fork when Forgente's own PR volume justifies generated notes |
 | `design` | a real Forgente logo/brand exists |
 | `blog` | first blog post |
 | `awesome-gitea` | community exists |
