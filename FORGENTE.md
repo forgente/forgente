@@ -83,6 +83,28 @@ configured). The snapcraft workflow is disabled and the snap renamed to
 After the first container publish, make the `forgente` package public once under
 https://github.com/orgs/forgente/packages (GHCR packages start private).
 
+## Rebranding state
+
+The build identity is Forgente; the runtime/compat surface deliberately stays
+Gitea's:
+
+- Binary and release artifacts are named `forgente` / `forgente-<version>-*`
+  (`EXECUTABLE` in the Makefile, xgo `-out`, src tarball, man page, `.air.toml`).
+- The snap installs and exposes a `forgente` command.
+- Container images keep the upstream-compatible internals on purpose:
+  `/app/gitea/gitea` path, `gitea` wrapper on PATH, `GITEA_*` environment
+  variables, s6 service names, volumes. Existing Gitea container setups work
+  unchanged, and `docker/` needs no fork-side edits.
+- Not yet rebranded: logo and UI branding (needs a Forgente logo — note
+  Gitea's name/logo are upstream trademarks), config defaults (`APP_NAME`),
+  Go module path (`code.gitea.io/gitea` — deep fork territory, avoid).
+
+Files that now differ from upstream and may conflict on sync (re-apply the
+same renames): the 3 `release-*` workflows (see above), `Makefile`
+(`EXECUTABLE`, `-out forgente-$(VERSION)`, `forgente-src-`, docs target),
+`Dockerfile` + `Dockerfile.rootless` (two `/go/src/gitea.dev/forgente` lines
+each), `.air.toml`, `.gitignore` (`/forgente`), `snap/*`.
+
 ## Gitea ecosystem tools
 
 The Gitea ecosystem (hosted at [gitea.com/gitea](https://gitea.com/gitea), not
