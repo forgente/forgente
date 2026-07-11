@@ -66,7 +66,7 @@ func SetupGiteaTestEnv() {
 		StaticRootPath = giteaRoot
 		// during testing, the AppPath must point to the pre-built Gitea binary in the source root
 		// it needs to be called by git hooks
-		AppPath = filepath.Join(giteaRoot, "gitea") + util.Iif(IsWindows, ".exe", "")
+		AppPath = filepath.Join(giteaRoot, "forgente") + util.Iif(IsWindows, ".exe", "")
 	}
 
 	initGiteaConf := func() string {

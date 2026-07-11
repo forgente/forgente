@@ -17,5 +17,5 @@ command -v pnpm >/dev/null 2>&1 || npm install -g pnpm
 # for 1.27: sqlite is not needed, "cert" seems doing nothing
 TAGS="bindata pam" make build
 
-install -D gitea "${SNAPCRAFT_PART_INSTALL}/gitea"
+install -D forgente "${SNAPCRAFT_PART_INSTALL}/forgente"
 cp -r options "${SNAPCRAFT_PART_INSTALL}/"

@@ -30,17 +30,17 @@ environment:
 
 apps:
   forgente:
-    command: gitea
+    command: forgente
     plugs: [network, network-bind, removable-media]
   web:
-    command: gitea web
+    command: forgente web
     daemon: simple
     plugs: [network, network-bind, removable-media]
   dump:
-    command: gitea dump
+    command: forgente dump
     plugs: [home, removable-media]
   version:
-    command: gitea --version
+    command: forgente --version
   sqlite:
     command: usr/bin/sqlite3
 
