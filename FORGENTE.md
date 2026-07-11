@@ -25,22 +25,25 @@ git remote add upstream https://github.com/go-gitea/gitea.git
 
 ## Syncing from upstream Gitea
 
-Run the helper script:
+Syncing is automated: a daily scheduled cloud agent fetches `upstream`, opens a
+`chore: sync upstream gitea` PR when `main` has new upstream commits, merges it
+with a **merge commit once checks pass — sync PRs are never squashed** (squashing
+flattens upstream history and makes every future sync re-conflict), fast-forwards
+`release/v*` branches and tags, and cancels release-branch nightlies stuck on
+upstream's private runners. Feature/fix PRs, by contrast, are squash-merged with
+the `(#N)` title suffix, matching upstream convention.
+
+For a manual sync, the helper script does the same:
 
 ```bash
 contrib/forgente/sync-upstream.sh
-```
-
-It fetches `upstream`, merges `upstream/main` into `main`, and syncs tags and
-release branches. Resolve any merge conflicts (they will be in files Forgente has
-modified), then push:
-
-```bash
 git push origin main --tags
 ```
 
-To keep merges tractable, prefer additive changes (new files under `contrib/forgente/`,
-new packages) over edits to upstream files where possible.
+Merge conflicts, when they happen, are in the files Forgente has modified — the
+list is at the end of the "Rebranding state" section. To keep merges tractable,
+prefer additive changes (new files under `contrib/forgente/`, new packages) over
+edits to upstream files where possible.
 
 ## CI/CD and releases
 
@@ -69,19 +72,27 @@ Configured repository secrets (Settings → Secrets and variables → Actions):
 `AWS_REGION`/`AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY`/`AWS_S3_BUCKET`
 (bucket `forgente-dl` in `eu-central-1`, IAM user `forgente-release-ci`,
 binaries land under `s3://forgente-dl/forgente/<version or branch-nightly>`),
-and `RELEASE_TOKEN` (PAT used to create GitHub releases, as upstream does).
+`RELEASE_TOKEN` (PAT used to create GitHub releases, as upstream does), and
+`SNAPCRAFT_STORE_CREDENTIALS` (publishes the `forgente` snap to `latest/edge`;
+the store name is registered, listing goes public after Canonical's review).
 
 Differences from upstream: release jobs run on GitHub-hosted `ubuntu-latest`
 runners instead of Gitea's Namespace runners, so container images are
 `linux/amd64` + `linux/arm64` (riscv64 is too slow under QEMU on standard
 runners — restore it in the `release-*` workflows if faster runners are ever
-configured). The snapcraft workflow is disabled and the snap renamed to
-`forgente`; register the name on the Snap store, add
-`SNAPCRAFT_STORE_CREDENTIALS`, then run
-`gh workflow enable release-nightly-snapcraft.yml`.
+configured).
 
-After the first container publish, make the `forgente` package public once under
-https://github.com/orgs/forgente/packages (GHCR packages start private).
+## Live properties
+
+| URL | What | Source of truth |
+| ---- | ---- | ---- |
+| https://forgente.com | hosted instance (anonymous visitors redirect to about) | forgente/infra (private runbook) |
+| https://about.forgente.com | landing page | served from the instance host |
+| https://docs.forgente.com | documentation | [forgente/docs](https://github.com/forgente/docs) |
+| https://dl.forgente.com | signed binaries + `forgente/version.json` (update checker) | release workflows + [forgente/deployment](https://github.com/forgente/deployment) |
+
+The private [forgente/infra](https://github.com/forgente/infra) repo holds the
+server provisioning, CDN/DNS/cert inventory, and operational lessons.
 
 ## Rebranding state
 
