@@ -123,14 +123,40 @@ its API. Because Forgente stays API-compatible with Gitea, **upstream tools
 work against Forgente unforked** — the strategy is fork-on-divergence, not
 fork-in-advance. Per tool:
 
-| Tool | Works with Forgente today | Fork trigger |
-| ---- | ---- | ---- |
-| `tea` (CLI) | yes — point it at a Forgente instance | Forgente-specific API additions or branding requirements |
-| `runner` (act_runner) | yes — registers against Forgente Actions | changes to the Actions protocol |
-| `helm-gitea` | yes — override `image.repository=forgente/forgente` in values | wanting a published `forgente` chart with our defaults (earliest sensible fork) |
-| `go-sdk` | yes — API-compatible | API divergence (also implies maintaining a `code.forgente.com`-style module path) |
-| `terraform-provider-gitea` | yes | API divergence |
-| `giteabot` | n/a — automates go-gitea/gitea team workflow (backports, merge queue, labels); its in-repo workflows skip here via repo guard | own release branches + contributor-scale PR volume; interim: a generic backport GitHub Action; prerequisites: bot account + hosting (it is a deployed service, not just a repo) |
+Complete disposition of all active gitea.com/gitea repos (audited 2026-07-11):
+
+**Forked under the forgente org:** `gitea` (this repo),
+`docs` → [forgente/docs](https://github.com/forgente/docs) (docs.forgente.com),
+`helm-gitea` → [forgente/helm-forgente](https://github.com/forgente/helm-forgente),
+`homebrew-gitea` → [forgente/homebrew-forgente](https://github.com/forgente/homebrew-forgente),
+and `infrastructure`/`deployment` → forgente/infra (private; includes the
+dl CDN, mirroring upstream's `infrastructure/dl-gitea-com`).
+
+**Work against Forgente unforked (fork trigger: API divergence):** `tea`,
+`go-sdk`, `sdk.js`, `terraform-provider-gitea` (can also terraform the
+forgente.com instance itself), `gitea-mcp`, `runner` (act_runner — Actions
+protocol change is its trigger), `git-lfs-transfer`, `gitea-mirror`,
+`importer`, `daggerverse-gitea`.
+
+**Internal build deps, consumed as-is:** `actions-proto-def`,
+`actions-proto-go`, `go-xsd-duration`, `go-fed-activity`, `runner-images`,
+`renovate-config`.
+
+**Trigger-based, not yet forked:**
+
+| Repo | Trigger |
+| ---- | ---- |
+| `changelog` | first tagged Forgente release (generates release notes from PR labels) |
+| `design` | a real Forgente logo/brand exists |
+| `blog` | first blog post |
+| `awesome-gitea` | community exists |
+| `government` | enterprise/compliance docs needed |
+| `giteabot` (GitHub) | own release branches + contributor-scale PR volume; interim: generic backport action; needs bot account + hosting |
+
+**Site plumbing where Forgente differs by design:** `gitea.com`, `redirects`,
+`website-pr-preview`, `pr-deployer` — replaced by our CloudFront
+distributions and the docs repo's publish Action. Test fixtures
+(`test-openldap`, `test_repo`, `*-skill`) are consumed by CI as-is.
 
 When a trigger fires, follow the same soft-fork playbook as this repository:
 regular repo (no fork relation), `origin` = forgente, `upstream` = gitea.com
