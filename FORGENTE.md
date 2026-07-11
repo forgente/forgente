@@ -97,9 +97,13 @@ Gitea's:
   unchanged, and `docker/` needs no fork-side edits.
 - Default `APP_NAME` and `[ui.meta]` author/description/keywords are Forgente
   (`modules/setting/server.go`, `modules/setting/ui.go`, `app.example.ini`).
-- Not yet rebranded: logo and UI branding (needs a Forgente logo — note
-  Gitea's name/logo are upstream trademarks), Go module path
-  (`code.gitea.io/gitea` — deep fork territory, avoid).
+- Logo/favicon are a placeholder Forgente mark (`assets/logo.svg`,
+  `assets/favicon.svg`; regenerate derived files with `make generate-images`).
+  Replace with a real brand design later — same two files + regenerate.
+  `public/assets/img/gitea.svg` stays Gitea's mark on purpose (it represents
+  Gitea as an external service in migration screens).
+- Not yet rebranded: Go module path (`code.gitea.io/gitea` — deep fork
+  territory, avoid).
 
 Files that now differ from upstream and may conflict on sync (re-apply the
 same renames): the 3 `release-*` workflows (see above), `Makefile`
