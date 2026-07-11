@@ -83,6 +83,26 @@ configured). The snapcraft workflow is disabled and the snap renamed to
 After the first container publish, make the `forgente` package public once under
 https://github.com/orgs/forgente/packages (GHCR packages start private).
 
+## Gitea ecosystem tools
+
+The Gitea ecosystem (hosted at [gitea.com/gitea](https://gitea.com/gitea), not
+the GitHub org) talks to the server through its API. Because Forgente stays
+API-compatible with Gitea, **upstream tools work against Forgente unforked** —
+the strategy is fork-on-divergence, not fork-in-advance. Per tool:
+
+| Tool | Works with Forgente today | Fork trigger |
+| ---- | ---- | ---- |
+| `tea` (CLI) | yes — point it at a Forgente instance | Forgente-specific API additions or branding requirements |
+| `runner` (act_runner) | yes — registers against Forgente Actions | changes to the Actions protocol |
+| `helm-gitea` | yes — override `image.repository=forgente/forgente` in values | wanting a published `forgente` chart with our defaults (earliest sensible fork) |
+| `go-sdk` | yes — API-compatible | API divergence (also implies maintaining a `code.forgente.com`-style module path) |
+| `terraform-provider-gitea` | yes | API divergence |
+| `giteabot` | n/a — automates go-gitea/gitea team workflow (backports, merge queue, labels); its in-repo workflows skip here via repo guard | own release branches + contributor-scale PR volume; interim: a generic backport GitHub Action; prerequisites: bot account + hosting (it is a deployed service, not just a repo) |
+
+When a trigger fires, follow the same soft-fork playbook as this repository:
+regular repo (no fork relation), `origin` = forgente, `upstream` = gitea.com
+source, CI adapted by pure substitutions, sync via merge commits.
+
 ## Development
 
 Everything from upstream applies unchanged — see [README.md](README.md) and
