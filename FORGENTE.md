@@ -95,15 +95,20 @@ Gitea's:
   `/app/gitea/gitea` path, `gitea` wrapper on PATH, `GITEA_*` environment
   variables, s6 service names, volumes. Existing Gitea container setups work
   unchanged, and `docker/` needs no fork-side edits.
+- Default `APP_NAME` and `[ui.meta]` author/description/keywords are Forgente
+  (`modules/setting/server.go`, `modules/setting/ui.go`, `app.example.ini`).
 - Not yet rebranded: logo and UI branding (needs a Forgente logo — note
-  Gitea's name/logo are upstream trademarks), config defaults (`APP_NAME`),
-  Go module path (`code.gitea.io/gitea` — deep fork territory, avoid).
+  Gitea's name/logo are upstream trademarks), Go module path
+  (`code.gitea.io/gitea` — deep fork territory, avoid).
 
 Files that now differ from upstream and may conflict on sync (re-apply the
 same renames): the 3 `release-*` workflows (see above), `Makefile`
 (`EXECUTABLE`, `-out forgente-$(VERSION)`, `forgente-src-`, docs target),
 `Dockerfile` + `Dockerfile.rootless` (two `/go/src/gitea.dev/forgente` lines
-each), `.air.toml`, `.gitignore` (`/forgente`), `snap/*`.
+each), `.air.toml`, `.gitignore` (`/forgente`), `snap/*`,
+`modules/setting/testenv.go` (AppPath), `modules/setting/server.go`
+(APP_NAME default), `modules/setting/ui.go` (meta defaults),
+`custom/conf/app.example.ini`.
 
 ## Gitea ecosystem tools
 
