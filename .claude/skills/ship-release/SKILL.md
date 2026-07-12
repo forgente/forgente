@@ -59,5 +59,6 @@ mirrored upstream tags — never reuse them.
   new version.
 - Helm: `curl https://dl.forgente.com/charts/index.yaml` lists the new chart.
 - Brew: formula installs (or at least `brew audit` passes) with the new URL/sha.
-- Known issue until fixed: container `forgente --version` reports the version
-  via `git describe` as `X.Y.Z+N` instead of `X.Y.Z-N`.
+- Container version: `docker run --rm forgente/forgente:<tag> forgente --version`
+  must report `X.Y.Z-N` (fixed in PR #22 by passing the GITEA_VERSION build
+  arg; first end-to-end confirmation happens at the next rc tag).
