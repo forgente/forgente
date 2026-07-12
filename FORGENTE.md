@@ -150,7 +150,7 @@ Files that now differ from upstream and may conflict on sync (re-apply the
 same renames): the 3 `release-*` workflows (see above), `Makefile`
 (`EXECUTABLE`, `-out forgente-$(VERSION)`, `forgente-src-`, docs target),
 `Dockerfile` + `Dockerfile.rootless` (two `/go/src/gitea.dev/forgente` lines
-each), `.air.toml`, `.gitignore` (`/forgente`), `snap/*`,
+each), `.air.toml`, `.gitignore` (`/forgente`, `.claude/skills/` re-include), `snap/*`,
 `modules/setting/testenv.go` (AppPath), `modules/setting/server.go`
 (APP_NAME default), `modules/setting/ui.go` (meta defaults),
 `custom/conf/app.example.ini`, `services/cron/tasks_extended.go`

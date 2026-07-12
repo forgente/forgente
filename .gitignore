@@ -107,8 +107,9 @@ prime/
 # Manpage
 /man
 
-# Ignore AI/LLM instruction files
-/.claude/
+# Ignore AI/LLM instruction files, except Forgente's committed agent skills
+/.claude/*
+!/.claude/skills/
 /.cursorrules
 /.cursor/
 /.goosehints
