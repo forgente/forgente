@@ -9,7 +9,7 @@
 - Ensure no trailing whitespace in edited files
 - Use Conventional Commits for commit messages and PR titles, e.g. `type(scope): subject`; `!` before the colon if breaking. Use `test` type for test-only changes.
 - Never force-push, amend, or squash unless asked. Use new commits and normal push for pull request updates
-- Run an agent code review (e.g. `/code-review`) on feature PRs before merging; agent-authored PRs must not be merged unreviewed
+- Run an agent code review (e.g. `/code-review`) on feature PRs before merging; agent-authored PRs must not be merged unreviewed. Automated `chore: sync upstream gitea` PRs are exempt — they carry upstream code already reviewed by the Gitea project and are merged by the sync routine once checks pass
 - Preserve existing code comments, do not remove or rewrite comments that are still relevant
 - Keep comments short, prefer same-line, explain why, never narrate code
 - Prefer unit tests over integration tests when logic is testable in isolation
