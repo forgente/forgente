@@ -119,7 +119,7 @@ Release procedure:
 | https://forgente.com | hosted instance (anonymous visitors redirect to about) | forgente/infra (private runbook) |
 | https://about.forgente.com | landing page | served from the instance host |
 | https://docs.forgente.com | documentation | [forgente/docs](https://github.com/forgente/docs) |
-| https://dl.forgente.com | signed binaries + `forgente/version.json` (update checker) | release workflows + [forgente/deployment](https://github.com/forgente/deployment) |
+| https://dl.forgente.com | signed binaries + `forgente/version.json` (update checker) + `charts/` (helm repo index) | release workflows + [forgente/deployment](https://github.com/forgente/deployment) + [forgente/helm-forgente](https://github.com/forgente/helm-forgente) |
 
 The private [forgente/infra](https://github.com/forgente/infra) repo holds the
 server provisioning, CDN/DNS/cert inventory, and operational lessons.
