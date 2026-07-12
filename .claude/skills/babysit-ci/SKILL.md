@@ -32,7 +32,8 @@ Each iteration (suggested `/loop` interval: 10–15m while a nightly is running)
 ## Stop condition
 
 Stop when the newest main nightly run has concluded `success` and nothing is
-stuck in queue. On success, spot-check the artifacts: the `nightly` docker tag
-was pushed within the last hours (`docker manifest inspect
-forgente/forgente:nightly` or the Docker Hub API) — validate real external
-state, not just the green check.
+stuck in queue. On success, spot-check the artifacts: main builds are tagged
+`main-nightly` (the workflow uses the cleaned branch name, NOT plain
+`nightly`), so check that tag was pushed within the last hours
+(`curl -s https://hub.docker.com/v2/repositories/forgente/forgente/tags/main-nightly | jq -r '.last_updated'`)
+— validate real external state, not just the green check.
