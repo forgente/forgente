@@ -21,9 +21,13 @@ because that is what keeps upstream merges cheap.
   `forgente` snap command, compat shims for everything else
 - Branch protection, PR workflow, local dev environment
 
-## Phase 1 — differentiate while tracking upstream (current)
+## Phase 1 — differentiate while tracking upstream (done)
 
-Build Forgente's own value here, under these rules of engagement:
+The buildout is complete: first tagged release shipped (`v1.26.4-1`), live
+properties up (forgente.com, dl.forgente.com, docs.forgente.com), brand
+applied at the edges, sync automation running. Forgente's own value is built
+here, and these rules of engagement remain the standing operating mode until
+a Phase 2 trigger fires:
 
 - **Additive code.** New features live in new packages/files where possible
   (e.g. `forgente/`-namespaced modules, new routes, feature flags). Bounded
@@ -36,9 +40,10 @@ Build Forgente's own value here, under these rules of engagement:
   rots for a week is a process failure. Upstream security fixes arrive
   through it — Forgente does not yet have its own security triage.
 - **Brand at the edges.** Everything users see can become Forgente without
-  merge cost: logo (needs an original design — Gitea's name and logo are
-  upstream trademarks), `APP_NAME` default, forgente.com, dl.forgente.com,
-  docs, screenshots, community channels.
+  merge cost: logo (placeholder Forgente mark shipped; the final design swaps
+  the same two asset files — Gitea's name and logo are upstream trademarks
+  and stay out), `APP_NAME` default, forgente.com, dl.forgente.com, docs,
+  screenshots, community channels.
 
 ## Phase 2 trigger — when to hard fork
 
