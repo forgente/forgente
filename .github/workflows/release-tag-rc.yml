@@ -91,6 +91,11 @@ jobs:
       - run: git fetch --unshallow --quiet --tags --force
       - uses: docker/setup-qemu-action@96fe6ef7f33517b61c61be40b68a1882f3264fb8 # v4.2.0
       - uses: docker/setup-buildx-action@bb05f3f5519dd87d3ba754cc423b652a5edd6d2c # v4.2.0
+      # in-container "git describe" turns the vX.Y.Z-N tag into X.Y.Z+N, so
+      # pass the version explicitly (Makefile env wins over the fallback)
+      - name: Get version from tag
+        id: tag_version
+        run: echo "version=${GITHUB_REF_NAME#v}" >> "$GITHUB_OUTPUT"
       - uses: docker/metadata-action@dc802804100637a589fabce1cb79ff13a1411302 # v6.2.0
         id: meta
         with:
@@ -136,6 +141,8 @@ jobs:
           context: .
           platforms: linux/amd64,linux/arm64
           push: true
+          build-args: |
+            GITEA_VERSION=${{ steps.tag_version.outputs.version }}
           tags: ${{ steps.meta.outputs.tags }}
           annotations: ${{ steps.meta.outputs.annotations }}
       - name: build rootless container image
@@ -145,5 +152,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           file: Dockerfile.rootless
+          build-args: |
+            GITEA_VERSION=${{ steps.tag_version.outputs.version }}
           tags: ${{ steps.meta_rootless.outputs.tags }}
           annotations: ${{ steps.meta_rootless.outputs.annotations }}
