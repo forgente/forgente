@@ -111,8 +111,12 @@ Release procedure:
 5. Fan out: `forgente/deployment` version.json (update checker),
    `homebrew-forgente` versioned formula, `helm-forgente` chart pin, and
    pin the forgente.com instance to the new tag (compose image bump —
-   procedure in the forgente/infra runbook). Snap promotion to stable once
-   the store listing is public.
+   procedure in the forgente/infra runbook).
+6. Snap: dispatch the `release-snap-stable` workflow with the tag — it
+   builds the tag's source with main's `snap/` scripts (the vX.Y.Z-N
+   grade/version handling lives there) and publishes to `latest/candidate`
+   (read back by `snap/part-gitea-pull.sh` as the last-released marker)
+   and `latest/stable`.
 
 ## Live properties
 
