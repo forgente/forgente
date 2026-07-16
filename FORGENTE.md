@@ -109,8 +109,10 @@ Release procedure:
    tag patterns because semver types would treat the `-N` suffix as a
    prerelease and skip `latest`/major/minor.
 5. Fan out: `forgente/deployment` version.json (update checker),
-   `homebrew-forgente` versioned formula, `helm-forgente` chart pin. Snap
-   promotion to stable once the store listing is public.
+   `homebrew-forgente` versioned formula, `helm-forgente` chart pin, and
+   pin the forgente.com instance to the new tag (compose image bump —
+   procedure in the forgente/infra runbook). Snap promotion to stable once
+   the store listing is public.
 
 ## Live properties
 
@@ -119,6 +121,7 @@ Release procedure:
 | https://forgente.com | hosted instance (anonymous visitors redirect to about) | forgente/infra (private runbook) |
 | https://about.forgente.com | landing page | served from the instance host |
 | https://docs.forgente.com | documentation | [forgente/docs](https://github.com/forgente/docs) |
+| https://blog.forgente.com | blog (infra live; content policy pending — currently builds upstream posts) | [forgente/blog](https://github.com/forgente/blog) |
 | https://dl.forgente.com | signed binaries + `forgente/version.json` (update checker) + `charts/` (helm repo index) | release workflows + [forgente/deployment](https://github.com/forgente/deployment) + [forgente/helm-forgente](https://github.com/forgente/helm-forgente) |
 
 The private [forgente/infra](https://github.com/forgente/infra) repo holds the
@@ -170,6 +173,9 @@ Complete disposition of all active gitea.com/gitea repos (audited 2026-07-11):
 
 **Forked under the forgente org:** `gitea` (this repo),
 `docs` → [forgente/docs](https://github.com/forgente/docs) (docs.forgente.com),
+`blog` → [forgente/blog](https://github.com/forgente/blog) (blog.forgente.com;
+forked 2026-07-16 ahead of its first-post trigger to stand up the S3+CloudFront
+publish infra — Forgente-only content policy still to apply),
 `helm-gitea` → [forgente/helm-forgente](https://github.com/forgente/helm-forgente),
 `homebrew-gitea` → [forgente/homebrew-forgente](https://github.com/forgente/homebrew-forgente),
 and `infrastructure`/`deployment` → forgente/infra (private; includes the
@@ -191,7 +197,6 @@ protocol change is its trigger), `git-lfs-transfer`, `gitea-mirror`,
 | ---- | ---- |
 | `changelog` | consciously deferred at v1.26.4-1: release notes live in the annotated tag; fork when Forgente's own PR volume justifies generated notes |
 | `design` | a real Forgente logo/brand exists |
-| `blog` | first blog post |
 | `awesome-gitea` | community exists |
 | `government` | enterprise/compliance docs needed |
 | `giteabot` (GitHub) | own release branches + contributor-scale PR volume; interim: generic backport action; needs bot account + hosting |
