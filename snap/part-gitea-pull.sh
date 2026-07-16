@@ -58,10 +58,19 @@ echo "Use recent tag $recent_tag to determine version and grade"
 
 version_main="$(echo "$recent_tag" | cut -d'-' -f1)"
 version_ext="$(echo "$recent_tag" | cut -d'-' -s -f2- | sed -e 'y/-/./')"
-[ -n "$version_ext" ] && grade=devel || grade=stable
 
-version="${version_main}"
-[ -n "$version_ext" ] && version="${version}+${version_ext}"
+# Forgente release tags are vX.Y.Z-N: a purely numeric suffix is a tagged
+# release, not a dev build — anything else (dev-205-g..., 1-rc1) stays devel
+if [ -n "$version_ext" ] && [ -z "$(echo "$version_ext" | tr -d '0-9')" ]; then
+  grade=stable
+  version="${version_main}-${version_ext}"
+elif [ -n "$version_ext" ]; then
+  grade=devel
+  version="${version_main}+${version_ext}"
+else
+  grade=stable
+  version="${version_main}"
+fi
 
 craftctl set version="$version"
 craftctl set grade="$grade"

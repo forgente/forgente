@@ -1,0 +1,38 @@
+name: release-snap-stable
+
+on:
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: "Release tag to build (vX.Y.Z-N)"
+        required: true
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-release:
+    strategy:
+      fail-fast: false
+      matrix:
+        runner: [ubuntu-24.04, ubuntu-24.04-arm]
+    runs-on: ${{ matrix.runner }}
+
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7
+        with:
+          fetch-depth: 0
+          ref: ${{ inputs.tag }}
+      # snap build scripts evolve on main (vX.Y.Z-N grade/version handling);
+      # build the tag's source with main's scripts
+      - run: git checkout origin/main -- snap/
+      - uses: snapcore/action-build@3bdaa03e1ba6bf59a65f84a751d943d549a54e79 # v1.3.0
+        id: build
+      - uses: snapcore/action-publish@214b86e5ca036ead1668c79afb81e550e6c54d40 # v1.2.0
+        env:
+          SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
+        with:
+          snap: ${{ steps.build.outputs.snap }}
+          # candidate is read back by snap/part-gitea-pull.sh as the
+          # "last released" marker; stable is the user-facing channel
+          release: latest/candidate,latest/stable
