@@ -25,13 +25,17 @@ git remote add upstream https://github.com/go-gitea/gitea.git
 
 ## Syncing from upstream Gitea
 
-Syncing is automated: a daily scheduled cloud agent fetches `upstream`, opens a
-`chore: sync upstream gitea` PR when `main` has new upstream commits, merges it
-with a **merge commit once checks pass — sync PRs are never squashed** (squashing
-flattens upstream history and makes every future sync re-conflict), fast-forwards
-`release/v*` branches and tags, and cancels release-branch nightlies stuck on
-upstream's private runners. Feature/fix PRs, by contrast, are squash-merged with
-the `(#N)` title suffix, matching upstream convention.
+Syncing is automated: a daily scheduled agent (06:00, maintainer-side) fetches
+`upstream`, opens a `chore: sync upstream gitea` PR when `main` has new upstream
+commits, merges it with a **merge commit once checks pass — sync PRs are never
+squashed** (squashing flattens upstream history and makes every future sync
+re-conflict), fast-forwards `release/v*` branches and tags, and cancels
+release-branch nightlies stuck on upstream's private runners. The same daily run
+also sweeps the ecosystem forks (docs, blog, helm-forgente, homebrew-forgente),
+merging their gitea.com upstreams with merge commits; conflicts there keep the
+Forgente identity surfaces (chart appVersion/icon, docusaurus title/urls,
+`.github/` workflows, formula versions). Feature/fix PRs, by contrast, are
+squash-merged with the `(#N)` title suffix, matching upstream convention.
 
 For a manual sync, the helper script does the same:
 
