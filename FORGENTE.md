@@ -1,12 +1,15 @@
-# Forgente
+# Forgente operations
 
-Forgente is a soft fork of [Gitea](https://github.com/go-gitea/gitea), hosted at
-[github.com/forgente/forgente](https://github.com/forgente/forgente) with its home
-at [forgente.com](https://forgente.com).
+This is the operational handbook for Forgente
+([github.com/forgente/forgente](https://github.com/forgente/forgente), home at
+[forgente.com](https://forgente.com)): how the project tracks its upstream,
+ships releases, and runs its live properties. For what Forgente is and where
+it is heading, see [README.md](README.md) and [ROADMAP.md](ROADMAP.md).
 
-"Soft fork" means: Forgente tracks upstream Gitea closely and regularly merges its
-changes, while carrying its own commits on top. The GitHub repository is a regular
-repository (not a GitHub fork), so it has no "forked from" association.
+Forgente builds on [Gitea](https://github.com/go-gitea/gitea) and tracks it as
+an upstream: upstream changes are merged regularly while Forgente carries its
+own commits on top. The GitHub repository is a regular repository (not a
+GitHub fork), so it has no "forked from" association.
 
 ## Repository layout
 
@@ -214,7 +217,8 @@ protocol change is its trigger), `git-lfs-transfer`, `gitea-mirror`,
 distributions and the docs repo's publish Action. Test fixtures
 (`test-openldap`, `test_repo`, `*-skill`) are consumed by CI as-is.
 
-When a trigger fires, follow the same soft-fork playbook as this repository:
+When a trigger fires, follow the same upstream-tracking playbook as this
+repository:
 regular repo (no fork relation), `origin` = forgente, `upstream` = gitea.com
 source, CI adapted by pure substitutions, sync via merge commits.
 

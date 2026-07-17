@@ -1,15 +1,18 @@
 # Forgente roadmap
 
-Forgente's goal is an independent, fully hackable Git service with its own
-brand and infrastructure. The path there is deliberate: stay a soft fork of
-[Gitea](https://github.com/go-gitea/gitea) while the project builds what makes
-it worth existing, then cut to a hard fork when — and only when — divergence
-is worth more than upstream's ongoing flow of fixes.
+Forgente is an independent, fully hackable software forge: its own brand,
+infrastructure, releases — and, the part being built now, its own
+differentiating features. The repository is completely hackable today: any
+feature, route, model, or UI change can be built now.
 
-The repository is already completely hackable today: any feature, route,
-model, or UI change can be built now. What the soft-fork phase constrains is
-only the renaming of upstream identifiers (paths, env vars, module names),
-because that is what keeps upstream merges cheap.
+[Gitea](https://github.com/go-gitea/gitea) is Forgente's starting point and
+current upstream. Tracking it is an engineering choice, not an identity:
+daily merges keep upstream's fixes and security patches flowing for free
+while Forgente builds what makes it worth existing. The only thing this
+choice constrains is the renaming of upstream identifiers (paths, env vars,
+module names), because that is what keeps the merges cheap. When divergence
+becomes worth more than upstream's flow of fixes, Forgente cuts over to a
+hard fork (Phase 2) — deliberately, not by drift.
 
 ## Phase 0 — infrastructure parity (done)
 
@@ -21,13 +24,14 @@ because that is what keeps upstream merges cheap.
   `forgente` snap command, compat shims for everything else
 - Branch protection, PR workflow, local dev environment
 
-## Phase 1 — differentiate while tracking upstream (done)
+## Phase 1 — differentiate while tracking upstream (current)
 
 The buildout is complete: first tagged release shipped (`v1.26.4-1`), live
 properties up (forgente.com, dl.forgente.com, docs.forgente.com), brand
-applied at the edges, sync automation running. Forgente's own value is built
-here, and these rules of engagement remain the standing operating mode until
-a Phase 2 trigger fires:
+applied at the edges, sync automation running. Forgente's own value — the
+features that make it more than its starting point — is built here, and
+these rules of engagement remain the standing operating mode until a Phase 2
+trigger fires:
 
 - **Additive code.** New features live in new packages/files where possible
   (e.g. `forgente/`-namespaced modules, new routes, feature flags). Bounded

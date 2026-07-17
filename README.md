@@ -6,21 +6,18 @@
 [![](https://github.com/forgente/forgente/actions/workflows/release-nightly.yml/badge.svg?branch=main)](https://github.com/forgente/forgente/actions/workflows/release-nightly.yml?query=branch%3Amain "Release Nightly")
 [![](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT "License: MIT")
 
-**A painless self-hosted Git service.**
+**The complete software forge you fully own.**
 
 </div>
 
 Forgente is an all-in-one software development service: Git hosting, code
 review, issue tracking, project boards, wiki, package registry, and CI/CD
 compatible with GitHub Actions workflows. Written in Go, it runs as a single
-binary on Linux, macOS, FreeBSD/OpenBSD, and Windows.
+binary on Linux, macOS, FreeBSD/OpenBSD, and Windows — on your hardware,
+under your control, with no telemetry.
 
-Forgente is a **soft fork of [Gitea](https://github.com/go-gitea/gitea)**: it
-tracks upstream closely and merges Gitea's improvements and security fixes
-continuously, while building its own identity and features on top. Enormous
-credit belongs to the Gitea maintainers and contributors — see
-[FORGENTE.md](FORGENTE.md) for exactly how the fork relates to upstream and
-[ROADMAP.md](ROADMAP.md) for where it is heading.
+Where Forgente is heading is laid out in [ROADMAP.md](ROADMAP.md); how it is
+built and shipped is documented in [FORGENTE.md](FORGENTE.md).
 
 ## Install
 
@@ -62,9 +59,18 @@ TAGS="bindata" make build
 
 ## Documentation
 
-Forgente is configuration- and API-compatible with Gitea, so the upstream
-[documentation](https://docs.gitea.com/) applies. Forgente-specific
-behavior is documented in [FORGENTE.md](FORGENTE.md).
+Documentation lives at [docs.forgente.com](https://docs.forgente.com).
+Forgente-specific behavior and operations are documented in
+[FORGENTE.md](FORGENTE.md).
+
+## Built on Gitea
+
+Forgente builds on [Gitea](https://github.com/go-gitea/gitea) and tracks it
+as an upstream: Gitea's improvements and security fixes are merged
+continuously while Forgente's own features are built on top, and Forgente
+stays configuration- and API-compatible. Enormous credit belongs to the Gitea
+maintainers and contributors. The tracking mechanics are documented in
+[FORGENTE.md](FORGENTE.md).
 
 ## Contributing
 
