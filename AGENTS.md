@@ -19,11 +19,14 @@
 - Always add `Assisted-By` trailers to commit messages in format `Assisted-by: AGENT_NAME:MODEL_VERSION`
 - Never add `Co-Authored-By` `Signed-off-by` trailer to commit messages. Sign off must be done by a human.
 
-## Forgente-specific (this repo is a soft fork of Gitea)
+## Forgente-specific
 
-- Read [FORGENTE.md](FORGENTE.md) before changing anything: fork model, sync
-  workflow, rebrand state, sync-conflict file list, ecosystem map. Strategy
-  and hard-fork triggers live in [ROADMAP.md](ROADMAP.md).
+- Forgente is its own project; it builds on Gitea and tracks it as an
+  upstream. Frame docs, posts, and PR descriptions Forgente-first — upstream
+  tracking is a build mechanism, not the project's identity.
+- Read [FORGENTE.md](FORGENTE.md) before changing anything: upstream-tracking
+  model, sync workflow, rebrand state, sync-conflict file list, ecosystem map.
+  Strategy and hard-fork triggers live in [ROADMAP.md](ROADMAP.md).
 - Never commit directly to `main` — feature branches and PRs only. Feature/fix
   PRs are squash-merged with the `(#N)` title suffix.
 - Upstream-sync PRs (`chore: sync upstream gitea`) are merged with a MERGE
