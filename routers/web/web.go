@@ -1365,6 +1365,7 @@ func registerWebRoutes(m *web.Router, webAuth *AuthMiddleware) {
 				m.Post("/unlock", reqRepoIssuesOrPullsWriter, repo.UnlockIssue)
 				m.Post("/delete", reqRepoAdmin, repo.DeleteIssue)
 				m.Post("/content-history/soft-delete", repo.SoftDeleteContentHistory)
+				m.Post("/create_branch", web.Bind(forms.NewBranchForm{}), repo.ForgenteCreateBranchFromIssue) // Forgente: create branch from issue
 			})
 
 			m.Post("/attachments", repo.UploadIssueAttachment)
