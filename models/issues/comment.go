@@ -165,6 +165,9 @@ var commentStrings = []string{
 }
 
 func (t CommentType) String() string {
+	if name, ok := forgenteCommentStrings[t]; ok { // Forgente types use explicit high values
+		return name
+	}
 	return commentStrings[t]
 }
 
@@ -174,7 +177,7 @@ func AsCommentType(typeName string) CommentType {
 			return CommentType(index)
 		}
 	}
-	return CommentTypeUndefined
+	return asForgenteCommentType(typeName)
 }
 
 func (t CommentType) HasContentSupport() bool {
