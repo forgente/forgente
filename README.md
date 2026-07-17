@@ -62,8 +62,9 @@ TAGS="bindata" make build
 
 ## Documentation
 
-Forgente is configuration- and API-compatible with Gitea, so the upstream
-[documentation](https://docs.gitea.com/) applies. Forgente-specific
+See the [Forgente documentation](https://docs.forgente.com/). Forgente is
+configuration- and API-compatible with Gitea, so the upstream
+[Gitea documentation](https://docs.gitea.com/) also applies. Forgente-specific
 behavior is documented in [FORGENTE.md](FORGENTE.md).
 
 ## Contributing
