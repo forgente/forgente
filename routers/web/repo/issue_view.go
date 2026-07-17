@@ -374,6 +374,7 @@ func ViewIssue(ctx *context.Context) {
 		prepareIssueViewSidebarWatch,
 		prepareIssueViewSidebarTimeTracker,
 		prepareIssueViewSidebarDependency,
+		forgentePrepareIssueViewSidebarRelated, // Forgente: related issues
 		prepareIssueViewSidebarPin,
 	}
 	if issue.IsPull {
@@ -728,7 +729,8 @@ func prepareIssueViewCommentsAndSidebarParticipants(ctx *context.Context, issue 
 				ctx.ServerError("LoadAssigneeUserAndTeam", err)
 				return
 			}
-		} else if comment.Type == issues_model.CommentTypeRemoveDependency || comment.Type == issues_model.CommentTypeAddDependency {
+		} else if comment.Type == issues_model.CommentTypeRemoveDependency || comment.Type == issues_model.CommentTypeAddDependency ||
+			issues_model.IsForgenteRelatedCommentType(comment.Type) {
 			if err = comment.LoadDepIssueDetails(ctx); err != nil {
 				if !issues_model.IsErrIssueNotExist(err) {
 					ctx.ServerError("LoadDepIssueDetails", err)

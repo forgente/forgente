@@ -16,10 +16,22 @@ import (
 const (
 	// CommentTypeForgenteCreateBranch records that a branch was created from the issue
 	CommentTypeForgenteCreateBranch CommentType = 1000
+	// CommentTypeForgenteAddRelated records that another issue was marked as related
+	CommentTypeForgenteAddRelated CommentType = 1001
+	// CommentTypeForgenteRemoveRelated records that a related issue was removed
+	CommentTypeForgenteRemoveRelated CommentType = 1002
 )
 
 var forgenteCommentStrings = map[CommentType]string{
-	CommentTypeForgenteCreateBranch: "forgente_create_branch",
+	CommentTypeForgenteCreateBranch:  "forgente_create_branch",
+	CommentTypeForgenteAddRelated:    "forgente_add_related",
+	CommentTypeForgenteRemoveRelated: "forgente_remove_related",
+}
+
+// IsForgenteRelatedCommentType reports whether t is one of the related-issue comment types,
+// which carry a DependentIssueID like the dependency comment types do.
+func IsForgenteRelatedCommentType(t CommentType) bool {
+	return t == CommentTypeForgenteAddRelated || t == CommentTypeForgenteRemoveRelated
 }
 
 func asForgenteCommentType(typeName string) CommentType {

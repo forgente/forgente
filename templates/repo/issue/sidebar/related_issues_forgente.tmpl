@@ -1,0 +1,51 @@
+{{/* Forgente: related issues */}}
+{{if not .Issue.IsPull}}
+	<div class="divider"></div>
+	<div>
+		<span class="text"><strong>{{ctx.Locale.Tr "repo.issues.related.title"}}</strong></span>
+		{{if .ForgenteRelatedIssues}}
+			<div class="ui divided list">
+				{{range .ForgenteRelatedIssues}}
+					<div class="item{{if .IsClosed}} is-closed{{end}} flex-left-right">
+						<div class="item-left tw-flex tw-justify-center tw-flex-col tw-flex-1 gt-ellipsis">
+							<a class="muted gt-ellipsis" href="{{.Link}}" data-tooltip-content="#{{.Index}} {{.Title | ctx.RenderUtils.RenderEmoji}}">
+								#{{.Index}} {{.Title | ctx.RenderUtils.RenderEmoji}}
+							</a>
+						</div>
+						<div class="item-right tw-flex tw-items-center tw-m-1">
+							{{if $.ForgenteCanRelate}}
+								<a class="muted show-modal" data-modal="#forgente-remove-related-confirm"
+									data-modal-related_id="{{.ID}}"
+									data-tooltip-content="{{ctx.Locale.Tr "repo.issues.related.remove_info"}}">
+									{{svg "octicon-trash" 16}}
+								</a>
+							{{end}}
+						</div>
+					</div>
+				{{end}}
+			</div>
+		{{else}}
+			<p>{{ctx.Locale.Tr "repo.issues.related.none"}}</p>
+		{{end}}
+		{{if .ForgenteCanRelate}}
+			<form method="post" action="{{.Issue.Link}}/related/add">
+				<div class="ui fluid action input">
+					<input name="related_ref" placeholder="{{ctx.Locale.Tr "repo.issues.related.add_placeholder"}}" required>
+					<button class="ui icon button" data-tooltip-content="{{ctx.Locale.Tr "repo.issues.related.add"}}">
+						{{svg "octicon-plus"}}
+					</button>
+				</div>
+			</form>
+		{{end}}
+	</div>
+	{{if .ForgenteCanRelate}}
+		<form id="forgente-remove-related-confirm" class="ui g-modal-confirm modal" method="post" action="{{.Issue.Link}}/related/delete">
+			<div class="header">{{svg "octicon-trash"}} {{ctx.Locale.Tr "repo.issues.related.remove_header"}}</div>
+			<div class="content">
+				<input type="hidden" value="" name="related_id">
+				<p>{{ctx.Locale.Tr "repo.issues.related.remove_text"}}</p>
+				{{template "base/modal_actions_confirm" (dict "ModalButtonTypes" "confirm")}}
+			</div>
+		</form>
+	{{end}}
+{{end}}
