@@ -8,15 +8,31 @@
 		<div class="header">{{ctx.Locale.Tr "repo.branch.new_branch"}}</div>
 		<form class="ui form" action="{{.Issue.Link}}/create_branch" method="post">
 			<div class="content">
-				<div class="field">
-					{{ctx.Locale.Tr "repo.issues.create_branch_from_default" .Repository.DefaultBranch}}
-				</div>
 				<div class="required field">
 					<label for="forgente-new-branch-name">{{ctx.Locale.Tr "repo.branch.name"}}</label>
 					<input id="forgente-new-branch-name" name="new_branch_name" value="{{.Issue.ForgenteDefaultBranchName}}" required>
+				</div>
+				<div class="field">
+					<label for="forgente-base-branch-name">{{ctx.Locale.Tr "repo.issues.create_branch_base"}}</label>
+					<select class="ui selection dropdown" id="forgente-base-branch-name" name="base_branch_name">
+						{{range .ForgenteBranchOptions}}
+							<option value="{{.}}"{{if eq . $.Repository.DefaultBranch}} selected{{end}}>{{.}}</option>
+						{{end}}
+					</select>
 				</div>
 			</div>
 			{{template "base/modal_actions_confirm" (dict "ModalButtonTypes" "confirm")}}
 		</form>
 	</div>
+	{{if .ForgenteCreatedBranches}}
+		<div class="divider"></div>
+		<span class="text small grey">{{ctx.Locale.Tr "repo.issues.branches_from_issue"}}</span>
+		<div class="ui relaxed list tw-mt-1">
+			{{range .ForgenteCreatedBranches}}
+				<div class="item">
+					{{svg "octicon-git-branch"}} <a href="{{$.RepoLink}}/src/branch/{{PathEscapeSegments .}}">{{.}}</a>
+				</div>
+			{{end}}
+		</div>
+	{{end}}
 {{end}}
