@@ -179,6 +179,25 @@ each), `.air.toml`, `.gitignore` (`/forgente`), `snap/*`,
 (update-checker endpoint), `web_src/js/modules/favicon-status.test.ts`
 (asserts the Forgente favicon color).
 
+A second category: upstream files where Forgente *features* have added lines
+(added by the issue-features batch; on a sync conflict here, keep both sides —
+the Forgente lines are additive): `routers/web/web.go` (route registrations),
+`options/locale/locale_en-US.json` (locale keys), `models/issues/comment.go`
+(forgente comment-type fallback in `String()`/`AsCommentType`),
+`routers/web/repo/issue_view.go`, `routers/web/repo/issue_list.go`,
+`templates/repo/issue/view_content/{comments,sidebar}.tmpl`,
+`templates/repo/issue/list.tmpl`, `templates/explore/navbar.tmpl`,
+`templates/user/dashboard/milestones.tmpl`,
+`services/mailer/incoming/incoming.go` (`MailContent.Subject`),
+`tools/lint-go-all.go` (header regex accepts "The Forgente Authors").
+
+Textual conflicts are not the only sync hazard: an upstream refactor can
+change an API that a `*_forgente.go` file calls, breaking the build with no
+merge conflict at all (first hit: `CreateNewBranch` gained a `gitRepo`
+parameter, 2026-07-18). Sync PRs must compile (`go build ./...`) before they
+merge — CI enforces this, and the sync agent fixes such breaks on the sync
+branch itself.
+
 ## Gitea ecosystem tools
 
 The Gitea ecosystem is hosted mostly at [gitea.com/gitea](https://gitea.com/gitea)
