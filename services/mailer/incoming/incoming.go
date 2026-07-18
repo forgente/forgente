@@ -334,6 +334,7 @@ func searchTokenInAddresses(addresses []*net_mail.Address) string {
 }
 
 type MailContent struct {
+	Subject     string // used by handlers that need a title, e.g. Forgente's new-issue-via-mail
 	Content     string
 	Attachments []*Attachment
 }
@@ -355,6 +356,7 @@ func getContentFromMailReader(env *enmime.Envelope) *MailContent {
 	}
 
 	return &MailContent{
+		Subject:     env.GetHeader("Subject"),
 		Content:     extractReply(env.Text),
 		Attachments: attachments,
 	}
