@@ -2741,6 +2741,8 @@
   "org.members": "Members",
   "org.teams": "Teams",
   "org.code": "Code",
+  "org.milestones.overview.grouped_view": "Grouped view",
+  "org.milestones.overview.empty": "No milestones found.",
   "org.repos.empty": "No repositories yet.",
   "org.repos.empty_description": "Create a repository to share code with the organization.",
   "org.lower_members": "members",

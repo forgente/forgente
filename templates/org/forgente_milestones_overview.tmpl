@@ -1,0 +1,67 @@
+{{template "base/head" .}}
+<div role="main" aria-label="{{.Title}}" class="page-content organization milestones">
+	{{template "org/header" .}}
+	<div class="ui container">
+		{{template "base/alert" .}}
+		<div class="list-header">
+			<div class="small-menu-items ui compact tiny menu list-header-toggle">
+				<a class="item{{if not .IsShowClosed}} active{{end}}" href="?state=open">
+					{{svg "octicon-milestone" 16 "tw-mr-2"}}
+					{{ctx.Locale.PrettyNumber .MilestoneStats.OpenCount}}&nbsp;{{ctx.Locale.Tr "repo.issues.open_title"}}
+				</a>
+				<a class="item{{if .IsShowClosed}} active{{end}}" href="?state=closed">
+					{{svg "octicon-check" 16 "tw-mr-2"}}
+					{{ctx.Locale.PrettyNumber .MilestoneStats.ClosedCount}}&nbsp;{{ctx.Locale.Tr "repo.issues.closed_title"}}
+				</a>
+			</div>
+		</div>
+		<div class="flex-divided-list">
+			{{range .MilestoneGroups}}
+				<div class="item flex-relaxed-list">
+					<div class="flex-left-right">
+						<span class="list-item-large-title">
+							{{svg "octicon-milestone" 16}}
+							<strong>{{.Name}}</strong>
+						</span>
+						<div class="flex-text-inline">
+							<span>{{.Completeness}}%</span>
+							<progress class="list-item-title-progress" value="{{.Completeness}}" max="100"></progress>
+						</div>
+					</div>
+					<div class="list-item-secondary-bar">
+						<div class="flex-text-block tw-flex-wrap">
+							<div class="flex-text-inline">
+								{{svg "octicon-issue-opened" 14}}
+								{{ctx.Locale.PrettyNumber .NumOpenIssues}}&nbsp;{{ctx.Locale.Tr "repo.issues.open_title"}}
+							</div>
+							<div class="flex-text-inline">
+								{{svg "octicon-check" 14}}
+								{{ctx.Locale.PrettyNumber .NumClosedIssues}}&nbsp;{{ctx.Locale.Tr "repo.issues.closed_title"}}
+							</div>
+							<div class="flex-text-inline">
+								{{if .DeadlineUnix}}
+									{{svg "octicon-calendar" 14}}
+									{{DateUtils.AbsoluteShort .DeadlineUnix}}
+								{{else}}
+									{{svg "octicon-calendar" 14}}
+									{{ctx.Locale.Tr "repo.milestones.no_due_date"}}
+								{{end}}
+							</div>
+						</div>
+					</div>
+					<div class="flex-text-block tw-flex-wrap">
+						{{range .Milestones}}
+							<a class="ui basic label" href="{{.Repo.Link}}/milestone/{{.ID}}" title="{{.Repo.FullName}}">
+								{{.Repo.FullName}}
+								<div class="detail">{{.Completeness}}%</div>
+							</a>
+						{{end}}
+					</div>
+				</div>
+			{{else}}
+				<div class="item">{{ctx.Locale.Tr "org.milestones.overview.empty"}}</div>
+			{{end}}
+		</div>
+	</div>
+</div>
+{{template "base/footer" .}}
