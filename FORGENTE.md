@@ -40,6 +40,14 @@ Forgente identity surfaces (chart appVersion/icon, docusaurus title/urls,
 `.github/` workflows, formula versions). Feature/fix PRs, by contrast, are
 squash-merged with the `(#N)` title suffix, matching upstream convention.
 
+The daily run also watches upstream release **tags**: branches sync silently,
+but a release is triggered by a tag, so any new stable `vX.Y.Z` upstream tag
+without a matching Forgente `vX.Y.Z-N` release gets an issue opened in this
+repo with the release checklist ("upstream tagged vX.Y.Z — cut vX.Y.Z-1").
+Release branches themselves are not merged into `forgente/vX.Y` between
+releases — drift there is free until upstream tags, and the tag-time merge is
+near-guaranteed clean because our release-line commits are additive.
+
 For a manual sync, the helper script does the same:
 
 ```bash
