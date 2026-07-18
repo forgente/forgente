@@ -548,6 +548,7 @@ func registerWebRoutes(m *web.Router, webAuth *AuthMiddleware) {
 			}
 		}, explore.Code)
 		m.Get("/topics/search", explore.TopicSearch)
+		m.Get("/issues", explore.ForgenteIssues)
 	}, optExploreSignIn)
 
 	m.Group("/issues", func() {

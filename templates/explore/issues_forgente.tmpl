@@ -1,0 +1,40 @@
+{{template "base/head" .}}
+<div role="main" aria-label="{{.Title}}" class="page-content explore issues">
+	{{template "explore/navbar" .}}
+	<div class="ui container">
+		{{template "base/alert" .}}
+		<div class="list-header">
+			<div class="small-menu-items ui compact tiny menu list-header-toggle flex-items-block">
+				<a class="item{{if eq .ViewType "issues"}} active{{end}}" href="{{QueryBuild "?" "type" "issues" "state" .State "q" .Keyword}}">
+					{{svg "octicon-issue-opened"}} {{ctx.Locale.Tr "issues"}}
+				</a>
+				<a class="item{{if eq .ViewType "pulls"}} active{{end}}" href="{{QueryBuild "?" "type" "pulls" "state" .State "q" .Keyword}}">
+					{{svg "octicon-git-pull-request"}} {{ctx.Locale.Tr "pull_requests"}}
+				</a>
+			</div>
+			<form class="list-header-search ui form ignore-dirty">
+				<input type="hidden" name="type" value="{{.ViewType}}">
+				<input type="hidden" name="state" value="{{.State}}">
+				{{template "shared/search/combo" (dict
+					"Value" .Keyword
+					"Placeholder" (ctx.Locale.Tr (Iif .PageIsPulls "search.pull_kind" "search.issue_kind"))
+					"Tooltip" (ctx.Locale.Tr "explore.go_to")
+					"SearchModes" .SearchModes
+					"SelectedSearchMode" .SelectedSearchMode
+				)}}
+			</form>
+			<div class="list-header-filters ui secondary menu tw-m-0">
+				<div class="small-menu-items ui compact tiny menu">
+					<a class="item{{if not .IsShowClosed}} active{{end}}" href="{{QueryBuild "?" "type" .ViewType "state" "open" "q" .Keyword}}">
+						{{svg "octicon-issue-opened"}} {{ctx.Locale.Tr "repo.issues.open_title"}}
+					</a>
+					<a class="item{{if .IsShowClosed}} active{{end}}" href="{{QueryBuild "?" "type" .ViewType "state" "closed" "q" .Keyword}}">
+						{{svg "octicon-issue-closed"}} {{ctx.Locale.Tr "repo.issues.closed_title"}}
+					</a>
+				</div>
+			</div>
+		</div>
+		{{template "shared/issuelist" dict "." . "listType" "dashboard"}}
+	</div>
+</div>
+{{template "base/footer" .}}
