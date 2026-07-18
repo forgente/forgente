@@ -373,6 +373,7 @@
   "explore.organizations": "Organizations",
   "explore.go_to": "Go to",
   "explore.code": "Code",
+  "explore.issues": "Issues",
   "explore.code_last_indexed_at": "Last indexed %s",
   "explore.relevant_repositories_tooltip": "Repositories that are forks or that have no topic, no icon, and no description are hidden.",
   "explore.relevant_repositories": "Only relevant repositories are being shown, <a href=\"%s\">show unfiltered results</a>.",

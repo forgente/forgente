@@ -18,5 +18,8 @@
 			{{svg "octicon-code"}} {{ctx.Locale.Tr "explore.code"}}
 		</a>
 		{{end}}
+		<a class="{{if .PageIsExploreIssues}}active {{end}}item" href="{{AppSubUrl}}/explore/issues">
+			{{svg "octicon-issue-opened"}} {{ctx.Locale.Tr "explore.issues"}}
+		</a>
 	</div>
 </overflow-menu>
