@@ -19,7 +19,10 @@ import (
 // without the blocking semantics of issue dependencies. One row represents the
 // relation in both directions.
 type ForgenteIssueRelated struct {
-	ID          int64              `xorm:"pk autoincr"`
+	ID int64 `xorm:"pk autoincr"`
+	// UserID is kept on user deletion: it only records who created the relation, and
+	// (matching issue_dependency, which upstream's deleteUser also leaves untouched)
+	// the relation's validity doesn't depend on the creator still existing.
 	UserID      int64              `xorm:"NOT NULL"`
 	IssueID     int64              `xorm:"UNIQUE(forgente_related) NOT NULL"`
 	RelatedID   int64              `xorm:"UNIQUE(forgente_related) NOT NULL"`
