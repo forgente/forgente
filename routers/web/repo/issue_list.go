@@ -755,6 +755,7 @@ func Issues(ctx *context.Context) {
 		ctx.Data["Title"] = ctx.Tr("repo.issues")
 		ctx.Data["PageIsIssueList"] = true
 		ctx.Data["NewIssueChooseTemplate"] = issue_service.HasTemplatesOrContactLinks(ctx, ctx.Repo.Repository, ctx.Repo.GitRepo)
+		forgentePrepareNewIssueMailAddress(ctx) // "New issue via email" link (Forgente addition)
 	}
 
 	projectIDs := parseProjectIDsFromQuery(ctx)

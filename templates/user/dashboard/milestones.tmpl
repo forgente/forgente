@@ -45,6 +45,11 @@
 							{{ctx.Locale.PrettyNumber .MilestoneStats.ClosedCount}}&nbsp;{{ctx.Locale.Tr "repo.issues.closed_title"}}
 						</a>
 					</div>
+					{{if and .ContextUser.IsOrganization (not .Team)}}{{/* the overview is org-wide, so hide it when a team filter is active */}}
+						<a class="flex-text-inline" href="{{.ContextUser.OrganisationLink}}/milestones-overview?state={{$.State}}">
+							{{svg "octicon-table" 16}}{{ctx.Locale.Tr "org.milestones.overview.grouped_view"}}
+						</a>
+					{{end}}
 					<form class="list-header-search ui form ignore-dirty">
 						<input type="hidden" name="type" value="{{$.ViewType}}">
 							<input type="hidden" name="repos" value="[{{range $.RepoIDs}}{{.}},{{end}}]">

@@ -42,6 +42,19 @@ for ref in $(git for-each-ref --format='%(refname:short)' "refs/remotes/$UPSTREA
   fi
 done
 
+echo "==> Checking upstream release tags against Forgente releases"
+# Flag stable upstream tags (vX.Y.Z) at or above our newest shipped base version
+# that have no Forgente vX.Y.Z-N release yet — the trigger for the release process.
+latest_base=$(git tag | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+-[0-9]+$' | sed -E 's/-[0-9]+$//' | sort -V | tail -1)
+if [ -n "$latest_base" ]; then
+  for tag in $(git tag | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' | sort -V); do
+    [ "$(printf '%s\n%s\n' "$latest_base" "$tag" | sort -V | head -1)" = "$latest_base" ] || continue
+    if [ -z "$(git tag --list "${tag}-[0-9]" "${tag}-[0-9][0-9]")" ]; then
+      echo "  NEW: upstream tagged $tag but no Forgente ${tag}-N exists — run the release process (see FORGENTE.md)"
+    fi
+  done
+fi
+
 echo
 echo "Done. Review the result, then push:"
 echo "  git push origin $BRANCH --tags"
