@@ -33,7 +33,7 @@ func ForgenteCreateBranchFromIssue(ctx *context.Context) {
 		return
 	}
 
-	if err := repo_service.CreateNewBranch(ctx, ctx.Doer, ctx.Repo.Repository, ctx.Repo.Repository.DefaultBranch, form.NewBranchName); err != nil {
+	if err := repo_service.CreateNewBranch(ctx, ctx.Doer, ctx.Repo.Repository, ctx.Repo.GitRepo, ctx.Repo.Repository.DefaultBranch, form.NewBranchName); err != nil {
 		switch {
 		case git_model.IsErrBranchAlreadyExists(err) || git.IsErrPushOutOfDate(err):
 			ctx.Flash.Error(ctx.Tr("repo.branch.branch_already_exists", form.NewBranchName))
