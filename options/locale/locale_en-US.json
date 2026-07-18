@@ -1404,6 +1404,8 @@
   "repo.issues.filter_no_results": "No results",
   "repo.issues.filter_no_results_placeholder": "Try adjusting your search filters.",
   "repo.issues.new": "New Issue",
+  "repo.issues.forgente_new_via_mail": "New issue via email",
+  "repo.issues.forgente_new_via_mail_tooltip": "Send an email to this address to create a new issue in this repository",
   "repo.issues.new.title_empty": "Title cannot be empty",
   "repo.issues.new.labels": "Labels",
   "repo.issues.new.no_labels": "No labels",
