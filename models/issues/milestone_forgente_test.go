@@ -59,6 +59,19 @@ func TestForgenteGroupMilestonesByName(t *testing.T) {
 			wantDead:   100,
 		},
 		{
+			name: "display casing follows the lowest-ID member regardless of input order",
+			miles: MilestoneList{
+				{ID: 7, Name: "forgente q1", RepoID: 2, NumOpenIssues: 1},
+				{ID: 4, Name: "Forgente Q1", RepoID: 1, NumClosedIssues: 1},
+			},
+			wantGroups:  1,
+			checkGroup:  0,
+			wantName:    "Forgente Q1",
+			wantOpen:    1,
+			wantClosed:  1,
+			wantPercent: 50,
+		},
+		{
 			name: "all-closed group with zero issues is 100% complete",
 			miles: MilestoneList{
 				{Name: "Done", RepoID: 1, IsClosed: true},

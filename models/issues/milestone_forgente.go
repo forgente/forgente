@@ -3,7 +3,10 @@
 
 package issues
 
-import "strings"
+import (
+	"sort"
+	"strings"
+)
 
 // ForgenteMilestoneGroup is a GitLab-style "group milestone": one milestone
 // name spanning multiple repositories, with combined progress. Gitea's
@@ -11,7 +14,7 @@ import "strings"
 // purely presentational roll-up computed over already-loaded milestones —
 // it does not introduce a new database concept.
 type ForgenteMilestoneGroup struct {
-	Name            string // display name, using the casing of the first milestone seen with this name
+	Name            string // display name, using the casing of the oldest (lowest-ID) member milestone
 	Milestones      MilestoneList
 	NumOpenIssues   int
 	NumClosedIssues int
@@ -27,7 +30,10 @@ func (g *ForgenteMilestoneGroup) NumIssues() int {
 // ForgenteGroupMilestonesByName groups already-loaded milestones by name
 // (case-insensitive) and computes combined stats for each group. Milestones
 // are expected to already have their Repo field populated by the caller.
-// Group order follows first-seen order of each name in the input list.
+// Group order follows first-seen order of each name in the input list. The
+// display casing comes from the lowest-ID member (input order is not
+// deterministic across databases: case-insensitive collations make
+// same-named rows compare equal in ORDER BY).
 func ForgenteGroupMilestonesByName(miles MilestoneList) []*ForgenteMilestoneGroup {
 	groups := make([]*ForgenteMilestoneGroup, 0, len(miles))
 	index := make(map[string]int, len(miles)) // lower-cased name -> index into groups
@@ -51,6 +57,11 @@ func ForgenteGroupMilestonesByName(miles MilestoneList) []*ForgenteMilestoneGrou
 	}
 
 	for _, g := range groups {
+		// sort members by ID: same-named rows compare equal under case-insensitive
+		// DB collations, so the query's ORDER BY leaves their order backend-dependent
+		sort.SliceStable(g.Milestones, func(i, j int) bool { return g.Milestones[i].ID < g.Milestones[j].ID })
+		g.Name = g.Milestones[0].Name // display casing: the oldest member's name
+
 		if total := g.NumIssues(); total > 0 {
 			g.Completeness = g.NumClosedIssues * 100 / total
 		} else if allClosed(g.Milestones) {
