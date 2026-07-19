@@ -6,8 +6,10 @@ package issues
 import (
 	"context"
 
+	"gitea.dev/models/db"
 	repo_model "gitea.dev/models/repo"
 	user_model "gitea.dev/models/user"
+	"gitea.dev/modules/container"
 )
 
 // Forgente comment types use explicit values starting at 1000 so upstream
@@ -57,4 +59,25 @@ func AddCreateBranchComment(ctx context.Context, doer *user_model.User, repo *re
 		NewRef: branchName,
 	})
 	return err
+}
+
+// forgenteCreateBranchNamesLimit caps how many create-branch comments are read per issue, to
+// bound page cost on long-lived issues (matches the base-branch selector's cap).
+const forgenteCreateBranchNamesLimit = 100
+
+// GetForgenteCreateBranchNames returns the distinct branch names recorded as created-from-issue
+// comments for issueID, in the order they were first created. Callers should filter the result
+// against the repository's live branches, since a comment persists after its branch is deleted.
+func GetForgenteCreateBranchNames(ctx context.Context, issueID int64) ([]string, error) {
+	comments, err := FindComments(ctx, &FindCommentsOptions{
+		IssueID:     issueID,
+		Type:        CommentTypeForgenteCreateBranch,
+		ListOptions: db.ListOptions{Page: 1, PageSize: forgenteCreateBranchNamesLimit},
+	})
+	if err != nil {
+		return nil, err
+	}
+	return container.FilterSlice(comments, func(c *Comment) (string, bool) {
+		return c.NewRef, c.NewRef != ""
+	}), nil
 }

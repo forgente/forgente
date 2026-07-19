@@ -375,6 +375,7 @@ func ViewIssue(ctx *context.Context) {
 		prepareIssueViewSidebarTimeTracker,
 		prepareIssueViewSidebarDependency,
 		forgentePrepareIssueViewSidebarRelated, // Forgente: related issues
+		forgentePrepareIssueViewSidebarBranch,  // Forgente: create-branch selector + branches created from issue
 		prepareIssueViewSidebarPin,
 	}
 	if issue.IsPull {
