@@ -5,14 +5,12 @@ infrastructure, releases — and, the part being built now, its own
 differentiating features. The repository is completely hackable today: any
 feature, route, model, or UI change can be built now.
 
-[Gitea](https://github.com/go-gitea/gitea) is Forgente's starting point and
-current upstream. Tracking it is an engineering choice, not an identity:
-daily merges keep upstream's fixes and security patches flowing for free
-while Forgente builds what makes it worth existing. The only thing this
-choice constrains is the renaming of upstream identifiers (paths, env vars,
-module names), because that is what keeps the merges cheap. When divergence
-becomes worth more than upstream's flow of fixes, Forgente cuts over to a
-hard fork (Phase 2) — deliberately, not by drift.
+[Gitea](https://github.com/go-gitea/gitea) is Forgente's starting point.
+Through Phases 0–1 it was tracked as a daily-merged upstream; at the Phase 2
+cutover (2026-07-21) Forgente became a hard fork — deliberately, not by
+drift. Upstream security fixes now arrive by watched advisories and
+cherry-picks instead of wholesale merges, and the old constraint against
+renaming upstream identifiers is gone.
 
 ## Phase 0 — infrastructure parity (done)
 
@@ -24,63 +22,42 @@ hard fork (Phase 2) — deliberately, not by drift.
   `forgente` snap command, compat shims for everything else
 - Branch protection, PR workflow, local dev environment
 
-## Phase 1 — differentiate while tracking upstream (current)
+## Phase 1 — differentiate while tracking upstream (done)
 
-The buildout is complete: first tagged release shipped (`v1.26.4-1`), live
+The buildout completed: first tagged release shipped (`v1.26.4-1`), live
 properties up (forgente.com, dl.forgente.com, docs.forgente.com), brand
-applied at the edges, sync automation running. Forgente's own value — the
-features that make it more than its starting point — is built here, and
-these rules of engagement remain the standing operating mode until a Phase 2
-trigger fires:
+applied at the edges, daily sync automation running, and the first Forgente
+features landed additively. The Phase 1 rules of engagement (additive code,
+compat shims over renames, sacred daily sync, brand at the edges) kept the
+eventual cutover mechanical — and ended with Phase 2.
 
-- **Additive code.** New features live in new packages/files where possible
-  (e.g. `forgente/`-namespaced modules, new routes, feature flags). Bounded
-  divergence keeps the eventual cutover mechanical.
-- **Compat shims over renames.** Runtime surface stays Gitea-compatible:
-  container internals (`/app/gitea/`, `GITEA_*` env), fixture hooks
-  (`gitea -> forgente` build symlink), Go module path (`code.gitea.io/gitea`).
-  Every shim is documented in [FORGENTE.md](FORGENTE.md).
-- **Sync is sacred.** The daily upstream sync keeps running; a sync PR that
-  rots for a week is a process failure. Upstream security fixes arrive
-  through it — Forgente does not yet have its own security triage.
-- **Brand at the edges.** Everything users see can become Forgente without
-  merge cost: logo (placeholder Forgente mark shipped; the final design swaps
-  the same two asset files — Gitea's name and logo are upstream trademarks
-  and stay out), `APP_NAME` default, forgente.com, dl.forgente.com, docs,
-  screenshots, community channels.
+## Phase 2 — hard-fork cutover (executed 2026-07-21)
 
-## Phase 2 trigger — when to hard fork
+The cutover ran as one deliberate campaign of five stacked PRs. What shipped
+(historical record; details in [FORGENTE.md](FORGENTE.md) and
+[docs/migration-hard-fork.md](docs/migration-hard-fork.md)):
 
-Cut over when **any** of these holds:
+1. Go module path renamed to `forgente.com` (from `gitea.dev` — upstream had
+   already moved off `code.gitea.io/gitea` itself in 2026-05; there were no
+   replace aliases to drop, contrary to this checklist's original wording).
+2. Compat shims removed with a fallback window: `gitea` build symlink gone,
+   container layout `/app/forgente/` (compat symlink kept), `FORGENTE_*` env
+   primary with `GITEA_*` honored + deprecation warning, docker scripts and
+   s6 service renamed.
+3. Test fixtures regenerated (`tests/gitea-repositories-meta` hooks call
+   `forgente`; delegate hook file renamed with self-healing legacy cleanup).
+4. Internals mass-rebranded: config defaults, UI strings, templates, docs.
+   The API wire surface (X-Gitea headers, webhook types, GITEA_TOKEN) stays
+   Gitea-compatible on purpose — that is compatibility, not unfinished work.
+5. User migration guide published (docs/migration-hard-fork.md).
+6. Sync routine flipped from "merge everything daily" to "watch Gitea
+   security advisories + patch tags, cherry-pick fixes"
+   (contrib/forgente/pick-upstream.sh).
+7. Ecosystem table re-checked: no API divergence, table stands.
 
-1. Features need such broad changes to core models/services that weekly
-   upstream merges cost more than they deliver.
-2. Upstream makes a structural decision Forgente must not follow.
-3. The project has the capacity (maintainers, process) to triage Gitea
-   security advisories and patch independently.
-
-Until a trigger fires, resist partial hard-forking: half-renamed internals
-pay both costs (merge friction and shim upkeep) and get neither benefit.
-
-## Phase 2 — hard-fork cutover checklist
-
-Executed as one deliberate campaign, roughly a week of work if Phase 1
-discipline held:
-
-1. Rename the Go module path (`code.gitea.io/gitea` → a forgente.com path)
-   and all imports; drop the `gitea.dev` replace aliases.
-2. Remove the compat shims: `gitea` build symlink, container layout
-   (`/app/gitea/` → `/app/forgente/`, `GITEA_*` → `FORGENTE_*` env with a
-   compatibility fallback window for users), docker scripts, s6 service names.
-3. Regenerate test fixtures (`tests/gitea-repositories-meta` hooks) for the
-   new names.
-4. Mass rebrand internals: config defaults, UI strings, templates, docs.
-5. Publish a user migration guide (env var mapping, volume paths, image tags).
-6. Flip the sync routine from "merge everything daily" to "watch Gitea
-   security advisories and cherry-pick fixes" — and subscribe to their
-   advisory feed before the flip, not after.
-7. Re-evaluate the ecosystem table in FORGENTE.md — API divergence is the
-   fork trigger for tea, runner, helm chart, and SDK.
+Open item from the cutover: the `vX.Y.Z-N` version scheme was defined by
+"based on Gitea X.Y.Z" and decouples now that main has diverged — decide the
+scheme for the first post-fork release.
 
 ## Standing rule — security
 

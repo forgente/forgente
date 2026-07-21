@@ -6,9 +6,11 @@ This is the operational handbook for Forgente
 ships releases, and runs its live properties. For what Forgente is and where
 it is heading, see [README.md](README.md) and [ROADMAP.md](ROADMAP.md).
 
-Forgente builds on [Gitea](https://github.com/go-gitea/gitea) and tracks it as
-an upstream: upstream changes are merged regularly while Forgente carries its
-own commits on top. The GitHub repository is a regular repository (not a
+Forgente builds on [Gitea](https://github.com/go-gitea/gitea). Since the
+Phase 2 hard-fork cutover (2026-07, see [ROADMAP.md](ROADMAP.md)) Forgente is
+an independent codebase: upstream is no longer merged wholesale; instead,
+Gitea security advisories and patch releases are watched and relevant fixes
+are cherry-picked. The GitHub repository is a regular repository (not a
 GitHub fork), so it has no "forked from" association.
 
 ## Repository layout
@@ -26,39 +28,36 @@ cd forgente
 git remote add upstream https://github.com/go-gitea/gitea.git
 ```
 
-## Syncing from upstream Gitea
+## Tracking upstream Gitea after the hard fork
 
-Syncing is automated: a daily scheduled agent (06:00, maintainer-side) fetches
-`upstream`, opens a `chore: sync upstream gitea` PR when `main` has new upstream
-commits, merges it with a **merge commit once checks pass — sync PRs are never
-squashed** (squashing flattens upstream history and makes every future sync
-re-conflict), fast-forwards `release/v*` branches and tags, and cancels
-release-branch nightlies stuck on upstream's private runners. The same daily run
-also sweeps the ecosystem forks (docs, blog, helm-forgente, homebrew-forgente),
-merging their gitea.com upstreams with merge commits; conflicts there keep the
-Forgente identity surfaces (chart appVersion/icon, docusaurus title/urls,
-`.github/` workflows, formula versions). Feature/fix PRs, by contrast, are
-squash-merged with the `(#N)` title suffix, matching upstream convention.
+Forgente stopped merging upstream wholesale at the Phase 2 cutover
+(2026-07-21; the last full sync was upstream main as of #47). The standing
+security rule in [ROADMAP.md](ROADMAP.md) still applies — upstream security
+fixes are never ignored — but the mechanism changed:
 
-The daily run also watches upstream release **tags**: branches sync silently,
-but a release is triggered by a tag, so any new stable `vX.Y.Z` upstream tag
-without a matching Forgente `vX.Y.Z-N` release gets an issue opened in this
-repo with the release checklist ("upstream tagged vX.Y.Z — cut vX.Y.Z-1").
-Release branches themselves are not merged into `forgente/vX.Y` between
-releases — drift there is free until upstream tags, and the tag-time merge is
-near-guaranteed clean because our release-line commits are additive.
-
-For a manual sync, the helper script does the same:
+- A daily scheduled agent (maintainer-side) watches go-gitea/gitea GitHub
+  **security advisories** and new upstream **patch-release tags** on release
+  lines Forgente has shipped from. Each new advisory or patch tag gets an
+  issue in this repo (`security: candidate cherry-pick — <id/tag>`) linking
+  the upstream commits. Nothing is cherry-picked automatically.
+- A human triages the issue and runs the pick helper on a branch:
 
 ```bash
-contrib/forgente/sync-upstream.sh
-git push origin main --tags
+contrib/forgente/pick-upstream.sh <upstream-sha>...
 ```
 
-Merge conflicts, when they happen, are in the files Forgente has modified — the
-list is at the end of the "Rebranding state" section. To keep merges tractable,
-prefer additive changes (new files under `contrib/forgente/`, new packages) over
-edits to upstream files where possible.
+Upstream commits still use the `gitea.dev` module path internally, so picks
+touching import lines conflict mechanically; the helper rewrites the module
+path (`gitea.dev/` → `forgente.com/`, sparing the external `gitea.dev/sdk`
+and `gitea.dev/actions-proto-go` modules) and leaves real conflicts for
+manual resolution. Cherry-pick PRs follow the normal feature-PR flow
+(squash-merged with the `(#N)` title suffix).
+
+The same daily run still sweeps the ecosystem forks (docs, blog,
+helm-forgente, homebrew-forgente), which remain soft forks of their gitea.com
+upstreams: merged with merge commits, conflicts keep the Forgente identity
+surfaces (chart appVersion/icon, docusaurus title/urls, `.github/` workflows,
+formula versions).
 
 ## CI/CD and releases
 
@@ -101,10 +100,12 @@ configured).
 
 Forgente versions are `v<upstream version>-<forgente release>`, e.g.
 `v1.26.4-1` is the first Forgente release of Gitea 1.26.4 (the Forgejo
-convention). Upstream's own tags are mirrored into this repository by the
-daily sync, so plain `vX.Y.Z` names are taken — and pushing a mirrored
-upstream tag is harmless by design: it runs the workflow file *at that tag*,
-which targets upstream's private runners and just queues (cancel it).
+convention). Post-hard-fork, main has diverged from upstream, so this scheme
+is an open question for the first post-fork release (tracked in
+[ROADMAP.md](ROADMAP.md)). Upstream tags mirrored before the cutover remain
+in this repository, so plain `vX.Y.Z` names are taken — pushing such a tag is
+harmless by design: it runs the workflow file *at that tag*, which targets
+upstream's private runners and just queues (cancel it).
 
 Release procedure:
 
@@ -146,57 +147,46 @@ Release procedure:
 The private [forgente/infra](https://github.com/forgente/infra) repo holds the
 server provisioning, CDN/DNS/cert inventory, and operational lessons.
 
-## Rebranding state
+## Rebranding state (post-hard-fork)
 
-The build identity is Forgente; the runtime/compat surface deliberately stays
-Gitea's:
+Since the Phase 2 cutover, build identity AND runtime surface are Forgente:
 
-- Binary and release artifacts are named `forgente` / `forgente-<version>-*`
-  (`EXECUTABLE` in the Makefile, xgo `-out`, src tarball, man page, `.air.toml`).
-- The snap installs and exposes a `forgente` command.
-- Container images keep the upstream-compatible internals on purpose:
-  `/app/gitea/gitea` path, `gitea` wrapper on PATH, `GITEA_*` environment
-  variables, s6 service names, volumes. Existing Gitea container setups work
-  unchanged, and `docker/` needs no fork-side edits.
-- Default `APP_NAME` and `[ui.meta]` author/description/keywords are Forgente
-  (`modules/setting/server.go`, `modules/setting/ui.go`, `app.example.ini`).
-- Logo/favicon are a placeholder Forgente mark (`assets/logo.svg`,
-  `assets/favicon.svg`; regenerate derived files with `make generate-images`).
-  Replace with a real brand design later — same two files + regenerate.
+- Binary and release artifacts are named `forgente` / `forgente-<version>-*`;
+  the snap installs a `forgente` command.
+- Go module path is `forgente.com` (bare-domain, gitea.dev-style; the
+  go-import vanity meta at forgente.com only matters for `go get`, not
+  builds).
+- Containers: binary at `/app/forgente/forgente`, `forgente` wrapper primary;
+  compat shims kept for a deprecation window (`/app/gitea` symlink, `gitea`
+  wrapper shim). Rootless image volumes are `/var/lib/forgente` +
+  `/etc/forgente`; the root image keeps `/data/gitea` paths so existing
+  volumes work.
+- Env: `FORGENTE_*` primary, legacy `GITEA_*` honored with a one-time
+  deprecation warning; git-hook env dual-emitted under both prefixes
+  (kept forever for users' custom hooks). See
+  [docs/migration-hard-fork.md](docs/migration-hard-fork.md) for the full
+  mapping.
+- Server-side delegate hooks are `hooks/<name>.d/forgente`; regeneration
+  removes the legacy `.d/gitea` file (`admin regenerate hooks`).
+- Default `APP_NAME` and `[ui.meta]` are Forgente; logo/favicon are a
+  placeholder Forgente mark (`assets/logo.svg`, `assets/favicon.svg`;
+  regenerate derived files with `make generate-images`).
   `public/assets/img/gitea.svg` stays Gitea's mark on purpose (it represents
   Gitea as an external service in migration screens).
-- Not yet rebranded: Go module path (`code.gitea.io/gitea` — deep fork
-  territory, avoid).
 
-Files that now differ from upstream and may conflict on sync (re-apply the
-same renames): the 3 `release-*` workflows (see above), `Makefile`
-(`EXECUTABLE`, `-out forgente-$(VERSION)`, `forgente-src-`, docs target),
-`Dockerfile` + `Dockerfile.rootless` (two `/go/src/gitea.dev/forgente` lines
-each), `.air.toml`, `.gitignore` (`/forgente`), `snap/*`,
-`modules/setting/testenv.go` (AppPath), `modules/setting/server.go`
-(APP_NAME default), `modules/setting/ui.go` (meta defaults),
-`custom/conf/app.example.ini`, `services/cron/tasks_extended.go`
-(update-checker endpoint), `web_src/js/modules/favicon-status.test.ts`
-(asserts the Forgente favicon color).
+**Deliberately kept Gitea-compatible (wire/ecosystem surface — do not
+"finish" these renames):** the API routes and `X-Gitea-*` headers, webhook
+type `gitea` and payload shape, `GITEA_TOKEN` runner secret, the `GITEA__*`
+config-override prefix (accepted alongside `FORGENTE__*`), and the
+`ONLY_ALLOW_PUSH_IF_GITEA_ENVIRONMENT_SET` ini key. This is what keeps the
+unforked ecosystem tools working (see the table below). Each such site
+carries an intent comment in code.
 
-A second category: upstream files where Forgente *features* have added lines
-(added by the issue-features batch; on a sync conflict here, keep both sides —
-the Forgente lines are additive): `routers/web/web.go` (route registrations),
-`options/locale/locale_en-US.json` (locale keys), `models/issues/comment.go`
-(forgente comment-type fallback in `String()`/`AsCommentType`),
-`routers/web/repo/issue_view.go`, `routers/web/repo/issue_list.go`,
-`templates/repo/issue/view_content/{comments,sidebar}.tmpl`,
-`templates/repo/issue/list.tmpl`, `templates/explore/navbar.tmpl`,
-`templates/user/dashboard/milestones.tmpl`,
-`services/mailer/incoming/incoming.go` (`MailContent.Subject`),
-`tools/lint-go-all.go` (header regex accepts "The Forgente Authors").
-
-Textual conflicts are not the only sync hazard: an upstream refactor can
-change an API that a `*_forgente.go` file calls, breaking the build with no
-merge conflict at all (first hit: `CreateNewBranch` gained a `gitRepo`
-parameter, 2026-07-18). Sync PRs must compile (`go build ./...`) before they
-merge — CI enforces this, and the sync agent fixes such breaks on the sync
-branch itself.
+Cherry-picks from upstream conflict mechanically on the module path
+(`gitea.dev/...` imports) — `contrib/forgente/pick-upstream.sh` handles that
+rewrite. An upstream fix can also compile-break against Forgente's diverged
+APIs with no textual conflict; cherry-pick PRs must build (`go build ./...`)
+before merge — CI enforces this.
 
 ## Gitea ecosystem tools
 
@@ -205,7 +195,9 @@ The Gitea ecosystem is hosted mostly at [gitea.com/gitea](https://gitea.com/gite
 since it operates on GitHub's PR/label APIs) and talks to the server through
 its API. Because Forgente stays API-compatible with Gitea, **upstream tools
 work against Forgente unforked** — the strategy is fork-on-divergence, not
-fork-in-advance. Per tool:
+fork-in-advance. Re-checked at the Phase 2 hard-fork cutover (2026-07-21):
+the cutover renamed identity/runtime surfaces only, not the API, so the
+table stands unchanged. Per tool:
 
 Complete disposition of all active gitea.com/gitea repos (audited 2026-07-11):
 
