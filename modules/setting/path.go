@@ -18,11 +18,11 @@ var (
 	// AppPath represents the path to the gitea binary
 	AppPath string
 
-	// AppWorkPath is the "working directory" of Gitea. It maps to the: WORK_PATH in app.ini, "--work-path" flag, environment variable GITEA_WORK_DIR.
+	// AppWorkPath is the "working directory" of Gitea. It maps to the: WORK_PATH in app.ini, "--work-path" flag, environment variable FORGENTE_WORK_DIR (deprecated fallback: GITEA_WORK_DIR).
 	// If that is not set it is the default set here by the linker or failing that the directory of AppPath.
 	// It is used as the base path for several other paths.
 	AppWorkPath string
-	CustomPath  string // Custom directory path. Env: GITEA_CUSTOM
+	CustomPath  string // Custom directory path. Env: FORGENTE_CUSTOM (deprecated fallback: GITEA_CUSTOM)
 	CustomConf  string
 
 	appWorkPathBuiltin string
@@ -122,19 +122,19 @@ func InitWorkPathAndCfgProvider(getEnvFn func(name string) string, args ArgWorkP
 	}
 
 	readFromEnv := func() {
-		envWorkPath := getEnvFn("GITEA_WORK_DIR")
+		envWorkPath := EnvWithFallbackFunc(getEnvFn, "FORGENTE_WORK_DIR", "GITEA_WORK_DIR")
 		if envWorkPath != "" {
 			tmpWorkPath.Set(envWorkPath)
 			if !filepath.IsAbs(tmpWorkPath.Value) {
-				log.Fatal("GITEA_WORK_DIR (work path) must be absolute path")
+				log.Fatal("FORGENTE_WORK_DIR (work path) must be absolute path")
 			}
 		}
 
-		envCustomPath := getEnvFn("GITEA_CUSTOM")
+		envCustomPath := EnvWithFallbackFunc(getEnvFn, "FORGENTE_CUSTOM", "GITEA_CUSTOM")
 		if envCustomPath != "" {
 			tmpCustomPath.Set(envCustomPath)
 			if !filepath.IsAbs(tmpCustomPath.Value) {
-				log.Fatal("GITEA_CUSTOM (custom path) must be absolute path")
+				log.Fatal("FORGENTE_CUSTOM (custom path) must be absolute path")
 			}
 		}
 	}
@@ -181,7 +181,7 @@ func InitWorkPathAndCfgProvider(getEnvFn func(name string) string, args ArgWorkP
 			log.Fatal("WORK_PATH in %q must be absolute path", configWorkPath)
 		}
 		configWorkPath = filepath.Clean(configWorkPath)
-		if tmpWorkPath.Value != "" && (getEnvFn("GITEA_WORK_DIR") != "" || args.WorkPath != "") {
+		if tmpWorkPath.Value != "" && (EnvWithFallbackFunc(getEnvFn, "FORGENTE_WORK_DIR", "GITEA_WORK_DIR") != "" || args.WorkPath != "") {
 			fi1, err1 := os.Stat(tmpWorkPath.Value)
 			fi2, err2 := os.Stat(configWorkPath)
 			if err1 != nil || err2 != nil || !os.SameFile(fi1, fi2) {

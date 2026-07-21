@@ -33,6 +33,6 @@ jobs:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.SNAPCRAFT_STORE_CREDENTIALS }}
         with:
           snap: ${{ steps.build.outputs.snap }}
-          # candidate is read back by snap/part-gitea-pull.sh as the
+          # candidate is read back by snap/part-forgente-pull.sh as the
           # "last released" marker; stable is the user-facing channel
           release: latest/candidate,latest/stable

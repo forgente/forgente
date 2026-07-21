@@ -13,5 +13,6 @@ fi
 if [ $# -gt 0 ]; then
     exec "$@"
 else
-    exec /usr/local/bin/gitea -c "${GITEA_APP_INI}" web
+    # FORGENTE_APP_INI is the primary env var name; GITEA_APP_INI is honored as a deprecated fallback
+    exec /usr/local/bin/forgente -c "${FORGENTE_APP_INI:-${GITEA_APP_INI}}" web
 fi

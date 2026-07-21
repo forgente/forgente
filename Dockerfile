@@ -21,7 +21,7 @@ RUN apk --no-cache add \
     build-base \
     git
 
-WORKDIR ${GOPATH}/src/gitea.dev
+WORKDIR ${GOPATH}/src/forgente.com
 COPY go.mod go.sum ./
 RUN go mod download
 # Use COPY instead of bind mount as read-only one breaks makefile state tracking and read-write one needs binary to be moved as it's discarded.
@@ -39,10 +39,10 @@ COPY docker/root /tmp/local
 # Set permissions for builds that made under windows which strips the executable bit from file
 RUN chmod 755 /tmp/local/usr/bin/entrypoint \
               /tmp/local/usr/local/bin/* \
-              /tmp/local/etc/s6/gitea/* \
+              /tmp/local/etc/s6/forgente/* \
               /tmp/local/etc/s6/openssh/* \
               /tmp/local/etc/s6/.s6-svscan/* \
-              /go/src/gitea.dev/forgente
+              /go/src/forgente.com/forgente
 
 FROM docker.io/library/alpine:3.24 AS gitea
 
@@ -74,9 +74,12 @@ RUN addgroup \
   echo "git:*" | chpasswd -e
 
 COPY --from=build-env /tmp/local /
-COPY --from=build-env /go/src/gitea.dev/forgente /app/gitea/gitea
+COPY --from=build-env /go/src/forgente.com/forgente /app/forgente/forgente
+# compat symlink: keep /app/gitea/gitea resolvable for anything still hardcoding the old path
+RUN ln -s /app/forgente /app/gitea
 
 ENV USER=git
+# /data/gitea is kept as-is (not /data/forgente): existing volumes already have data under /data/gitea/...
 ENV GITEA_CUSTOM=/data/gitea
 
 VOLUME ["/data"]

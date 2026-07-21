@@ -312,19 +312,18 @@ func runServ(ctx context.Context, c *cli.Command) error {
 	command.Stdin = os.Stdin
 	command.Stderr = os.Stderr
 	command.Env = append(command.Env, os.Environ()...)
-	command.Env = append(command.Env,
-		repo_module.EnvRepoIsWiki+"="+strconv.FormatBool(results.IsWiki),
-		repo_module.EnvRepoName+"="+results.RepoName,
-		repo_module.EnvRepoUsername+"="+results.OwnerName,
-		repo_module.EnvPusherName+"="+results.UserName,
-		repo_module.EnvPusherEmail+"="+results.UserEmail,
-		repo_module.EnvPusherID+"="+strconv.FormatInt(results.UserID, 10),
-		repo_module.EnvRepoID+"="+strconv.FormatInt(results.RepoID, 10),
-		repo_module.EnvPRID+"="+strconv.Itoa(0),
-		repo_module.EnvDeployKeyID+"="+strconv.FormatInt(results.DeployKeyID, 10),
-		repo_module.EnvKeyID+"="+strconv.FormatInt(results.KeyID, 10),
-		repo_module.EnvAppURL+"="+setting.AppURL,
-	)
+	// dual-emit FORGENTE_* and legacy GITEA_* names (the latter kept for users' custom hooks; do not remove)
+	command.Env = append(command.Env, repo_module.EnvPair(repo_module.EnvRepoIsWikiNew, repo_module.EnvRepoIsWiki, strconv.FormatBool(results.IsWiki))...)
+	command.Env = append(command.Env, repo_module.EnvPair(repo_module.EnvRepoNameNew, repo_module.EnvRepoName, results.RepoName)...)
+	command.Env = append(command.Env, repo_module.EnvPair(repo_module.EnvRepoUsernameNew, repo_module.EnvRepoUsername, results.OwnerName)...)
+	command.Env = append(command.Env, repo_module.EnvPair(repo_module.EnvPusherNameNew, repo_module.EnvPusherName, results.UserName)...)
+	command.Env = append(command.Env, repo_module.EnvPair(repo_module.EnvPusherEmailNew, repo_module.EnvPusherEmail, results.UserEmail)...)
+	command.Env = append(command.Env, repo_module.EnvPair(repo_module.EnvPusherIDNew, repo_module.EnvPusherID, strconv.FormatInt(results.UserID, 10))...)
+	command.Env = append(command.Env, repo_module.EnvPair(repo_module.EnvRepoIDNew, repo_module.EnvRepoID, strconv.FormatInt(results.RepoID, 10))...)
+	command.Env = append(command.Env, repo_module.EnvPair(repo_module.EnvPRIDNew, repo_module.EnvPRID, strconv.Itoa(0))...)
+	command.Env = append(command.Env, repo_module.EnvPair(repo_module.EnvDeployKeyIDNew, repo_module.EnvDeployKeyID, strconv.FormatInt(results.DeployKeyID, 10))...)
+	command.Env = append(command.Env, repo_module.EnvPair(repo_module.EnvKeyIDNew, repo_module.EnvKeyID, strconv.FormatInt(results.KeyID, 10))...)
+	command.Env = append(command.Env, repo_module.EnvPair(repo_module.EnvAppURLNew, repo_module.EnvAppURL, setting.AppURL)...)
 	// to avoid breaking, here only use the minimal environment variables for the "gitea serv" command.
 	// it could be re-considered whether to use the same git.CommonGitCmdEnvs() as "git" command later.
 	command.Env = append(command.Env, gitcmd.CommonCmdServEnvs()...)

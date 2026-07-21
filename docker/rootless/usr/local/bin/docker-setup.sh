@@ -1,23 +1,31 @@
 #!/bin/bash
 
+# FORGENTE_* is the primary env var name; GITEA_* is honored as a deprecated fallback for
+# deployments still setting the old names (see Dockerfile.rootless ENV block for the defaults).
+FORGENTE_WORK_DIR="${FORGENTE_WORK_DIR:-${GITEA_WORK_DIR:-/var/lib/forgente}}"
+FORGENTE_CUSTOM="${FORGENTE_CUSTOM:-${GITEA_CUSTOM:-"$FORGENTE_WORK_DIR/custom"}}"
+FORGENTE_TEMP="${FORGENTE_TEMP:-${GITEA_TEMP:-/tmp/forgente}}"
+FORGENTE_APP_INI="${FORGENTE_APP_INI:-${GITEA_APP_INI:-/etc/forgente/app.ini}}"
+export FORGENTE_WORK_DIR FORGENTE_CUSTOM FORGENTE_TEMP FORGENTE_APP_INI
+
 # Prepare git folder
 mkdir -p "${HOME}" && chmod 0700 "${HOME}"
 if [ ! -w "${HOME}" ]; then echo "${HOME} is not writable"; exit 1; fi
 
 # Prepare custom folder
-mkdir -p "${GITEA_CUSTOM}" && chmod 0700 "${GITEA_CUSTOM}"
+mkdir -p "${FORGENTE_CUSTOM}" && chmod 0700 "${FORGENTE_CUSTOM}"
 
 # Prepare temp folder
-mkdir -p "${GITEA_TEMP}" && chmod 0700 "${GITEA_TEMP}"
-if [ ! -w "${GITEA_TEMP}" ]; then echo "${GITEA_TEMP} is not writable"; exit 1; fi
+mkdir -p "${FORGENTE_TEMP}" && chmod 0700 "${FORGENTE_TEMP}"
+if [ ! -w "${FORGENTE_TEMP}" ]; then echo "${FORGENTE_TEMP} is not writable"; exit 1; fi
 
 #Prepare config file
-if [ ! -f "${GITEA_APP_INI}" ]; then
+if [ ! -f "${FORGENTE_APP_INI}" ]; then
 
     #Prepare config file folder
-    GITEA_APP_INI_DIR=$(dirname "${GITEA_APP_INI}")
-    mkdir -p "${GITEA_APP_INI_DIR}" && chmod 0700 "${GITEA_APP_INI_DIR}"
-    if [ ! -w "${GITEA_APP_INI_DIR}" ]; then echo "${GITEA_APP_INI_DIR} is not writable"; exit 1; fi
+    FORGENTE_APP_INI_DIR=$(dirname "${FORGENTE_APP_INI}")
+    mkdir -p "${FORGENTE_APP_INI_DIR}" && chmod 0700 "${FORGENTE_APP_INI_DIR}"
+    if [ ! -w "${FORGENTE_APP_INI_DIR}" ]; then echo "${FORGENTE_APP_INI_DIR} is not writable"; exit 1; fi
 
     # Set INSTALL_LOCK to true only if SECRET_KEY is not empty and
     # INSTALL_LOCK is empty
@@ -44,8 +52,8 @@ if [ ! -f "${GITEA_APP_INI}" ]; then
     DISABLE_REGISTRATION=${DISABLE_REGISTRATION:-"false"} \
     REQUIRE_SIGNIN_VIEW=${REQUIRE_SIGNIN_VIEW:-"false"} \
     SECRET_KEY=${SECRET_KEY:-""} \
-    envsubst < /etc/templates/app.ini > "${GITEA_APP_INI}"
+    envsubst < /etc/templates/app.ini > "${FORGENTE_APP_INI}"
 fi
 
-# Replace app.ini settings with env variables in the form GITEA__SECTION_NAME__KEY_NAME
-environment-to-ini --config "${GITEA_APP_INI}"
+# Replace app.ini settings with env variables in the form FORGENTE__SECTION_NAME__KEY_NAME (or the legacy GITEA__ form)
+environment-to-ini --config "${FORGENTE_APP_INI}"

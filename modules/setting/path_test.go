@@ -52,6 +52,23 @@ func TestInitWorkPathAndCommonConfig(t *testing.T) {
 		assert.Equal(t, fp(dirBar, "custom/conf/app.ini"), CustomConf)
 	})
 
+	t.Run("WorkDir(env,FORGENTE_WORK_DIR)", func(t *testing.T) {
+		// FORGENTE_WORK_DIR is the primary env var name; GITEA_WORK_DIR is still honored as a deprecated fallback (see above).
+		testInit(dirFoo, "", "")
+		InitWorkPathAndCommonConfig(envVars{"FORGENTE_WORK_DIR": dirBar}.Getenv, ArgWorkPathAndCustomConf{})
+		assert.Equal(t, dirBar, AppWorkPath)
+		assert.Equal(t, fp(dirBar, "custom"), CustomPath)
+		assert.Equal(t, fp(dirBar, "custom/conf/app.ini"), CustomConf)
+	})
+
+	t.Run("WorkDir(env,FORGENTE_WORK_DIR wins over GITEA_WORK_DIR)", func(t *testing.T) {
+		testInit(dirFoo, "", "")
+		InitWorkPathAndCommonConfig(envVars{"FORGENTE_WORK_DIR": dirBar, "GITEA_WORK_DIR": dirXxx}.Getenv, ArgWorkPathAndCustomConf{})
+		assert.Equal(t, dirBar, AppWorkPath)
+		assert.Equal(t, fp(dirBar, "custom"), CustomPath)
+		assert.Equal(t, fp(dirBar, "custom/conf/app.ini"), CustomConf)
+	})
+
 	t.Run("WorkDir(env,arg)", func(t *testing.T) {
 		testInit(dirFoo, "", "")
 		InitWorkPathAndCommonConfig(envVars{"GITEA_WORK_DIR": dirBar}.Getenv, ArgWorkPathAndCustomConf{WorkPath: dirXxx})
@@ -63,6 +80,15 @@ func TestInitWorkPathAndCommonConfig(t *testing.T) {
 	t.Run("CustomPath(env)", func(t *testing.T) {
 		testInit(dirFoo, "", "")
 		InitWorkPathAndCommonConfig(envVars{"GITEA_CUSTOM": fp(dirBar, "custom1")}.Getenv, ArgWorkPathAndCustomConf{})
+		assert.Equal(t, dirFoo, AppWorkPath)
+		assert.Equal(t, fp(dirBar, "custom1"), CustomPath)
+		assert.Equal(t, fp(dirBar, "custom1/conf/app.ini"), CustomConf)
+	})
+
+	t.Run("CustomPath(env,FORGENTE_CUSTOM)", func(t *testing.T) {
+		// FORGENTE_CUSTOM is the primary env var name; GITEA_CUSTOM is still honored as a deprecated fallback (see above).
+		testInit(dirFoo, "", "")
+		InitWorkPathAndCommonConfig(envVars{"FORGENTE_CUSTOM": fp(dirBar, "custom1")}.Getenv, ArgWorkPathAndCustomConf{})
 		assert.Equal(t, dirFoo, AppWorkPath)
 		assert.Equal(t, fp(dirBar, "custom1"), CustomPath)
 		assert.Equal(t, fp(dirBar, "custom1/conf/app.ini"), CustomConf)

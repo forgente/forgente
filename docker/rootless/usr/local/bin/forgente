@@ -1,0 +1,41 @@
+#!/bin/bash
+
+###############################################################
+# This script sets defaults for forgente to run in the container #
+###############################################################
+
+# It assumes that you place this script as forgente in /usr/local/bin
+#
+# And place the original in /usr/lib/forgente with working files in /data/gitea
+FORGENTE="/app/forgente/forgente"
+WORK_DIR="/var/lib/forgente"
+APP_INI="/etc/forgente/app.ini"
+
+APP_INI_SET=""
+for i in "$@"; do
+	case "$i" in
+	"-c")
+		APP_INI_SET=1
+		;;
+	"-c="*)
+		APP_INI_SET=1
+		;;
+	"--config")
+		APP_INI_SET=1
+		;;
+	"--config="*)
+		APP_INI_SET=1
+		;;
+	*)
+	;;
+	esac
+done
+
+# FORGENTE_APP_INI is the primary env var name; GITEA_APP_INI is honored as a deprecated fallback
+if [ -z "$APP_INI_SET" ]; then
+	CONF_ARG=("-c" "${FORGENTE_APP_INI:-${GITEA_APP_INI:-$APP_INI}}")
+fi
+
+
+# Provide docker defaults; FORGENTE_WORK_DIR is primary, GITEA_WORK_DIR is a deprecated fallback
+FORGENTE_WORK_DIR="${FORGENTE_WORK_DIR:-${GITEA_WORK_DIR:-$WORK_DIR}}" exec -a "$0" "$FORGENTE" "${CONF_ARG[@]}" "$@"

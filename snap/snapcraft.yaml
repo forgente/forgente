@@ -9,7 +9,7 @@ description: |
 icon: public/assets/img/logo.png
 confinement: strict
 base: core24
-adopt-info: gitea
+adopt-info: forgente
 
 platforms:
   amd64:
@@ -20,8 +20,10 @@ platforms:
     build-for: [arm64]
 
 environment:
-  GITEA_CUSTOM: "$SNAP_COMMON"
-  GITEA_WORK_DIR: "$SNAP_COMMON"
+  FORGENTE_CUSTOM: "$SNAP_COMMON"
+  FORGENTE_WORK_DIR: "$SNAP_COMMON"
+  GITEA_CUSTOM: "$SNAP_COMMON" # deprecated fallback, kept alongside FORGENTE_CUSTOM above
+  GITEA_WORK_DIR: "$SNAP_COMMON" # deprecated fallback, kept alongside FORGENTE_WORK_DIR above
   GIT_TEMPLATE_DIR: "$SNAP/usr/share/git-core/templates"
   GIT_EXEC_PATH: "$SNAP/usr/lib/git-core"
 
@@ -42,7 +44,7 @@ apps:
     command: usr/bin/sqlite3
 
 parts:
-  gitea:
+  forgente:
     plugin: make
     source: .
     stage-packages: [ git, sqlite3, openssh-client ]
@@ -50,8 +52,8 @@ parts:
     build-snaps: [ go/1.26/stable, node/24/stable ]
     build-environment:
       - LDFLAGS: ""
-    override-pull: craftctl default && ./snap/part-gitea-pull.sh
-    override-build: ./snap/part-gitea-build.sh
+    override-pull: craftctl default && ./snap/part-forgente-pull.sh
+    override-build: ./snap/part-forgente-build.sh
     prime:
       - -etc
       - -usr/lib/systemd

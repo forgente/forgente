@@ -1,6 +1,6 @@
 #!/bin/bash
 ### BEGIN INIT INFO
-# Provides:          gitea
+# Provides:          forgente
 # Required-Start:    $syslog $network
 # Required-Stop:     $syslog
 # Default-Start:     2 3 4 5
@@ -15,8 +15,8 @@
 
 # PATH should only include /usr/* if it runs after the mountnfs.sh script
 PATH=/sbin:/usr/sbin:/bin:/usr/bin:/usr/local/bin
-DESC="Gitea - Git with a cup of tea"
-NAME=gitea
+DESC="Forgente - Git with a cup of tea"
+NAME=forgente
 SERVICEVERBOSE=yes
 PIDFILE=/run/$NAME.pid
 SCRIPTNAME=/etc/init.d/$NAME
@@ -26,7 +26,7 @@ DAEMON_ARGS="web -c /etc/$NAME/app.ini"
 USER=git
 STOP_SCHEDULE="${STOP_SCHEDULE:-QUIT/5/TERM/1/KILL/5}"
 
-# If you want to bind Gitea to a port below 1024, apply "setcap" to the gitea binary
+# If you want to bind Forgente to a port below 1024, apply "setcap" to the forgente binary
 #setcap cap_net_bind_service=+ep $DAEMON"
 
 # Read configuration variable file if it is present
@@ -37,11 +37,11 @@ STOP_SCHEDULE="${STOP_SCHEDULE:-QUIT/5/TERM/1/KILL/5}"
 
 do_start()
 {
-    GITEA_ENVS="USER=$USER GITEA_WORK_DIR=$WORKINGDIR HOME=/home/$USER"
-    GITEA_EXEC="$DAEMON -- $DAEMON_ARGS"
+    FORGENTE_ENVS="USER=$USER FORGENTE_WORK_DIR=$WORKINGDIR HOME=/home/$USER"
+    FORGENTE_EXEC="$DAEMON -- $DAEMON_ARGS"
     sh -c "start-stop-daemon --start --quiet --pidfile $PIDFILE --make-pidfile \\
         --background --chdir $WORKINGDIR --chuid $USER \\
-        --exec /bin/bash -- -c '/usr/bin/env $GITEA_ENVS $GITEA_EXEC'"
+        --exec /bin/bash -- -c '/usr/bin/env $FORGENTE_ENVS $FORGENTE_EXEC'"
 }
 
 do_stop()

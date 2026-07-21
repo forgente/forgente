@@ -166,7 +166,7 @@ func loadRunModeFrom(rootCfg ConfigProvider) {
 	rootSec := rootCfg.Section("")
 	mustNotRunAsRoot(rootSec)
 
-	runModeValue := os.Getenv("GITEA_RUN_MODE")
+	runModeValue, _ := EnvWithFallback("FORGENTE_RUN_MODE", "GITEA_RUN_MODE")
 	runModeValue = util.IfZero(runModeValue, rootSec.Key("RUN_MODE").String())
 	// non-dev mode is treated as prod mode, to protect users from accidentally running in dev mode if there is a typo in this value.
 	IsProd = !strings.EqualFold(runModeValue, "dev") // TODO: can use case-sensitive comparing in the future
@@ -188,12 +188,13 @@ func mustNotRunAsRoot(rootSec ConfigSection) {
 
 	// The following is a purposefully undocumented option. Please do not run Gitea as root. It will only cause future headaches.
 	// Please don't use root as a bandaid to "fix" something that is broken, instead the broken thing should instead be fixed properly.
+	rootEnvValue, _ := EnvWithFallback("FORGENTE_I_AM_BEING_UNSAFE_RUNNING_AS_ROOT", "GITEA_I_AM_BEING_UNSAFE_RUNNING_AS_ROOT")
 	allowRunAsRoot := ConfigSectionKeyBool(rootSec, "I_AM_BEING_UNSAFE_RUNNING_AS_ROOT") || // check gitea config
-		optional.ParseBool(os.Getenv("GITEA_I_AM_BEING_UNSAFE_RUNNING_AS_ROOT")).Value() // check gitea env var
+		optional.ParseBool(rootEnvValue).Value() // check env var
 
 	if !allowRunAsRoot {
 		// Special thanks to VLC which inspired the wording of this messaging.
-		log.Fatal("Gitea is not supposed to be run as root. If you need to use privileged TCP ports please instead use `setcap` and the `cap_net_bind_service` permission.")
+		log.Fatal("Gitea is not supposed to be run as root. If you need to use privileged TCP ports please instead use `setcap` and the `cap_net_bind_service` permission (or set FORGENTE_I_AM_BEING_UNSAFE_RUNNING_AS_ROOT).")
 	}
 	log.Warn("You are running Gitea using the root user, and have purposely chosen to skip built-in protections around this. You have been warned against this.")
 }

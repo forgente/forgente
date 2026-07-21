@@ -21,7 +21,7 @@ RUN apk --no-cache add \
     build-base \
     git
 
-WORKDIR ${GOPATH}/src/gitea.dev
+WORKDIR ${GOPATH}/src/forgente.com
 COPY go.mod go.sum ./
 RUN go mod download
 # See the comments in Dockerfile
@@ -37,7 +37,7 @@ COPY docker/rootless /tmp/local
 
 # Set permissions for builds that made under windows which strips the executable bit from file
 RUN chmod 755 /tmp/local/usr/local/bin/* \
-              /go/src/gitea.dev/forgente
+              /go/src/forgente.com/forgente
 
 FROM docker.io/library/alpine:3.24 AS gitea-rootless
 
@@ -58,30 +58,32 @@ RUN addgroup \
     git && \
   adduser \
     -S -H -D \
-    -h /var/lib/gitea/git \
+    -h /var/lib/forgente/git \
     -s /bin/bash \
     -u 1000 \
     -G git \
     git
 
-RUN mkdir -p /var/lib/gitea /etc/gitea
-RUN chown git:git /var/lib/gitea /etc/gitea
+RUN mkdir -p /var/lib/forgente /etc/forgente
+RUN chown git:git /var/lib/forgente /etc/forgente
 
 COPY --from=build-env /tmp/local /
-COPY --from=build-env --chown=root:root /go/src/gitea.dev/forgente /app/gitea/gitea
+COPY --from=build-env --chown=root:root /go/src/forgente.com/forgente /app/forgente/forgente
+# compat symlink: keep /app/gitea/gitea resolvable for anything still hardcoding the old path
+RUN ln -s /app/forgente /app/gitea
 
 # git:git
 USER 1000:1000
-ENV GITEA_WORK_DIR=/var/lib/gitea
-ENV GITEA_CUSTOM=/var/lib/gitea/custom
-ENV GITEA_TEMP=/tmp/gitea
-ENV TMPDIR=/tmp/gitea
+ENV FORGENTE_WORK_DIR=/var/lib/forgente
+ENV FORGENTE_CUSTOM=/var/lib/forgente/custom
+ENV FORGENTE_TEMP=/tmp/forgente
+ENV TMPDIR=/tmp/forgente
 
 # TODO add to docs the ability to define the ini to load (useful to test and revert a config)
-ENV GITEA_APP_INI=/etc/gitea/app.ini
-ENV HOME="/var/lib/gitea/git"
-VOLUME ["/var/lib/gitea", "/etc/gitea"]
-WORKDIR /var/lib/gitea
+ENV FORGENTE_APP_INI=/etc/forgente/app.ini
+ENV HOME="/var/lib/forgente/git"
+VOLUME ["/var/lib/forgente", "/etc/forgente"]
+WORKDIR /var/lib/forgente
 
 # HINT: HEALTH-CHECK-ENDPOINT: don't use HEALTHCHECK, search this hint keyword for more information
 ENTRYPOINT ["/usr/bin/dumb-init", "--", "/usr/local/bin/docker-entrypoint.sh"]

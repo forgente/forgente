@@ -169,7 +169,7 @@ func parseGitHookCommitRefLine(line string) (oldCommitID, newCommitID string, re
 }
 
 func runHookPreReceive(ctx context.Context, c *cli.Command) error {
-	if isInternal, _ := strconv.ParseBool(os.Getenv(repo_module.EnvIsInternal)); isInternal {
+	if isInternal, _ := strconv.ParseBool(repo_module.EnvGet(repo_module.EnvIsInternalNew, repo_module.EnvIsInternal)); isInternal {
 		return nil
 	}
 
@@ -185,13 +185,13 @@ Gitea or set your environment appropriately.`, "")
 	}
 
 	// the environment is set by serv command
-	isWiki, _ := strconv.ParseBool(os.Getenv(repo_module.EnvRepoIsWiki))
-	username := os.Getenv(repo_module.EnvRepoUsername)
-	reponame := os.Getenv(repo_module.EnvRepoName)
-	userID, _ := strconv.ParseInt(os.Getenv(repo_module.EnvPusherID), 10, 64)
-	prID, _ := strconv.ParseInt(os.Getenv(repo_module.EnvPRID), 10, 64)
-	deployKeyID, _ := strconv.ParseInt(os.Getenv(repo_module.EnvDeployKeyID), 10, 64)
-	actionsTaskID, _ := strconv.ParseInt(os.Getenv(repo_module.EnvActionsTaskID), 10, 64)
+	isWiki, _ := strconv.ParseBool(repo_module.EnvGet(repo_module.EnvRepoIsWikiNew, repo_module.EnvRepoIsWiki))
+	username := repo_module.EnvGet(repo_module.EnvRepoUsernameNew, repo_module.EnvRepoUsername)
+	reponame := repo_module.EnvGet(repo_module.EnvRepoNameNew, repo_module.EnvRepoName)
+	userID, _ := strconv.ParseInt(repo_module.EnvGet(repo_module.EnvPusherIDNew, repo_module.EnvPusherID), 10, 64)
+	prID, _ := strconv.ParseInt(repo_module.EnvGet(repo_module.EnvPRIDNew, repo_module.EnvPRID), 10, 64)
+	deployKeyID, _ := strconv.ParseInt(repo_module.EnvGet(repo_module.EnvDeployKeyIDNew, repo_module.EnvDeployKeyID), 10, 64)
+	actionsTaskID, _ := strconv.ParseInt(repo_module.EnvGet(repo_module.EnvActionsTaskIDNew, repo_module.EnvActionsTaskID), 10, 64)
 
 	hookOptions := private.HookOptions{
 		UserID:                          userID,
@@ -298,7 +298,7 @@ Gitea or set your environment appropriately.`, "")
 // runHookUpdate avoid to do heavy operations on update hook because it will be
 // invoked for every ref update which does not like pre-receive and post-receive
 func runHookUpdate(_ context.Context, c *cli.Command) error {
-	if isInternal, _ := strconv.ParseBool(os.Getenv(repo_module.EnvIsInternal)); isInternal {
+	if isInternal, _ := strconv.ParseBool(repo_module.EnvGet(repo_module.EnvIsInternalNew, repo_module.EnvIsInternal)); isInternal {
 		return nil
 	}
 
@@ -323,7 +323,7 @@ func runHookPostReceive(ctx context.Context, c *cli.Command) error {
 	}
 
 	// Now if we're an internal don't do anything else
-	if isInternal, _ := strconv.ParseBool(os.Getenv(repo_module.EnvIsInternal)); isInternal {
+	if isInternal, _ := strconv.ParseBool(repo_module.EnvGet(repo_module.EnvIsInternalNew, repo_module.EnvIsInternal)); isInternal {
 		return nil
 	}
 
@@ -348,12 +348,12 @@ Gitea or set your environment appropriately.`, "")
 	}
 
 	// the environment is set by serv command
-	repoUser := os.Getenv(repo_module.EnvRepoUsername)
-	isWiki, _ := strconv.ParseBool(os.Getenv(repo_module.EnvRepoIsWiki))
-	repoName := os.Getenv(repo_module.EnvRepoName)
-	pusherID, _ := strconv.ParseInt(os.Getenv(repo_module.EnvPusherID), 10, 64)
-	prID, _ := strconv.ParseInt(os.Getenv(repo_module.EnvPRID), 10, 64)
-	pusherName := os.Getenv(repo_module.EnvPusherName)
+	repoUser := repo_module.EnvGet(repo_module.EnvRepoUsernameNew, repo_module.EnvRepoUsername)
+	isWiki, _ := strconv.ParseBool(repo_module.EnvGet(repo_module.EnvRepoIsWikiNew, repo_module.EnvRepoIsWiki))
+	repoName := repo_module.EnvGet(repo_module.EnvRepoNameNew, repo_module.EnvRepoName)
+	pusherID, _ := strconv.ParseInt(repo_module.EnvGet(repo_module.EnvPusherIDNew, repo_module.EnvPusherID), 10, 64)
+	prID, _ := strconv.ParseInt(repo_module.EnvGet(repo_module.EnvPRIDNew, repo_module.EnvPRID), 10, 64)
+	pusherName := repo_module.EnvGet(repo_module.EnvPusherNameNew, repo_module.EnvPusherName)
 
 	hookOptions := private.HookOptions{
 		UserName:                        pusherName,
@@ -363,7 +363,7 @@ Gitea or set your environment appropriately.`, "")
 		GitQuarantinePath:               os.Getenv(private.GitQuarantinePath),
 		GitPushOptions:                  pushOptions(),
 		PullRequestID:                   prID,
-		PushTrigger:                     repo_module.PushTrigger(os.Getenv(repo_module.EnvPushTrigger)),
+		PushTrigger:                     repo_module.PushTrigger(repo_module.EnvGet(repo_module.EnvPushTriggerNew, repo_module.EnvPushTrigger)),
 		IsWiki:                          isWiki,
 	}
 
@@ -477,11 +477,11 @@ Gitea or set your environment appropriately.`, "")
 	}
 
 	reader := bufio.NewReader(os.Stdin)
-	repoUser := os.Getenv(repo_module.EnvRepoUsername)
-	isWiki, _ := strconv.ParseBool(os.Getenv(repo_module.EnvRepoIsWiki))
-	repoName := os.Getenv(repo_module.EnvRepoName)
-	pusherID, _ := strconv.ParseInt(os.Getenv(repo_module.EnvPusherID), 10, 64)
-	pusherName := os.Getenv(repo_module.EnvPusherName)
+	repoUser := repo_module.EnvGet(repo_module.EnvRepoUsernameNew, repo_module.EnvRepoUsername)
+	isWiki, _ := strconv.ParseBool(repo_module.EnvGet(repo_module.EnvRepoIsWikiNew, repo_module.EnvRepoIsWiki))
+	repoName := repo_module.EnvGet(repo_module.EnvRepoNameNew, repo_module.EnvRepoName)
+	pusherID, _ := strconv.ParseInt(repo_module.EnvGet(repo_module.EnvPusherIDNew, repo_module.EnvPusherID), 10, 64)
+	pusherName := repo_module.EnvGet(repo_module.EnvPusherNameNew, repo_module.EnvPusherName)
 
 	// 1. Version and features negotiation.
 	// S: PKT-LINE(version=1\0push-options atomic...) / PKT-LINE(version=1\n)
