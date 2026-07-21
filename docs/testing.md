@@ -1,6 +1,6 @@
 # Testing
 
-Gitea has four kinds of automated tests: backend unit tests, integration tests,
+Forgente has four kinds of automated tests: backend unit tests, integration tests,
 end-to-end (e2e) tests, and migration tests. Local runs default to SQLite, so no
 extra services are required to get started.
 
@@ -33,7 +33,7 @@ pnpm exec vitest <path-filter>
 
 ## Integration tests
 
-Integration tests exercise Gitea against a real database. They live in
+Integration tests exercise Forgente against a real database. They live in
 `tests/integration/` and require [Git LFS](https://git-lfs.com/) to be installed.
 The database is selected with `GITEA_TEST_DATABASE`; an empty value defaults to
 SQLite, which needs no external service:
@@ -113,7 +113,7 @@ gitea-runner exec -W ./.github/workflows/pull-db-tests.yml --event=pull_request 
 
 ## End-to-end tests
 
-End-to-end tests drive a running Gitea instance with [Playwright](https://playwright.dev/):
+End-to-end tests drive a running Forgente instance with [Playwright](https://playwright.dev/):
 
 ```bash
 make test-e2e

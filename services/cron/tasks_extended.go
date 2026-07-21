@@ -139,7 +139,7 @@ func registerDeleteOldActions() {
 	})
 }
 
-func registerUpdateGiteaChecker() {
+func registerUpdateChecker() {
 	type UpdateCheckerConfig struct {
 		BaseConfig
 		HTTPEndpoint string
@@ -235,7 +235,7 @@ func initExtendedTasks() {
 	registerDeleteMissingRepositories()
 	registerRemoveRandomAvatars()
 	registerDeleteOldActions()
-	registerUpdateGiteaChecker()
+	registerUpdateChecker()
 	registerDeleteOldSystemNotices()
 	registerGCLFS()
 	registerRebuildIssueIndexer()
