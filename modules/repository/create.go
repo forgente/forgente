@@ -7,9 +7,9 @@ import (
 	"context"
 	"fmt"
 
-	git_model "gitea.dev/models/git"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/gitrepo"
+	git_model "forgente.com/models/git"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/gitrepo"
 )
 
 // UpdateRepoSize updates the repository size, calculating it using getDirectorySize

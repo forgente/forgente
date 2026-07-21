@@ -7,9 +7,9 @@ import (
 	"context"
 	"strconv"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/packages"
-	debian_module "gitea.dev/modules/packages/debian"
+	"forgente.com/models/db"
+	"forgente.com/models/packages"
+	debian_module "forgente.com/modules/packages/debian"
 
 	"xorm.io/builder"
 )

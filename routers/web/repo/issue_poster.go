@@ -8,10 +8,10 @@ import (
 	"slices"
 	"strings"
 
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	shared_user "gitea.dev/routers/web/shared/user"
-	"gitea.dev/services/context"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	shared_user "forgente.com/routers/web/shared/user"
+	"forgente.com/services/context"
 )
 
 func IssuePullPosters(ctx *context.Context) {

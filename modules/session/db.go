@@ -9,8 +9,8 @@ import (
 	"log"
 	"sync"
 
-	"gitea.dev/models/auth"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/auth"
+	"forgente.com/modules/timeutil"
 
 	"gitea.com/go-chi/session"
 )

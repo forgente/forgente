@@ -8,12 +8,12 @@ import (
 	"net/http"
 	"testing"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/tests"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	api "forgente.com/modules/structs"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

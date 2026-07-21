@@ -8,13 +8,13 @@ import (
 	"context"
 	"fmt"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/organization"
-	"gitea.dev/models/perm"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/structs"
+	"forgente.com/models/db"
+	"forgente.com/models/organization"
+	"forgente.com/models/perm"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/structs"
 
 	"xorm.io/builder"
 )

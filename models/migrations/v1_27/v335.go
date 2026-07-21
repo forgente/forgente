@@ -4,7 +4,7 @@
 package v1_27
 
 import (
-	"gitea.dev/models/db"
+	"forgente.com/models/db"
 
 	"xorm.io/xorm"
 )

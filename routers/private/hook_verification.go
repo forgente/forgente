@@ -8,10 +8,10 @@ import (
 	"context"
 	"io"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/log"
-	asymkey_service "gitea.dev/services/asymkey"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/log"
+	asymkey_service "forgente.com/services/asymkey"
 )
 
 // This file contains commit verification functions for refs passed across in hooks

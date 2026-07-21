@@ -20,7 +20,7 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"gitea.dev/modules/json"
+	"forgente.com/modules/json"
 )
 
 const (

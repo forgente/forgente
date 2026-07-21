@@ -6,11 +6,11 @@ package misc
 import (
 	"net/http"
 
-	"gitea.dev/modules/options"
-	repo_module "gitea.dev/modules/repository"
-	"gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
+	"forgente.com/modules/options"
+	repo_module "forgente.com/modules/repository"
+	"forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
 )
 
 // Shows a list of all Gitignore templates

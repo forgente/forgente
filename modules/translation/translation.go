@@ -10,11 +10,11 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/options"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/translation/i18n"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/log"
+	"forgente.com/modules/options"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/translation/i18n"
+	"forgente.com/modules/util"
 
 	"golang.org/x/text/language"
 	"golang.org/x/text/message"

@@ -7,10 +7,10 @@ import (
 	"os"
 	"testing"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/util"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/db"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/util"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

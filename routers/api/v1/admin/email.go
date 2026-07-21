@@ -6,11 +6,11 @@ package admin
 import (
 	"net/http"
 
-	user_model "gitea.dev/models/user"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
+	user_model "forgente.com/models/user"
+	api "forgente.com/modules/structs"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
 )
 
 // GetAllEmails

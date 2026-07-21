@@ -6,13 +6,13 @@ package issue
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	access_model "gitea.dev/models/perm/access"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	notify_service "gitea.dev/services/notify"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	access_model "forgente.com/models/perm/access"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	notify_service "forgente.com/services/notify"
 )
 
 func toBeRemovedAssignees(issue *issues_model.Issue, assignees []*user_model.User) (toBeRemovedAssignees []*user_model.User) {

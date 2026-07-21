@@ -13,16 +13,16 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/models/db"
-	packages_model "gitea.dev/models/packages"
-	"gitea.dev/modules/optional"
-	packages_module "gitea.dev/modules/packages"
-	chef_module "gitea.dev/modules/packages/chef"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
-	"gitea.dev/routers/api/packages/helper"
-	"gitea.dev/services/context"
-	packages_service "gitea.dev/services/packages"
+	"forgente.com/models/db"
+	packages_model "forgente.com/models/packages"
+	"forgente.com/modules/optional"
+	packages_module "forgente.com/modules/packages"
+	chef_module "forgente.com/modules/packages/chef"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
+	"forgente.com/routers/api/packages/helper"
+	"forgente.com/services/context"
+	packages_service "forgente.com/services/packages"
 )
 
 func apiError(ctx *context.Context, status int, obj any) {

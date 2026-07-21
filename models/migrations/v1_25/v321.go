@@ -4,9 +4,9 @@
 package v1_25
 
 import (
-	"gitea.dev/models/db"
-	"gitea.dev/models/migrations/base"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	"forgente.com/models/migrations/base"
+	"forgente.com/modules/setting"
 
 	"xorm.io/xorm/schemas"
 )

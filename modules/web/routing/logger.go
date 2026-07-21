@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"time"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/web/types"
+	"forgente.com/modules/log"
+	"forgente.com/modules/web/types"
 )
 
 var (

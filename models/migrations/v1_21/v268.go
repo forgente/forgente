@@ -3,7 +3,7 @@
 
 package v1_21
 
-import "gitea.dev/models/db"
+import "forgente.com/models/db"
 
 // UpdateActionsRefIndex updates the index of actions ref field
 func UpdateActionsRefIndex(x db.EngineMigration) error {

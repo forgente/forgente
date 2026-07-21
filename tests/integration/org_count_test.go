@@ -7,13 +7,13 @@ import (
 	"strings"
 	"testing"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/db"
-	"gitea.dev/models/organization"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/tests"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/db"
+	"forgente.com/models/organization"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	api "forgente.com/modules/structs"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

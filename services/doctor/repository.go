@@ -6,10 +6,10 @@ package doctor
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/storage"
-	repo_service "gitea.dev/services/repository"
+	"forgente.com/models/db"
+	"forgente.com/modules/log"
+	"forgente.com/modules/storage"
+	repo_service "forgente.com/services/repository"
 
 	"xorm.io/builder"
 )

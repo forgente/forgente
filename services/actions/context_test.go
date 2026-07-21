@@ -7,11 +7,11 @@ import (
 	"strconv"
 	"testing"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/json"
-	api "gitea.dev/modules/structs"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/db"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/json"
+	api "forgente.com/modules/structs"
 
 	act_model "gitea.com/gitea/runner/act/model"
 	"github.com/stretchr/testify/assert"

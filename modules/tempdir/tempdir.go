@@ -8,8 +8,8 @@ import (
 	"path/filepath"
 	"time"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 )
 
 type TempDir struct {

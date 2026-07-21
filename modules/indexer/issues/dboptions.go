@@ -6,11 +6,11 @@ package issues
 import (
 	"strings"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/modules/indexer/issues/internal"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/modules/indexer/issues/internal"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
 )
 
 func ToSearchOptions(keyword string, opts *issues_model.IssuesOptions) *SearchOptions {

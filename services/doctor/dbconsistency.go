@@ -6,16 +6,16 @@ package doctor
 import (
 	"context"
 
-	actions_model "gitea.dev/models/actions"
-	activities_model "gitea.dev/models/activities"
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/models/migrations"
-	repo_model "gitea.dev/models/repo"
-	secret_model "gitea.dev/models/secret"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	issue_service "gitea.dev/services/issue"
+	actions_model "forgente.com/models/actions"
+	activities_model "forgente.com/models/activities"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/models/migrations"
+	repo_model "forgente.com/models/repo"
+	secret_model "forgente.com/models/secret"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	issue_service "forgente.com/services/issue"
 )
 
 type consistencyCheck struct {

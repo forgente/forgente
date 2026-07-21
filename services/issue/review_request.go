@@ -6,15 +6,15 @@ package issue
 import (
 	"context"
 
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/models/organization"
-	"gitea.dev/models/perm"
-	access_model "gitea.dev/models/perm/access"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	notify_service "gitea.dev/services/notify"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/models/organization"
+	"forgente.com/models/perm"
+	access_model "forgente.com/models/perm/access"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	notify_service "forgente.com/services/notify"
 )
 
 // ReviewRequest add or remove a review request from a user for this PR, and make comment for it.

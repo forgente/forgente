@@ -7,12 +7,12 @@ import (
 	"context"
 	"fmt"
 
-	auth_model "gitea.dev/models/auth"
-	user_model "gitea.dev/models/user"
-	password_module "gitea.dev/modules/auth/password"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/structs"
+	auth_model "forgente.com/models/auth"
+	user_model "forgente.com/models/user"
+	password_module "forgente.com/modules/auth/password"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/structs"
 )
 
 type UpdateOptionField[T any] struct {

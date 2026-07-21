@@ -9,13 +9,13 @@ import (
 	"image/png"
 	"io"
 
-	"gitea.dev/models/avatars"
-	"gitea.dev/models/db"
-	"gitea.dev/modules/avatar"
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/storage"
+	"forgente.com/models/avatars"
+	"forgente.com/models/db"
+	"forgente.com/modules/avatar"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/storage"
 )
 
 // CustomAvatarRelativePath returns user custom avatar relative path.

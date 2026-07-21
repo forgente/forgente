@@ -10,17 +10,17 @@ import (
 	"strconv"
 	"strings"
 
-	git_model "gitea.dev/models/git"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/markup"
-	repo_module "gitea.dev/modules/repository"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
-	context_service "gitea.dev/services/context"
+	git_model "forgente.com/models/git"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/log"
+	"forgente.com/modules/markup"
+	repo_module "forgente.com/modules/repository"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
+	context_service "forgente.com/services/context"
 )
 
 // getUniquePatchBranchName Gets a unique branch name for a new patch branch

@@ -14,11 +14,11 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	base "gitea.dev/modules/migration"
-	"gitea.dev/modules/proxy"
-	"gitea.dev/modules/structs"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	base "forgente.com/modules/migration"
+	"forgente.com/modules/proxy"
+	"forgente.com/modules/structs"
 
 	"github.com/google/go-github/v89/github"
 	"golang.org/x/oauth2"

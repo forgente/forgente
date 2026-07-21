@@ -12,8 +12,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/setting"
 )
 
 // CreateArchive create archive content to the target path

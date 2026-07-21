@@ -6,10 +6,10 @@ package cmd
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/versioned_migration"
+	"forgente.com/models/db"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/services/versioned_migration"
 
 	"github.com/urfave/cli/v3"
 )

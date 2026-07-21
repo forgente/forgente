@@ -6,13 +6,13 @@ package project
 import (
 	"testing"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	org_model "gitea.dev/models/organization"
-	project_model "gitea.dev/models/project"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	org_model "forgente.com/models/organization"
+	project_model "forgente.com/models/project"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -6,8 +6,8 @@ package v1_13
 import (
 	"fmt"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	"forgente.com/modules/setting"
 )
 
 func IncreaseLanguageField(x db.EngineMigration) error {

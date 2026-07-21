@@ -10,15 +10,15 @@ import (
 	"strconv"
 	"time"
 
-	issues_model "gitea.dev/models/issues"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
+	issues_model "forgente.com/models/issues"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
 )
 
 // GetSingleCommit get a commit via sha

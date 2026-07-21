@@ -3,7 +3,7 @@
 
 package v1_9
 
-import "gitea.dev/models/db"
+import "forgente.com/models/db"
 
 func AddGPGKeyImport(x db.EngineMigration) error {
 	type GPGKeyImport struct {

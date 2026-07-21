@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"time"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/perm"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/models/perm"
+	"forgente.com/modules/timeutil"
 
 	"xorm.io/builder"
 )

@@ -11,10 +11,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/reqctx"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/reqctx"
+	"forgente.com/modules/util"
 )
 
 type Repository = gitcmd.RepositoryFacade

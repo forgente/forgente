@@ -10,10 +10,10 @@ import (
 	"path/filepath"
 	"time"
 
-	asymkey_model "gitea.dev/models/asymkey"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	asymkey_model "forgente.com/models/asymkey"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 // RewriteAllPublicKeys removes any authorized key and rewrite all keys from database again.

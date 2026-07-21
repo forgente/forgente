@@ -6,9 +6,9 @@ package db_test
 import (
 	"testing"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
 
 	"github.com/stretchr/testify/assert"
 	"xorm.io/builder"

@@ -6,14 +6,14 @@ package automerge
 import (
 	"context"
 
-	git_model "gitea.dev/models/git"
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/repository"
-	"gitea.dev/services/automergequeue"
-	notify_service "gitea.dev/services/notify"
+	git_model "forgente.com/models/git"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	"forgente.com/modules/repository"
+	"forgente.com/services/automergequeue"
+	notify_service "forgente.com/services/notify"
 )
 
 type automergeNotifier struct {

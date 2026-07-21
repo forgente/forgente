@@ -12,10 +12,10 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 type DiffTree struct {

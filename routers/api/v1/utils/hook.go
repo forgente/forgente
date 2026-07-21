@@ -8,17 +8,17 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/models/webhook"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/validation"
-	webhook_module "gitea.dev/modules/webhook"
-	"gitea.dev/services/context"
-	webhook_service "gitea.dev/services/webhook"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
+	"forgente.com/models/webhook"
+	"forgente.com/modules/json"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/modules/validation"
+	webhook_module "forgente.com/modules/webhook"
+	"forgente.com/services/context"
+	webhook_service "forgente.com/services/webhook"
 )
 
 // ListOwnerHooks lists the webhooks of the provided owner

@@ -6,10 +6,10 @@ package user
 import (
 	"net/http"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
 )
 
 // GetStopwatches get all stopwatches

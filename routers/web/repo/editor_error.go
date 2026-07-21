@@ -6,14 +6,14 @@ package repo
 import (
 	"errors"
 
-	git_model "gitea.dev/models/git"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
-	"gitea.dev/routers/utils"
-	context_service "gitea.dev/services/context"
-	files_service "gitea.dev/services/repository/files"
+	git_model "forgente.com/models/git"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
+	"forgente.com/routers/utils"
+	context_service "forgente.com/services/context"
+	files_service "forgente.com/services/repository/files"
 )
 
 func errorAs[T error](v error) (e T, ok bool) {

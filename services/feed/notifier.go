@@ -9,16 +9,16 @@ import (
 	"path"
 	"strings"
 
-	activities_model "gitea.dev/models/activities"
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/repository"
-	"gitea.dev/modules/util"
-	notify_service "gitea.dev/services/notify"
+	activities_model "forgente.com/models/activities"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/repository"
+	"forgente.com/modules/util"
+	notify_service "forgente.com/services/notify"
 )
 
 type actionNotifier struct {

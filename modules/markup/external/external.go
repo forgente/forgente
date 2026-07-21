@@ -12,9 +12,9 @@ import (
 	"runtime"
 	"strings"
 
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/process"
+	"forgente.com/modules/setting"
 
 	"github.com/kballard/go-shellquote"
 )

@@ -8,12 +8,12 @@ import (
 	"math"
 	"time"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 func AddCommitDivergenceToPulls(x db.EngineMigration) error {

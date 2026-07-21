@@ -4,8 +4,8 @@
 package user
 
 import (
-	user_model "gitea.dev/models/user"
-	"gitea.dev/services/context"
+	user_model "forgente.com/models/user"
+	"forgente.com/services/context"
 )
 
 // GetUserByPathParam get user by the path param name

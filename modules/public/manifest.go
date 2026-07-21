@@ -13,9 +13,9 @@ import (
 	"sync/atomic"
 	"time"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 // https://vite.dev/guide/backend-integration

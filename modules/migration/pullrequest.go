@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"time"
 
-	"gitea.dev/modules/git"
+	"forgente.com/modules/git"
 )
 
 // PullRequest defines a standard pull request information

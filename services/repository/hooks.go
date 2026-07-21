@@ -7,11 +7,11 @@ import (
 	"context"
 	"fmt"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/webhook"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/log"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/webhook"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/log"
 
 	"xorm.io/builder"
 )

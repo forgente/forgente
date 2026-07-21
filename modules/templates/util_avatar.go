@@ -9,14 +9,14 @@ import (
 	"html/template"
 	"strconv"
 
-	activities_model "gitea.dev/models/activities"
-	"gitea.dev/models/avatars"
-	"gitea.dev/models/organization"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	gitea_html "gitea.dev/modules/htmlutil"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	activities_model "forgente.com/models/activities"
+	"forgente.com/models/avatars"
+	"forgente.com/models/organization"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	gitea_html "forgente.com/modules/htmlutil"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 type AvatarUtils struct {

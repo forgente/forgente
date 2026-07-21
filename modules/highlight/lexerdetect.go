@@ -8,8 +8,8 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/analyze"
-	"gitea.dev/modules/log"
+	"forgente.com/modules/analyze"
+	"forgente.com/modules/log"
 
 	"github.com/alecthomas/chroma/v2"
 	"github.com/alecthomas/chroma/v2/lexers"

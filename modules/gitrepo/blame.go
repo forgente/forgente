@@ -9,9 +9,9 @@ import (
 	"context"
 	"io"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/setting"
 )
 
 func LineBlame(ctx context.Context, repo Repository, revision, file string, line uint) (string, error) {

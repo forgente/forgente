@@ -6,9 +6,9 @@ package actions
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/modules/container"
+	"forgente.com/modules/timeutil"
 
 	"xorm.io/builder"
 )

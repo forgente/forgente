@@ -11,11 +11,11 @@ import (
 	"net/url"
 	"testing"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/db"
-	git_model "gitea.dev/models/git"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/tests"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/db"
+	git_model "forgente.com/models/git"
+	api "forgente.com/modules/structs"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

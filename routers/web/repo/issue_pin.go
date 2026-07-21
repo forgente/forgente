@@ -6,11 +6,11 @@ package repo
 import (
 	"net/http"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/services/context"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/services/context"
 )
 
 // IssuePinOrUnpin pin or unpin a Issue

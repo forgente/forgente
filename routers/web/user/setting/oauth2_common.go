@@ -7,13 +7,13 @@ import (
 	"fmt"
 	"net/http"
 
-	"gitea.dev/models/auth"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web"
-	shared_user "gitea.dev/routers/web/shared/user"
-	"gitea.dev/services/context"
-	"gitea.dev/services/forms"
+	"forgente.com/models/auth"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web"
+	shared_user "forgente.com/routers/web/shared/user"
+	"forgente.com/services/context"
+	"forgente.com/services/forms"
 )
 
 type OAuth2CommonHandlers struct {

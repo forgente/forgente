@@ -8,13 +8,13 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	"gitea.dev/services/forms"
-	issue_service "gitea.dev/services/issue"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	"forgente.com/services/forms"
+	issue_service "forgente.com/services/issue"
 )
 
 // AddTimeManually tracks time manually

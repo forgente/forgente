@@ -3,7 +3,7 @@
 
 package v1_21
 
-import "gitea.dev/models/db"
+import "forgente.com/models/db"
 
 func AddIndexToIssueUserIssueID(x db.EngineMigration) error {
 	type IssueUser struct {

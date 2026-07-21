@@ -11,10 +11,10 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/markup/mdstripper"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/log"
+	"forgente.com/modules/markup/mdstripper"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 var (

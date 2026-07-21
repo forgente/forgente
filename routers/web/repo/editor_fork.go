@@ -6,9 +6,9 @@ package repo
 import (
 	"net/http"
 
-	"gitea.dev/modules/templates"
-	"gitea.dev/services/context"
-	repo_service "gitea.dev/services/repository"
+	"forgente.com/modules/templates"
+	"forgente.com/services/context"
+	repo_service "forgente.com/services/repository"
 )
 
 const tplEditorFork templates.TplName = "repo/editor/fork"

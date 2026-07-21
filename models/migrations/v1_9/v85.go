@@ -6,11 +6,11 @@ package v1_9
 import (
 	"fmt"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/migrations/base"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	"forgente.com/models/migrations/base"
+	"forgente.com/modules/log"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
 )
 
 func HashAppToken(x db.EngineMigration) error {

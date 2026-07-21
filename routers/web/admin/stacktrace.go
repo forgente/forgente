@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"runtime"
 
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/context"
+	"forgente.com/modules/process"
+	"forgente.com/modules/setting"
+	"forgente.com/services/context"
 )
 
 func monitorTraceCommon(ctx *context.Context) {

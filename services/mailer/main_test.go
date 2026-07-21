@@ -6,10 +6,10 @@ package mailer
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
+	"forgente.com/models/unittest"
 
-	_ "gitea.dev/models"
-	_ "gitea.dev/models/actions"
+	_ "forgente.com/models"
+	_ "forgente.com/models/actions"
 )
 
 func TestMain(m *testing.M) {

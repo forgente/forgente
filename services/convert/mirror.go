@@ -6,8 +6,8 @@ package convert
 import (
 	"context"
 
-	repo_model "gitea.dev/models/repo"
-	api "gitea.dev/modules/structs"
+	repo_model "forgente.com/models/repo"
+	api "forgente.com/modules/structs"
 )
 
 // ToPushMirror convert from repo_model.PushMirror and remoteAddress to api.TopicResponse

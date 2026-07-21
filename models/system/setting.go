@@ -9,10 +9,10 @@ import (
 	"sync"
 	"time"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting/config"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting/config"
+	"forgente.com/modules/timeutil"
 
 	"xorm.io/builder"
 )

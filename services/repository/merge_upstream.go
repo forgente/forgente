@@ -7,17 +7,17 @@ import (
 	"errors"
 	"fmt"
 
-	issue_model "gitea.dev/models/issues"
-	access_model "gitea.dev/models/perm/access"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/gitrepo"
-	repo_module "gitea.dev/modules/repository"
-	"gitea.dev/modules/reqctx"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/pull"
+	issue_model "forgente.com/models/issues"
+	access_model "forgente.com/models/perm/access"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/gitrepo"
+	repo_module "forgente.com/modules/repository"
+	"forgente.com/modules/reqctx"
+	"forgente.com/modules/util"
+	"forgente.com/services/pull"
 )
 
 // MergeUpstream merges the base repository's default branch into the fork repository's current branch.

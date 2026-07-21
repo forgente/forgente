@@ -16,14 +16,14 @@ import (
 	"syscall"
 	"time"
 
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/structs"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web/middleware"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/structs"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web/middleware"
 )
 
 // RedirectToUser redirect to a differently-named user

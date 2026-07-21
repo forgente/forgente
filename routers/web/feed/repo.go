@@ -6,10 +6,10 @@ package feed
 import (
 	"time"
 
-	activities_model "gitea.dev/models/activities"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/services/context"
-	feed_service "gitea.dev/services/feed"
+	activities_model "forgente.com/models/activities"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/services/context"
+	feed_service "forgente.com/services/feed"
 
 	"github.com/gorilla/feeds"
 )

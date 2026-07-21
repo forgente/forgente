@@ -6,9 +6,9 @@ package actions
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
 )
 
 type ActionRunAttemptList []*ActionRunAttempt

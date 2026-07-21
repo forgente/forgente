@@ -18,9 +18,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 
 	"github.com/golang-jwt/jwt/v5"
 )

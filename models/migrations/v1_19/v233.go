@@ -6,10 +6,10 @@ package v1_19
 import (
 	"fmt"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/secret"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	"forgente.com/modules/json"
+	"forgente.com/modules/secret"
+	"forgente.com/modules/setting"
 
 	"xorm.io/builder"
 )

@@ -9,11 +9,11 @@ import (
 	"io"
 	"strconv"
 
-	"gitea.dev/modules/csv"
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/translation"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/csv"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/translation"
+	"forgente.com/modules/util"
 )
 
 func init() {

@@ -3,7 +3,7 @@
 
 package v1_19
 
-import "gitea.dev/models/db"
+import "forgente.com/models/db"
 
 func AddIndexForHookTask(x db.EngineMigration) error {
 	type HookTask struct {

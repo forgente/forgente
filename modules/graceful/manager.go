@@ -9,10 +9,10 @@ import (
 	"sync"
 	"time"
 
-	"gitea.dev/modules/gtprof"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/gtprof"
+	"forgente.com/modules/log"
+	"forgente.com/modules/process"
+	"forgente.com/modules/setting"
 )
 
 type state uint8

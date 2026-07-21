@@ -10,9 +10,9 @@ import (
 	"html/template"
 	"reflect"
 
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/container"
+	"forgente.com/modules/json"
+	"forgente.com/modules/setting"
 )
 
 func dictMerge(base map[string]any, arg any) bool {

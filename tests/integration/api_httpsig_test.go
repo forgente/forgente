@@ -9,11 +9,11 @@ import (
 	"net/url"
 	"testing"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/test"
-	"gitea.dev/tests"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/test"
+	"forgente.com/tests"
 
 	"github.com/42wim/httpsig"
 	"golang.org/x/crypto/ssh"

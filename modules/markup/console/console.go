@@ -8,10 +8,10 @@ import (
 	"io"
 	"unicode/utf8"
 
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/typesniffer"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/typesniffer"
+	"forgente.com/modules/util"
 
 	trend "github.com/buildkite/terminal-to-html/v3"
 )

@@ -6,10 +6,10 @@ package repo
 import (
 	"net/http"
 
-	issues_model "gitea.dev/models/issues"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
+	issues_model "forgente.com/models/issues"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
 )
 
 // LockIssue lock an issue

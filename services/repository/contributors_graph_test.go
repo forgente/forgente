@@ -7,10 +7,10 @@ import (
 	"slices"
 	"testing"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/cache"
-	"gitea.dev/modules/setting"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/cache"
+	"forgente.com/modules/setting"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -3,7 +3,7 @@
 
 package v1_8
 
-import "gitea.dev/models/db"
+import "forgente.com/models/db"
 
 func AddUserDefaultTheme(x db.EngineMigration) error {
 	type User struct {

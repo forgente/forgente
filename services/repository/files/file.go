@@ -11,12 +11,12 @@ import (
 	"strings"
 	"time"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/routers/api/v1/utils"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/routers/api/v1/utils"
 )
 
 func GetContentsListFromTreePaths(ctx context.Context, repo *repo_model.Repository, gitRepo *git.Repository, refCommit *utils.RefCommit, treePaths []string) (files []*api.ContentsResponse) {

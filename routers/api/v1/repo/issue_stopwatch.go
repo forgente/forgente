@@ -6,10 +6,10 @@ package repo
 import (
 	"net/http"
 
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
 )
 
 // StartIssueStopwatch creates a stopwatch for the given issue.

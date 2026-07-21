@@ -13,9 +13,9 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/modules/packages"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/validation"
+	"forgente.com/modules/packages"
+	"forgente.com/modules/util"
+	"forgente.com/modules/validation"
 
 	"github.com/klauspost/compress/zstd"
 	"github.com/ulikunitz/xz"

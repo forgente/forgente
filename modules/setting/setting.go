@@ -11,10 +11,10 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/user"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/log"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/user"
+	"forgente.com/modules/util"
 )
 
 // settings

@@ -9,14 +9,14 @@ import (
 	"os"
 	"time"
 
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/log"
-	repo_module "gitea.dev/modules/repository"
-	asymkey_service "gitea.dev/services/asymkey"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/log"
+	repo_module "forgente.com/modules/repository"
+	asymkey_service "forgente.com/services/asymkey"
 )
 
 // initRepoCommit temporarily changes with work directory.

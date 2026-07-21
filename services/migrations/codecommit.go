@@ -10,10 +10,10 @@ import (
 	"strconv"
 	"strings"
 
-	git_module "gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	base "gitea.dev/modules/migration"
-	"gitea.dev/modules/structs"
+	git_module "forgente.com/modules/git"
+	"forgente.com/modules/log"
+	base "forgente.com/modules/migration"
+	"forgente.com/modules/structs"
 
 	"github.com/aws/aws-sdk-go-v2/credentials"
 	"github.com/aws/aws-sdk-go-v2/service/codecommit"

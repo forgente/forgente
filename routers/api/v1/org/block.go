@@ -4,8 +4,8 @@
 package org
 
 import (
-	"gitea.dev/routers/api/v1/shared"
-	"gitea.dev/services/context"
+	"forgente.com/routers/api/v1/shared"
+	"forgente.com/services/context"
 )
 
 func ListBlocks(ctx *context.APIContext) {

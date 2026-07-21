@@ -20,15 +20,15 @@ import (
 	"io"
 	"strings"
 
-	packages_model "gitea.dev/models/packages"
-	alpine_model "gitea.dev/models/packages/alpine"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/json"
-	packages_module "gitea.dev/modules/packages"
-	alpine_module "gitea.dev/modules/packages/alpine"
-	"gitea.dev/modules/util"
-	packages_service "gitea.dev/services/packages"
+	packages_model "forgente.com/models/packages"
+	alpine_model "forgente.com/models/packages/alpine"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/json"
+	packages_module "forgente.com/modules/packages"
+	alpine_module "forgente.com/modules/packages/alpine"
+	"forgente.com/modules/util"
+	packages_service "forgente.com/services/packages"
 )
 
 const (

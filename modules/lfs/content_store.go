@@ -11,8 +11,8 @@ import (
 	"io"
 	"os"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/storage"
+	"forgente.com/modules/log"
+	"forgente.com/modules/storage"
 )
 
 var (

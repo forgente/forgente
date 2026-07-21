@@ -6,9 +6,9 @@ package system_test
 import (
 	"testing"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/system"
-	"gitea.dev/models/unittest"
+	"forgente.com/models/db"
+	"forgente.com/models/system"
+	"forgente.com/models/unittest"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -7,11 +7,11 @@ import (
 	"context"
 	"slices"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	"gitea.dev/modules/log"
-	actions_service "gitea.dev/services/actions"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	"forgente.com/modules/log"
+	actions_service "forgente.com/services/actions"
 )
 
 // UpdateRepositoryUnits updates a repository's units

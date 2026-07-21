@@ -4,7 +4,7 @@
 package bleve
 
 import (
-	"gitea.dev/modules/optional"
+	"forgente.com/modules/optional"
 
 	"github.com/blevesearch/bleve/v2"
 	"github.com/blevesearch/bleve/v2/search/query"

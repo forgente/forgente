@@ -13,8 +13,8 @@ import (
 	"slices"
 	"strings"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 type ConnOptions struct {

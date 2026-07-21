@@ -6,11 +6,11 @@ package actions
 import (
 	"testing"
 
-	actions_model "gitea.dev/models/actions"
-	repo_model "gitea.dev/models/repo"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/translation"
+	actions_model "forgente.com/models/actions"
+	repo_model "forgente.com/models/repo"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/translation"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

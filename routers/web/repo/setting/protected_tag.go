@@ -8,17 +8,17 @@ import (
 	"net/http"
 	"strings"
 
-	git_model "gitea.dev/models/git"
-	"gitea.dev/models/organization"
-	"gitea.dev/models/perm"
-	access_model "gitea.dev/models/perm/access"
-	"gitea.dev/models/unit"
-	"gitea.dev/modules/base"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	"gitea.dev/services/forms"
+	git_model "forgente.com/models/git"
+	"forgente.com/models/organization"
+	"forgente.com/models/perm"
+	access_model "forgente.com/models/perm/access"
+	"forgente.com/models/unit"
+	"forgente.com/modules/base"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	"forgente.com/services/forms"
 )
 
 const (

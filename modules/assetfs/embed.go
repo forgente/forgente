@@ -15,8 +15,8 @@ import (
 	"sync"
 	"time"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/json"
+	"forgente.com/modules/util"
 )
 
 type EmbeddedFile interface {

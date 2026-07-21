@@ -6,7 +6,7 @@ package actions
 import (
 	"context"
 
-	"gitea.dev/models/db"
+	"forgente.com/models/db"
 )
 
 // ActionTaskOutput represents an output of ActionTask.

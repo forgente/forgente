@@ -7,7 +7,7 @@ package structs
 import (
 	"time"
 
-	"gitea.dev/modules/json"
+	"forgente.com/modules/json"
 )
 
 // User represents a user

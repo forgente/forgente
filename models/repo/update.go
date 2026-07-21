@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"time"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	"forgente.com/modules/util"
 )
 
 // UpdateRepositoryOwnerNames updates repository owner_names (this should only be used when the ownerName has changed case)

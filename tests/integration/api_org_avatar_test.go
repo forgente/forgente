@@ -10,10 +10,10 @@ import (
 	"path/filepath"
 	"testing"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/tests"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

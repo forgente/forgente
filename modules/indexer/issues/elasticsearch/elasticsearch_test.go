@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/modules/indexer/issues/internal/tests"
-	"gitea.dev/modules/test"
+	"forgente.com/modules/indexer/issues/internal/tests"
+	"forgente.com/modules/test"
 
 	"github.com/stretchr/testify/require"
 )

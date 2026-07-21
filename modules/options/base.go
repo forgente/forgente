@@ -4,8 +4,8 @@
 package options
 
 import (
-	"gitea.dev/modules/assetfs"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/assetfs"
+	"forgente.com/modules/setting"
 )
 
 func CustomAssets() *assetfs.Layer {

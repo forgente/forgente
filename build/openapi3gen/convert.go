@@ -9,7 +9,7 @@ import (
 	"sort"
 	"strings"
 
-	"gitea.dev/modules/json"
+	"forgente.com/modules/json"
 
 	"github.com/getkin/kin-openapi/openapi2"
 	"github.com/getkin/kin-openapi/openapi2conv"

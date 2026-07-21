@@ -6,9 +6,9 @@ package settings
 import (
 	"net/http"
 
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/services/context"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/services/context"
 )
 
 // GetGeneralUISettings returns instance's global settings for ui

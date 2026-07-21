@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"strconv"
 
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/context"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/json"
+	"forgente.com/modules/setting"
+	"forgente.com/services/context"
 )
 
 func SettingsCtxData(ctx *context.Context) {

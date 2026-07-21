@@ -7,11 +7,11 @@ import (
 	"fmt"
 	"strings"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/log"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/log"
 )
 
 // getRebaseAmendMessage composes the message to amend commits in rebase merge of a pull request.

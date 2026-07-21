@@ -9,9 +9,9 @@ import (
 	"path"
 	"strings"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/storage"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/storage"
+	"forgente.com/modules/util"
 )
 
 // BlobHash256Key is the key to address a blob content

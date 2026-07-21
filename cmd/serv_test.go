@@ -6,8 +6,8 @@ package cmd
 import (
 	"testing"
 
-	"gitea.dev/models/perm"
-	"gitea.dev/modules/git"
+	"forgente.com/models/perm"
+	"forgente.com/modules/git"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -7,7 +7,7 @@ import (
 	"context"
 	"fmt"
 
-	"gitea.dev/modules/log"
+	"forgente.com/modules/log"
 )
 
 // VersionedIndexName returns the full index name with version suffix.

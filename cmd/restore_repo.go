@@ -7,8 +7,8 @@ import (
 	"context"
 	"strings"
 
-	"gitea.dev/modules/private"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/private"
+	"forgente.com/modules/setting"
 
 	"github.com/urfave/cli/v3"
 )

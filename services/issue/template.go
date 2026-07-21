@@ -10,12 +10,12 @@ import (
 	"path"
 	"strings"
 
-	"gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/issue/template"
-	"gitea.dev/modules/log"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
+	"forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/issue/template"
+	"forgente.com/modules/log"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
 
 	"go.yaml.in/yaml/v4"
 )

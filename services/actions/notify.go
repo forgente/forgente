@@ -6,9 +6,9 @@ package actions
 import (
 	"context"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/modules/log"
-	notify_service "gitea.dev/services/notify"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/modules/log"
+	notify_service "forgente.com/services/notify"
 )
 
 // NotifyWorkflowJobsAndRunsStatusUpdate notifies status changes for a batch of jobs and the runs they affect.

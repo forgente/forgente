@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"strings"
 
-	activities_model "gitea.dev/models/activities"
-	"gitea.dev/models/db"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
+	activities_model "forgente.com/models/activities"
+	"forgente.com/models/db"
+	api "forgente.com/modules/structs"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
 )
 
 // NewAvailable check if unread notifications exist

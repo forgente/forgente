@@ -6,11 +6,11 @@ package issue
 import (
 	"testing"
 
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
 
 	"github.com/stretchr/testify/assert"
 )

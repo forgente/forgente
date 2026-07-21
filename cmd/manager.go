@@ -8,7 +8,7 @@ import (
 	"os"
 	"time"
 
-	"gitea.dev/modules/private"
+	"forgente.com/modules/private"
 
 	"github.com/urfave/cli/v3"
 )

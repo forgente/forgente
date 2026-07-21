@@ -6,11 +6,11 @@ package files
 import (
 	"testing"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/json"
-	"gitea.dev/services/contexttest"
-	"gitea.dev/services/gitdiff"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/json"
+	"forgente.com/services/contexttest"
+	"forgente.com/services/gitdiff"
 
 	"github.com/stretchr/testify/assert"
 )

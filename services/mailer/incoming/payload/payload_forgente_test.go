@@ -6,8 +6,8 @@ package payload
 import (
 	"testing"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
 
 	"github.com/stretchr/testify/assert"
 )

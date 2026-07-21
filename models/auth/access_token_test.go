@@ -6,10 +6,10 @@ package auth_test
 import (
 	"testing"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/db"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/util"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/db"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/util"
 
 	"github.com/stretchr/testify/assert"
 )

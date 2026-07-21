@@ -6,9 +6,9 @@ package pull_test
 import (
 	"testing"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	pull_service "gitea.dev/services/pull"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	pull_service "forgente.com/services/pull"
 
 	"github.com/stretchr/testify/assert"
 )

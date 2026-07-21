@@ -8,12 +8,12 @@ import (
 	"net/http"
 	"strconv"
 
-	"gitea.dev/models/db"
-	system_model "gitea.dev/models/system"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/services/context"
+	"forgente.com/models/db"
+	system_model "forgente.com/models/system"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/services/context"
 )
 
 const (

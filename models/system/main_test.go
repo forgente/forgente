@@ -6,12 +6,12 @@ package system_test
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
+	"forgente.com/models/unittest"
 
-	_ "gitea.dev/models" // register models
-	_ "gitea.dev/models/actions"
-	_ "gitea.dev/models/activities"
-	_ "gitea.dev/models/system" // register models of system
+	_ "forgente.com/models" // register models
+	_ "forgente.com/models/actions"
+	_ "forgente.com/models/activities"
+	_ "forgente.com/models/system" // register models of system
 )
 
 func TestMain(m *testing.M) {

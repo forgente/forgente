@@ -14,13 +14,13 @@ import (
 	"sync"
 	"testing"
 
-	auth_model "gitea.dev/models/auth"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/git/gitcmd"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/test"
-	"gitea.dev/tests"
+	auth_model "forgente.com/models/auth"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/git/gitcmd"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/test"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

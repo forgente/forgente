@@ -9,10 +9,10 @@ import (
 	"slices"
 	"strings"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/structs"
+	"forgente.com/models/db"
+	"forgente.com/modules/container"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/structs"
 
 	"xorm.io/builder"
 )

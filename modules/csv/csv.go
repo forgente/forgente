@@ -11,9 +11,9 @@ import (
 	"regexp"
 	"strings"
 
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/translation"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/translation"
+	"forgente.com/modules/util"
 )
 
 const (

@@ -8,8 +8,8 @@ import (
 	"context"
 	"io"
 
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/log"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/log"
 )
 
 // CommitFileStatus represents status of files in a commit.

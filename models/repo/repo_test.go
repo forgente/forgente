@@ -6,13 +6,13 @@ package repo
 import (
 	"testing"
 
-	"gitea.dev/models/unit"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
+	"forgente.com/models/unit"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

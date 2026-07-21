@@ -11,11 +11,11 @@ import (
 	"regexp"
 	"strings"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/reqctx"
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/context"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/log"
+	"forgente.com/modules/reqctx"
+	"forgente.com/modules/setting"
+	"forgente.com/services/context"
 )
 
 // ErrFileTypeForbidden not allowed file type error

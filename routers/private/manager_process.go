@@ -11,10 +11,10 @@ import (
 	"runtime"
 	"time"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/private"
-	process_module "gitea.dev/modules/process"
-	"gitea.dev/services/context"
+	"forgente.com/modules/log"
+	"forgente.com/modules/private"
+	process_module "forgente.com/modules/process"
+	"forgente.com/services/context"
 )
 
 // Processes prints out the processes

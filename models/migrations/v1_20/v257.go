@@ -4,8 +4,8 @@
 package v1_20
 
 import (
-	"gitea.dev/models/db"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/modules/timeutil"
 )
 
 func CreateActionArtifactTable(x db.EngineMigration) error {

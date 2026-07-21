@@ -11,8 +11,8 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/setting"
 )
 
 // GetBranchCommitID returns last commit ID string of given branch.

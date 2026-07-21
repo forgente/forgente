@@ -7,11 +7,11 @@ import (
 	"slices"
 	"testing"
 
-	"gitea.dev/models/auth"
-	"gitea.dev/models/db"
-	"gitea.dev/models/unittest"
-	"gitea.dev/models/user"
-	"gitea.dev/modules/log"
+	"forgente.com/models/auth"
+	"forgente.com/models/db"
+	"forgente.com/models/unittest"
+	"forgente.com/models/user"
+	"forgente.com/modules/log"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

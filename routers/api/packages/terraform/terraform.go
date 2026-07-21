@@ -13,15 +13,15 @@ import (
 	"strings"
 	"unicode"
 
-	packages_model "gitea.dev/models/packages"
-	"gitea.dev/modules/globallock"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/optional"
-	packages_module "gitea.dev/modules/packages"
-	terraform_module "gitea.dev/modules/packages/terraform"
-	"gitea.dev/routers/api/packages/helper"
-	"gitea.dev/services/context"
-	packages_service "gitea.dev/services/packages"
+	packages_model "forgente.com/models/packages"
+	"forgente.com/modules/globallock"
+	"forgente.com/modules/log"
+	"forgente.com/modules/optional"
+	packages_module "forgente.com/modules/packages"
+	terraform_module "forgente.com/modules/packages/terraform"
+	"forgente.com/routers/api/packages/helper"
+	"forgente.com/services/context"
+	packages_service "forgente.com/services/packages"
 )
 
 var packageNameRegex = regexp.MustCompile(`\A[-_+.\w]+\z`)

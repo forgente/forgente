@@ -8,8 +8,8 @@ import (
 	"regexp"
 	"strings"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 )
 
 const (

@@ -4,8 +4,8 @@
 package auth
 
 import (
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
 )
 
 func UnmarshalGroupTeamMapping(raw string) (map[string]map[string][]string, error) {

@@ -11,13 +11,13 @@ import (
 	"regexp"
 	"testing"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/perm"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/tests"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/perm"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

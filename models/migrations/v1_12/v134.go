@@ -11,10 +11,10 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 func RefixMergeBase(ctx context.Context, x db.EngineMigration) error {

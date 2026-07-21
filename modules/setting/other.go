@@ -3,7 +3,7 @@
 
 package setting
 
-import "gitea.dev/modules/log"
+import "forgente.com/modules/log"
 
 type OtherConfig struct {
 	ShowFooterVersion          bool

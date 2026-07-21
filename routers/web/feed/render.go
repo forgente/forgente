@@ -4,8 +4,8 @@
 package feed
 
 import (
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/services/context"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/services/context"
 )
 
 // checkRepoFeedTokenScope ensures an API token has repository read scope before a

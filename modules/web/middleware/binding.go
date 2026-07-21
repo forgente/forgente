@@ -8,9 +8,9 @@ import (
 	"reflect"
 	"strings"
 
-	"gitea.dev/modules/translation"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/validation"
+	"forgente.com/modules/translation"
+	"forgente.com/modules/util"
+	"forgente.com/modules/validation"
 
 	"gitea.com/go-chi/binding"
 )

@@ -8,12 +8,12 @@ import (
 	"errors"
 	"fmt"
 
-	"gitea.dev/models/db"
-	issue_model "gitea.dev/models/issues"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/indexer/issues/internal"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/queue"
+	"forgente.com/models/db"
+	issue_model "forgente.com/models/issues"
+	"forgente.com/modules/container"
+	"forgente.com/modules/indexer/issues/internal"
+	"forgente.com/modules/log"
+	"forgente.com/modules/queue"
 )
 
 // getIssueIndexerData returns the indexer data of an issue and a bool value indicating whether the issue exists.

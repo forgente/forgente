@@ -4,10 +4,10 @@
 package label
 
 import (
-	"gitea.dev/modules/label"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	"gitea.dev/services/forms"
+	"forgente.com/modules/label"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	"forgente.com/services/forms"
 )
 
 func GetLabelEditForm(ctx *context.Context) *forms.CreateLabelForm {

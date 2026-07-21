@@ -8,10 +8,10 @@ import (
 	"strconv"
 	"time"
 
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/base"
-	"gitea.dev/modules/log"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/base"
+	"forgente.com/modules/log"
 )
 
 // This file provides functions relating verifying gpg keys

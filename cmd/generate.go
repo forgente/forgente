@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"os"
 
-	"gitea.dev/modules/generate"
-	"gitea.dev/modules/ssh"
+	"forgente.com/modules/generate"
+	"forgente.com/modules/ssh"
 
 	"github.com/mattn/go-isatty"
 	"github.com/urfave/cli/v3"

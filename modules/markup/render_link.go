@@ -9,8 +9,8 @@ import (
 	"path"
 	"strings"
 
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/setting"
 )
 
 // resolveLinkRelative tries to resolve the link relative to the "{base}/{cur}", and returns the final link.

@@ -6,16 +6,16 @@ package repo
 import (
 	"strings"
 
-	"gitea.dev/models/db"
-	git_model "gitea.dev/models/git"
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	"gitea.dev/services/forms"
-	repo_service "gitea.dev/services/repository"
+	"forgente.com/models/db"
+	git_model "forgente.com/models/git"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	"forgente.com/services/forms"
+	repo_service "forgente.com/services/repository"
 )
 
 // forgenteBranchOptionsLimit caps how many non-default branch names are loaded for the

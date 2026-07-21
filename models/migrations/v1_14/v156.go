@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"strings"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
 )
 
 func FixPublisherIDforTagReleases(ctx context.Context, x db.EngineMigration) error {

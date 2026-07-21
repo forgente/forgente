@@ -10,14 +10,14 @@ import (
 	"sync"
 	"time"
 
-	runnerv1 "gitea.dev/actions-proto-go/runner/v1"
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	secret_model "gitea.dev/models/secret"
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/db"
+	secret_model "forgente.com/models/secret"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 
+	runnerv1 "gitea.dev/actions-proto-go/runner/v1"
 	"google.golang.org/protobuf/types/known/structpb"
 )
 

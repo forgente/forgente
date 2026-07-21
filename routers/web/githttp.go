@@ -4,8 +4,8 @@
 package web
 
 import (
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/web/repo"
+	"forgente.com/modules/web"
+	"forgente.com/routers/web/repo"
 )
 
 func addOwnerRepoGitHTTPRouters(m *web.Router, middlewares ...any) {

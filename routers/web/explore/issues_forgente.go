@@ -7,15 +7,15 @@ import (
 	"net/http"
 	"strings"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	issue_indexer "gitea.dev/modules/indexer/issues"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/services/context"
-	issue_service "gitea.dev/services/issue"
-	pull_service "gitea.dev/services/pull"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	issue_indexer "forgente.com/modules/indexer/issues"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/services/context"
+	issue_service "forgente.com/services/issue"
+	pull_service "forgente.com/services/pull"
 )
 
 // tplExploreIssues explore issues page template

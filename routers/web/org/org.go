@@ -8,15 +8,15 @@ import (
 	"errors"
 	"net/http"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/organization"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	"gitea.dev/services/forms"
+	"forgente.com/models/db"
+	"forgente.com/models/organization"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	"forgente.com/services/forms"
 )
 
 const (

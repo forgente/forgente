@@ -11,13 +11,13 @@ import (
 	"os"
 	"path/filepath"
 
-	git_model "gitea.dev/models/git"
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/log"
-	repo_module "gitea.dev/modules/repository"
+	git_model "forgente.com/models/git"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/log"
+	repo_module "forgente.com/modules/repository"
 )
 
 // Temporary repos created here use standard branch names to help simplify

@@ -6,11 +6,11 @@ package repo
 import (
 	"net/http"
 
-	repo_model "gitea.dev/models/repo"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
+	repo_model "forgente.com/models/repo"
+	api "forgente.com/modules/structs"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
 )
 
 // ListSubscribers list a repo's subscribers (i.e. watchers)

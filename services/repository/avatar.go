@@ -9,11 +9,11 @@ import (
 	"io"
 	"strconv"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/avatar"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/storage"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/avatar"
+	"forgente.com/modules/log"
+	"forgente.com/modules/storage"
 )
 
 // UploadAvatar saves custom avatar for repository.

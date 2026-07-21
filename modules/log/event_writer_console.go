@@ -6,7 +6,7 @@ package log
 import (
 	"os"
 
-	"gitea.dev/modules/util"
+	"forgente.com/modules/util"
 )
 
 type WriterConsoleOption struct {

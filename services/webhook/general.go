@@ -9,13 +9,13 @@ import (
 	"net/url"
 	"strings"
 
-	user_model "gitea.dev/models/user"
-	webhook_model "gitea.dev/models/webhook"
-	"gitea.dev/modules/base"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	webhook_module "gitea.dev/modules/webhook"
+	user_model "forgente.com/models/user"
+	webhook_model "forgente.com/models/webhook"
+	"forgente.com/modules/base"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	webhook_module "forgente.com/modules/webhook"
 )
 
 type linkFormatter = func(string, string) string

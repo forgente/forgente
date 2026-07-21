@@ -6,9 +6,9 @@ package auth
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
 
 	"xorm.io/builder"
 )

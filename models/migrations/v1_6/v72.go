@@ -6,8 +6,8 @@ package v1_6
 import (
 	"fmt"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/modules/timeutil"
 )
 
 func AddReview(x db.EngineMigration) error {

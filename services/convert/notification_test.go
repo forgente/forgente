@@ -6,13 +6,13 @@ package convert
 import (
 	"testing"
 
-	activities_model "gitea.dev/models/activities"
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/timeutil"
+	activities_model "forgente.com/models/activities"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/timeutil"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

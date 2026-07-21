@@ -13,10 +13,10 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/git/pipeline"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/git/pipeline"
+	"forgente.com/modules/util"
 
 	"golang.org/x/sync/errgroup"
 )

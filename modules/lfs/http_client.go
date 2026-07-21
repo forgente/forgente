@@ -13,10 +13,10 @@ import (
 	"net/url"
 	"strings"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/proxy"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/proxy"
+	"forgente.com/modules/setting"
 
 	"golang.org/x/sync/errgroup"
 )

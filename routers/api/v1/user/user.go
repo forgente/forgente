@@ -7,12 +7,12 @@ package user
 import (
 	"net/http"
 
-	activities_model "gitea.dev/models/activities"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
-	feed_service "gitea.dev/services/feed"
+	activities_model "forgente.com/models/activities"
+	user_model "forgente.com/models/user"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
+	feed_service "forgente.com/services/feed"
 )
 
 // Search search users

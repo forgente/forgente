@@ -8,7 +8,7 @@ import (
 	"strings"
 	"testing"
 
-	"gitea.dev/models/migrations/migrationtest"
+	"forgente.com/models/migrations/migrationtest"
 
 	"github.com/stretchr/testify/assert"
 )

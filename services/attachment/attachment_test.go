@@ -8,11 +8,11 @@ import (
 	"path/filepath"
 	"testing"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
 
-	_ "gitea.dev/models/actions"
+	_ "forgente.com/models/actions"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -6,13 +6,13 @@ package admin
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/contexttest"
-	"gitea.dev/services/forms"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/services/contexttest"
+	"forgente.com/services/forms"
 
 	"github.com/stretchr/testify/assert"
 )

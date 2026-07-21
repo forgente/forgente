@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"time"
 
-	activities_model "gitea.dev/models/activities"
-	git_model "gitea.dev/models/git"
-	"gitea.dev/models/unit"
-	"gitea.dev/modules/templates"
-	"gitea.dev/services/context"
+	activities_model "forgente.com/models/activities"
+	git_model "forgente.com/models/git"
+	"forgente.com/models/unit"
+	"forgente.com/modules/templates"
+	"forgente.com/services/context"
 )
 
 const (

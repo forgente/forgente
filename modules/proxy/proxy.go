@@ -10,9 +10,9 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/glob"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/glob"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 var (

@@ -13,13 +13,13 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/structs"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/structs"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
 
 	"xorm.io/builder"
 )

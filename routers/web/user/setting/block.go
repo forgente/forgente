@@ -6,10 +6,10 @@ package setting
 import (
 	"net/http"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	shared_user "gitea.dev/routers/web/shared/user"
-	"gitea.dev/services/context"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	shared_user "forgente.com/routers/web/shared/user"
+	"forgente.com/services/context"
 )
 
 const (

@@ -13,8 +13,8 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/translation"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/translation"
 )
 
 var (

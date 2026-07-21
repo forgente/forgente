@@ -7,12 +7,12 @@ import (
 	"strings"
 	"testing"
 
-	"gitea.dev/models/db"
-	perm_model "gitea.dev/models/perm"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/services/contexttest"
+	"forgente.com/models/db"
+	perm_model "forgente.com/models/perm"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/services/contexttest"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

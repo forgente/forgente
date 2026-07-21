@@ -6,7 +6,7 @@ package v1_22
 import (
 	"fmt"
 
-	"gitea.dev/models/db"
+	"forgente.com/models/db"
 
 	"xorm.io/xorm/schemas"
 )

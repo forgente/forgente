@@ -4,8 +4,8 @@
 package templates
 
 import (
-	"gitea.dev/modules/assetfs"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/assetfs"
+	"forgente.com/modules/setting"
 )
 
 func AssetFS() *assetfs.LayeredFS {

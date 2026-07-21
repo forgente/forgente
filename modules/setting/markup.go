@@ -8,8 +8,8 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 )
 
 // ExternalMarkupRenderers represents the external markup renderers

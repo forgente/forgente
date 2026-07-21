@@ -6,8 +6,8 @@ package setting
 import (
 	"time"
 
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/log"
+	"forgente.com/modules/container"
+	"forgente.com/modules/log"
 )
 
 // UI settings

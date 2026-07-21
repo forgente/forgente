@@ -9,7 +9,7 @@ package git
 import (
 	"path/filepath"
 
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/setting"
 
 	"github.com/go-git/go-billy/v5"
 	"github.com/go-git/go-billy/v5/osfs"

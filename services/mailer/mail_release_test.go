@@ -6,12 +6,12 @@ package mailer
 import (
 	"testing"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
-	sender_service "gitea.dev/services/mailer/sender"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
+	sender_service "forgente.com/services/mailer/sender"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

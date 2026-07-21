@@ -7,13 +7,13 @@ import (
 	"errors"
 	"net/http"
 
-	user_model "gitea.dev/models/user"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
-	user_service "gitea.dev/services/user"
+	user_model "forgente.com/models/user"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
+	user_service "forgente.com/services/user"
 )
 
 func ListBlocks(ctx *context.APIContext, blocker *user_model.User) {

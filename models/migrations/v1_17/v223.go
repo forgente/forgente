@@ -7,10 +7,10 @@ import (
 	"context"
 	"fmt"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/migrations/base"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/models/migrations/base"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/timeutil"
 )
 
 func RenameCredentialIDBytes(x db.EngineMigration) error {

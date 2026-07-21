@@ -11,10 +11,10 @@ import (
 	"strings"
 	"testing"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/tests"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/tests"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/stretchr/testify/assert"

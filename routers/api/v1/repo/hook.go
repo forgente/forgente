@@ -7,19 +7,19 @@ package repo
 import (
 	"net/http"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/perm"
-	access_model "gitea.dev/models/perm/access"
-	"gitea.dev/models/webhook"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	webhook_module "gitea.dev/modules/webhook"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
-	webhook_service "gitea.dev/services/webhook"
+	"forgente.com/models/db"
+	"forgente.com/models/perm"
+	access_model "forgente.com/models/perm/access"
+	"forgente.com/models/webhook"
+	"forgente.com/modules/git"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	webhook_module "forgente.com/modules/webhook"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
+	webhook_service "forgente.com/services/webhook"
 )
 
 // ListHooks list all hooks of a repository

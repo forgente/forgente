@@ -7,11 +7,11 @@ import (
 	"testing"
 	"time"
 
-	activities_model "gitea.dev/models/activities"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/timeutil"
+	activities_model "forgente.com/models/activities"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/json"
+	"forgente.com/modules/timeutil"
 
 	"github.com/stretchr/testify/assert"
 )

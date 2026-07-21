@@ -7,10 +7,10 @@ import (
 	"errors"
 	"net/http"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
-	archiver_service "gitea.dev/services/repository/archiver"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
+	archiver_service "forgente.com/services/repository/archiver"
 )
 
 func serveRepoArchive(ctx *context.APIContext, reqFileName string, paths []string) {

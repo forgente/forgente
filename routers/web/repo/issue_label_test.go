@@ -9,14 +9,14 @@ import (
 	"strings"
 	"testing"
 
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/base"
-	"gitea.dev/modules/repository"
-	"gitea.dev/modules/test"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/contexttest"
-	"gitea.dev/services/forms"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/base"
+	"forgente.com/modules/repository"
+	"forgente.com/modules/test"
+	"forgente.com/modules/web"
+	"forgente.com/services/contexttest"
+	"forgente.com/services/forms"
 
 	"github.com/stretchr/testify/assert"
 )

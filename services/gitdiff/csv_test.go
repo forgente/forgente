@@ -8,8 +8,8 @@ import (
 	"strings"
 	"testing"
 
-	csv_module "gitea.dev/modules/csv"
-	"gitea.dev/modules/setting"
+	csv_module "forgente.com/modules/csv"
+	"forgente.com/modules/setting"
 
 	"github.com/stretchr/testify/assert"
 )

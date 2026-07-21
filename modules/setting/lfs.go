@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"time"
 
-	"gitea.dev/modules/generate"
+	"forgente.com/modules/generate"
 )
 
 // LFS represents the server-side configuration for Git LFS.

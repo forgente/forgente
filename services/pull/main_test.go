@@ -7,9 +7,9 @@ package pull
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
+	"forgente.com/models/unittest"
 
-	_ "gitea.dev/models/actions"
+	_ "forgente.com/models/actions"
 )
 
 func TestMain(m *testing.M) {

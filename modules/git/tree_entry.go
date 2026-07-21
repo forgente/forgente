@@ -10,7 +10,7 @@ import (
 	"slices"
 	"strings"
 
-	"gitea.dev/modules/util"
+	"forgente.com/modules/util"
 )
 
 // TreeEntry the leaf in the git tree

@@ -13,14 +13,14 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	webhook_model "gitea.dev/models/webhook"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	webhook_module "gitea.dev/modules/webhook"
+	webhook_model "forgente.com/models/webhook"
+	"forgente.com/modules/git"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	webhook_module "forgente.com/modules/webhook"
 )
 
 type (

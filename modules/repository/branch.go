@@ -7,14 +7,14 @@ import (
 	"context"
 	"fmt"
 
-	"gitea.dev/models/db"
-	git_model "gitea.dev/models/git"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	git_model "forgente.com/models/git"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/container"
+	"forgente.com/modules/git"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/log"
+	"forgente.com/modules/timeutil"
 )
 
 // SyncResult describes a reference update detected during sync.

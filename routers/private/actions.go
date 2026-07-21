@@ -9,14 +9,14 @@ import (
 	"net/http"
 	"strings"
 
-	actions_model "gitea.dev/models/actions"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/private"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
+	actions_model "forgente.com/models/actions"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/private"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
 )
 
 // GenerateActionsRunnerToken generates a new runner token for a given scope

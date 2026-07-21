@@ -8,14 +8,14 @@ import (
 	"net/http"
 	"sort"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/services/auth/source/oauth2"
-	"gitea.dev/services/context"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/services/auth/source/oauth2"
+	"forgente.com/services/context"
 )
 
 const (

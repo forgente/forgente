@@ -12,10 +12,10 @@ import (
 	"os"
 	"path"
 
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/public"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/log"
+	"forgente.com/modules/public"
+	"forgente.com/modules/setting"
 )
 
 // ErrURLNotSupported represents url is not supported

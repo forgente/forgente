@@ -7,14 +7,14 @@ import (
 	"testing"
 	"time"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/queue"
-	"gitea.dev/modules/setting"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/queue"
+	"forgente.com/modules/setting"
 
-	_ "gitea.dev/models"
-	_ "gitea.dev/models/actions"
-	_ "gitea.dev/models/activities"
+	_ "forgente.com/models"
+	_ "forgente.com/models/actions"
+	_ "forgente.com/models/activities"
 
 	"github.com/stretchr/testify/assert"
 )

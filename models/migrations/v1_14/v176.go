@@ -3,7 +3,7 @@
 
 package v1_14
 
-import "gitea.dev/models/db"
+import "forgente.com/models/db"
 
 // RemoveInvalidLabels looks through the database to look for comments and issue_labels
 // that refer to labels do not belong to the repository or organization that repository

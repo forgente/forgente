@@ -9,14 +9,14 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/organization"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	"forgente.com/models/organization"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/util"
 
 	"xorm.io/builder"
 )

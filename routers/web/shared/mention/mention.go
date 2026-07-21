@@ -6,8 +6,8 @@ package mention
 import (
 	"context"
 
-	"gitea.dev/models/organization"
-	user_model "gitea.dev/models/user"
+	"forgente.com/models/organization"
+	user_model "forgente.com/models/user"
 )
 
 // Mention is the JSON structure returned by mention autocomplete endpoints.

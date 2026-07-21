@@ -9,7 +9,7 @@ import (
 	"fmt"
 	"os"
 
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/setting"
 
 	"github.com/urfave/cli/v3"
 )

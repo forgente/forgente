@@ -8,8 +8,8 @@ import (
 	"sync"
 	"time"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 )
 
 // EphemeralCache is a cache that can be used to store data in a request level context

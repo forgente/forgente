@@ -8,10 +8,10 @@ import (
 	"strings"
 	"testing"
 
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/storage"
-	"gitea.dev/modules/test"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/storage"
+	"forgente.com/modules/test"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

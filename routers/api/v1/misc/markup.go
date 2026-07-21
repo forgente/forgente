@@ -4,13 +4,13 @@
 package misc
 
 import (
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/markup/markdown"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/common"
-	"gitea.dev/services/context"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/markup/markdown"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web"
+	"forgente.com/routers/common"
+	"forgente.com/services/context"
 )
 
 // Markup render markup document to HTML

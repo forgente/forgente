@@ -10,16 +10,16 @@ import (
 	"strings"
 	"time"
 
-	asymkey_model "gitea.dev/models/asymkey"
-	"gitea.dev/models/db"
-	git_model "gitea.dev/models/git"
-	"gitea.dev/models/gituser"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	asymkey_service "gitea.dev/services/asymkey"
+	asymkey_model "forgente.com/models/asymkey"
+	"forgente.com/models/db"
+	git_model "forgente.com/models/git"
+	"forgente.com/models/gituser"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	asymkey_service "forgente.com/services/asymkey"
 )
 
 // NewGraph creates a basic graph

@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"testing"
 
-	"gitea.dev/modules/options"
-	repo_module "gitea.dev/modules/repository"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/tests"
+	"forgente.com/modules/options"
+	repo_module "forgente.com/modules/repository"
+	api "forgente.com/modules/structs"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

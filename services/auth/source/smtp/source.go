@@ -4,8 +4,8 @@
 package smtp
 
 import (
-	"gitea.dev/models/auth"
-	"gitea.dev/modules/json"
+	"forgente.com/models/auth"
+	"forgente.com/modules/json"
 )
 
 //   _________   __________________________

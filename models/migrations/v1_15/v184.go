@@ -7,9 +7,9 @@ import (
 	"context"
 	"fmt"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/migrations/base"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	"forgente.com/models/migrations/base"
+	"forgente.com/modules/setting"
 )
 
 func RenameTaskErrorsToMessage(x db.EngineMigration) error {

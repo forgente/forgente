@@ -10,17 +10,17 @@ import (
 	"html/template"
 	"strings"
 
-	"gitea.dev/models/perm/access"
-	"gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	"gitea.dev/modules/charset"
-	"gitea.dev/modules/git/languagestats"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/indexer/code"
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
-	gitea_context "gitea.dev/services/context"
+	"forgente.com/models/perm/access"
+	"forgente.com/models/repo"
+	"forgente.com/models/unit"
+	"forgente.com/modules/charset"
+	"forgente.com/modules/git/languagestats"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/indexer/code"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
+	gitea_context "forgente.com/services/context"
 )
 
 func renderRepoFileCodePreview(ctx context.Context, opts markup.RenderCodePreviewOptions) (template.HTML, error) {

@@ -9,12 +9,12 @@ import (
 	"io/fs"
 	"strings"
 
-	actions_model "gitea.dev/models/actions"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/actions"
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
+	actions_model "forgente.com/models/actions"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/actions"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
 )
 
 func DownloadActionsRunJobLogsWithID(ctx *context.Base, ctxRepo *repo_model.Repository, runID, jobID int64) error {

@@ -8,13 +8,13 @@ import (
 	"strings"
 	"testing"
 
-	"gitea.dev/models/packages"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	packages_module "gitea.dev/modules/packages"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/storage"
-	packages_service "gitea.dev/services/packages"
+	"forgente.com/models/packages"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	packages_module "forgente.com/modules/packages"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/storage"
+	packages_service "forgente.com/services/packages"
 
 	"github.com/stretchr/testify/assert"
 )

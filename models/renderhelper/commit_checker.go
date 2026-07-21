@@ -7,10 +7,10 @@ import (
 	"context"
 	"io"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/log"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/log"
 )
 
 type commitChecker struct {

@@ -10,13 +10,13 @@ import (
 	"net/http"
 	"strings"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/private"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/common"
-	"gitea.dev/routers/web/misc"
-	"gitea.dev/services/context"
+	"forgente.com/modules/log"
+	"forgente.com/modules/private"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/web"
+	"forgente.com/routers/common"
+	"forgente.com/routers/web/misc"
+	"forgente.com/services/context"
 
 	"gitea.com/go-chi/binding"
 )

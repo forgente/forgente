@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"strings"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/log"
-	"gitea.dev/services/context"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/log"
+	"forgente.com/services/context"
 )
 
 // TopicsPost response for creating repository

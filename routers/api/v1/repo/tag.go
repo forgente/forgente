@@ -9,16 +9,16 @@ import (
 	"net/http"
 	"strings"
 
-	git_model "gitea.dev/models/git"
-	"gitea.dev/models/organization"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
-	release_service "gitea.dev/services/release"
+	git_model "forgente.com/models/git"
+	"forgente.com/models/organization"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
+	release_service "forgente.com/services/release"
 )
 
 // ListTags list all the tags of a repository

@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/timeutil"
 
 	"github.com/ProtonMail/go-crypto/openpgp"
 	"github.com/ProtonMail/go-crypto/openpgp/packet"

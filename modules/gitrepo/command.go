@@ -6,7 +6,7 @@ package gitrepo
 import (
 	"context"
 
-	"gitea.dev/modules/git/gitcmd"
+	"forgente.com/modules/git/gitcmd"
 )
 
 // TODO: all wrappers can be removed in next PR, because cmd now can accept Repository directly.

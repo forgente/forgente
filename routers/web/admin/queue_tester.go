@@ -8,11 +8,11 @@ import (
 	"sync"
 	"time"
 
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/queue"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	"forgente.com/modules/process"
+	"forgente.com/modules/queue"
+	"forgente.com/modules/setting"
 )
 
 var testQueueOnce sync.Once

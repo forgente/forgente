@@ -6,12 +6,12 @@ package issues
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 // CommentList defines a list of comments

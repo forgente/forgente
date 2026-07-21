@@ -7,10 +7,10 @@ import (
 	"context"
 	"strconv"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/renderhelper"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/markup/markdown"
+	"forgente.com/models/db"
+	"forgente.com/models/renderhelper"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/markup/markdown"
 
 	"xorm.io/builder"
 )

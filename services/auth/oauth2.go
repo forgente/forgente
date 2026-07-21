@@ -11,16 +11,16 @@ import (
 	"strings"
 	"time"
 
-	actions_model "gitea.dev/models/actions"
-	auth_model "gitea.dev/models/auth"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/auth/httpauth"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/actions"
-	"gitea.dev/services/oauth2_provider"
+	actions_model "forgente.com/models/actions"
+	auth_model "forgente.com/models/auth"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/auth/httpauth"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
+	"forgente.com/services/actions"
+	"forgente.com/services/oauth2_provider"
 )
 
 var _ Method = &OAuth2{}

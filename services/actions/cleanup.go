@@ -9,14 +9,14 @@ import (
 	"fmt"
 	"time"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	actions_module "gitea.dev/modules/actions"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/storage"
-	"gitea.dev/modules/timeutil"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/db"
+	actions_module "forgente.com/modules/actions"
+	"forgente.com/modules/container"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/storage"
+	"forgente.com/modules/timeutil"
 
 	"xorm.io/builder"
 )

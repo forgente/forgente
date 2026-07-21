@@ -9,13 +9,13 @@ import (
 	"fmt"
 	"net/http"
 
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/auth/webauthn"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/session"
-	"gitea.dev/modules/web/middleware"
-	user_service "gitea.dev/services/user"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/auth/webauthn"
+	"forgente.com/modules/log"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/session"
+	"forgente.com/modules/web/middleware"
+	user_service "forgente.com/services/user"
 )
 
 type ErrUserAuthMessage string

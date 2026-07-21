@@ -6,12 +6,12 @@ package user
 import (
 	"net/http"
 
-	"gitea.dev/modules/optional"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
-	user_service "gitea.dev/services/user"
+	"forgente.com/modules/optional"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
+	user_service "forgente.com/services/user"
 )
 
 // GetUserSettings returns user settings

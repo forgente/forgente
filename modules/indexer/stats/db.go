@@ -6,14 +6,14 @@ package stats
 import (
 	"fmt"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/languagestats"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/setting"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/languagestats"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	"forgente.com/modules/process"
+	"forgente.com/modules/setting"
 )
 
 // DBIndexer implements Indexer interface to use database's like search

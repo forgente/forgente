@@ -7,10 +7,10 @@ import (
 	"html/template"
 	"testing"
 
-	pull_model "gitea.dev/models/pull"
-	"gitea.dev/modules/fileicon"
-	"gitea.dev/modules/git"
-	"gitea.dev/services/gitdiff"
+	pull_model "forgente.com/models/pull"
+	"forgente.com/modules/fileicon"
+	"forgente.com/modules/git"
+	"forgente.com/services/gitdiff"
 
 	"github.com/stretchr/testify/assert"
 )

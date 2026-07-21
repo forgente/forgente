@@ -6,9 +6,9 @@ package v1_17
 import (
 	"time"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/repo"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/models/repo"
+	"forgente.com/modules/timeutil"
 )
 
 func AddSyncOnCommitColForPushMirror(x db.EngineMigration) error {

@@ -6,8 +6,8 @@ package log
 import (
 	"io"
 
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/util/rotatingfilewriter"
+	"forgente.com/modules/util"
+	"forgente.com/modules/util/rotatingfilewriter"
 )
 
 type WriterFileOption struct {

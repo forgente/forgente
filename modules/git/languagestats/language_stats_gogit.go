@@ -10,10 +10,10 @@ import (
 	"context"
 	"io"
 
-	"gitea.dev/modules/analyze"
-	git_module "gitea.dev/modules/git"
-	"gitea.dev/modules/git/attribute"
-	"gitea.dev/modules/optional"
+	"forgente.com/modules/analyze"
+	git_module "forgente.com/modules/git"
+	"forgente.com/modules/git/attribute"
+	"forgente.com/modules/optional"
 
 	"github.com/go-enry/go-enry/v2"
 	"github.com/go-git/go-git/v5"

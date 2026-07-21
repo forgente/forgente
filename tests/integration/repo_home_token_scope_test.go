@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"testing"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/tests"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/tests"
 )
 
 // TestRepoHomeContentTokenScopes ensures the web repository home page enforces the

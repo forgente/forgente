@@ -6,11 +6,11 @@ package user
 import (
 	"net/http"
 
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
-	webhook_service "gitea.dev/services/webhook"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
+	webhook_service "forgente.com/services/webhook"
 )
 
 // ListHooks list the authenticated user's webhooks

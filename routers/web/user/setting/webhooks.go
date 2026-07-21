@@ -6,11 +6,11 @@ package setting
 import (
 	"net/http"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/webhook"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/services/context"
+	"forgente.com/models/db"
+	"forgente.com/models/webhook"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/services/context"
 )
 
 const (

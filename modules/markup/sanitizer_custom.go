@@ -7,7 +7,7 @@ import (
 	"regexp"
 	"strings"
 
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/setting"
 
 	"github.com/microcosm-cc/bluemonday"
 )

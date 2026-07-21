@@ -7,7 +7,7 @@ import (
 	"html/template"
 	"strings"
 
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/setting"
 )
 
 type RenderedIconPool struct {

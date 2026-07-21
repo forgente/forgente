@@ -7,14 +7,14 @@ import (
 	"context"
 	"slices"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/git"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
 )
 
 const maxPushCommitsInCommentCount = 1000

@@ -4,7 +4,7 @@
 package actions
 
 import (
-	webhook_module "gitea.dev/modules/webhook"
+	webhook_module "forgente.com/modules/webhook"
 )
 
 const (

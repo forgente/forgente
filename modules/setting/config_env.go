@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/modules/log"
+	"forgente.com/modules/log"
 )
 
 const (

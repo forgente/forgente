@@ -3,7 +3,7 @@
 
 package v1_20
 
-import "gitea.dev/models/db"
+import "forgente.com/models/db"
 
 func AddActionTaskOutputTable(x db.EngineMigration) error {
 	type ActionTaskOutput struct {

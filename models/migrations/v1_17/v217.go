@@ -4,8 +4,8 @@
 package v1_17
 
 import (
-	"gitea.dev/models/db"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	"forgente.com/modules/setting"
 )
 
 func AlterHookTaskTextFieldsToLongText(x db.EngineMigration) error {

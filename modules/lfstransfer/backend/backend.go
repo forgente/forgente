@@ -12,9 +12,9 @@ import (
 	"net/url"
 	"strconv"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/lfs"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/json"
+	"forgente.com/modules/lfs"
+	"forgente.com/modules/setting"
 
 	"github.com/charmbracelet/git-lfs-transfer/transfer"
 )

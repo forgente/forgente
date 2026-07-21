@@ -6,13 +6,13 @@ package pull
 import (
 	"testing"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/json"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/json"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

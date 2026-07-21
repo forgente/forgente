@@ -7,9 +7,9 @@ import (
 	"context"
 	"fmt"
 
-	asymkey_model "gitea.dev/models/asymkey"
-	"gitea.dev/models/db"
-	"gitea.dev/models/perm"
+	asymkey_model "forgente.com/models/asymkey"
+	"forgente.com/models/db"
+	"forgente.com/models/perm"
 )
 
 // AddPrincipalKey adds new principal to database and authorized_principals file.

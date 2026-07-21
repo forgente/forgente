@@ -11,7 +11,7 @@ import (
 	"errors"
 	"io"
 
-	"gitea.dev/modules/log"
+	"forgente.com/modules/log"
 )
 
 // IsTagExist returns true if given tag exists in the repository.

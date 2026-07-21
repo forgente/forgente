@@ -10,13 +10,13 @@ import (
 	"strconv"
 	"testing"
 
-	org_model "gitea.dev/models/organization"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/structs"
-	"gitea.dev/modules/test"
-	org_service "gitea.dev/services/org"
-	"gitea.dev/tests"
+	org_model "forgente.com/models/organization"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/structs"
+	"forgente.com/modules/test"
+	org_service "forgente.com/services/org"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

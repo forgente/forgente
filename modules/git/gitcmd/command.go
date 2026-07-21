@@ -16,11 +16,11 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/git/internal" //nolint:depguard // only this file can use the internal type CmdArg, other files and packages should use AddXxx functions
-	"gitea.dev/modules/gtprof"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/git/internal" //nolint:depguard // only this file can use the internal type CmdArg, other files and packages should use AddXxx functions
+	"forgente.com/modules/gtprof"
+	"forgente.com/modules/log"
+	"forgente.com/modules/process"
+	"forgente.com/modules/util"
 )
 
 // TrustedCmdArgs returns the trusted arguments for git command.

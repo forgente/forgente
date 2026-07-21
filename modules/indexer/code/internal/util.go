@@ -6,8 +6,8 @@ package internal
 import (
 	"strings"
 
-	"gitea.dev/modules/indexer/internal"
-	"gitea.dev/modules/log"
+	"forgente.com/modules/indexer/internal"
+	"forgente.com/modules/log"
 )
 
 const filenameMatchNumberOfLines = 7 // Copied from GitHub search

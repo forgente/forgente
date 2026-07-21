@@ -8,13 +8,13 @@ import (
 	"slices"
 	"strconv"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/perm"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/perm"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
 )
 
 const (

@@ -7,13 +7,13 @@ package mailer
 import (
 	"context"
 
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/queue"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	sender_service "gitea.dev/services/mailer/sender"
-	notify_service "gitea.dev/services/notify"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	"forgente.com/modules/queue"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	sender_service "forgente.com/services/mailer/sender"
+	notify_service "forgente.com/services/notify"
 )
 
 var mailQueue *queue.WorkerPoolQueue[*sender_service.Message]

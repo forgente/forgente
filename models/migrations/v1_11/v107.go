@@ -3,7 +3,7 @@
 
 package v1_11
 
-import "gitea.dev/models/db"
+import "forgente.com/models/db"
 
 func AddTemplateToRepo(x db.EngineMigration) error {
 	type Repository struct {

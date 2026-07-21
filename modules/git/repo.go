@@ -15,10 +15,10 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/proxy"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/proxy"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 type RepositoryFacade = gitcmd.RepositoryFacade

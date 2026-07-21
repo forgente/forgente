@@ -13,12 +13,12 @@ import (
 	"runtime"
 	"strings"
 
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/globallock"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/tempdir"
-	"gitea.dev/modules/testlogger"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/globallock"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/tempdir"
+	"forgente.com/modules/testlogger"
 
 	"github.com/hashicorp/go-version"
 )

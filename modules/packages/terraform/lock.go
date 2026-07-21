@@ -9,10 +9,10 @@ import (
 	"io"
 	"time"
 
-	"gitea.dev/models/db"
-	packages_model "gitea.dev/models/packages"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	packages_model "forgente.com/models/packages"
+	"forgente.com/modules/json"
+	"forgente.com/modules/util"
 
 	"xorm.io/builder"
 )

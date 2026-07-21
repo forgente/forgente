@@ -6,11 +6,11 @@ package repo
 import (
 	"net/http"
 
-	repo_model "gitea.dev/models/repo"
-	unit_model "gitea.dev/models/unit"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
-	release_service "gitea.dev/services/release"
+	repo_model "forgente.com/models/repo"
+	unit_model "forgente.com/models/unit"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
+	release_service "forgente.com/services/release"
 )
 
 // GetReleaseByTag get a single release of a repository by tag name

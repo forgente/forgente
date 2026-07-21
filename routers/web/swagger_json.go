@@ -6,8 +6,8 @@ package web
 import (
 	"html/template"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/context"
+	"forgente.com/modules/setting"
+	"forgente.com/services/context"
 )
 
 // SwaggerV1Json render swagger v1 json

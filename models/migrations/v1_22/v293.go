@@ -4,9 +4,9 @@
 package v1_22
 
 import (
-	"gitea.dev/models/db"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/timeutil"
 )
 
 // CheckProjectColumnsConsistency ensures there is exactly one default board per project present

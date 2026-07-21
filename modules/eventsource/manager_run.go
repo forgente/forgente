@@ -7,16 +7,16 @@ import (
 	"context"
 	"time"
 
-	activities_model "gitea.dev/models/activities"
-	issues_model "gitea.dev/models/issues"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/services/convert"
+	activities_model "forgente.com/models/activities"
+	issues_model "forgente.com/models/issues"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/process"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/timeutil"
+	"forgente.com/services/convert"
 )
 
 // Init starts this eventsource

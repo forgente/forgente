@@ -10,8 +10,8 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/glob"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/glob"
+	"forgente.com/modules/setting"
 )
 
 type globalVarsStruct struct {

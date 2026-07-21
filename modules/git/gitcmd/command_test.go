@@ -11,9 +11,9 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/tempdir"
-	"gitea.dev/modules/testlogger"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/tempdir"
+	"forgente.com/modules/testlogger"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

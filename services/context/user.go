@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"strings"
 
-	user_model "gitea.dev/models/user"
+	user_model "forgente.com/models/user"
 )
 
 // UserAssignmentWeb returns a middleware to handle context-user assignment for web routes

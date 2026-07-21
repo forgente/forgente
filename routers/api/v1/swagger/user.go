@@ -4,8 +4,8 @@
 package swagger
 
 import (
-	activities_model "gitea.dev/models/activities"
-	api "gitea.dev/modules/structs"
+	activities_model "forgente.com/models/activities"
+	api "forgente.com/modules/structs"
 )
 
 // User

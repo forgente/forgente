@@ -4,8 +4,8 @@
 package v1_8
 
 import (
-	"gitea.dev/models/db"
-	"gitea.dev/models/migrations/base"
+	"forgente.com/models/db"
+	"forgente.com/models/migrations/base"
 )
 
 func RenameRepoIsBareToIsEmpty(x db.EngineMigration) error {

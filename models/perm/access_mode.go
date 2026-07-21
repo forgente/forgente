@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"slices"
 
-	"gitea.dev/modules/util"
+	"forgente.com/modules/util"
 )
 
 // AccessMode specifies the users access mode

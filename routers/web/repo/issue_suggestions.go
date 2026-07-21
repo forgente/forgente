@@ -6,10 +6,10 @@ package repo
 import (
 	"net/http"
 
-	"gitea.dev/models/unit"
-	"gitea.dev/modules/optional"
-	"gitea.dev/services/context"
-	issue_service "gitea.dev/services/issue"
+	"forgente.com/models/unit"
+	"forgente.com/modules/optional"
+	"forgente.com/services/context"
+	issue_service "forgente.com/services/issue"
 )
 
 // IssueSuggestions returns a list of issue suggestions

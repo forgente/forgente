@@ -12,7 +12,7 @@ import (
 
 	_ "embed"
 
-	"gitea.dev/modules/assetfs"
+	"forgente.com/modules/assetfs"
 )
 
 //go:embed bindata.dat

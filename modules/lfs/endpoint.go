@@ -10,9 +10,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	giturl "gitea.dev/modules/git/url"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	giturl "forgente.com/modules/git/url"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 )
 
 // DetermineEndpoint determines an endpoint from the clone url or uses the specified LFS url.

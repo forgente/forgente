@@ -6,9 +6,9 @@ import (
 	"errors"
 	"fmt"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 
 	"xorm.io/xorm"
 )

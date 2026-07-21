@@ -14,11 +14,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/public"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/container"
+	"forgente.com/modules/log"
+	"forgente.com/modules/public"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 type themeCollectionStruct struct {

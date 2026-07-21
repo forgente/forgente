@@ -12,17 +12,17 @@ import (
 	"path"
 	"strconv"
 
-	packages_model "gitea.dev/models/packages"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/json"
-	cargo_module "gitea.dev/modules/packages/cargo"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	repo_service "gitea.dev/services/repository"
-	files_service "gitea.dev/services/repository/files"
+	packages_model "forgente.com/models/packages"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/json"
+	cargo_module "forgente.com/modules/packages/cargo"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	repo_service "forgente.com/services/repository"
+	files_service "forgente.com/services/repository/files"
 )
 
 const (

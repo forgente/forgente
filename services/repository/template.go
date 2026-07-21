@@ -8,14 +8,14 @@ import (
 	"fmt"
 	"strings"
 
-	"gitea.dev/models/db"
-	git_model "gitea.dev/models/git"
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/log"
-	notify_service "gitea.dev/services/notify"
+	"forgente.com/models/db"
+	git_model "forgente.com/models/git"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/log"
+	notify_service "forgente.com/services/notify"
 )
 
 // GenerateIssueLabels generates issue labels from a template repository

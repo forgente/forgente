@@ -6,7 +6,7 @@ package gitrepo
 import (
 	"context"
 
-	"gitea.dev/modules/git/gitcmd"
+	"forgente.com/modules/git/gitcmd"
 )
 
 func UpdateRef(ctx context.Context, repo Repository, refName, newCommitID string) error {

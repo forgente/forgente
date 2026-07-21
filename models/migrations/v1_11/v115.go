@@ -12,11 +12,11 @@ import (
 	"path/filepath"
 	"time"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	"forgente.com/modules/container"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 func RenameExistingUserAvatarName(x db.EngineMigration) error {

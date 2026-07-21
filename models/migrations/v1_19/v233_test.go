@@ -6,11 +6,11 @@ package v1_19
 import (
 	"testing"
 
-	"gitea.dev/models/migrations/migrationtest"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/secret"
-	"gitea.dev/modules/setting"
-	webhook_module "gitea.dev/modules/webhook"
+	"forgente.com/models/migrations/migrationtest"
+	"forgente.com/modules/json"
+	"forgente.com/modules/secret"
+	"forgente.com/modules/setting"
+	webhook_module "forgente.com/modules/webhook"
 
 	"github.com/stretchr/testify/assert"
 )

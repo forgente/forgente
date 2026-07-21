@@ -11,9 +11,9 @@ import (
 	"path/filepath"
 	"time"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/log"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/log"
 )
 
 // BatchChecker provides a reader for check-attribute content that can be long running

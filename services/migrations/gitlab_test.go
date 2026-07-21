@@ -14,9 +14,9 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/json"
-	base "gitea.dev/modules/migration"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/json"
+	base "forgente.com/modules/migration"
 
 	"github.com/stretchr/testify/assert"
 	gitlab "gitlab.com/gitlab-org/api/client-go/v2"

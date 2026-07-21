@@ -8,8 +8,8 @@ import (
 	"strings"
 	"unicode"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/attribute"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/attribute"
 )
 
 const (

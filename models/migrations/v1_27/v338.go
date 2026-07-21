@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"strings"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/migrations/base"
+	"forgente.com/models/db"
+	"forgente.com/models/migrations/base"
 
 	"xorm.io/xorm/schemas"
 )

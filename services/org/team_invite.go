@@ -6,9 +6,9 @@ package org
 import (
 	"context"
 
-	org_model "gitea.dev/models/organization"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/services/mailer"
+	org_model "forgente.com/models/organization"
+	user_model "forgente.com/models/user"
+	"forgente.com/services/mailer"
 )
 
 // CreateTeamInvite make a persistent invite in db and mail it

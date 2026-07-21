@@ -9,7 +9,7 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/util"
+	"forgente.com/modules/util"
 )
 
 // Label represents label information loaded from template

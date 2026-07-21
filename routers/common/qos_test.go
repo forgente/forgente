@@ -6,9 +6,9 @@ package common
 import (
 	"testing"
 
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/web/middleware"
-	"gitea.dev/services/contexttest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/web/middleware"
+	"forgente.com/services/contexttest"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/stretchr/testify/assert"

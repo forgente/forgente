@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"net/http"
 
-	"gitea.dev/models/organization"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
-	repo_service "gitea.dev/services/repository"
+	"forgente.com/models/organization"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
+	repo_service "forgente.com/services/repository"
 )
 
 // ListTeams list a repository's teams

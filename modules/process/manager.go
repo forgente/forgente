@@ -12,8 +12,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"gitea.dev/modules/gtprof"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/gtprof"
+	"forgente.com/modules/util"
 )
 
 // TODO: This packages still uses a singleton for the Manager.

@@ -8,8 +8,8 @@ import (
 	"runtime"
 	"strings"
 
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/util/rotatingfilewriter"
+	"forgente.com/modules/process"
+	"forgente.com/modules/util/rotatingfilewriter"
 )
 
 var projectPackagePrefix string

@@ -8,9 +8,9 @@ import (
 	"os"
 	"strings"
 
-	"gitea.dev/modules/auth/password/hash"
-	"gitea.dev/modules/generate"
-	"gitea.dev/modules/log"
+	"forgente.com/modules/auth/password/hash"
+	"forgente.com/modules/generate"
+	"forgente.com/modules/log"
 )
 
 // Security settings

@@ -10,7 +10,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"gitea.dev/modules/nosql"
+	"forgente.com/modules/nosql"
 
 	"github.com/go-redsync/redsync/v4"
 	"github.com/go-redsync/redsync/v4/redis/goredis/v9"

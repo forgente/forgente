@@ -10,9 +10,9 @@ import (
 	stdurl "net/url"
 	"strings"
 
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 // ErrWrongURLFormat represents an error with wrong url format

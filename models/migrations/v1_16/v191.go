@@ -4,8 +4,8 @@
 package v1_16
 
 import (
-	"gitea.dev/models/db"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	"forgente.com/modules/setting"
 )
 
 func AlterIssueAndCommentTextFieldsToLongText(x db.EngineMigration) error {

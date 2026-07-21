@@ -13,14 +13,14 @@ import (
 	"strings"
 	"unicode"
 
-	packages_model "gitea.dev/models/packages"
-	packages_module "gitea.dev/modules/packages"
-	pypi_module "gitea.dev/modules/packages/pypi"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/validation"
-	"gitea.dev/routers/api/packages/helper"
-	"gitea.dev/services/context"
-	packages_service "gitea.dev/services/packages"
+	packages_model "forgente.com/models/packages"
+	packages_module "forgente.com/modules/packages"
+	pypi_module "forgente.com/modules/packages/pypi"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/validation"
+	"forgente.com/routers/api/packages/helper"
+	"forgente.com/services/context"
+	packages_service "forgente.com/services/packages"
 )
 
 // https://peps.python.org/pep-0426/#name

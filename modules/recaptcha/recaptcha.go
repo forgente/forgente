@@ -11,8 +11,8 @@ import (
 	"net/url"
 	"strings"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/json"
+	"forgente.com/modules/setting"
 )
 
 // Response is the structure of JSON returned from API

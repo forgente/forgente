@@ -7,12 +7,12 @@ import (
 	"fmt"
 	"testing"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/actions/jobparser"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/db"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/actions/jobparser"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

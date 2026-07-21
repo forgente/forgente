@@ -6,11 +6,11 @@ package actions
 import (
 	"context"
 
-	"gitea.dev/models/perm"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/util"
+	"forgente.com/models/perm"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/json"
+	"forgente.com/modules/util"
 
 	"xorm.io/xorm/convert"
 )

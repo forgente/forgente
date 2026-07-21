@@ -9,17 +9,17 @@ import (
 	"os"
 	"strings"
 
-	asymkey_model "gitea.dev/models/asymkey"
-	"gitea.dev/models/auth"
-	"gitea.dev/models/db"
-	git_model "gitea.dev/models/git"
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/setting"
+	asymkey_model "forgente.com/models/asymkey"
+	"forgente.com/models/auth"
+	"forgente.com/models/db"
+	git_model "forgente.com/models/git"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	"forgente.com/modules/process"
+	"forgente.com/modules/setting"
 )
 
 type signingMode string

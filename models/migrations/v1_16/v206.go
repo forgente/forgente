@@ -6,7 +6,7 @@ package v1_16
 import (
 	"fmt"
 
-	"gitea.dev/models/db"
+	"forgente.com/models/db"
 )
 
 func AddAuthorizeColForTeamUnit(x db.EngineMigration) error {

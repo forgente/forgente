@@ -8,8 +8,8 @@ import (
 	"strings"
 	"testing"
 
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/util"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

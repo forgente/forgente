@@ -7,9 +7,9 @@ import (
 	"encoding/binary"
 	"fmt"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/migrations/base"
-	"gitea.dev/modules/json"
+	"forgente.com/models/db"
+	"forgente.com/models/migrations/base"
+	"forgente.com/modules/json"
 )
 
 func UnwrapLDAPSourceCfg(x db.EngineMigration) error {

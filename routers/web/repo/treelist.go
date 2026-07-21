@@ -9,13 +9,13 @@ import (
 	"path"
 	"strings"
 
-	pull_model "gitea.dev/models/pull"
-	"gitea.dev/modules/base"
-	"gitea.dev/modules/fileicon"
-	"gitea.dev/modules/git"
-	"gitea.dev/services/context"
-	"gitea.dev/services/gitdiff"
-	files_service "gitea.dev/services/repository/files"
+	pull_model "forgente.com/models/pull"
+	"forgente.com/modules/base"
+	"forgente.com/modules/fileicon"
+	"forgente.com/modules/git"
+	"forgente.com/services/context"
+	"forgente.com/services/gitdiff"
+	files_service "forgente.com/services/repository/files"
 
 	"github.com/go-enry/go-enry/v2"
 )

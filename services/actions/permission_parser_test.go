@@ -6,10 +6,10 @@ package actions
 import (
 	"testing"
 
-	"gitea.dev/models/perm"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	"gitea.dev/modules/actions/jobparser"
+	"forgente.com/models/perm"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	"forgente.com/modules/actions/jobparser"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

@@ -8,12 +8,12 @@ import (
 	"errors"
 	"fmt"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/models/organization"
-	access_model "gitea.dev/models/perm/access"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/models/organization"
+	access_model "forgente.com/models/perm/access"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/setting"
 )
 
 // TeamAddRepository adds new repository to team of organization.

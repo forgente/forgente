@@ -14,10 +14,10 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 
 	"golang.org/x/crypto/ssh"
 )

@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"time"
 
-	"gitea.dev/modules/eventsource"
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	"gitea.dev/routers/web/auth"
-	"gitea.dev/services/context"
+	"forgente.com/modules/eventsource"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	"forgente.com/routers/web/auth"
+	"forgente.com/services/context"
 )
 
 // Events listens for events

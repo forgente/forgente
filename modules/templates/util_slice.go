@@ -10,7 +10,7 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/modules/util"
+	"forgente.com/modules/util"
 )
 
 type SliceUtils struct{}

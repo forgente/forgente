@@ -7,9 +7,9 @@ import (
 	"context"
 	"time"
 
-	"gitea.dev/modules/gtprof"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/gtprof"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 
 	"xorm.io/xorm/contexts"
 )

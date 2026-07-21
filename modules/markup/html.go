@@ -13,11 +13,11 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/htmlutil"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/markup/common"
-	"gitea.dev/modules/translation"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/htmlutil"
+	"forgente.com/modules/log"
+	"forgente.com/modules/markup/common"
+	"forgente.com/modules/translation"
+	"forgente.com/modules/util"
 
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"

@@ -4,8 +4,8 @@
 package v1_24
 
 import (
-	"gitea.dev/models/db"
-	"gitea.dev/models/migrations/base"
+	"forgente.com/models/db"
+	"forgente.com/models/migrations/base"
 )
 
 func MovePinOrderToTableIssuePin(x db.EngineMigration) error {

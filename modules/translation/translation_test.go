@@ -6,7 +6,7 @@ package translation
 import (
 	"testing"
 
-	"gitea.dev/modules/translation/i18n"
+	"forgente.com/modules/translation/i18n"
 
 	"github.com/stretchr/testify/assert"
 )

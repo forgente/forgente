@@ -3,7 +3,7 @@
 
 package v1_22
 
-import "gitea.dev/models/db"
+import "forgente.com/models/db"
 
 func RenameUserThemes(x db.EngineMigration) error {
 	sess := x.NewSession()

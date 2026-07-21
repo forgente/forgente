@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"testing"
 
-	repo_model "gitea.dev/models/repo"
-	code_indexer "gitea.dev/modules/indexer/code"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
-	"gitea.dev/tests"
+	repo_model "forgente.com/models/repo"
+	code_indexer "forgente.com/modules/indexer/code"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
+	"forgente.com/tests"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/stretchr/testify/assert"

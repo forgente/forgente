@@ -9,11 +9,11 @@ import (
 	"net/http"
 	"sync"
 
-	"gitea.dev/models/auth"
-	"gitea.dev/models/db"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/auth"
+	"forgente.com/models/db"
+	"forgente.com/modules/log"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
 
 	"github.com/google/uuid"
 	"github.com/gorilla/sessions"

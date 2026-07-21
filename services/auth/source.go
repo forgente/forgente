@@ -6,9 +6,9 @@ package auth
 import (
 	"context"
 
-	"gitea.dev/models/auth"
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
+	"forgente.com/models/auth"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
 )
 
 // DeleteSource deletes a AuthSource record in DB.

@@ -6,8 +6,8 @@ package web
 import (
 	"net/http"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/context"
+	"forgente.com/modules/setting"
+	"forgente.com/services/context"
 )
 
 type nodeInfoLinks struct {

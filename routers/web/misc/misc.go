@@ -9,15 +9,15 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/httpcache"
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web/middleware"
-	"gitea.dev/services/context"
+	"forgente.com/modules/git"
+	"forgente.com/modules/httpcache"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web/middleware"
+	"forgente.com/services/context"
 )
 
 func SiteManifest(w http.ResponseWriter, req *http.Request) {

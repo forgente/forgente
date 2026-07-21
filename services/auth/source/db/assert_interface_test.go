@@ -4,9 +4,9 @@
 package db_test
 
 import (
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/services/auth"
-	"gitea.dev/services/auth/source/db"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/services/auth"
+	"forgente.com/services/auth/source/db"
 )
 
 // This test file exists to assert that our Source exposes the interfaces that we expect

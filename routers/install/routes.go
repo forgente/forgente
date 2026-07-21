@@ -8,13 +8,13 @@ import (
 	"html"
 	"net/http"
 
-	"gitea.dev/modules/public"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/common"
-	"gitea.dev/routers/web/healthcheck"
-	"gitea.dev/routers/web/misc"
-	"gitea.dev/services/forms"
+	"forgente.com/modules/public"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/web"
+	"forgente.com/routers/common"
+	"forgente.com/routers/web/healthcheck"
+	"forgente.com/routers/web/misc"
+	"forgente.com/services/forms"
 )
 
 // Routes registers the installation routes

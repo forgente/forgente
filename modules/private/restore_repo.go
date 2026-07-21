@@ -7,7 +7,7 @@ import (
 	"context"
 	"fmt"
 
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/setting"
 )
 
 // RestoreParams structure holds a data for restore repository

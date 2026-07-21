@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 func getHookTemplates() (hookNames, hookTpls, giteaHookTpls []string) {

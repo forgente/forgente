@@ -6,9 +6,9 @@ package utils
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/setting"
-	webhook_service "gitea.dev/services/webhook"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/setting"
+	webhook_service "forgente.com/services/webhook"
 )
 
 func TestMain(m *testing.M) {

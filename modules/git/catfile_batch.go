@@ -7,7 +7,7 @@ import (
 	"context"
 	"io"
 
-	"gitea.dev/modules/git/gitcmd"
+	"forgente.com/modules/git/gitcmd"
 )
 
 type BufferedReader interface {

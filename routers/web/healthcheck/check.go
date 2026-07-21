@@ -9,11 +9,11 @@ import (
 	"os"
 	"time"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/cache"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	"forgente.com/modules/cache"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 type status string

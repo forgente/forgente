@@ -6,16 +6,16 @@ package uinotification
 import (
 	"context"
 
-	activities_model "gitea.dev/models/activities"
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/queue"
-	notify_service "gitea.dev/services/notify"
+	activities_model "forgente.com/models/activities"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	"forgente.com/modules/queue"
+	notify_service "forgente.com/services/notify"
 )
 
 type (

@@ -8,14 +8,14 @@ import (
 	"fmt"
 	"strings"
 
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/log"
-	repo_module "gitea.dev/modules/repository"
-	"gitea.dev/modules/setting"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/log"
+	repo_module "forgente.com/modules/repository"
+	"forgente.com/modules/setting"
 )
 
 // updateHeadByRebaseOnToBase handles updating a PR's head branch by rebasing it on the PR current base branch

@@ -9,11 +9,11 @@ import (
 	"slices"
 	"time"
 
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
 )
 
 // ActionRunAttempt represents a single execution attempt of an ActionRun.

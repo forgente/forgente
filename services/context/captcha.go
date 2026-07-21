@@ -8,14 +8,14 @@ import (
 	"image/color"
 	"sync"
 
-	"gitea.dev/modules/cache"
-	"gitea.dev/modules/hcaptcha"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/mcaptcha"
-	"gitea.dev/modules/recaptcha"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/turnstile"
+	"forgente.com/modules/cache"
+	"forgente.com/modules/hcaptcha"
+	"forgente.com/modules/log"
+	"forgente.com/modules/mcaptcha"
+	"forgente.com/modules/recaptcha"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/turnstile"
 
 	"gitea.com/go-chi/captcha"
 )

@@ -6,11 +6,11 @@ package actions
 import (
 	"testing"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/test"
-	webhook_module "gitea.dev/modules/webhook"
+	"forgente.com/modules/git"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/test"
+	webhook_module "forgente.com/modules/webhook"
 
 	"github.com/stretchr/testify/assert"
 )

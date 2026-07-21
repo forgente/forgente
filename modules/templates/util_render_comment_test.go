@@ -7,9 +7,9 @@ import (
 	"html/template"
 	"testing"
 
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/modules/reqctx"
-	"gitea.dev/modules/translation"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/modules/reqctx"
+	"forgente.com/modules/translation"
 
 	"github.com/stretchr/testify/assert"
 )

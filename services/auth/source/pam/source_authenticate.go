@@ -8,11 +8,11 @@ import (
 	"fmt"
 	"strings"
 
-	"gitea.dev/models/auth"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/auth/pam"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/auth"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/auth/pam"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
 
 	"github.com/google/uuid"
 )

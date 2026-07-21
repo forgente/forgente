@@ -6,11 +6,11 @@ package incoming
 import (
 	"testing"
 
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	incoming_payload "gitea.dev/services/mailer/incoming/payload"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	incoming_payload "forgente.com/services/mailer/incoming/payload"
 
 	"github.com/stretchr/testify/assert"
 )

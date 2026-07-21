@@ -6,10 +6,10 @@ package db_test
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
+	"forgente.com/models/unittest"
 
-	_ "gitea.dev/models"
-	_ "gitea.dev/models/repo"
+	_ "forgente.com/models"
+	_ "forgente.com/models/repo"
 )
 
 func TestMain(m *testing.M) {

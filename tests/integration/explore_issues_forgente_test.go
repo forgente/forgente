@@ -9,9 +9,9 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/models/db"
-	issue_indexer "gitea.dev/modules/indexer/issues"
-	"gitea.dev/tests"
+	"forgente.com/models/db"
+	issue_indexer "forgente.com/modules/indexer/issues"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

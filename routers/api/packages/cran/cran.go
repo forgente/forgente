@@ -11,14 +11,14 @@ import (
 	"net/http"
 	"strings"
 
-	packages_model "gitea.dev/models/packages"
-	cran_model "gitea.dev/models/packages/cran"
-	packages_module "gitea.dev/modules/packages"
-	cran_module "gitea.dev/modules/packages/cran"
-	"gitea.dev/modules/util"
-	"gitea.dev/routers/api/packages/helper"
-	"gitea.dev/services/context"
-	packages_service "gitea.dev/services/packages"
+	packages_model "forgente.com/models/packages"
+	cran_model "forgente.com/models/packages/cran"
+	packages_module "forgente.com/modules/packages"
+	cran_module "forgente.com/modules/packages/cran"
+	"forgente.com/modules/util"
+	"forgente.com/routers/api/packages/helper"
+	"forgente.com/services/context"
+	packages_service "forgente.com/services/packages"
 )
 
 func apiError(ctx *context.Context, status int, obj any) {

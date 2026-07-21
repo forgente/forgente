@@ -7,7 +7,7 @@ import (
 	"crypto/sha256"
 	"encoding/hex"
 
-	"gitea.dev/models/db"
+	"forgente.com/models/db"
 
 	"golang.org/x/crypto/argon2"
 	"golang.org/x/crypto/bcrypt"

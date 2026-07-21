@@ -6,7 +6,7 @@ package markup
 import (
 	"strings"
 
-	"gitea.dev/modules/markup/common"
+	"forgente.com/modules/markup/common"
 
 	"golang.org/x/net/html"
 )

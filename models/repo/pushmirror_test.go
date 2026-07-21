@@ -7,10 +7,10 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/timeutil"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -7,12 +7,12 @@ import (
 	"bytes"
 	"testing"
 
-	packages_model "gitea.dev/models/packages"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	packages_module "gitea.dev/modules/packages"
-	packages_service "gitea.dev/services/packages"
-	"gitea.dev/tests"
+	packages_model "forgente.com/models/packages"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	packages_module "forgente.com/modules/packages"
+	packages_service "forgente.com/services/packages"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

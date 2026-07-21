@@ -6,9 +6,9 @@ package actions
 import (
 	"testing"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/util"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

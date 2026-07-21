@@ -6,10 +6,10 @@ package repository
 import (
 	"context"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/cache"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/gitrepo"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/cache"
+	"forgente.com/modules/git"
+	"forgente.com/modules/gitrepo"
 )
 
 // CacheRef cachhe last commit information of the branch or the tag

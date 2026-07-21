@@ -8,14 +8,14 @@ import (
 	"errors"
 	"net/http"
 
-	actions_model "gitea.dev/models/actions"
-	auth_model "gitea.dev/models/auth"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/auth/httpauth"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
+	actions_model "forgente.com/models/actions"
+	auth_model "forgente.com/models/auth"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/auth/httpauth"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
 )
 
 // Ensure the struct implements the interface.

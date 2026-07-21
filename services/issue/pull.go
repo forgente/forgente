@@ -9,13 +9,13 @@ import (
 	"slices"
 	"time"
 
-	issues_model "gitea.dev/models/issues"
-	org_model "gitea.dev/models/organization"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	issues_model "forgente.com/models/issues"
+	org_model "forgente.com/models/organization"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 type ReviewRequestNotifier struct {

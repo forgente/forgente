@@ -6,7 +6,7 @@ package templates
 import (
 	"bytes"
 
-	"gitea.dev/modules/json"
+	"forgente.com/modules/json"
 )
 
 type JsonUtils struct{} //nolint:revive // variable naming triggers on Json, wants JSON

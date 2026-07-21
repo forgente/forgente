@@ -6,9 +6,9 @@ package misc
 import (
 	"net/http"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/structs"
-	"gitea.dev/services/context"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/structs"
+	"forgente.com/services/context"
 )
 
 // Version shows the version of the Gitea server

@@ -11,8 +11,8 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/translation"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/translation"
 )
 
 type htmlChunkReader struct {

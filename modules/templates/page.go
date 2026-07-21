@@ -14,10 +14,10 @@ import (
 	"sync"
 	texttemplate "text/template"
 
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 type pageRenderer struct {

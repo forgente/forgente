@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"strings"
 
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/reqctx"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/web/middleware"
-	"gitea.dev/modules/web/routing"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/reqctx"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/web/middleware"
+	"forgente.com/modules/web/routing"
 
 	"github.com/go-chi/chi/v5"
 )

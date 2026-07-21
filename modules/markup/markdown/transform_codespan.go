@@ -7,7 +7,7 @@ import (
 	"bytes"
 	"strings"
 
-	"gitea.dev/modules/markup"
+	"forgente.com/modules/markup"
 
 	"github.com/microcosm-cc/bluemonday/css"
 	"github.com/yuin/goldmark/ast"

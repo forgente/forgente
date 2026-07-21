@@ -6,9 +6,9 @@ package feed
 import (
 	"time"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/services/context"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/services/context"
 
 	"github.com/gorilla/feeds"
 )

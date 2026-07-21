@@ -6,9 +6,9 @@ package repo
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
-	"gitea.dev/services/contexttest"
-	"gitea.dev/services/gitdiff"
+	"forgente.com/models/unittest"
+	"forgente.com/services/contexttest"
+	"forgente.com/services/gitdiff"
 
 	"github.com/stretchr/testify/assert"
 )

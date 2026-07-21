@@ -15,9 +15,9 @@ import (
 	"strings"
 	"sync/atomic"
 
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 )
 
 type catFileBatchCommunicator struct {

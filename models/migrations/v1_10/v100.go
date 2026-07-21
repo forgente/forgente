@@ -8,7 +8,7 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/models/db"
+	"forgente.com/models/db"
 )
 
 func UpdateMigrationServiceTypes(x db.EngineMigration) error {

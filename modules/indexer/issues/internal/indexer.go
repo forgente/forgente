@@ -7,8 +7,8 @@ import (
 	"context"
 	"errors"
 
-	"gitea.dev/modules/indexer"
-	"gitea.dev/modules/indexer/internal"
+	"forgente.com/modules/indexer"
+	"forgente.com/modules/indexer/internal"
 )
 
 // Indexer defines an interface to indexer issues contents

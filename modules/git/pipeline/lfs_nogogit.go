@@ -12,8 +12,8 @@ import (
 	"io"
 	"sort"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
 )
 
 // FindLFSFile finds commits that contain a provided pointer file hash

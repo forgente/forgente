@@ -9,9 +9,9 @@ import (
 	"net/url"
 	"testing"
 
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
 
 	"github.com/stretchr/testify/assert"
 )

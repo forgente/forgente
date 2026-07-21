@@ -7,14 +7,14 @@ import (
 	"net/http"
 	"testing"
 
-	auth_model "gitea.dev/models/auth"
-	org_model "gitea.dev/models/organization"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	api "gitea.dev/modules/structs"
-	org_service "gitea.dev/services/org"
-	"gitea.dev/tests"
+	auth_model "forgente.com/models/auth"
+	org_model "forgente.com/models/organization"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	api "forgente.com/modules/structs"
+	org_service "forgente.com/services/org"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

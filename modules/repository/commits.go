@@ -9,11 +9,11 @@ import (
 	"net/url"
 	"time"
 
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/gitrepo"
-	api "gitea.dev/modules/structs"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/gitrepo"
+	api "forgente.com/modules/structs"
 )
 
 // PushCommit represents a commit in a push operation.

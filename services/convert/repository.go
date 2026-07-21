@@ -7,15 +7,15 @@ import (
 	"context"
 	"time"
 
-	"gitea.dev/models/db"
-	git_model "gitea.dev/models/git"
-	"gitea.dev/models/perm"
-	access_model "gitea.dev/models/perm/access"
-	repo_model "gitea.dev/models/repo"
-	unit_model "gitea.dev/models/unit"
-	"gitea.dev/modules/log"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	git_model "forgente.com/models/git"
+	"forgente.com/models/perm"
+	access_model "forgente.com/models/perm/access"
+	repo_model "forgente.com/models/repo"
+	unit_model "forgente.com/models/unit"
+	"forgente.com/modules/log"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
 )
 
 // ToRepo converts a Repository to api.Repository

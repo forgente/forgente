@@ -9,15 +9,15 @@ import (
 	"net/http"
 	"strconv"
 
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/private"
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/context"
-	"gitea.dev/services/mailer"
-	sender_service "gitea.dev/services/mailer/sender"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/private"
+	"forgente.com/modules/setting"
+	"forgente.com/services/context"
+	"forgente.com/services/mailer"
+	sender_service "forgente.com/services/mailer/sender"
 )
 
 // SendEmail pushes messages to mail queue

@@ -10,10 +10,10 @@ import (
 	"strings"
 	"testing"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web/types"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web/types"
 
 	"github.com/go-chi/chi/v5"
 	"github.com/stretchr/testify/assert"

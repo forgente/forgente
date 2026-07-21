@@ -1,4 +1,4 @@
-module gitea.dev
+module forgente.com
 
 go 1.26.5
 

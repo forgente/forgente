@@ -6,7 +6,7 @@ package session
 import (
 	"net/http"
 
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/setting"
 
 	"gitea.com/go-chi/session"
 )

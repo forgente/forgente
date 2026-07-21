@@ -7,11 +7,11 @@ import (
 	"context"
 	"fmt"
 
-	git_model "gitea.dev/models/git"
-	repo_model "gitea.dev/models/repo"
-	actions_module "gitea.dev/modules/actions"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/log"
+	git_model "forgente.com/models/git"
+	repo_model "forgente.com/models/repo"
+	actions_module "forgente.com/modules/actions"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/log"
 
 	lru "github.com/hashicorp/golang-lru/v2"
 )

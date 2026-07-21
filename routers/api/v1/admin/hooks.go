@@ -7,15 +7,15 @@ import (
 	"errors"
 	"net/http"
 
-	"gitea.dev/models/webhook"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
-	webhook_service "gitea.dev/services/webhook"
+	"forgente.com/models/webhook"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
+	webhook_service "forgente.com/services/webhook"
 )
 
 // ListHooks list system's webhooks

@@ -8,8 +8,8 @@ import (
 	"slices"
 	"testing"
 
-	unit_model "gitea.dev/models/unit"
-	"gitea.dev/tests"
+	unit_model "forgente.com/models/unit"
+	"forgente.com/tests"
 )
 
 func TestOrgProjectAccess(t *testing.T) {

@@ -8,14 +8,14 @@ import (
 	"testing"
 	"time"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	git_model "gitea.dev/models/git"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/commitstatus"
-	"gitea.dev/modules/gitrepo"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/db"
+	git_model "forgente.com/models/git"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/commitstatus"
+	"forgente.com/modules/gitrepo"
 
 	"github.com/stretchr/testify/assert"
 )

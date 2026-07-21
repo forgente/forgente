@@ -13,14 +13,14 @@ import (
 	"path"
 	"strings"
 
-	"gitea.dev/models/renderhelper"
-	"gitea.dev/modules/base"
-	"gitea.dev/modules/charset"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
+	"forgente.com/models/renderhelper"
+	"forgente.com/modules/base"
+	"forgente.com/modules/charset"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
 )
 
 // locate a README for a tree in one of the supported paths.

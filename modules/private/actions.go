@@ -6,7 +6,7 @@ package private
 import (
 	"context"
 
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/setting"
 )
 
 type GenerateTokenRequest struct {

@@ -10,9 +10,9 @@ import (
 	"net/url"
 	"sort"
 
-	packages_model "gitea.dev/models/packages"
-	npm_module "gitea.dev/modules/packages/npm"
-	"gitea.dev/modules/setting"
+	packages_model "forgente.com/models/packages"
+	npm_module "forgente.com/modules/packages/npm"
+	"forgente.com/modules/setting"
 )
 
 func createPackageMetadataResponse(registryURL string, pds []*packages_model.PackageDescriptor) *npm_module.PackageMetadata {

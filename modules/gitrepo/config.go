@@ -6,8 +6,8 @@ package gitrepo
 import (
 	"context"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
 )
 
 // GitConfigAdd add a git configuration key to a specific value for the given repository.

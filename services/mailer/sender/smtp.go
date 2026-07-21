@@ -14,8 +14,8 @@ import (
 	"os"
 	"strings"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 // SMTPSender Sender SMTP mail sender

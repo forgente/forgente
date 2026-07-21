@@ -6,14 +6,14 @@ package v1_26
 import (
 	"testing"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/migrations/migrationtest"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
+	"forgente.com/models/db"
+	"forgente.com/models/migrations/migrationtest"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
 
-	_ "gitea.dev/models/actions"
-	_ "gitea.dev/models/git"
-	_ "gitea.dev/models/repo"
+	_ "forgente.com/models/actions"
+	_ "forgente.com/models/git"
+	_ "forgente.com/models/repo"
 
 	"github.com/stretchr/testify/require"
 )

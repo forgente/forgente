@@ -6,7 +6,7 @@ package v1_12
 import (
 	"fmt"
 
-	"gitea.dev/models/db"
+	"forgente.com/models/db"
 )
 
 func AddSystemWebhookColumn(x db.EngineMigration) error {

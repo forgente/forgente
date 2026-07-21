@@ -8,13 +8,13 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/models/db"
-	issue_model "gitea.dev/models/issues"
-	"gitea.dev/modules/indexer"
-	indexer_internal "gitea.dev/modules/indexer/internal"
-	inner_db "gitea.dev/modules/indexer/internal/db"
-	"gitea.dev/modules/indexer/issues/internal"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	issue_model "forgente.com/models/issues"
+	"forgente.com/modules/indexer"
+	indexer_internal "forgente.com/modules/indexer/internal"
+	inner_db "forgente.com/modules/indexer/internal/db"
+	"forgente.com/modules/indexer/issues/internal"
+	"forgente.com/modules/util"
 
 	"xorm.io/builder"
 )

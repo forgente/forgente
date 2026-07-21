@@ -9,14 +9,14 @@ import (
 	"testing"
 	"time"
 
-	activities_model "gitea.dev/models/activities"
-	auth_model "gitea.dev/models/auth"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/eventsource"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/tests"
+	activities_model "forgente.com/models/activities"
+	auth_model "forgente.com/models/auth"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/eventsource"
+	api "forgente.com/modules/structs"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

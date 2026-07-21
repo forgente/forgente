@@ -12,12 +12,12 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/public"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web/middleware"
-	"gitea.dev/services/webtheme"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/public"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web/middleware"
+	"forgente.com/services/webtheme"
 )
 
 type TemplateContext map[string]any

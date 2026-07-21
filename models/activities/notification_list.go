@@ -6,15 +6,15 @@ package activities
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	access_model "gitea.dev/models/perm/access"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	access_model "forgente.com/models/perm/access"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 
 	"xorm.io/builder"
 )

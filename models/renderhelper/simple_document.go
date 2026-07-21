@@ -6,7 +6,7 @@ package renderhelper
 import (
 	"context"
 
-	"gitea.dev/modules/markup"
+	"forgente.com/modules/markup"
 )
 
 type SimpleDocument struct {

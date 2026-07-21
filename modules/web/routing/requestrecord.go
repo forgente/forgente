@@ -8,7 +8,7 @@ import (
 	"sync"
 	"time"
 
-	"gitea.dev/modules/log"
+	"forgente.com/modules/log"
 )
 
 type requestRecord struct {

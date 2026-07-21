@@ -4,9 +4,9 @@
 package v1_17
 
 import (
-	"gitea.dev/models/db"
-	"gitea.dev/models/pull"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/models/pull"
+	"forgente.com/modules/timeutil"
 )
 
 func AddReviewViewedFiles(x db.EngineMigration) error {

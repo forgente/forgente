@@ -8,16 +8,16 @@ import (
 	"net/url"
 	"strings"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/routers/web/explore"
-	"gitea.dev/services/context"
-	repo_service "gitea.dev/services/repository"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/routers/web/explore"
+	"forgente.com/services/context"
+	repo_service "forgente.com/services/repository"
 )
 
 const (

@@ -9,12 +9,12 @@ import (
 	"html/template"
 	"strings"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/optional"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/optional"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
 
 	"xorm.io/builder"
 )

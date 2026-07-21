@@ -6,8 +6,8 @@ package v1_16
 import (
 	"fmt"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/modules/timeutil"
 )
 
 func AddTableIssueContentHistory(x db.EngineMigration) error {

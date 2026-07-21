@@ -7,13 +7,13 @@ import (
 	"net/http"
 	"strings"
 
-	user_model "gitea.dev/models/user"
-	chef_module "gitea.dev/modules/packages/chef"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/util"
-	shared "gitea.dev/routers/web/shared/packages"
-	"gitea.dev/services/context"
+	user_model "forgente.com/models/user"
+	chef_module "forgente.com/modules/packages/chef"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/util"
+	shared "forgente.com/routers/web/shared/packages"
+	"forgente.com/services/context"
 )
 
 const (

@@ -8,7 +8,7 @@ import (
 	"fmt"
 	"time"
 
-	"gitea.dev/modules/util"
+	"forgente.com/modules/util"
 )
 
 const (

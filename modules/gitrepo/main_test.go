@@ -7,9 +7,9 @@ import (
 	"path/filepath"
 	"testing"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/setting"
 )
 
 func mockRepository(repoPath string) gitcmd.RepositoryFacade {

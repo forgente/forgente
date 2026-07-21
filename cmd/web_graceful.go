@@ -9,9 +9,9 @@ import (
 	"net/http/fcgi"
 	"strings"
 
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 func runHTTP(network, listenAddr, name string, m http.Handler, useProxyProtocol bool) error {

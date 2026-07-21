@@ -6,9 +6,9 @@ package files
 import (
 	"context"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/structs"
-	asymkey_service "gitea.dev/services/asymkey"
+	"forgente.com/modules/git"
+	"forgente.com/modules/structs"
+	asymkey_service "forgente.com/services/asymkey"
 )
 
 // GetPayloadCommitVerification returns the verification information of a commit

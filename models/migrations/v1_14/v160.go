@@ -3,7 +3,7 @@
 
 package v1_14
 
-import "gitea.dev/models/db"
+import "forgente.com/models/db"
 
 func AddBlockOnOfficialReviewRequests(x db.EngineMigration) error {
 	type ProtectedBranch struct {

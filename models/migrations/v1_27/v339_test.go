@@ -7,8 +7,8 @@ import (
 	"context"
 	"testing"
 
-	"gitea.dev/models/migrations/migrationtest"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/migrations/migrationtest"
+	"forgente.com/modules/timeutil"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

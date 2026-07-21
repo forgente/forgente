@@ -6,8 +6,8 @@ package v1_12
 import (
 	"fmt"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/modules/timeutil"
 )
 
 func AddLanguageStats(x db.EngineMigration) error {

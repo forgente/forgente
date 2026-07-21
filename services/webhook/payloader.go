@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"net/http"
 
-	webhook_model "gitea.dev/models/webhook"
-	"gitea.dev/modules/json"
-	api "gitea.dev/modules/structs"
-	webhook_module "gitea.dev/modules/webhook"
+	webhook_model "forgente.com/models/webhook"
+	"forgente.com/modules/json"
+	api "forgente.com/modules/structs"
+	webhook_module "forgente.com/modules/webhook"
 )
 
 // payloadConvertor defines the interface to convert system payload to webhook payload

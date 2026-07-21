@@ -7,10 +7,10 @@ import (
 	"context"
 	"fmt"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/modules/actions/jobparser"
-	"gitea.dev/modules/json"
-	api "gitea.dev/modules/structs"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/modules/actions/jobparser"
+	"forgente.com/modules/json"
+	api "forgente.com/modules/structs"
 )
 
 func getWorkflowDispatchInputsFromRun(run *actions_model.ActionRun) (map[string]any, error) {

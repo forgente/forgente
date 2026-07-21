@@ -10,11 +10,11 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	webhook_module "gitea.dev/modules/webhook"
+	"forgente.com/models/db"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	webhook_module "forgente.com/modules/webhook"
 )
 
 const (

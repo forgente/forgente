@@ -6,8 +6,8 @@ package models
 import (
 	"testing"
 
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/models/unittest"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/models/unittest"
 
 	"github.com/stretchr/testify/assert"
 )

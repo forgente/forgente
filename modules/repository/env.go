@@ -8,10 +8,10 @@ import (
 	"strconv"
 	"strings"
 
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 // env keys for git hooks need

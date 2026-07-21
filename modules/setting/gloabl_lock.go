@@ -4,8 +4,8 @@
 package setting
 
 import (
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/nosql"
+	"forgente.com/modules/log"
+	"forgente.com/modules/nosql"
 )
 
 // GlobalLock represents configuration of global lock

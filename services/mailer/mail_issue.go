@@ -7,15 +7,15 @@ import (
 	"context"
 	"fmt"
 
-	activities_model "gitea.dev/models/activities"
-	issues_model "gitea.dev/models/issues"
-	access_model "gitea.dev/models/perm/access"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	activities_model "forgente.com/models/activities"
+	issues_model "forgente.com/models/issues"
+	access_model "forgente.com/models/perm/access"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 const MailBatchSize = 100 // batch size used in mailIssueCommentBatch

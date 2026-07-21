@@ -6,10 +6,10 @@ package repository
 import (
 	"testing"
 
-	"gitea.dev/models/db"
-	git_model "gitea.dev/models/git"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
+	"forgente.com/models/db"
+	git_model "forgente.com/models/git"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
 
 	"github.com/stretchr/testify/assert"
 )

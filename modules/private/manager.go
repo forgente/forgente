@@ -12,7 +12,7 @@ import (
 	"strconv"
 	"time"
 
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/setting"
 )
 
 // Shutdown calls the internal shutdown function

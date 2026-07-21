@@ -7,10 +7,10 @@ import (
 	"context"
 	"errors"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/queue"
-	"gitea.dev/modules/setting"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/log"
+	"forgente.com/modules/queue"
+	"forgente.com/modules/setting"
 )
 
 // doMirrorSync causes this request to mirror itself

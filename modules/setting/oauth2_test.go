@@ -7,8 +7,8 @@ import (
 	"os"
 	"testing"
 
-	"gitea.dev/modules/generate"
-	"gitea.dev/modules/test"
+	"forgente.com/modules/generate"
+	"forgente.com/modules/test"
 
 	"github.com/stretchr/testify/assert"
 )

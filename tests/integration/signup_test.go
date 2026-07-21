@@ -9,13 +9,13 @@ import (
 	"strings"
 	"testing"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
-	"gitea.dev/modules/translation"
-	"gitea.dev/tests"
+	"forgente.com/models/db"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
+	"forgente.com/modules/translation"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

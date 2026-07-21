@@ -10,8 +10,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/tempdir"
+	"forgente.com/modules/log"
+	"forgente.com/modules/tempdir"
 )
 
 var (

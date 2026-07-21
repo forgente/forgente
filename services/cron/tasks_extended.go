@@ -7,17 +7,17 @@ import (
 	"context"
 	"time"
 
-	activities_model "gitea.dev/models/activities"
-	"gitea.dev/models/system"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git/gitcmd"
-	issue_indexer "gitea.dev/modules/indexer/issues"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/updatechecker"
-	asymkey_service "gitea.dev/services/asymkey"
-	repo_service "gitea.dev/services/repository"
-	archiver_service "gitea.dev/services/repository/archiver"
-	user_service "gitea.dev/services/user"
+	activities_model "forgente.com/models/activities"
+	"forgente.com/models/system"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git/gitcmd"
+	issue_indexer "forgente.com/modules/indexer/issues"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/updatechecker"
+	asymkey_service "forgente.com/services/asymkey"
+	repo_service "forgente.com/services/repository"
+	archiver_service "forgente.com/services/repository/archiver"
+	user_service "forgente.com/services/user"
 )
 
 func registerDeleteInactiveUsers() {

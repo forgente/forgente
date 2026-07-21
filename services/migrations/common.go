@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"strings"
 
-	system_model "gitea.dev/models/system"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	base "gitea.dev/modules/migration"
+	system_model "forgente.com/models/system"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	base "forgente.com/modules/migration"
 )
 
 // WarnAndNotice will log the provided message and send a repository notice

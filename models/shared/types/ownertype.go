@@ -3,7 +3,7 @@
 
 package types
 
-import "gitea.dev/modules/translation"
+import "forgente.com/modules/translation"
 
 type OwnerType string
 

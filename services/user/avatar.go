@@ -10,11 +10,11 @@ import (
 	"io"
 	"os"
 
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/avatar"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/storage"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/avatar"
+	"forgente.com/modules/log"
+	"forgente.com/modules/storage"
 )
 
 // UploadAvatar saves custom avatar for user.

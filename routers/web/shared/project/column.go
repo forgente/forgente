@@ -4,9 +4,9 @@
 package project
 
 import (
-	project_model "gitea.dev/models/project"
-	"gitea.dev/modules/json"
-	"gitea.dev/services/context"
+	project_model "forgente.com/models/project"
+	"forgente.com/modules/json"
+	"forgente.com/services/context"
 )
 
 // MoveColumns moves or keeps columns in a project and sorts them inside that project

@@ -6,10 +6,10 @@ package repo
 import (
 	"html/template"
 
-	"gitea.dev/modules/htmlutil"
-	"gitea.dev/modules/svg"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
+	"forgente.com/modules/htmlutil"
+	"forgente.com/modules/svg"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
 )
 
 type pullMergeBoxInfoItem struct {

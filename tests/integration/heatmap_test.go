@@ -8,8 +8,8 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/tests"
+	"forgente.com/modules/timeutil"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -4,11 +4,11 @@
 package actions
 
 import (
-	"gitea.dev/models/perm"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	"gitea.dev/modules/actions/jobparser"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/perm"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	"forgente.com/modules/actions/jobparser"
+	"forgente.com/modules/setting"
 
 	"go.yaml.in/yaml/v4"
 )

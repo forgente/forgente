@@ -7,14 +7,14 @@ package admin
 import (
 	"net/http"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/organization"
-	user_model "gitea.dev/models/user"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
+	"forgente.com/models/db"
+	"forgente.com/models/organization"
+	user_model "forgente.com/models/user"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
 )
 
 // CreateOrg api for create organization

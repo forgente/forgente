@@ -43,7 +43,7 @@ linters:
               desc: use os or io instead
             - pkg: golang.org/x/exp
               desc: it's experimental and unreliable
-            - pkg: gitea.dev/modules/git/internal
+            - pkg: forgente.com/modules/git/internal
               desc: do not use the internal package, use AddXxx function instead
             - pkg: gopkg.in/ini.v1
               desc: do not use the ini package, use gitea's config system instead
@@ -55,9 +55,9 @@ linters:
           files:
             - '**/models/migrations/**/*.go'
           deny:
-            - pkg: gitea.dev/models$
+            - pkg: forgente.com/models$
               desc: migrations must not depend on the models package
-            - pkg: gitea.dev/modules/structs
+            - pkg: forgente.com/modules/structs
               desc: migrations must not depend on modules/structs (API structures change over time)
     nolintlint:
       allow-unused: false
@@ -174,7 +174,7 @@ formatters:
       custom-order: true
       sections:
         - standard
-        - prefix(gitea.dev)
+        - prefix(forgente.com)
         - blank
         - default
     gofumpt:

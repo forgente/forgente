@@ -10,8 +10,8 @@ import (
 	"regexp"
 	"sync"
 
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/validation"
+	"forgente.com/modules/util"
+	"forgente.com/modules/validation"
 
 	"go.yaml.in/yaml/v4"
 )

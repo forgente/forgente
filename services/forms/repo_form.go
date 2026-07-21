@@ -8,14 +8,14 @@ import (
 	"net/http"
 	"strings"
 
-	issues_model "gitea.dev/models/issues"
-	project_model "gitea.dev/models/project"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web/middleware"
-	"gitea.dev/services/context"
-	"gitea.dev/services/webhook"
+	issues_model "forgente.com/models/issues"
+	project_model "forgente.com/models/project"
+	"forgente.com/modules/json"
+	"forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web/middleware"
+	"forgente.com/services/context"
+	"forgente.com/services/webhook"
 
 	"gitea.com/go-chi/binding"
 )

@@ -7,12 +7,12 @@ import (
 	"html/template"
 	"strings"
 
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/modules/htmlutil"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/svg"
-	"gitea.dev/modules/translation"
-	"gitea.dev/modules/util"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/modules/htmlutil"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/svg"
+	"forgente.com/modules/translation"
+	"forgente.com/modules/util"
 )
 
 func commentTimelineEventIsWipToggle(c *issues_model.Comment) (isToggle, isWip bool) {

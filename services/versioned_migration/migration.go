@@ -6,9 +6,9 @@ package versioned_migration
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/migrations"
-	"gitea.dev/modules/globallock"
+	"forgente.com/models/db"
+	"forgente.com/models/migrations"
+	"forgente.com/modules/globallock"
 )
 
 func Migrate(ctx context.Context, x db.EngineMigration) error {

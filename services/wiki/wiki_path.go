@@ -8,11 +8,11 @@ import (
 	"path"
 	"strings"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/convert"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/services/convert"
 )
 
 // To define the wiki related concepts:

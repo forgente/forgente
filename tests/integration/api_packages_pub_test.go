@@ -15,12 +15,12 @@ import (
 	"testing"
 	"time"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/packages"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	pub_module "gitea.dev/modules/packages/pub"
-	"gitea.dev/tests"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/packages"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	pub_module "forgente.com/modules/packages/pub"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

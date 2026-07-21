@@ -9,9 +9,9 @@ import (
 	"strings"
 	"testing"
 
-	repo_module "gitea.dev/modules/repository"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/tests"
+	repo_module "forgente.com/modules/repository"
+	api "forgente.com/modules/structs"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

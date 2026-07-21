@@ -760,7 +760,8 @@ const file_artifact_proto_rawDesc = "" +
 	"\x16DeleteArtifactResponse\x12\x0e\n" +
 	"\x02ok\x18\x01 \x01(\bR\x02ok\x12\x1f\n" +
 	"\vartifact_id\x18\x02 \x01(\x03R\n" +
-	"artifactIdB\x1fZ\x1dgitea.dev/routers/api/actionsb\x06proto3"
+	// hand-patched go_package (no protoc in repo): Z byte = len(path) (32=\x20), B byte = len+2 (34=\x22)
+	"artifactIdB\x22Z\x20forgente.com/routers/api/actionsb\x06proto3"
 
 var (
 	file_artifact_proto_rawDescOnce sync.Once

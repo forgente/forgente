@@ -6,8 +6,8 @@ package v1_20
 import (
 	"strings"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/json"
+	"forgente.com/models/db"
+	"forgente.com/modules/json"
 )
 
 func ChangeContainerMetadataMultiArch(x db.EngineMigration) error {

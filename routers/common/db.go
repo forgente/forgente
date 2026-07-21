@@ -8,13 +8,13 @@ import (
 	"errors"
 	"time"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/migrations"
-	system_model "gitea.dev/models/system"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/setting/config"
-	"gitea.dev/services/versioned_migration"
+	"forgente.com/models/db"
+	"forgente.com/models/migrations"
+	system_model "forgente.com/models/system"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/setting/config"
+	"forgente.com/services/versioned_migration"
 )
 
 // InitDBEngine In case of problems connecting to DB, retry connection. Eg, PGSQL in Docker Container on Synology

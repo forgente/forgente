@@ -6,10 +6,10 @@ package misc
 import (
 	"net/http"
 
-	repo_module "gitea.dev/modules/repository"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
+	repo_module "forgente.com/modules/repository"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
 )
 
 // Shows a list of all Label templates

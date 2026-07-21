@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"strings"
 
-	"gitea.dev/models/auth"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/auth/source/ldap"
+	"forgente.com/models/auth"
+	"forgente.com/modules/util"
+	"forgente.com/services/auth/source/ldap"
 
 	"github.com/urfave/cli/v3"
 )

@@ -9,12 +9,12 @@ import (
 	"net/url"
 	"testing"
 
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/test"
-	repo_service "gitea.dev/services/repository"
-	"gitea.dev/tests"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/test"
+	repo_service "forgente.com/services/repository"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

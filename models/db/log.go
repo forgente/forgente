@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"sync/atomic"
 
-	"gitea.dev/modules/log"
+	"forgente.com/modules/log"
 
 	xormlog "xorm.io/xorm/log"
 )

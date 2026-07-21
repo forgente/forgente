@@ -10,9 +10,9 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/models/actions"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	"forgente.com/models/actions"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 )
 
 const (

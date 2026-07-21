@@ -7,9 +7,9 @@ import (
 	"strings"
 	"testing"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
-	"gitea.dev/modules/translation"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
+	"forgente.com/modules/translation"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

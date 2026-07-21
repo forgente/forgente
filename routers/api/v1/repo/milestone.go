@@ -8,15 +8,15 @@ import (
 	"net/http"
 	"strconv"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/routers/common"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/web"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/routers/common"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
 )
 
 // ListMilestones list milestones for a repository

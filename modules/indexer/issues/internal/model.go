@@ -6,10 +6,10 @@ package internal
 import (
 	"strconv"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/indexer"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/modules/indexer"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/timeutil"
 )
 
 // IndexerData data stored in the issue indexer

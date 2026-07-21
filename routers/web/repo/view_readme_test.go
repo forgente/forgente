@@ -8,9 +8,9 @@ import (
 	"path"
 	"testing"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/services/contexttest"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/services/contexttest"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

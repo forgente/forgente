@@ -3,7 +3,7 @@
 
 package v1_12
 
-import "gitea.dev/models/db"
+import "forgente.com/models/db"
 
 func AddUserRepoMissingColumns(x db.EngineMigration) error {
 	type VisibleType int

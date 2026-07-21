@@ -7,8 +7,8 @@ import (
 	"context"
 	"errors"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/modules/timeutil"
 )
 
 func AddBranchTable(x db.EngineMigration) error {

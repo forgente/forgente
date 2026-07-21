@@ -3,7 +3,7 @@
 
 package v1_8
 
-import "gitea.dev/models/db"
+import "forgente.com/models/db"
 
 func AddIsLockedToIssues(x db.EngineMigration) error {
 	// Issue see models/issue.go

@@ -4,8 +4,8 @@
 package v1_13
 
 import (
-	"gitea.dev/models/db"
-	"gitea.dev/modules/log"
+	"forgente.com/models/db"
+	"forgente.com/modules/log"
 )
 
 func RecalculateStars(x db.EngineMigration) (err error) {

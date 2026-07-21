@@ -7,10 +7,10 @@ import (
 	"context"
 	"net/url"
 
-	git_model "gitea.dev/models/git"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/commitstatus"
-	api "gitea.dev/modules/structs"
+	git_model "forgente.com/models/git"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/commitstatus"
+	api "forgente.com/modules/structs"
 )
 
 // ToCommitStatus converts git_model.CommitStatus to api.CommitStatus

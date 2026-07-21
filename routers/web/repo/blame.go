@@ -12,17 +12,17 @@ import (
 	"path"
 	"strconv"
 
-	"gitea.dev/models/gituser"
-	"gitea.dev/modules/charset"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/languagestats"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/highlight"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
+	"forgente.com/models/gituser"
+	"forgente.com/modules/charset"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/languagestats"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/highlight"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
 )
 
 type blameRow struct {

@@ -7,7 +7,7 @@ package git
 import (
 	"context"
 
-	"gitea.dev/modules/git/gitcmd"
+	"forgente.com/modules/git/gitcmd"
 )
 
 // BranchPrefix base dir of the branch information file store on git

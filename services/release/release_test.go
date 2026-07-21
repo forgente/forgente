@@ -8,17 +8,17 @@ import (
 	"testing"
 	"time"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/services/attachment"
-	"gitea.dev/services/context/upload"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
+	"forgente.com/modules/timeutil"
+	"forgente.com/services/attachment"
+	"forgente.com/services/context/upload"
 
-	_ "gitea.dev/models/actions"
+	_ "forgente.com/models/actions"
 
 	"github.com/stretchr/testify/assert"
 )

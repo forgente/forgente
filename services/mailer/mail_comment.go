@@ -6,12 +6,12 @@ package mailer
 import (
 	"context"
 
-	activities_model "gitea.dev/models/activities"
-	issues_model "gitea.dev/models/issues"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	activities_model "forgente.com/models/activities"
+	issues_model "forgente.com/models/issues"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 // MailParticipantsComment sends new comment emails to repository watchers and mentioned people.

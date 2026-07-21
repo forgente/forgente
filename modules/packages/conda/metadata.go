@@ -10,10 +10,10 @@ import (
 	"io"
 	"strings"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/validation"
-	"gitea.dev/modules/zstd"
+	"forgente.com/modules/json"
+	"forgente.com/modules/util"
+	"forgente.com/modules/validation"
+	"forgente.com/modules/zstd"
 )
 
 var (

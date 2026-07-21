@@ -15,15 +15,15 @@ import (
 	"strings"
 	"time"
 
-	issues_model "gitea.dev/models/issues"
-	access_model "gitea.dev/models/perm/access"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/references"
-	"gitea.dev/modules/repository"
+	issues_model "forgente.com/models/issues"
+	access_model "forgente.com/models/perm/access"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	"forgente.com/modules/references"
+	"forgente.com/modules/repository"
 )
 
 const (

@@ -4,8 +4,8 @@
 package sspi_test
 
 import (
-	"gitea.dev/models/auth"
-	"gitea.dev/services/auth/source/sspi"
+	"forgente.com/models/auth"
+	"forgente.com/services/auth/source/sspi"
 )
 
 // This test file exists to assert that our Source exposes the interfaces that we expect

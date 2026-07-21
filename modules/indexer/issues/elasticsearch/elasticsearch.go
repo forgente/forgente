@@ -8,12 +8,12 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/indexer"
-	indexer_internal "gitea.dev/modules/indexer/internal"
-	es "gitea.dev/modules/indexer/internal/elasticsearch"
-	"gitea.dev/modules/indexer/issues/internal"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/indexer"
+	indexer_internal "forgente.com/modules/indexer/internal"
+	es "forgente.com/modules/indexer/internal/elasticsearch"
+	"forgente.com/modules/indexer/issues/internal"
+	"forgente.com/modules/util"
 )
 
 const issueIndexerLatestVersion = 4

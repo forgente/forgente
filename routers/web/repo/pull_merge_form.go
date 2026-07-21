@@ -7,16 +7,16 @@ import (
 	"errors"
 	"html/template"
 
-	pull_model "gitea.dev/models/pull"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/svg"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
-	pull_service "gitea.dev/services/pull"
+	pull_model "forgente.com/models/pull"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	"forgente.com/modules/svg"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
+	pull_service "forgente.com/services/pull"
 )
 
 func (prInfo *pullRequestViewInfo) prepareMergeBoxFormProps(ctx *context.Context) {

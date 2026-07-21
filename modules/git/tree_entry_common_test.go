@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"gitea.dev/modules/util"
+	"forgente.com/modules/util"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

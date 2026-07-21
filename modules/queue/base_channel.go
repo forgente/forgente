@@ -9,7 +9,7 @@ import (
 	"sync"
 	"time"
 
-	"gitea.dev/modules/container"
+	"forgente.com/modules/container"
 )
 
 var errChannelClosed = errors.New("channel is closed")

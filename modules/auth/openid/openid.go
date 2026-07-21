@@ -8,9 +8,9 @@ import (
 	"sync"
 	"time"
 
-	"gitea.dev/modules/hostmatcher"
-	"gitea.dev/modules/proxy"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/hostmatcher"
+	"forgente.com/modules/proxy"
+	"forgente.com/modules/setting"
 
 	"github.com/yohcop/openid-go"
 )

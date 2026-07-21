@@ -8,7 +8,7 @@ import (
 	"slices"
 	"strconv"
 
-	"gitea.dev/models/user"
+	"forgente.com/models/user"
 )
 
 type SearchUserInfo struct {

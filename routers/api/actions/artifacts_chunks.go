@@ -17,12 +17,12 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/storage"
+	"forgente.com/models/actions"
+	"forgente.com/models/db"
+	"forgente.com/modules/log"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/storage"
 )
 
 type saveUploadChunkOptions struct {

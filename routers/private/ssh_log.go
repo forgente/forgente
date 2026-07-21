@@ -6,11 +6,11 @@ package private
 import (
 	"net/http"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/private"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
+	"forgente.com/modules/log"
+	"forgente.com/modules/private"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
 )
 
 // SSHLog hook to response ssh log

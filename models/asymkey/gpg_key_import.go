@@ -6,7 +6,7 @@ package asymkey
 import (
 	"context"
 
-	"gitea.dev/models/db"
+	"forgente.com/models/db"
 )
 
 //    __________________  ________   ____  __.

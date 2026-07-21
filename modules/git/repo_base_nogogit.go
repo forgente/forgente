@@ -10,7 +10,7 @@ import (
 	"context"
 	"sync"
 
-	"gitea.dev/modules/log"
+	"forgente.com/modules/log"
 )
 
 const isGogit = false

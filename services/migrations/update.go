@@ -6,11 +6,11 @@ package migrations
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/structs"
-	"gitea.dev/services/externalaccount"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	"forgente.com/modules/structs"
+	"forgente.com/services/externalaccount"
 )
 
 // UpdateMigrationPosterID updates all migrated repositories' issues and comments posterID

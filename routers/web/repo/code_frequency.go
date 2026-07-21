@@ -7,9 +7,9 @@ import (
 	"errors"
 	"net/http"
 
-	"gitea.dev/modules/templates"
-	"gitea.dev/services/context"
-	contributors_service "gitea.dev/services/repository"
+	"forgente.com/modules/templates"
+	"forgente.com/services/context"
+	contributors_service "forgente.com/services/repository"
 )
 
 const (

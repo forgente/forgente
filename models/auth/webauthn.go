@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"strings"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
 
 	"github.com/go-webauthn/webauthn/protocol"
 	"github.com/go-webauthn/webauthn/webauthn"

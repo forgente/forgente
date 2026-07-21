@@ -6,10 +6,10 @@ package admin
 import (
 	"net/http"
 
-	user_model "gitea.dev/models/user"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
+	user_model "forgente.com/models/user"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
 )
 
 // ListUserBadges lists all badges belonging to a user

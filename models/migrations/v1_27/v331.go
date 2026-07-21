@@ -7,9 +7,9 @@ import (
 	"context"
 	"time"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/migrations/base"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/models/migrations/base"
+	"forgente.com/modules/timeutil"
 
 	"xorm.io/xorm"
 )

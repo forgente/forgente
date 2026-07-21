@@ -3,7 +3,7 @@
 
 package elasticsearch
 
-import "gitea.dev/modules/json"
+import "forgente.com/modules/json"
 
 const (
 	bulkActionIndex  = "index"

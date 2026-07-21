@@ -8,10 +8,10 @@ import (
 	"io"
 	"net/http"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/proxy"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/system"
+	"forgente.com/modules/json"
+	"forgente.com/modules/proxy"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/system"
 
 	"github.com/hashicorp/go-version"
 )

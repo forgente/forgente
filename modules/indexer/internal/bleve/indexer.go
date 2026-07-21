@@ -7,8 +7,8 @@ import (
 	"context"
 	"errors"
 
-	"gitea.dev/modules/indexer/internal"
-	"gitea.dev/modules/log"
+	"forgente.com/modules/indexer/internal"
+	"forgente.com/modules/log"
 
 	"github.com/blevesearch/bleve/v2"
 	"github.com/blevesearch/bleve/v2/mapping"

@@ -9,7 +9,7 @@ import (
 	"context"
 	"io"
 
-	"gitea.dev/modules/git/gitcmd"
+	"forgente.com/modules/git/gitcmd"
 )
 
 // Tree represents a flat directory listing.

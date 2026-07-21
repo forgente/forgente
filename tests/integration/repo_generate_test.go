@@ -11,10 +11,10 @@ import (
 	"strings"
 	"testing"
 
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
-	"gitea.dev/tests"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

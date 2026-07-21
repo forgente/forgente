@@ -11,8 +11,8 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/process"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/process"
 )
 
 // GPGSettings represents the default GPG settings for this repository

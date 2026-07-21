@@ -6,9 +6,9 @@ package system
 import (
 	"context"
 
-	"gitea.dev/models/system"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/util"
+	"forgente.com/models/system"
+	"forgente.com/modules/json"
+	"forgente.com/modules/util"
 )
 
 // DBStore can be used to store app state items in local filesystem

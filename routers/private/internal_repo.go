@@ -7,11 +7,11 @@ import (
 	"fmt"
 	"net/http"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/gitrepo"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/private"
-	gitea_context "gitea.dev/services/context"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/log"
+	"forgente.com/modules/private"
+	gitea_context "forgente.com/services/context"
 )
 
 // This file contains common functions relating to setting the Repository for the internal routes

@@ -12,14 +12,14 @@ import (
 	"path"
 	"strings"
 
-	"gitea.dev/modules/assetfs"
-	"gitea.dev/modules/avatar"
-	"gitea.dev/modules/httpcache"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/storage"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web/routing"
+	"forgente.com/modules/assetfs"
+	"forgente.com/modules/avatar"
+	"forgente.com/modules/httpcache"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/storage"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web/routing"
 )
 
 func avatarStorageHandler(storageSetting *setting.Storage, prefix string, objStore storage.ObjectStorage) http.HandlerFunc {

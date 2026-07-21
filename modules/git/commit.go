@@ -11,8 +11,8 @@ import (
 	"os/exec"
 	"strings"
 
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/util"
 )
 
 // Commit represents a git commit.

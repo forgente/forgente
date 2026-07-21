@@ -9,12 +9,12 @@ import (
 	"net/url"
 	"testing"
 
-	actions_model "gitea.dev/models/actions"
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/db"
-	api "gitea.dev/modules/structs"
-	webhook_module "gitea.dev/modules/webhook"
-	"gitea.dev/tests"
+	actions_model "forgente.com/models/actions"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/db"
+	api "forgente.com/modules/structs"
+	webhook_module "forgente.com/modules/webhook"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

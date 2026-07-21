@@ -6,7 +6,7 @@ package gitrepo
 import (
 	"context"
 
-	"gitea.dev/modules/git"
+	"forgente.com/modules/git"
 )
 
 // CloneExternalRepo clones an external repository to the managed repository.

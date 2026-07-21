@@ -7,7 +7,7 @@ import (
 	"encoding/xml"
 	"strings"
 
-	packages_model "gitea.dev/models/packages"
+	packages_model "forgente.com/models/packages"
 )
 
 // MetadataResponse https://maven.apache.org/ref/3.2.5/maven-repository-metadata/repository-metadata.html

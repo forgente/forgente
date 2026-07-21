@@ -8,14 +8,14 @@ import (
 	"path"
 	"testing"
 
-	activities_model "gitea.dev/models/activities"
-	"gitea.dev/models/db"
-	issue_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
+	activities_model "forgente.com/models/activities"
+	"forgente.com/models/db"
+	issue_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
 
 	"github.com/stretchr/testify/assert"
 )

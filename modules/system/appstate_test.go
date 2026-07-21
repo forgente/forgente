@@ -6,7 +6,7 @@ package system
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
+	"forgente.com/models/unittest"
 
 	"github.com/stretchr/testify/assert"
 )

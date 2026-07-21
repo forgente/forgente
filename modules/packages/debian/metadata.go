@@ -13,9 +13,9 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/validation"
-	"gitea.dev/modules/zstd"
+	"forgente.com/modules/util"
+	"forgente.com/modules/validation"
+	"forgente.com/modules/zstd"
 
 	"github.com/blakesmith/ar"
 	"github.com/ulikunitz/xz"

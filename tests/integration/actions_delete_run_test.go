@@ -11,14 +11,14 @@ import (
 	"testing"
 	"time"
 
-	runnerv1 "gitea.dev/actions-proto-go/runner/v1"
-	actions_model "gitea.dev/models/actions"
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/json"
-	"gitea.dev/routers/web/repo/actions"
+	actions_model "forgente.com/models/actions"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/json"
+	"forgente.com/routers/web/repo/actions"
 
+	runnerv1 "gitea.dev/actions-proto-go/runner/v1"
 	"github.com/stretchr/testify/assert"
 	"google.golang.org/protobuf/types/known/timestamppb"
 )

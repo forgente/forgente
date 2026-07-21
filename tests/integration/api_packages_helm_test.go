@@ -12,12 +12,12 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/models/packages"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	helm_module "gitea.dev/modules/packages/helm"
-	"gitea.dev/modules/setting"
-	"gitea.dev/tests"
+	"forgente.com/models/packages"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	helm_module "forgente.com/modules/packages/helm"
+	"forgente.com/modules/setting"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 	"go.yaml.in/yaml/v4"

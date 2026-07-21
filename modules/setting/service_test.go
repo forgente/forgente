@@ -6,9 +6,9 @@ package setting
 import (
 	"testing"
 
-	"gitea.dev/modules/glob"
-	"gitea.dev/modules/structs"
-	"gitea.dev/modules/test"
+	"forgente.com/modules/glob"
+	"forgente.com/modules/structs"
+	"forgente.com/modules/test"
 
 	"github.com/stretchr/testify/assert"
 )

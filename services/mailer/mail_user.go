@@ -7,13 +7,13 @@ import (
 	"bytes"
 	"fmt"
 
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/translation"
-	sender_service "gitea.dev/services/mailer/sender"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/translation"
+	sender_service "forgente.com/services/mailer/sender"
 )
 
 const (

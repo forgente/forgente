@@ -14,12 +14,12 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/private"
-	repo_module "gitea.dev/modules/repository"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/log"
+	"forgente.com/modules/private"
+	repo_module "forgente.com/modules/repository"
+	"forgente.com/modules/setting"
 
 	"github.com/urfave/cli/v3"
 )

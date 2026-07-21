@@ -6,12 +6,12 @@ package setting
 import (
 	"net/http"
 
-	git_model "gitea.dev/models/git"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/routers/web/repo"
-	"gitea.dev/services/context"
-	repo_service "gitea.dev/services/repository"
+	git_model "forgente.com/models/git"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/routers/web/repo"
+	"forgente.com/services/context"
+	repo_service "forgente.com/services/repository"
 )
 
 // SetDefaultBranchPost set default branch

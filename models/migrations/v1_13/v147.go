@@ -4,8 +4,8 @@
 package v1_13
 
 import (
-	"gitea.dev/models/db"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/modules/timeutil"
 )
 
 func CreateReviewsForCodeComments(x db.EngineMigration) error {

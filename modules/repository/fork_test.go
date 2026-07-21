@@ -6,8 +6,8 @@ package repository
 import (
 	"testing"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
 
 	"github.com/stretchr/testify/assert"
 )

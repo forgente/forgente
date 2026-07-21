@@ -6,9 +6,9 @@ package git
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/commitstatus"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	"forgente.com/modules/commitstatus"
+	"forgente.com/modules/setting"
 
 	"xorm.io/builder"
 )

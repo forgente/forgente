@@ -6,17 +6,17 @@ package repo
 import (
 	"net/http"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	"gitea.dev/modules/git"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
-	release_service "gitea.dev/services/release"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	"forgente.com/modules/git"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
+	release_service "forgente.com/services/release"
 )
 
 func canAccessReleaseDraft(ctx *context.APIContext) bool {

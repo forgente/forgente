@@ -6,8 +6,8 @@ package rpm
 import (
 	"context"
 
-	packages_model "gitea.dev/models/packages"
-	rpm_module "gitea.dev/modules/packages/rpm"
+	packages_model "forgente.com/models/packages"
+	rpm_module "forgente.com/modules/packages/rpm"
 )
 
 // GetGroups gets all available groups

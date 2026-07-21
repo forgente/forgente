@@ -9,11 +9,11 @@ import (
 	"fmt"
 	"strings"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/cache"
-	"gitea.dev/modules/json"
-	setting_module "gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	"forgente.com/modules/cache"
+	"forgente.com/modules/json"
+	setting_module "forgente.com/modules/setting"
+	"forgente.com/modules/util"
 
 	"xorm.io/builder"
 	"xorm.io/xorm/convert"

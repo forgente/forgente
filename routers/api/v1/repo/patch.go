@@ -6,10 +6,10 @@ package repo
 import (
 	"net/http"
 
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
-	"gitea.dev/services/repository/files"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
+	"forgente.com/services/repository/files"
 )
 
 // ApplyDiffPatch handles API call for applying a patch

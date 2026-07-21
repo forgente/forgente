@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"strings"
 
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 // CheckPrincipalKeyString strips spaces and returns an error if the given principal contains newlines

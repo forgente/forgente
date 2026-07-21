@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"time"
 
-	activities_model "gitea.dev/models/activities"
-	"gitea.dev/models/db"
-	"gitea.dev/modules/structs"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
+	activities_model "forgente.com/models/activities"
+	"forgente.com/models/db"
+	"forgente.com/modules/structs"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
 )
 
 // ListNotifications list users's notification threads

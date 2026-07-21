@@ -11,17 +11,17 @@ import (
 	"slices"
 	"strings"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	"gitea.dev/models/organization"
-	perm_model "gitea.dev/models/perm"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/db"
+	"forgente.com/models/organization"
+	perm_model "forgente.com/models/perm"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 // Permission contains all the permissions related variables to a repository for a user

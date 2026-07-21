@@ -6,15 +6,15 @@ package org
 import (
 	"errors"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/modules/label"
-	repo_module "gitea.dev/modules/repository"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web"
-	shared_label "gitea.dev/routers/web/shared/label"
-	"gitea.dev/services/context"
-	"gitea.dev/services/forms"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/modules/label"
+	repo_module "forgente.com/modules/repository"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web"
+	shared_label "forgente.com/routers/web/shared/label"
+	"forgente.com/services/context"
+	"forgente.com/services/forms"
 )
 
 // RetrieveLabels find all the labels of an organization

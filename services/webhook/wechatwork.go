@@ -9,10 +9,10 @@ import (
 	"net/http"
 	"strings"
 
-	webhook_model "gitea.dev/models/webhook"
-	"gitea.dev/modules/git"
-	api "gitea.dev/modules/structs"
-	webhook_module "gitea.dev/modules/webhook"
+	webhook_model "forgente.com/models/webhook"
+	"forgente.com/modules/git"
+	api "forgente.com/modules/structs"
+	webhook_module "forgente.com/modules/webhook"
 )
 
 type (

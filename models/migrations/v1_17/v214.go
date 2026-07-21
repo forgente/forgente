@@ -3,7 +3,7 @@
 
 package v1_17
 
-import "gitea.dev/models/db"
+import "forgente.com/models/db"
 
 func AddAutoMergeTable(x db.EngineMigration) error {
 	type MergeStyle string

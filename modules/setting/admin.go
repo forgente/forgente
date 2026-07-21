@@ -4,8 +4,8 @@
 package setting
 
 import (
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/log"
+	"forgente.com/modules/container"
+	"forgente.com/modules/log"
 )
 
 // Admin settings

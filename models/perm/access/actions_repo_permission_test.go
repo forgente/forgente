@@ -6,13 +6,13 @@ package access
 import (
 	"testing"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	perm_model "gitea.dev/models/perm"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/db"
+	perm_model "forgente.com/models/perm"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

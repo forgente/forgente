@@ -11,9 +11,9 @@ import (
 	"slices"
 	"strconv"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 )
 
 const jobSummaryRouteBase = "/_apis/pipelines/workflows/{run_id}/jobs/{job_id}/steps/{step_index}/summary"

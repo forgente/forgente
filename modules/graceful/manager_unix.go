@@ -15,10 +15,10 @@ import (
 	"syscall"
 	"time"
 
-	"gitea.dev/modules/graceful/releasereopen"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/graceful/releasereopen"
+	"forgente.com/modules/log"
+	"forgente.com/modules/process"
+	"forgente.com/modules/setting"
 )
 
 func pidMsg() systemdNotifyMsg {

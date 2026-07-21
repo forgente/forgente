@@ -8,9 +8,9 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/timeutil"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
