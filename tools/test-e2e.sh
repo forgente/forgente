@@ -147,7 +147,7 @@ IS_INPUT_FILE = false
 RENDER_CONTENT_MODE = iframe
 EOF
 
-export GITEA_WORK_DIR="$WORK_DIR"
+export FORGENTE_WORK_DIR="$WORK_DIR"
 export FORGENTE_TEST_E2E=true
 
 # Start Gitea server
