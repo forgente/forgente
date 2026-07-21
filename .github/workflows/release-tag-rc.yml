@@ -3,7 +3,7 @@ name: release-tag-rc
 on:
   push:
     tags:
-      - "v1*-rc*"
+      - "v*-rc*"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}

@@ -3,9 +3,9 @@ name: release-tag-version
 on:
   push:
     tags:
-      - "v1.*"
-      - "!v1*-rc*"
-      - "!v1*-dev"
+      - "v*.*"
+      - "!v*-rc*"
+      - "!v*-dev"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}
@@ -105,15 +105,14 @@ jobs:
           images: |-
             forgente/forgente
             ghcr.io/forgente/forgente
-          # Forgente tags are v<upstream>-<forgente release>, e.g. v1.2.3-1.
-          # semver types treat the -1 suffix as a prerelease and would skip
-          # latest/major/minor, so match on the tag name instead. This will
-          # generate tags in the following format:
+          # Forgente tags are native semver (v2.0.0+); pre-fork tags were
+          # v<upstream>-<N> (e.g. v1.2.3-1), whose -N suffix semver types
+          # treat as a prerelease (skipping latest/major/minor), so match on
+          # the tag name instead. For v2.0.0 this generates:
           # latest
-          # 1
-          # 1.2
-          # 1.2.3
-          # 1.2.3-1
+          # 2
+          # 2.0
+          # 2.0.0
           flavor: |
             latest=true
           tags: |
