@@ -103,7 +103,9 @@ func (p *Renderer) Render(ctx *markup.RenderContext, input io.Reader, output io.
 	baseLinkSrc := ctx.RenderHelper.ResolveLink("", markup.LinkTypeDefault)
 	baseLinkRaw := ctx.RenderHelper.ResolveLink("", markup.LinkTypeRaw)
 	command := strings.NewReplacer(
-		envMark("GITEA_PREFIX_SRC"), baseLinkSrc,
+		envMark("FORGENTE_PREFIX_SRC"), baseLinkSrc,
+		envMark("FORGENTE_PREFIX_RAW"), baseLinkRaw,
+		envMark("GITEA_PREFIX_SRC"), baseLinkSrc, // legacy name kept for external renderer configs; do not remove
 		envMark("GITEA_PREFIX_RAW"), baseLinkRaw,
 	).Replace(p.Command)
 	commands, err := shellquote.Split(command)
@@ -139,7 +141,9 @@ func (p *Renderer) Render(ctx *markup.RenderContext, input io.Reader, output io.
 	cmd := exec.CommandContext(processCtx, commands[0], args...)
 	cmd.Env = append(
 		os.Environ(),
-		"GITEA_PREFIX_SRC="+baseLinkSrc,
+		"FORGENTE_PREFIX_SRC="+baseLinkSrc,
+		"FORGENTE_PREFIX_RAW="+baseLinkRaw,
+		"GITEA_PREFIX_SRC="+baseLinkSrc, // legacy name kept for external renderer configs; do not remove
 		"GITEA_PREFIX_RAW="+baseLinkRaw,
 	)
 	if !p.IsInputFile {

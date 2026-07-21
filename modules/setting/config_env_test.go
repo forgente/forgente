@@ -97,6 +97,11 @@ key = old
 	changed = EnvironmentToConfig(cfg, []string{"GITEA__sec__key=new"})
 	assert.False(t, changed)
 
+	// FORGENTE__ is accepted alongside the legacy GITEA__ prefix
+	changed = EnvironmentToConfig(cfg, []string{"FORGENTE__sec__key=newer"})
+	assert.True(t, changed)
+	assert.Equal(t, "newer", cfg.Section("sec").Key("key").String())
+
 	tmpFile := t.TempDir() + "/the-file"
 	_ = os.WriteFile(tmpFile, []byte("value-from-file"), 0o644)
 	changed = EnvironmentToConfig(cfg, []string{"GITEA__sec__key__FILE=" + tmpFile})

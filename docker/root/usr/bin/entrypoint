@@ -30,6 +30,7 @@ if [ -n "${USER_UID}" ] && [ "${USER_UID}" != "`id -u ${USER}`" ]; then
     sed -i -e "s/^${USER}:\([^:]*\):[0-9]*:\([0-9]*\)/${USER}:\1:${USER_UID}:\2/" /etc/passwd
 fi
 
+# /data/gitea is kept as-is (not /data/forgente): existing volumes already have data under /data/gitea/...
 for FOLDER in /data/gitea/conf /data/gitea/log /data/git /data/ssh; do
     mkdir -p ${FOLDER}
 done

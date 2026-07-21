@@ -1,0 +1,48 @@
+#!/bin/sh
+#
+# $FreeBSD$
+#
+# PROVIDE: forgente
+# REQUIRE: NETWORKING SYSLOG
+# KEYWORD: shutdown
+#
+# Add the following lines to /etc/rc.conf to enable forgente:
+#
+#forgente_enable="YES"
+
+. /etc/rc.subr
+
+name="forgente"
+rcvar="forgente_enable"
+
+load_rc_config $name
+
+: ${forgente_user:="git"}
+: ${forgente_enable:="NO"}
+: ${forgente_directory:="/var/lib/forgente"}
+
+command="/usr/local/bin/forgente web -c /etc/forgente/app.ini"
+procname="$(echo $command |cut -d' ' -f1)"
+
+pidfile="${forgente_directory}/${name}.pid"
+
+start_cmd="${name}_start"
+stop_cmd="${name}_stop"
+
+forgente_start() {
+	cd ${forgente_directory}
+	export USER=${forgente_user}
+	export HOME=/usr/home/${forgente_user}
+	export FORGENTE_WORK_DIR=${forgente_directory}
+	/usr/sbin/daemon -f -u ${forgente_user} -p ${pidfile} $command
+}
+
+forgente_stop() {
+	if [ ! -f $pidfile ]; then
+		echo "FORGENTE PID File not found. Maybe FORGENTE is not running?"
+	else
+		kill $(cat $pidfile)
+	fi
+}
+
+run_rc_command "$1"

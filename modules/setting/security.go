@@ -141,6 +141,8 @@ func loadSecurityFrom(rootCfg ConfigProvider) {
 	ImportLocalPaths = sec.Key("IMPORT_LOCAL_PATHS").MustBool(false)
 	DisableGitHooks = sec.Key("DISABLE_GIT_HOOKS").MustBool(true)
 	DisableWebhooks = sec.Key("DISABLE_WEBHOOKS").MustBool(false)
+	// ONLY_ALLOW_PUSH_IF_GITEA_ENVIRONMENT_SET is an ini key name kept as-is for config compatibility;
+	// not part of the GITEA_* -> FORGENTE_* runtime env rename.
 	OnlyAllowPushIfGiteaEnvironmentSet = sec.Key("ONLY_ALLOW_PUSH_IF_GITEA_ENVIRONMENT_SET").MustBool(true)
 
 	// Ensure that the provided default hash algorithm is a valid hash algorithm

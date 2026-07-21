@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# $OpenBSD$
+
+daemon="/usr/local/bin/forgente"
+daemon_user="git"
+daemon_flags="web -c /etc/forgente/app.ini"
+
+forgente_directory="/var/lib/forgente"
+
+rc_bg=YES
+
+. /etc/rc.d/rc.subr
+
+rc_start() {
+	${rcexec} "cd ${forgente_directory}; ${daemon} ${daemon_flags} ${_bg}"
+}
+
+rc_cmd $1

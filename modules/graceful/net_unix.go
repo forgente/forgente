@@ -22,9 +22,10 @@ import (
 )
 
 const (
-	listenFDsEnv = "LISTEN_FDS"
-	startFD      = 3
-	unlinkFDsEnv = "GITEA_UNLINK_FDS"
+	listenFDsEnv    = "LISTEN_FDS"
+	startFD         = 3
+	unlinkFDsEnv    = "FORGENTE_UNLINK_FDS"
+	unlinkFDsEnvOld = "GITEA_UNLINK_FDS" // deprecated fallback: only relevant if a graceful restart is inherited from an older binary
 
 	notifySocketEnv    = "NOTIFY_SOCKET"
 	watchdogTimeoutEnv = "WATCHDOG_USEC"
@@ -97,7 +98,8 @@ func getProvidedFDs() (savedErr error) {
 			return
 		}
 
-		fdsToUnlinkStr := strings.Split(os.Getenv(unlinkFDsEnv), ",")
+		unlinkFDsValue, _ := setting.EnvWithFallback(unlinkFDsEnv, unlinkFDsEnvOld)
+		fdsToUnlinkStr := strings.Split(unlinkFDsValue, ",")
 		providedListenersToUnlink = make([]bool, n)
 		for _, fdStr := range fdsToUnlinkStr {
 			i, err := strconv.Atoi(fdStr)

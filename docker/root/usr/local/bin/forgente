@@ -1,0 +1,15 @@
+#!/bin/bash
+
+###############################################################
+# This script sets defaults for forgente to run in the container #
+###############################################################
+
+# It assumes that you place this script as forgente in /usr/local/bin
+#
+# And place the original in /usr/lib/forgente with working files in /data/gitea
+FORGENTE="/app/forgente/forgente"
+WORK_DIR="/data/gitea"
+CUSTOM_PATH="/data/gitea"
+
+# Provide docker defaults
+GITEA_WORK_DIR="${GITEA_WORK_DIR:-$WORK_DIR}" GITEA_CUSTOM="${GITEA_CUSTOM:-$CUSTOM_PATH}" exec -a "$0" "$FORGENTE" $CONF_ARG "$@"

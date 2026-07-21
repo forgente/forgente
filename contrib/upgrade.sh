@@ -11,7 +11,7 @@
 #   giteahome=/opt/gitea giteaconf=$giteahome/app.ini upgrade.sh
 
 # Check if gitea service is running
-if ! pidof gitea &> /dev/null; then
+if ! pidof forgente &> /dev/null; then
   echo "Error: gitea is not running."
   exit 1
 fi
@@ -20,15 +20,15 @@ fi
 echo "Gitea is running. Continuing with rest of script..."
 
 # apply variables from environment
-: "${giteabin:="/usr/local/bin/gitea"}"
-: "${giteahome:="/var/lib/gitea"}"
-: "${giteaconf:="/etc/gitea/app.ini"}"
+: "${giteabin:="/usr/local/bin/forgente"}"
+: "${giteahome:="/var/lib/forgente"}"
+: "${giteaconf:="/etc/forgente/app.ini"}"
 : "${giteauser:="git"}"
 : "${sudocmd:="sudo"}"
 : "${arch:="linux-amd64"}"
-: "${service_start:="$sudocmd systemctl start gitea"}"
-: "${service_stop:="$sudocmd systemctl stop gitea"}"
-: "${service_status:="$sudocmd systemctl status gitea"}"
+: "${service_start:="$sudocmd systemctl start forgente"}"
+: "${service_stop:="$sudocmd systemctl stop forgente"}"
+: "${service_status:="$sudocmd systemctl status forgente"}"
 : "${backupopts:=""}" # see `gitea dump --help` for available options
 
 function giteacmd {
@@ -65,9 +65,9 @@ if [[ -f /etc/os-release ]]; then
 
   if [[ "$os_release" =~ "OpenWrt" ]]; then
     sudocmd="su"
-    service_start="/etc/init.d/gitea start"
-    service_stop="/etc/init.d/gitea stop"
-    service_status="/etc/init.d/gitea status"
+    service_start="/etc/init.d/forgente start"
+    service_stop="/etc/init.d/forgente stop"
+    service_status="/etc/init.d/forgente status"
   else
     require systemctl
   fi

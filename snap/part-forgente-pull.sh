@@ -25,9 +25,9 @@ fi
 # This approach highly depends on the "main" branch's push.
 
 # To debug the logic:
-# * last_committed_tag=v1.26.1 last_released_tag=v1.26.0 ./snap/part-gitea-pull.sh
+# * last_committed_tag=v1.26.1 last_released_tag=v1.26.0 ./snap/part-forgente-pull.sh
 #   it will checkout tag v1.26.1, and build that for "stable"
-# * last_committed_tag=v1.26.1 last_released_tag=v1.26.1 recent_tag=v1.27.0-dev-205 ./snap/part-gitea-pull.sh
+# * last_committed_tag=v1.26.1 last_released_tag=v1.26.1 recent_tag=v1.27.0-dev-205 ./snap/part-forgente-pull.sh
 #   it will still use the current branch, and build it for "devel"
 
 [ -z "$last_committed_tag" ] && last_committed_tag="$(git for-each-ref --sort=taggerdate --format '%(tag)' refs/tags | tail -n 1)"
@@ -43,7 +43,7 @@ if [ "${last_committed_tag}" != "${last_released_tag}" ]; then
   echo "Build last committed tag ${last_committed_tag} for new release, fetching and checking out ..."
   git fetch --quiet
   git checkout --quiet "${last_committed_tag}"
-  # HINT: after this, the "build" step will use that commit's "part-gitea-build.sh", but not this one's
+  # HINT: after this, the "build" step will use that commit's "part-forgente-build.sh", but not this one's
 else
   echo "Build current branch $(git branch --show-current) @ $(git rev-parse HEAD)"
 fi

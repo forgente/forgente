@@ -1,14 +1,14 @@
 #!/sbin/openrc-run
 
-DIR=/var/lib/gitea
+DIR=/var/lib/forgente
 USER=git
 HOME=/home/${USER}
-GITEA_WORK_DIR=${DIR}
-EXECUTABLE=/usr/local/bin/gitea
+FORGENTE_WORK_DIR=${DIR}
+EXECUTABLE=/usr/local/bin/forgente
 
 export USER
 export HOME
-export GITEA_WORK_DIR
+export FORGENTE_WORK_DIR
 
 name=$RC_SVCNAME
 cfgfile="/etc/$RC_SVCNAME/app.ini"
@@ -37,7 +37,7 @@ start_pre()
         checkpath --directory --owner $command_user:$command_user --mode 0750 \
                 /run/$RC_SVCNAME /var/log/$RC_SVCNAME
         ##
-        # If you want to bind Gitea to a port below 1024, uncomment
+        # If you want to bind Forgente to a port below 1024, uncomment
         # the value below
         ##
         #setcap cap_net_bind_service=+ep "${EXECUTABLE}"
