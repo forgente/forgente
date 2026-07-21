@@ -61,7 +61,7 @@ func IsRunUserMatchCurrentUser(runUser string) (string, bool) {
 }
 
 func IsInE2eTesting() bool {
-	return os.Getenv("GITEA_TEST_E2E") == "true"
+	return os.Getenv("FORGENTE_TEST_E2E") == "true"
 }
 
 // PrepareAppDataPath creates app data directory if necessary

@@ -148,11 +148,11 @@ RENDER_CONTENT_MODE = iframe
 EOF
 
 export GITEA_WORK_DIR="$WORK_DIR"
-export GITEA_TEST_E2E=true
+export FORGENTE_TEST_E2E=true
 
 # Start Gitea server
 echo "Starting Gitea server on port $FREE_PORT (workdir: $WORK_DIR)..."
-if [ -n "${GITEA_TEST_E2E_DEBUG:-}" ]; then
+if [ -n "${FORGENTE_TEST_E2E_DEBUG:-}" ]; then
   "./$EXECUTABLE" web &
 else
   "./$EXECUTABLE" web > "$WORK_DIR/server.log" 2>&1 &
@@ -180,35 +180,35 @@ done
 
 echo "Gitea server is ready at $E2E_URL"
 
-GITEA_TEST_E2E_DOMAIN="e2e.gitea.com"
-GITEA_TEST_E2E_USER="e2e-admin"
-GITEA_TEST_E2E_PASSWORD="password"
-GITEA_TEST_E2E_EMAIL="$GITEA_TEST_E2E_USER@$GITEA_TEST_E2E_DOMAIN"
+FORGENTE_TEST_E2E_DOMAIN="e2e.gitea.com"
+FORGENTE_TEST_E2E_USER="e2e-admin"
+FORGENTE_TEST_E2E_PASSWORD="password"
+FORGENTE_TEST_E2E_EMAIL="$FORGENTE_TEST_E2E_USER@$FORGENTE_TEST_E2E_DOMAIN"
 
 # Create admin test user
 "./$EXECUTABLE" admin user create \
-  --username "$GITEA_TEST_E2E_USER" \
-  --password "$GITEA_TEST_E2E_PASSWORD" \
-  --email "$GITEA_TEST_E2E_EMAIL" \
+  --username "$FORGENTE_TEST_E2E_USER" \
+  --password "$FORGENTE_TEST_E2E_PASSWORD" \
+  --email "$FORGENTE_TEST_E2E_EMAIL" \
   --must-change-password=false \
   --admin
 
 # timeout multiplier to make the tests pass on slow CI runners while using
 # factor 1 on a fast local machine like a MacBook Pro M1+
-if [ -z "${GITEA_TEST_E2E_TIMEOUT_FACTOR:-}" ]; then
+if [ -z "${FORGENTE_TEST_E2E_TIMEOUT_FACTOR:-}" ]; then
   if [ -n "${CI:-}" ]; then
-    GITEA_TEST_E2E_TIMEOUT_FACTOR=4
+    FORGENTE_TEST_E2E_TIMEOUT_FACTOR=4
   else
-    GITEA_TEST_E2E_TIMEOUT_FACTOR=1
+    FORGENTE_TEST_E2E_TIMEOUT_FACTOR=1
   fi
 fi
 
-export GITEA_TEST_E2E_URL="$E2E_URL"
-export GITEA_TEST_E2E_DOMAIN
-export GITEA_TEST_E2E_USER
-export GITEA_TEST_E2E_PASSWORD
-export GITEA_TEST_E2E_EMAIL
-export GITEA_TEST_E2E_TIMEOUT_FACTOR
+export FORGENTE_TEST_E2E_URL="$E2E_URL"
+export FORGENTE_TEST_E2E_DOMAIN
+export FORGENTE_TEST_E2E_USER
+export FORGENTE_TEST_E2E_PASSWORD
+export FORGENTE_TEST_E2E_EMAIL
+export FORGENTE_TEST_E2E_TIMEOUT_FACTOR
 
 if [ "$PLAYWRIGHT_MODE" = "container" ]; then
   export PW_TEST_CONNECT_WS_ENDPOINT="ws://127.0.0.1:${PLAYWRIGHT_SERVER_PORT}/"
