@@ -21,7 +21,6 @@ import (
 	actions_module "forgente.com/modules/actions"
 	"forgente.com/modules/container"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/json"
 	"forgente.com/modules/log"
 	"forgente.com/modules/setting"
@@ -148,7 +147,7 @@ func notify(ctx context.Context, input *notifyInput) error {
 		return nil
 	}
 
-	gitRepo, err := gitrepo.OpenRepository(input.Repo)
+	gitRepo, err := git.OpenRepository(input.Repo)
 	if err != nil {
 		return fmt.Errorf("git.OpenRepository: %w", err)
 	}
@@ -591,7 +590,7 @@ func DetectAndHandleSchedules(ctx context.Context, repo *repo_model.Repository) 
 		return nil
 	}
 
-	gitRepo, err := gitrepo.OpenRepository(repo)
+	gitRepo, err := git.OpenRepository(repo)
 	if err != nil {
 		return fmt.Errorf("git.OpenRepository: %w", err)
 	}

@@ -13,7 +13,7 @@ import (
 
 	"forgente.com/models/db"
 	repo_model "forgente.com/models/repo"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/graceful"
 	"forgente.com/modules/indexer"
 	"forgente.com/modules/indexer/code/bleve"
@@ -74,7 +74,7 @@ func index(ctx context.Context, indexer internal.Indexer, repoID int64) error {
 		return nil
 	}
 
-	gitRepo, closer, err := gitrepo.RepositoryFromContextOrOpen(ctx, repo)
+	gitRepo, closer, err := git.RepositoryFromContextOrOpen(ctx, repo)
 	if err != nil {
 		return err
 	}

@@ -18,7 +18,6 @@ import (
 	repo_model "forgente.com/models/repo"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/graceful"
 	"forgente.com/modules/log"
 	"forgente.com/modules/process"
@@ -104,7 +103,7 @@ func StartPRCheckAndAutoMergeBySHA(ctx context.Context, sha string, repo *repo_m
 }
 
 func getPullRequestsByHeadSHA(ctx context.Context, sha string, repo *repo_model.Repository, filter func(*issues_model.PullRequest) bool) (map[int64]*issues_model.PullRequest, error) {
-	gitRepo, err := gitrepo.OpenRepository(repo)
+	gitRepo, err := git.OpenRepository(repo)
 	if err != nil {
 		return nil, err
 	}
@@ -181,7 +180,7 @@ func handlePullRequestAutoMerge(pullID int64, sha string) {
 	}
 
 	// check the sha is the same as pull request head commit id
-	baseGitRepo, err := gitrepo.OpenRepository(pr.BaseRepo)
+	baseGitRepo, err := git.OpenRepository(pr.BaseRepo)
 	if err != nil {
 		log.Error("OpenRepository: %v", err)
 		return
@@ -217,7 +216,7 @@ func handlePullRequestAutoMerge(pullID int64, sha string) {
 			return
 		}
 	case issues_model.PullRequestFlowAGit:
-		headBranchExist := gitrepo.IsReferenceExist(ctx, pr.BaseRepo, pr.GetGitHeadRefName())
+		headBranchExist := git.IsReferenceExist(ctx, pr.BaseRepo, pr.GetGitHeadRefName())
 		if !headBranchExist {
 			log.Warn("Head branch of auto merge %-v does not exist [HeadRepoID: %d, Branch(Agit): %s]", pr, pr.HeadRepoID, pr.HeadBranch)
 			return

@@ -15,7 +15,6 @@ import (
 	actions_module "forgente.com/modules/actions"
 	"forgente.com/modules/commitstatus"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/timeutil"
 
 	"github.com/stretchr/testify/assert"
@@ -48,7 +47,7 @@ func TestCreateCommitStatus_Dedupe(t *testing.T) {
 	assert.NoError(t, unittest.PrepareTestDatabase())
 
 	repo := unittest.AssertExistsAndLoadBean(t, &repo_model.Repository{ID: 4})
-	gitRepo, err := gitrepo.OpenRepository(repo)
+	gitRepo, err := git.OpenRepository(repo)
 	require.NoError(t, err)
 	defer gitRepo.Close()
 

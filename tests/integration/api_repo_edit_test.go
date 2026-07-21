@@ -15,7 +15,7 @@ import (
 	unit_model "forgente.com/models/unit"
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	api "forgente.com/modules/structs"
 	mirror_service "forgente.com/services/mirror"
 	"forgente.com/tests"
@@ -471,7 +471,7 @@ func TestAPIRepoEdit(t *testing.T) {
 		updatedRepo := unittest.AssertExistsAndLoadBean(t, &repo_model.Repository{ID: mirrorRepo.ID})
 		assert.Equal(t, "https://example.com/user2/repo1.git", updatedRepo.OriginalURL)
 
-		remoteURL, err := gitrepo.GitRemoteGetURL(ctx, updatedRepo, updatedMirror.GetRemoteName())
+		remoteURL, err := git.ParseRemoteAddressURL(ctx, updatedRepo, updatedMirror.GetRemoteName())
 		require.NoError(t, err)
 		require.NotNil(t, remoteURL.User)
 		assert.Equal(t, "existing-user", remoteURL.User.Username())
@@ -495,7 +495,7 @@ func TestAPIRepoEdit(t *testing.T) {
 		updatedRepo = unittest.AssertExistsAndLoadBean(t, &repo_model.Repository{ID: mirrorRepo.ID})
 		assert.Equal(t, "https://example.com/user2/repo1.git", updatedRepo.OriginalURL)
 
-		remoteURL, err = gitrepo.GitRemoteGetURL(ctx, updatedRepo, updatedMirror.GetRemoteName())
+		remoteURL, err = git.ParseRemoteAddressURL(ctx, updatedRepo, updatedMirror.GetRemoteName())
 		require.NoError(t, err)
 		require.NotNil(t, remoteURL.User)
 		assert.Empty(t, remoteURL.User.Username())

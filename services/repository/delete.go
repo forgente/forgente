@@ -23,7 +23,7 @@ import (
 	user_model "forgente.com/models/user"
 	"forgente.com/models/webhook"
 	actions_module "forgente.com/modules/actions"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/graceful"
 	"forgente.com/modules/lfs"
 	"forgente.com/modules/log"
@@ -310,7 +310,7 @@ func DeleteRepositoryDirectly(ctx context.Context, repoID int64, ignoreOrgTeams 
 	// we delete the file but the database rollback, the repository will be broken.
 
 	// Remove repository files.
-	if err := gitrepo.DeleteRepository(ctx, repo); err != nil {
+	if err := git.DeleteRepository(ctx, repo); err != nil {
 		desc := fmt.Sprintf("Delete repository files (%s): %v", repo.FullName(), err)
 		if err = system_model.CreateNotice(graceful.GetManager().ShutdownContext(), system_model.NoticeRepository, desc); err != nil {
 			log.Error("CreateRepositoryNotice: %v", err)
@@ -318,7 +318,7 @@ func DeleteRepositoryDirectly(ctx context.Context, repoID int64, ignoreOrgTeams 
 	}
 
 	// Remove wiki files if it exists.
-	if err := gitrepo.DeleteRepository(ctx, repo.WikiStorageRepo()); err != nil {
+	if err := git.DeleteRepository(ctx, repo.WikiStorageRepo()); err != nil {
 		desc := fmt.Sprintf("Delete wiki repository files (%s): %v", repo.FullName(), err)
 		// Note we use the db.DefaultContext here rather than passing in a context as the context may be cancelled
 		if err = system_model.CreateNotice(graceful.GetManager().ShutdownContext(), system_model.NoticeRepository, desc); err != nil {

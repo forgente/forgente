@@ -13,7 +13,7 @@ import (
 	access_model "forgente.com/models/perm/access"
 	repo_model "forgente.com/models/repo"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/json"
 	"forgente.com/modules/log"
 	"forgente.com/modules/timeutil"
@@ -180,7 +180,7 @@ func LoadCommentPushCommits(ctx context.Context, c *issues_model.Comment) error 
 			return err
 		}
 
-		gitRepo, closer, err := gitrepo.RepositoryFromContextOrOpen(ctx, c.Issue.Repo)
+		gitRepo, closer, err := git.RepositoryFromContextOrOpen(ctx, c.Issue.Repo)
 		if err != nil {
 			return err
 		}

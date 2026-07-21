@@ -9,12 +9,12 @@ import (
 
 	git_model "forgente.com/models/git"
 	repo_model "forgente.com/models/repo"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 )
 
 // UpdateRepoSize updates the repository size, calculating it using getDirectorySize
 func UpdateRepoSize(ctx context.Context, repo *repo_model.Repository) error {
-	size, err := gitrepo.CalcRepositorySize(repo)
+	size, err := git.CalcRepositorySize(repo)
 	if err != nil {
 		return fmt.Errorf("updateSize: %w", err)
 	}

@@ -13,7 +13,7 @@ import (
 	repo_model "forgente.com/models/repo"
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/setting"
 	"forgente.com/modules/test"
 	"forgente.com/modules/web"
@@ -423,7 +423,7 @@ func TestHandleSettingsPostMirrorPreservesExistingUsername(t *testing.T) {
 	updatedRepo := unittest.AssertExistsAndLoadBean(t, &repo_model.Repository{ID: mirrorRepo.ID})
 	assert.Equal(t, "https://example.com/user2/repo1.git", updatedRepo.OriginalURL)
 
-	remoteURL, err := gitrepo.GitRemoteGetURL(t.Context(), updatedRepo, updatedMirror.GetRemoteName())
+	remoteURL, err := git.ParseRemoteAddressURL(t.Context(), updatedRepo, updatedMirror.GetRemoteName())
 	require.NoError(t, err)
 	require.NotNil(t, remoteURL.User)
 	assert.Equal(t, "existing-user", remoteURL.User.Username())

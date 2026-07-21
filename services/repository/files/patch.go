@@ -13,7 +13,6 @@ import (
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
 	"forgente.com/modules/git/gitcmd"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/log"
 	"forgente.com/modules/structs"
 	"forgente.com/modules/util"
@@ -117,7 +116,7 @@ func ApplyDiffPatch(ctx context.Context, repo *repo_model.Repository, doer *user
 		return nil, err
 	}
 
-	gitRepo, closer, err := gitrepo.RepositoryFromContextOrOpen(ctx, repo)
+	gitRepo, closer, err := git.RepositoryFromContextOrOpen(ctx, repo)
 	if err != nil {
 		return nil, err
 	}

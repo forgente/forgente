@@ -12,7 +12,6 @@ import (
 	repo_model "forgente.com/models/repo"
 	"forgente.com/models/unittest"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/web"
 	"forgente.com/services/contexttest"
 	"forgente.com/services/forms"
@@ -29,7 +28,7 @@ const (
 )
 
 func wikiEntry(t *testing.T, repo *repo_model.Repository, wikiName wiki_service.WebPath) (*git.Repository, *git.TreeEntry) {
-	wikiRepo, err := gitrepo.OpenRepository(repo.WikiStorageRepo())
+	wikiRepo, err := git.OpenRepository(repo.WikiStorageRepo())
 	assert.NoError(t, err)
 	t.Cleanup(func() {
 		defer wikiRepo.Close()

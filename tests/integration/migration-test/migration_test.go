@@ -17,9 +17,9 @@ import (
 	"strings"
 	"testing"
 
+	"forgente.com/modelmigration"
+	migrate_base "forgente.com/modelmigration/base"
 	"forgente.com/models/db"
-	"forgente.com/models/migrations"
-	migrate_base "forgente.com/models/migrations/base"
 	"forgente.com/models/unittest"
 	"forgente.com/modules/git"
 	"forgente.com/modules/log"
@@ -149,7 +149,7 @@ func restoreOldDB(t *testing.T, version string) {
 
 func wrappedMigrate(ctx context.Context, x db.EngineMigration) error {
 	currentEngine = x
-	return migrations.Migrate(ctx, x)
+	return modelmigration.Migrate(ctx, x)
 }
 
 func doMigrationTest(t *testing.T, version string) {

@@ -12,7 +12,6 @@ import (
 	git_model "forgente.com/models/git"
 	repo_model "forgente.com/models/repo"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/lfs"
 	"forgente.com/modules/log"
 	"forgente.com/modules/setting"
@@ -70,7 +69,7 @@ func GarbageCollectLFSMetaObjectsForRepo(ctx context.Context, repo *repo_model.R
 		}
 	}()
 
-	gitRepo, err := gitrepo.OpenRepository(repo)
+	gitRepo, err := git.OpenRepository(repo)
 	if err != nil {
 		log.Error("Unable to open git repository %-v: %v", repo, err)
 		return err

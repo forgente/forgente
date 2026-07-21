@@ -14,7 +14,6 @@ import (
 	repo_model "forgente.com/models/repo"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/optional"
 	repo_module "forgente.com/modules/repository"
 	api "forgente.com/modules/structs"
@@ -1169,7 +1168,7 @@ func EditBranchProtection(ctx *context.APIContext) {
 	} else {
 		if !isPlainRule {
 			if ctx.Repo.GitRepo == nil {
-				ctx.Repo.GitRepo, err = gitrepo.RepositoryFromRequestContextOrOpen(ctx, ctx.Repo.Repository)
+				ctx.Repo.GitRepo, err = git.RepositoryFromRequestContextOrOpen(ctx, ctx.Repo.Repository)
 				if err != nil {
 					ctx.APIErrorInternal(err)
 					return

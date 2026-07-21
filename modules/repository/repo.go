@@ -14,7 +14,6 @@ import (
 	git_model "forgente.com/models/git"
 	repo_model "forgente.com/models/repo"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/lfs"
 	"forgente.com/modules/log"
 	"forgente.com/modules/setting"
@@ -47,7 +46,7 @@ func SyncRepoTags(ctx context.Context, repoID int64) error {
 		return err
 	}
 
-	gitRepo, err := gitrepo.OpenRepository(repo)
+	gitRepo, err := git.OpenRepository(repo)
 	if err != nil {
 		return err
 	}

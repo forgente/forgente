@@ -9,7 +9,6 @@ import (
 	git_model "forgente.com/models/git"
 	repo_model "forgente.com/models/repo"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/reqctx"
 	"forgente.com/services/context"
 )
@@ -23,14 +22,14 @@ type RefCommit struct {
 
 // ResolveRefCommit resolve ref to a commit if exist
 func ResolveRefCommit(ctx reqctx.RequestContext, repo *repo_model.Repository, inputRef string, minCommitIDLen ...int) (_ *RefCommit, err error) {
-	gitRepo, err := gitrepo.RepositoryFromRequestContextOrOpen(ctx, repo)
+	gitRepo, err := git.RepositoryFromRequestContextOrOpen(ctx, repo)
 	if err != nil {
 		return nil, err
 	}
 	refCommit := RefCommit{InputRef: inputRef}
 	if exist, _ := git_model.IsBranchExist(ctx, repo.ID, inputRef); exist {
 		refCommit.RefName = git.RefNameFromBranch(inputRef)
-	} else if gitrepo.IsTagExist(ctx, repo, inputRef) {
+	} else if git.IsTagExist(ctx, repo, inputRef) {
 		refCommit.RefName = git.RefNameFromTag(inputRef)
 	} else if git.IsStringLikelyCommitID(git.ObjectFormatFromName(repo.ObjectFormatName), inputRef, minCommitIDLen...) {
 		refCommit.RefName = git.RefNameFromCommit(inputRef)

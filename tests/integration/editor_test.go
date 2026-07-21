@@ -20,7 +20,6 @@ import (
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/test"
 	"forgente.com/modules/translation"
 	"forgente.com/modules/util"
@@ -221,7 +220,7 @@ func testEditorWebGitCommitEmail(t *testing.T) {
 	require.True(t, user.KeepEmailPrivate)
 
 	repo1 := unittest.AssertExistsAndLoadBean(t, &repo_model.Repository{ID: 1})
-	gitRepo, _ := gitrepo.OpenRepository(repo1)
+	gitRepo, _ := git.OpenRepository(repo1)
 	defer gitRepo.Close()
 	getLastCommit := func(t *testing.T) *git.Commit {
 		c, err := gitRepo.GetBranchCommit(t.Context(), "master")

@@ -12,7 +12,6 @@ import (
 	repo_model "forgente.com/models/repo"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/log"
 	"forgente.com/modules/structs"
 	"forgente.com/services/pull"
@@ -36,7 +35,7 @@ func (err ErrCommitIDDoesNotMatch) Error() string {
 
 // CherryPick cherry-picks or reverts a commit to the given repository
 func CherryPick(ctx context.Context, repo *repo_model.Repository, doer *user_model.User, revert bool, opts *ApplyDiffPatchOptions) (*structs.FileResponse, error) {
-	gitRepo, closer, err := gitrepo.RepositoryFromContextOrOpen(ctx, repo)
+	gitRepo, closer, err := git.RepositoryFromContextOrOpen(ctx, repo)
 	if err != nil {
 		return nil, err
 	}

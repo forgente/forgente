@@ -12,7 +12,6 @@ import (
 	repo_model "forgente.com/models/repo"
 	"forgente.com/modules/container"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/graceful"
 	"forgente.com/modules/log"
 	"forgente.com/modules/options"
@@ -72,7 +71,7 @@ func repoLicenseUpdater(items ...*LicenseUpdaterOptions) []*LicenseUpdaterOption
 			continue
 		}
 
-		gitRepo, err := gitrepo.OpenRepository(repo)
+		gitRepo, err := git.OpenRepository(repo)
 		if err != nil {
 			log.Error("repoLicenseUpdater [%d] failed: OpenRepository: %v", opts.RepoID, err)
 			continue

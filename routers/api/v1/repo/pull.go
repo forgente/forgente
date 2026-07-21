@@ -23,7 +23,6 @@ import (
 	"forgente.com/modules/base"
 	"forgente.com/modules/git"
 	"forgente.com/modules/git/gitcmd"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/graceful"
 	"forgente.com/modules/log"
 	"forgente.com/modules/optional"
@@ -1107,7 +1106,7 @@ func parseCompareInfo(ctx *context.APIContext, compareParam string) (result *git
 		headGitRepo = ctx.Repo.GitRepo
 		closer = func() {} // no need to close the head repo because it shares the base repo
 	} else {
-		headGitRepo, err = gitrepo.OpenRepository(headRepo)
+		headGitRepo, err = git.OpenRepository(headRepo)
 		if err != nil {
 			ctx.APIErrorInternal(err)
 			return nil, nil
@@ -1426,7 +1425,7 @@ func GetPullRequestCommits(ctx *context.APIContext) {
 		return
 	}
 
-	baseGitRepo, closer, err := gitrepo.RepositoryFromContextOrOpen(ctx, pr.BaseRepo)
+	baseGitRepo, closer, err := git.RepositoryFromContextOrOpen(ctx, pr.BaseRepo)
 	if err != nil {
 		ctx.APIErrorInternal(err)
 		return
@@ -1597,7 +1596,7 @@ func GetPullRequestFiles(ctx *context.APIContext) {
 		return
 	}
 
-	diffShortStat, err := gitdiff.GetDiffShortStat(ctx, ctx.Repo.Repository, baseGitRepo, startCommitID, endCommitID)
+	diffShortStat, err := gitdiff.GetDiffShortStat(ctx, baseGitRepo, startCommitID, endCommitID)
 	if err != nil {
 		ctx.APIErrorInternal(err)
 		return

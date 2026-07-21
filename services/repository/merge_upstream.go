@@ -13,7 +13,6 @@ import (
 	"forgente.com/models/unit"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	repo_module "forgente.com/modules/repository"
 	"forgente.com/modules/reqctx"
 	"forgente.com/modules/util"
@@ -47,7 +46,7 @@ func MergeUpstream(ctx reqctx.RequestContext, doer *user_model.User, repo *repo_
 		return "up-to-date", nil
 	}
 
-	err = gitrepo.Push(ctx, repo.BaseRepo, repo, git.PushOptions{
+	err = git.PushManaged(ctx, repo.BaseRepo, repo, git.PushOptions{
 		Branch: fmt.Sprintf("%s:%s", divergingInfo.BaseBranchName, branch),
 		Env:    repo_module.PushingEnvironment(doer, repo),
 	})

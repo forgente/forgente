@@ -13,7 +13,7 @@ import (
 	repo_model "forgente.com/models/repo"
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/json"
 	"forgente.com/modules/setting"
 	api "forgente.com/modules/structs"
@@ -42,7 +42,7 @@ func TestAPIGetRequestedFiles(t *testing.T) {
 	session = loginUser(t, user4.Name)
 	token4 := getTokenForLoggedInUser(t, session, auth_model.AccessTokenScopeWriteRepository)
 
-	gitRepo, err := gitrepo.OpenRepository(repo1)
+	gitRepo, err := git.OpenRepository(repo1)
 	assert.NoError(t, err)
 	defer gitRepo.Close()
 	lastCommit, _ := gitRepo.GetCommitByPath(t.Context(), "README.md")

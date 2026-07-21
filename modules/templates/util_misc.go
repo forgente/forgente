@@ -15,7 +15,7 @@ import (
 	activities_model "forgente.com/models/activities"
 	repo_model "forgente.com/models/repo"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/json"
 	"forgente.com/modules/log"
 	"forgente.com/modules/repository"
@@ -141,7 +141,7 @@ type remoteAddress struct {
 
 func mirrorRemoteAddress(ctx context.Context, m *repo_model.Repository, remoteName string) remoteAddress {
 	ret := remoteAddress{}
-	u, err := gitrepo.GitRemoteGetURL(ctx, m, remoteName)
+	u, err := git.ParseRemoteAddressURL(ctx, m, remoteName)
 	if err != nil {
 		log.Error("GetRemoteURL %v", err)
 		return ret

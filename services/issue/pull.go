@@ -13,7 +13,6 @@ import (
 	org_model "forgente.com/models/organization"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/log"
 	"forgente.com/modules/setting"
 )
@@ -55,7 +54,7 @@ func PullRequestCodeOwnersReview(ctx context.Context, pr *issues_model.PullReque
 		return nil, nil
 	}
 
-	repo, err := gitrepo.OpenRepository(pr.BaseRepo)
+	repo, err := git.OpenRepository(pr.BaseRepo)
 	if err != nil {
 		return nil, err
 	}
@@ -85,7 +84,7 @@ func PullRequestCodeOwnersReview(ctx context.Context, pr *issues_model.PullReque
 	}
 
 	// get the mergebase
-	mergeBase, err := gitrepo.MergeBase(ctx, pr.BaseRepo, git.BranchPrefix+pr.BaseBranch, pr.GetGitHeadRefName())
+	mergeBase, err := git.MergeBase(ctx, pr.BaseRepo, git.BranchPrefix+pr.BaseBranch, pr.GetGitHeadRefName())
 	if err != nil {
 		return nil, err
 	}

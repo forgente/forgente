@@ -15,7 +15,6 @@ import (
 	repo_model "forgente.com/models/repo"
 	"forgente.com/models/unit"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/log"
 	"forgente.com/modules/optional"
 	repo_module "forgente.com/modules/repository"
@@ -138,7 +137,7 @@ func RestoreBranchPost(ctx *context.Context) {
 		return
 	}
 
-	if err := gitrepo.Push(ctx, ctx.Repo.Repository, ctx.Repo.Repository, git.PushOptions{
+	if err := git.PushManaged(ctx, ctx.Repo.Repository, ctx.Repo.Repository, git.PushOptions{
 		Branch: fmt.Sprintf("%s:%s%s", deletedBranch.CommitID, git.BranchPrefix, deletedBranch.Name),
 		Env:    repo_module.PushingEnvironment(ctx.Doer, ctx.Repo.Repository),
 	}); err != nil {

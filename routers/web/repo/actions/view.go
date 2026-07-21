@@ -28,7 +28,6 @@ import (
 	"forgente.com/modules/base"
 	"forgente.com/modules/cache"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/httplib"
 	"forgente.com/modules/json"
 	"forgente.com/modules/log"
@@ -1476,7 +1475,7 @@ func viewScopedWorkflowFile(ctx *context_module.Context, run *actions_model.Acti
 		return
 	}
 
-	sourceGitRepo, err := gitrepo.OpenRepository(sourceRepo)
+	sourceGitRepo, err := git.OpenRepository(sourceRepo)
 	if err != nil {
 		ctx.ServerError("OpenRepository", err)
 		return

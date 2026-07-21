@@ -16,7 +16,6 @@ import (
 	system_model "forgente.com/models/system"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/log"
 	"forgente.com/modules/storage"
 	notify_service "forgente.com/services/notify"
@@ -171,7 +170,7 @@ func DeleteIssue(ctx context.Context, doer *user_model.User, issue *issues_model
 		if err := issue.PullRequest.LoadBaseRepo(ctx); err != nil {
 			return err
 		}
-		if err := gitrepo.RemoveRef(ctx, issue.PullRequest.BaseRepo, issue.PullRequest.GetGitHeadRefName()); err != nil {
+		if err := git.RemoveRef(ctx, issue.PullRequest.BaseRepo, issue.PullRequest.GetGitHeadRefName()); err != nil {
 			return err
 		}
 	}

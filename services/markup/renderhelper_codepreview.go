@@ -14,8 +14,8 @@ import (
 	"forgente.com/models/repo"
 	"forgente.com/models/unit"
 	"forgente.com/modules/charset"
+	"forgente.com/modules/git"
 	"forgente.com/modules/git/languagestats"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/indexer/code"
 	"forgente.com/modules/markup"
 	"forgente.com/modules/setting"
@@ -50,7 +50,7 @@ func renderRepoFileCodePreview(ctx context.Context, opts markup.RenderCodePrevie
 		return "", util.ErrPermissionDenied
 	}
 
-	gitRepo, err := gitrepo.OpenRepository(dbRepo)
+	gitRepo, err := git.OpenRepository(dbRepo)
 	if err != nil {
 		return "", err
 	}

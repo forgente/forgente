@@ -8,7 +8,7 @@ import (
 	"net/http"
 
 	repo_model "forgente.com/models/repo"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/private"
 	gitea_context "forgente.com/services/context"
 	repo_service "forgente.com/services/repository"
@@ -21,7 +21,7 @@ func SetDefaultBranch(ctx *gitea_context.PrivateContext) {
 	branch := ctx.PathParam("branch")
 
 	ctx.Repo.Repository.DefaultBranch = branch
-	if err := gitrepo.SetDefaultBranch(ctx, ctx.Repo.Repository, ctx.Repo.Repository.DefaultBranch); err != nil {
+	if err := git.SetDefaultBranch(ctx, ctx.Repo.Repository, ctx.Repo.Repository.DefaultBranch); err != nil {
 		ctx.JSON(http.StatusInternalServerError, private.Response{
 			Err: fmt.Sprintf("Unable to set default branch on repository: %s/%s Error: %v", ownerName, repoName, err),
 		})

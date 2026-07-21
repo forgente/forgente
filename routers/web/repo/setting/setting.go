@@ -17,7 +17,6 @@ import (
 	unit_model "forgente.com/models/unit"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/indexer/code"
 	issue_indexer "forgente.com/modules/indexer/issues"
 	"forgente.com/modules/indexer/stats"
@@ -296,7 +295,7 @@ func handleSettingsPostMirror(ctx *context.Context) {
 		return
 	}
 
-	u, err := gitrepo.GitRemoteGetURL(ctx, ctx.Repo.Repository, pullMirror.GetRemoteName())
+	u, err := git.ParseRemoteAddressURL(ctx, ctx.Repo.Repository, pullMirror.GetRemoteName())
 	if err != nil {
 		ctx.Data["Err_MirrorAddress"] = true
 		handleSettingRemoteAddrError(ctx, err, form)

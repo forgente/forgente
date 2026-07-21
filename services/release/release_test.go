@@ -11,7 +11,7 @@ import (
 	repo_model "forgente.com/models/repo"
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/setting"
 	"forgente.com/modules/test"
 	"forgente.com/modules/timeutil"
@@ -33,7 +33,7 @@ func TestRelease_Create(t *testing.T) {
 	user := unittest.AssertExistsAndLoadBean(t, &user_model.User{ID: 2})
 	repo := unittest.AssertExistsAndLoadBean(t, &repo_model.Repository{ID: 1})
 
-	gitRepo, err := gitrepo.OpenRepository(repo)
+	gitRepo, err := git.OpenRepository(repo)
 	assert.NoError(t, err)
 	defer gitRepo.Close()
 
@@ -138,7 +138,7 @@ func TestRelease_Update(t *testing.T) {
 	user := unittest.AssertExistsAndLoadBean(t, &user_model.User{ID: 2})
 	repo := unittest.AssertExistsAndLoadBean(t, &repo_model.Repository{ID: 1})
 
-	gitRepo, err := gitrepo.OpenRepository(repo)
+	gitRepo, err := git.OpenRepository(repo)
 	assert.NoError(t, err)
 	defer gitRepo.Close()
 
@@ -297,7 +297,7 @@ func TestRelease_createTag(t *testing.T) {
 	user := unittest.AssertExistsAndLoadBean(t, &user_model.User{ID: 2})
 	repo := unittest.AssertExistsAndLoadBean(t, &repo_model.Repository{ID: 1})
 
-	gitRepo, err := gitrepo.OpenRepository(repo)
+	gitRepo, err := git.OpenRepository(repo)
 	assert.NoError(t, err)
 	defer gitRepo.Close()
 

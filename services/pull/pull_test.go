@@ -12,7 +12,6 @@ import (
 	"forgente.com/models/unit"
 	"forgente.com/models/unittest"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/setting"
 	"forgente.com/modules/test"
 
@@ -45,7 +44,7 @@ func TestPullRequest_GetDefaultMergeMessage_InternalTracker(t *testing.T) {
 	pr := unittest.AssertExistsAndLoadBean(t, &issues_model.PullRequest{ID: 2})
 
 	assert.NoError(t, pr.LoadBaseRepo(t.Context()))
-	gitRepo, err := gitrepo.OpenRepository(pr.BaseRepo)
+	gitRepo, err := git.OpenRepository(pr.BaseRepo)
 	assert.NoError(t, err)
 	defer gitRepo.Close()
 
@@ -75,7 +74,7 @@ func TestPullRequest_GetDefaultMergeMessage_ExternalTracker(t *testing.T) {
 	pr := unittest.AssertExistsAndLoadBean(t, &issues_model.PullRequest{ID: 2, BaseRepo: baseRepo})
 
 	assert.NoError(t, pr.LoadBaseRepo(t.Context()))
-	gitRepo, err := gitrepo.OpenRepository(pr.BaseRepo)
+	gitRepo, err := git.OpenRepository(pr.BaseRepo)
 	assert.NoError(t, err)
 	defer gitRepo.Close()
 

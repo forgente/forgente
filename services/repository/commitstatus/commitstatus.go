@@ -16,7 +16,6 @@ import (
 	"forgente.com/modules/cache"
 	"forgente.com/modules/commitstatus"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/json"
 	"forgente.com/modules/log"
 	repo_module "forgente.com/modules/repository"
@@ -70,7 +69,7 @@ func deleteCommitStatusCache(repoID int64, branchName string) error {
 // Requires: Repo, Creator, SHA
 func CreateCommitStatus(ctx context.Context, repo *repo_model.Repository, creator *user_model.User, sha string, status *git_model.CommitStatus) error {
 	// confirm that commit is exist
-	gitRepo, closer, err := gitrepo.RepositoryFromContextOrOpen(ctx, repo)
+	gitRepo, closer, err := git.RepositoryFromContextOrOpen(ctx, repo)
 	if err != nil {
 		return fmt.Errorf("OpenRepository[%s]: %w", repo.FullName(), err)
 	}

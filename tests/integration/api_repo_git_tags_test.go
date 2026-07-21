@@ -12,7 +12,7 @@ import (
 	repo_model "forgente.com/models/repo"
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	api "forgente.com/modules/structs"
 	"forgente.com/tests"
 
@@ -28,10 +28,10 @@ func TestAPIGitTags(t *testing.T) {
 	token := getTokenForLoggedInUser(t, session, auth_model.AccessTokenScopeReadRepository)
 
 	// Set up git config for the tagger
-	_ = gitrepo.GitConfigSet(t.Context(), repo, "user.name", user.Name)
-	_ = gitrepo.GitConfigSet(t.Context(), repo, "user.email", user.Email)
+	_ = git.ManagedConfigSet(t.Context(), repo, "user.name", user.Name)
+	_ = git.ManagedConfigSet(t.Context(), repo, "user.email", user.Email)
 
-	gitRepo, _ := gitrepo.OpenRepository(repo)
+	gitRepo, _ := git.OpenRepository(repo)
 	defer gitRepo.Close()
 
 	commit, _ := gitRepo.GetBranchCommit(t.Context(), "master")

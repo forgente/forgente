@@ -18,7 +18,6 @@ import (
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/cache"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/httpcache"
 	"forgente.com/modules/log"
 	"forgente.com/modules/setting"
@@ -279,7 +278,7 @@ func ReferencesGitRepo(allowEmpty ...bool) func(ctx *APIContext) {
 		// For API calls.
 		if ctx.Repo.GitRepo == nil {
 			var err error
-			ctx.Repo.GitRepo, err = gitrepo.RepositoryFromRequestContextOrOpen(ctx, ctx.Repo.Repository)
+			ctx.Repo.GitRepo, err = git.RepositoryFromRequestContextOrOpen(ctx, ctx.Repo.Repository)
 			if err != nil {
 				ctx.APIErrorInternal(err)
 				return

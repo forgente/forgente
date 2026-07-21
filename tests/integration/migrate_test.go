@@ -24,7 +24,7 @@ import (
 	repo_model "forgente.com/models/repo"
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/setting"
 	"forgente.com/modules/structs"
 	"forgente.com/modules/test"
@@ -336,7 +336,7 @@ func Test_MigrateFromGiteaToGitea(t *testing.T) {
 	assert.False(t, pr13.HasMerged)
 	assert.True(t, pr13.Issue.IsLocked)
 
-	gitRepo, err := gitrepo.OpenRepository(migratedRepo)
+	gitRepo, err := git.OpenRepository(migratedRepo)
 	require.NoError(t, err)
 	defer gitRepo.Close()
 

@@ -8,7 +8,7 @@ import (
 
 	repo_model "forgente.com/models/repo"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/routers/api/v1/utils"
 	"forgente.com/services/context"
 	repo_service "forgente.com/services/repository"
@@ -99,7 +99,7 @@ func AdoptRepository(ctx *context.APIContext) {
 		ctx.APIErrorInternal(err)
 		return
 	}
-	exist, err := gitrepo.IsRepositoryExist(ctx, repo_model.CodeRepoByName(ctxUser.Name, repoName))
+	exist, err := git.IsRepositoryExist(ctx, repo_model.CodeRepoByName(ctxUser.Name, repoName))
 	if err != nil {
 		ctx.APIErrorInternal(err)
 		return
@@ -161,7 +161,7 @@ func DeleteUnadoptedRepository(ctx *context.APIContext) {
 		ctx.APIErrorInternal(err)
 		return
 	}
-	exist, err := gitrepo.IsRepositoryExist(ctx, repo_model.CodeRepoByName(ctxUser.Name, repoName))
+	exist, err := git.IsRepositoryExist(ctx, repo_model.CodeRepoByName(ctxUser.Name, repoName))
 	if err != nil {
 		ctx.APIErrorInternal(err)
 		return

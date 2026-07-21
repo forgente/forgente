@@ -6,11 +6,11 @@ package doctor
 import (
 	"context"
 
+	modelmigration "forgente.com/modelmigration"
 	actions_model "forgente.com/models/actions"
 	activities_model "forgente.com/models/activities"
 	"forgente.com/models/db"
 	issues_model "forgente.com/models/issues"
-	"forgente.com/models/migrations"
 	repo_model "forgente.com/models/repo"
 	secret_model "forgente.com/models/secret"
 	"forgente.com/modules/log"
@@ -249,7 +249,7 @@ func prepareDBConsistencyChecks() []consistencyCheck {
 
 func checkDBConsistency(ctx context.Context, logger log.Logger, autofix bool) error {
 	// make sure DB version is uptodate
-	if err := db.InitEngineWithMigration(ctx, migrations.EnsureUpToDate); err != nil {
+	if err := db.InitEngineWithMigration(ctx, modelmigration.EnsureUpToDate); err != nil {
 		logger.Critical("Model version on the database does not match the current Gitea version. Model consistency will not be checked until the database is upgraded")
 		return err
 	}

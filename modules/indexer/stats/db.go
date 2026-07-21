@@ -9,7 +9,6 @@ import (
 	repo_model "forgente.com/models/repo"
 	"forgente.com/modules/git"
 	"forgente.com/modules/git/languagestats"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/graceful"
 	"forgente.com/modules/log"
 	"forgente.com/modules/process"
@@ -37,7 +36,7 @@ func (db *DBIndexer) Index(id int64) error {
 		return err
 	}
 
-	gitRepo, err := gitrepo.OpenRepository(repo)
+	gitRepo, err := git.OpenRepository(repo)
 	if err != nil {
 		if err.Error() == "no such file or directory" {
 			return nil

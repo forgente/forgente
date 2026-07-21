@@ -13,7 +13,6 @@ import (
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
 	"forgente.com/modules/git/gitcmd"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/log"
 	repo_module "forgente.com/modules/repository"
 	asymkey_service "forgente.com/services/asymkey"
@@ -68,7 +67,7 @@ func initRepoCommit(ctx context.Context, tmpPath string, repo *repo_model.Reposi
 		return fmt.Errorf("git commit: %w", err)
 	}
 
-	if err := gitrepo.PushFromLocal(ctx, tmpPath, repo, git.PushOptions{
+	if err := git.PushFromLocal(ctx, tmpPath, repo, git.PushOptions{
 		LocalRefName: "HEAD",
 		Branch:       repo.DefaultBranch,
 		Env:          repo_module.InternalPushingEnvironment(u, repo),

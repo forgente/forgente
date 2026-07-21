@@ -13,8 +13,8 @@ import (
 	repo_model "forgente.com/models/repo"
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
 	"forgente.com/modules/git/gitcmd"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/test"
 	"forgente.com/modules/util"
 	"forgente.com/routers/common"
@@ -182,7 +182,7 @@ func TestResolveRefWithSuffixContract(t *testing.T) {
 	defer tests.PrepareTestEnv(t)()
 
 	repo := unittest.AssertExistsAndLoadBean(t, &repo_model.Repository{ID: 31})
-	gitRepo, err := gitrepo.OpenRepository(repo)
+	gitRepo, err := git.OpenRepository(repo)
 	require.NoError(t, err)
 	defer gitRepo.Close()
 

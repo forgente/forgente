@@ -10,7 +10,7 @@ import (
 	git_model "forgente.com/models/git"
 	repo_model "forgente.com/models/repo"
 	actions_module "forgente.com/modules/actions"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/log"
 
 	lru "github.com/hashicorp/golang-lru/v2"
@@ -50,7 +50,7 @@ func LoadParsedScopedWorkflows(ctx context.Context, sourceRepo *repo_model.Repos
 	}
 
 	// cache miss: open the source repo at the exact SHA we keyed on
-	sourceGitRepo, err := gitrepo.OpenRepository(sourceRepo)
+	sourceGitRepo, err := git.OpenRepository(sourceRepo)
 	if err != nil {
 		return "", nil, fmt.Errorf("open source repo: %w", err)
 	}

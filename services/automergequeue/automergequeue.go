@@ -9,7 +9,7 @@ import (
 	"fmt"
 
 	issues_model "forgente.com/models/issues"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/log"
 	"forgente.com/modules/queue"
 )
@@ -34,7 +34,7 @@ func StartPRCheckAndAutoMerge(ctx context.Context, pull *issues_model.PullReques
 		return
 	}
 
-	gitRepo, err := gitrepo.OpenRepository(pull.BaseRepo)
+	gitRepo, err := git.OpenRepository(pull.BaseRepo)
 	if err != nil {
 		log.Error("OpenRepository: %v", err)
 		return

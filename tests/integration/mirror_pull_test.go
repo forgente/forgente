@@ -15,7 +15,7 @@ import (
 	"forgente.com/models/unit"
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/migration"
 	"forgente.com/modules/setting"
 	"forgente.com/modules/test"
@@ -66,7 +66,7 @@ func TestMirrorPull(t *testing.T) {
 	assert.True(t, slices.ContainsFunc(mirrorRepo.Units, func(u *repo_model.RepoUnit) bool { return u.Type == unit.TypeReleases }))
 	assert.True(t, slices.ContainsFunc(mirrorRepo.Units, func(u *repo_model.RepoUnit) bool { return u.Type == unit.TypeWiki }))
 
-	gitRepo, err := gitrepo.OpenRepository(repo)
+	gitRepo, err := git.OpenRepository(repo)
 	assert.NoError(t, err)
 	defer gitRepo.Close()
 

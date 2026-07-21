@@ -17,7 +17,6 @@ import (
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
 	"forgente.com/modules/git/attribute"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/lfs"
 	"forgente.com/modules/log"
 	"forgente.com/modules/setting"
@@ -105,7 +104,7 @@ func ChangeRepoFiles(ctx context.Context, repo *repo_model.Repository, doer *use
 		opts.NewBranch = opts.OldBranch
 	}
 
-	gitRepo, closer, err := gitrepo.RepositoryFromContextOrOpen(ctx, repo)
+	gitRepo, closer, err := git.RepositoryFromContextOrOpen(ctx, repo)
 	if err != nil {
 		return nil, err
 	}

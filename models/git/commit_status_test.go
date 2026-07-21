@@ -15,7 +15,7 @@ import (
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/commitstatus"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 
 	"github.com/stretchr/testify/assert"
 )
@@ -186,7 +186,7 @@ func TestFindRepoRecentCommitStatusContexts(t *testing.T) {
 
 	repo2 := unittest.AssertExistsAndLoadBean(t, &repo_model.Repository{ID: 2})
 	user2 := unittest.AssertExistsAndLoadBean(t, &user_model.User{ID: 2})
-	gitRepo, err := gitrepo.OpenRepository(repo2)
+	gitRepo, err := git.OpenRepository(repo2)
 	assert.NoError(t, err)
 	defer gitRepo.Close()
 

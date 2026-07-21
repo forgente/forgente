@@ -16,7 +16,6 @@ import (
 	issues_model "forgente.com/models/issues"
 	"forgente.com/modules/git"
 	"forgente.com/modules/git/gitcmd"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/glob"
 	"forgente.com/modules/log"
 	"forgente.com/modules/process"
@@ -30,7 +29,7 @@ func DownloadDiffOrPatch(ctx context.Context, pr *issues_model.PullRequest, w io
 		return err
 	}
 
-	gitRepo, closer, err := gitrepo.RepositoryFromContextOrOpen(ctx, pr.BaseRepo)
+	gitRepo, closer, err := git.RepositoryFromContextOrOpen(ctx, pr.BaseRepo)
 	if err != nil {
 		return fmt.Errorf("OpenRepository: %w", err)
 	}

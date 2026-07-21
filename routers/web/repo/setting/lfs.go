@@ -20,7 +20,6 @@ import (
 	"forgente.com/modules/git"
 	"forgente.com/modules/git/attribute"
 	"forgente.com/modules/git/pipeline"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/lfs"
 	"forgente.com/modules/log"
 	repo_module "forgente.com/modules/repository"
@@ -105,7 +104,7 @@ func LFSLocks(ctx *context.Context) {
 	}
 
 	// Clone base repo.
-	tmpBasePath, cleanup, err := repo_module.CreateTemporaryPath("locks")
+	tmpBasePath, _, cleanup, err := repo_module.CreateTemporaryGitRepo("locks")
 	if err != nil {
 		log.Error("Failed to create temporary path: %v", err)
 		ctx.ServerError("LFSLocks", err)
@@ -113,7 +112,7 @@ func LFSLocks(ctx *context.Context) {
 	}
 	defer cleanup()
 
-	if err := gitrepo.CloneRepoToLocal(ctx, ctx.Repo.Repository, tmpBasePath, git.CloneRepoOptions{
+	if err := git.CloneRepoToLocal(ctx, ctx.Repo.Repository, tmpBasePath, git.CloneRepoOptions{
 		Bare:   true,
 		Shared: true,
 	}); err != nil {

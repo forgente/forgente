@@ -12,7 +12,6 @@ import (
 	repo_model "forgente.com/models/repo"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	api "forgente.com/modules/structs"
 )
 
@@ -70,7 +69,7 @@ func ToAPIPayloadCommit(ctx context.Context, emailUsers map[string]*user_model.U
 		committerUsername = committer.Name
 	}
 
-	fileStatus, err := gitrepo.GetCommitFileStatus(ctx, repo, commit.Sha1)
+	fileStatus, err := git.GetCommitFileStatus(ctx, repo, commit.Sha1)
 	if err != nil {
 		return nil, fmt.Errorf("FileStatus [commit_sha1: %s]: %w", commit.Sha1, err)
 	}

@@ -15,7 +15,6 @@ import (
 	"forgente.com/models/unit"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/log"
 	"forgente.com/modules/markup"
 	"forgente.com/modules/markup/markdown"
@@ -110,7 +109,7 @@ func FindOwnerProfileReadme(ctx *context.Context, doer *user_model.User, optProf
 		return nil, nil
 	}
 
-	profileGitRepo, err := gitrepo.RepositoryFromRequestContextOrOpen(ctx, profileDbRepo)
+	profileGitRepo, err := git.RepositoryFromRequestContextOrOpen(ctx, profileDbRepo)
 	if err != nil {
 		log.Error("FindOwnerProfileReadme failed to OpenRepository: %v", err)
 		return nil, nil

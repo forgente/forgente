@@ -12,9 +12,9 @@ import (
 	"strings"
 	"text/tabwriter"
 
+	"forgente.com/modelmigration"
+	"forgente.com/modelmigration/base"
 	"forgente.com/models/db"
-	"forgente.com/models/migrations"
-	migrate_base "forgente.com/models/migrations/base"
 	"forgente.com/modules/container"
 	"forgente.com/modules/log"
 	"forgente.com/modules/setting"
@@ -129,10 +129,10 @@ func runRecreateTable(ctx context.Context, cmd *cli.Command) error {
 	if err != nil {
 		return err
 	}
-	recreateTables := migrate_base.RecreateTables(beans...)
+	recreateTables := base.RecreateTables(beans...)
 
 	return db.InitEngineWithMigration(context.Background(), func(ctx context.Context, x db.EngineMigration) error {
-		if err := migrations.EnsureUpToDate(ctx, x); err != nil {
+		if err := modelmigration.EnsureUpToDate(ctx, x); err != nil {
 			return err
 		}
 		return recreateTables(x)

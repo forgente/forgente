@@ -11,7 +11,7 @@ import (
 	"forgente.com/models/db"
 	repo_model "forgente.com/models/repo"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/log"
 	"forgente.com/modules/setting"
 	"forgente.com/modules/templates"
@@ -134,7 +134,7 @@ func AdoptOrDeleteRepository(ctx *context.Context) {
 		ctx.ServerError("IsRepositoryExist", err)
 		return
 	}
-	exist, err := gitrepo.IsRepositoryExist(ctx, repo_model.CodeRepoByName(ctxUser.Name, repoName))
+	exist, err := git.IsRepositoryExist(ctx, repo_model.CodeRepoByName(ctxUser.Name, repoName))
 	if err != nil {
 		ctx.ServerError("IsDir", err)
 		return

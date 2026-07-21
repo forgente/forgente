@@ -8,7 +8,6 @@ import (
 	"net/http"
 
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/util"
 	"forgente.com/services/context"
 	"forgente.com/services/forms"
@@ -64,7 +63,7 @@ func CherryPickPost(ctx *context.Context) {
 		// Drop through to the "apply" method
 		buf := &bytes.Buffer{}
 		if parsed.form.Revert {
-			err = gitrepo.GetReverseRawDiff(ctx, ctx.Repo.Repository, fromCommitID, buf)
+			err = git.GetReverseRawDiff(ctx, ctx.Repo.Repository, fromCommitID, buf)
 		} else {
 			err = git.GetRawDiff(ctx, ctx.Repo.GitRepo, fromCommitID, git.RawDiffPatch, buf)
 		}

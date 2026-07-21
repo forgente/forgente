@@ -21,7 +21,6 @@ import (
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/cache"
 	git_module "forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/reqctx"
 	"forgente.com/modules/session"
 	"forgente.com/modules/templates"
@@ -141,7 +140,7 @@ func LoadRepoCommit(t *testing.T, ctx gocontext.Context) {
 		assert.FailNow(t, "context is not *context.Context or *context.APIContext")
 	}
 
-	gitRepo, err := gitrepo.OpenRepository(repo.Repository)
+	gitRepo, err := git_module.OpenRepository(repo.Repository)
 	require.NoError(t, err)
 	t.Cleanup(func() {
 		gitRepo.Close()
@@ -185,7 +184,7 @@ func LoadGitRepo(t *testing.T, ctx gocontext.Context) {
 	}
 	assert.NoError(t, repo.Repository.LoadOwner(ctx))
 	var err error
-	repo.GitRepo, err = gitrepo.OpenRepository(repo.Repository)
+	repo.GitRepo, err = git_module.OpenRepository(repo.Repository)
 	assert.NoError(t, err)
 }
 

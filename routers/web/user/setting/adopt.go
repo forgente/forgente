@@ -5,7 +5,7 @@ package setting
 
 import (
 	repo_model "forgente.com/models/repo"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/setting"
 	"forgente.com/services/context"
 	repo_service "forgente.com/services/repository"
@@ -32,7 +32,7 @@ func AdoptOrDeleteRepository(ctx *context.Context) {
 		return
 	}
 
-	exist, err := gitrepo.IsRepositoryExist(ctx, repo_model.CodeRepoByName(ctxUser.Name, dir))
+	exist, err := git.IsRepositoryExist(ctx, repo_model.CodeRepoByName(ctxUser.Name, dir))
 	if err != nil {
 		ctx.ServerError("IsDir", err)
 		return

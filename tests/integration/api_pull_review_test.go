@@ -15,7 +15,7 @@ import (
 	repo_model "forgente.com/models/repo"
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/json"
 	api "forgente.com/modules/structs"
 	issue_service "forgente.com/services/issue"
@@ -375,7 +375,7 @@ func TestAPIPullReviewCommentResolveEndpoints(t *testing.T) {
 
 	doer := unittest.AssertExistsAndLoadBean(t, &user_model.User{ID: pullIssue.PosterID})
 	require.NoError(t, pullIssue.LoadPullRequest(ctx))
-	gitRepo, err := gitrepo.OpenRepository(repo)
+	gitRepo, err := git.OpenRepository(repo)
 	require.NoError(t, err)
 	defer gitRepo.Close()
 
@@ -536,7 +536,7 @@ func testAPIPullReviewCommentReply(t *testing.T) {
 	require.NoError(t, pullIssue.LoadRepo(t.Context()))
 	require.NoError(t, pullIssue.LoadPullRequest(t.Context()))
 	doer := unittest.AssertExistsAndLoadBean(t, &user_model.User{ID: 2})
-	gitRepo, err := gitrepo.OpenRepository(pullIssue.Repo)
+	gitRepo, err := git.OpenRepository(pullIssue.Repo)
 	require.NoError(t, err)
 	defer gitRepo.Close()
 

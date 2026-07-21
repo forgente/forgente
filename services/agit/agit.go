@@ -16,7 +16,6 @@ import (
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
 	"forgente.com/modules/git/gitcmd"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/log"
 	"forgente.com/modules/private"
 	"forgente.com/modules/setting"
@@ -225,10 +224,8 @@ func ProcReceive(ctx context.Context, repo *repo_model.Repository, gitRepo *git.
 		}
 
 		if !forcePush.Value() {
-			output, _, err := gitrepo.RunCmdString(ctx, repo,
-				gitcmd.NewCommand("rev-list", "--max-count=1").
-					AddDynamicArguments(oldCommitID, "^"+opts.NewCommitIDs[i]),
-			)
+			output, _, err := gitcmd.NewCommand("rev-list", "--max-count=1").
+				AddDynamicArguments(oldCommitID, "^"+opts.NewCommitIDs[i]).WithRepo(repo).RunStdString(ctx)
 			if err != nil {
 				return nil, fmt.Errorf("failed to detect force push: %w", err)
 			} else if len(output) > 0 {

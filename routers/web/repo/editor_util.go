@@ -14,7 +14,6 @@ import (
 	repo_model "forgente.com/models/repo"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/log"
 	"forgente.com/modules/markup"
 	repo_module "forgente.com/modules/repository"
@@ -128,7 +127,7 @@ func getUniqueRepositoryName(ctx context.Context, ownerID int64, name string) st
 }
 
 func editorPushBranchToForkedRepository(ctx context.Context, doer *user_model.User, baseRepo *repo_model.Repository, baseBranchName string, targetRepo *repo_model.Repository, targetBranchName string) error {
-	return gitrepo.Push(ctx, baseRepo, targetRepo, git.PushOptions{
+	return git.PushManaged(ctx, baseRepo, targetRepo, git.PushOptions{
 		Branch: baseBranchName + ":" + targetBranchName,
 		Env:    repo_module.PushingEnvironment(doer, targetRepo),
 	})

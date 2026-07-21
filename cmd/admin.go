@@ -11,7 +11,6 @@ import (
 	"forgente.com/models/db"
 	repo_model "forgente.com/models/repo"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/log"
 	repo_module "forgente.com/modules/repository"
 
@@ -129,7 +128,7 @@ func runRepoSyncReleases(ctx context.Context, _ *cli.Command) error {
 		log.Trace("Processing next %d repos of %d", len(repos), count)
 		for _, repo := range repos {
 			log.Trace("Synchronizing repo %s", repo.FullName())
-			gitRepo, err := gitrepo.OpenRepository(repo)
+			gitRepo, err := git.OpenRepository(repo)
 			if err != nil {
 				log.Warn("OpenRepository: %v", err)
 				continue

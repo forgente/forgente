@@ -16,7 +16,7 @@ import (
 	actions_module "forgente.com/modules/actions"
 	"forgente.com/modules/actions/jobparser"
 	"forgente.com/modules/container"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/httplib"
 	"forgente.com/modules/json"
 	"forgente.com/modules/setting"
@@ -79,7 +79,7 @@ func loadReusableWorkflowSource(ctx context.Context, run *actions_model.ActionRu
 
 // readWorkflowFromRepo loads a workflow file from `repo` at `refOrSHA` and returns its content plus the resolved commit SHA.
 func readWorkflowFromRepo(ctx context.Context, repo *repo_model.Repository, refOrSHA, path string) ([]byte, string, error) {
-	gitRepo, err := gitrepo.OpenRepository(repo)
+	gitRepo, err := git.OpenRepository(repo)
 	if err != nil {
 		return nil, "", fmt.Errorf("open repo %s: %w", repo.FullName(), err)
 	}

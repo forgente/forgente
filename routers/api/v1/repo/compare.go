@@ -7,7 +7,7 @@ import (
 	"net/http"
 
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	api "forgente.com/modules/structs"
 	"forgente.com/services/context"
 	"forgente.com/services/convert"
@@ -58,7 +58,7 @@ func CompareDiff(ctx *context.APIContext) {
 
 	if ctx.Repo.GitRepo == nil {
 		var err error
-		ctx.Repo.GitRepo, err = gitrepo.RepositoryFromRequestContextOrOpen(ctx, ctx.Repo.Repository)
+		ctx.Repo.GitRepo, err = git.RepositoryFromRequestContextOrOpen(ctx, ctx.Repo.Repository)
 		if err != nil {
 			ctx.APIErrorInternal(err)
 			return

@@ -29,7 +29,6 @@ import (
 	"forgente.com/modules/actions"
 	"forgente.com/modules/container"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/httplib"
 	"forgente.com/modules/log"
 	"forgente.com/modules/setting"
@@ -680,7 +679,7 @@ func ResolveActionWorkflowForRun(ctx context.Context, repo *repo_model.Repositor
 		if err != nil {
 			return nil, err
 		}
-		sourceGitRepo, err := gitrepo.OpenRepository(sourceRepo)
+		sourceGitRepo, err := git.OpenRepository(sourceRepo)
 		if err != nil {
 			return nil, err
 		}
@@ -688,7 +687,7 @@ func ResolveActionWorkflowForRun(ctx context.Context, repo *repo_model.Repositor
 		return GetScopedActionWorkflow(ctx, sourceGitRepo, sourceRepo, run.WorkflowID, run.WorkflowCommitSHA)
 	}
 
-	gitRepo, err := gitrepo.OpenRepository(repo)
+	gitRepo, err := git.OpenRepository(repo)
 	if err != nil {
 		return nil, err
 	}

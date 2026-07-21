@@ -13,7 +13,6 @@ import (
 	repo_model "forgente.com/models/repo"
 	"forgente.com/modules/cache"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/lfs"
 	"forgente.com/modules/setting"
 	api "forgente.com/modules/structs"
@@ -125,7 +124,7 @@ func GetFileContents(ctx context.Context, repo *repo_model.Repository, gitRepo *
 func addLastCommitCache(ctx context.Context, repo *repo_model.Repository, gitRepo *git.Repository, cacheKey, fullName, sha string) error {
 	if gitRepo.LastCommitCache == nil {
 		commitsCount, err := cache.GetInt64(cacheKey, func() (int64, error) {
-			return gitrepo.CommitsCountOfCommit(ctx, repo, sha)
+			return git.CommitsCountOfCommit(ctx, repo, sha)
 		})
 		if err != nil {
 			return err

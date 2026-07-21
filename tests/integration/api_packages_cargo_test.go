@@ -16,7 +16,7 @@ import (
 	repo_model "forgente.com/models/repo"
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/json"
 	cargo_module "forgente.com/modules/packages/cargo"
 	"forgente.com/modules/setting"
@@ -76,7 +76,7 @@ func testPackageCargo(t *testing.T, _ *neturl.URL) {
 	assert.NoError(t, err)
 
 	readGitContent := func(t *testing.T, path string) string {
-		gitRepo, err := gitrepo.OpenRepository(repo)
+		gitRepo, err := git.OpenRepository(repo)
 		assert.NoError(t, err)
 		defer gitRepo.Close()
 

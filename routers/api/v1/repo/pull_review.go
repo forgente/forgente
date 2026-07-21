@@ -13,7 +13,7 @@ import (
 	"forgente.com/models/organization"
 	access_model "forgente.com/models/perm/access"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	api "forgente.com/modules/structs"
 	"forgente.com/modules/web"
 	"forgente.com/routers/api/v1/utils"
@@ -519,7 +519,7 @@ func CreatePullReview(ctx *context.APIContext) {
 
 	// if CommitID is empty, set it as lastCommitID
 	if opts.CommitID == "" {
-		gitRepo, closer, err := gitrepo.RepositoryFromContextOrOpen(ctx, pr.Issue.Repo)
+		gitRepo, closer, err := git.RepositoryFromContextOrOpen(ctx, pr.Issue.Repo)
 		if err != nil {
 			ctx.APIErrorInternal(err)
 			return

@@ -8,7 +8,7 @@ import (
 	"net/http"
 
 	repo_model "forgente.com/models/repo"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/log"
 	"forgente.com/modules/private"
 	gitea_context "forgente.com/services/context"
@@ -27,7 +27,7 @@ func RepoAssignment(ctx *gitea_context.PrivateContext) {
 		return
 	}
 
-	gitRepo, err := gitrepo.RepositoryFromRequestContextOrOpen(ctx, repo)
+	gitRepo, err := git.RepositoryFromRequestContextOrOpen(ctx, repo)
 	if err != nil {
 		log.Error("Failed to open repository: %s/%s Error: %v", ownerName, repoName, err)
 		ctx.JSON(http.StatusInternalServerError, private.Response{

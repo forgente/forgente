@@ -11,7 +11,6 @@ import (
 	repo_model "forgente.com/models/repo"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/log"
 	api "forgente.com/modules/structs"
 	ctx "forgente.com/services/context"
@@ -190,7 +189,7 @@ func ToCommit(ctx context.Context, repo *repo_model.Repository, gitRepo *git.Rep
 
 	// Retrieve files affected by the commit
 	if opts.Files {
-		fileStatus, err := gitrepo.GetCommitFileStatus(ctx, repo, commit.ID.String())
+		fileStatus, err := git.GetCommitFileStatus(ctx, repo, commit.ID.String())
 		if err != nil {
 			return nil, err
 		}
@@ -210,7 +209,7 @@ func ToCommit(ctx context.Context, repo *repo_model.Repository, gitRepo *git.Rep
 
 	// Get diff stats for commit
 	if opts.Stat {
-		diffShortStat, err := gitdiff.GetDiffShortStat(ctx, repo, gitRepo, "", commit.ID.String())
+		diffShortStat, err := gitdiff.GetDiffShortStat(ctx, gitRepo, "", commit.ID.String())
 		if err != nil {
 			return nil, err
 		}

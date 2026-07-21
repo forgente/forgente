@@ -18,7 +18,6 @@ import (
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/test"
 	issue_service "forgente.com/services/issue"
 	repo_service "forgente.com/services/repository"
@@ -100,7 +99,7 @@ func TestPullView_CodeOwner(t *testing.T) {
 
 			// capture the current PR head ref so we can wait for the async
 			// refs/pull/N/head sync triggered by the next push to complete
-			baseGitRepo, err := gitrepo.OpenRepository(repo)
+			baseGitRepo, err := git.OpenRepository(repo)
 			require.NoError(t, err)
 			defer baseGitRepo.Close()
 			headRefBefore, err := baseGitRepo.GetRefCommitID(t.Context(), pr.GetGitHeadRefName())

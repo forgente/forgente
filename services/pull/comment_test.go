@@ -11,7 +11,6 @@ import (
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/json"
 
 	"github.com/stretchr/testify/assert"
@@ -26,7 +25,7 @@ func TestCreatePushPullCommentForcePushDeletesOldComments(t *testing.T) {
 	require.NoError(t, pr.LoadIssue(ctx))
 	require.NoError(t, pr.LoadBaseRepo(ctx))
 
-	gitRepo, err := gitrepo.OpenRepository(pr.BaseRepo)
+	gitRepo, err := git.OpenRepository(pr.BaseRepo)
 	require.NoError(t, err)
 	defer gitRepo.Close()
 

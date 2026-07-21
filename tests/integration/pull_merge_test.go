@@ -29,7 +29,6 @@ import (
 	"forgente.com/modules/commitstatus"
 	"forgente.com/modules/git"
 	"forgente.com/modules/git/gitcmd"
-	"forgente.com/modules/gitrepo"
 	"forgente.com/modules/json"
 	"forgente.com/modules/queue"
 	"forgente.com/modules/setting"
@@ -838,7 +837,7 @@ func TestPullAutoMergeAfterCommitStatusSucceed(t *testing.T) {
 		assert.Empty(t, pr.MergedCommitID)
 
 		// update commit status to success, then it should be merged automatically
-		baseGitRepo, err := gitrepo.OpenRepository(baseRepo)
+		baseGitRepo, err := git.OpenRepository(baseRepo)
 		assert.NoError(t, err)
 		sha, err := baseGitRepo.GetRefCommitID(t.Context(), pr.GetGitHeadRefName())
 		assert.NoError(t, err)
@@ -910,7 +909,7 @@ func TestPullAutoMergeAfterCommitStatusSucceedAndApproval(t *testing.T) {
 		assert.Empty(t, pr.MergedCommitID)
 
 		// update commit status to success, then it should be merged automatically
-		baseGitRepo, err := gitrepo.OpenRepository(baseRepo)
+		baseGitRepo, err := git.OpenRepository(baseRepo)
 		assert.NoError(t, err)
 		sha, err := baseGitRepo.GetRefCommitID(t.Context(), pr.GetGitHeadRefName())
 		assert.NoError(t, err)
@@ -1023,7 +1022,7 @@ func TestPullAutoMergeAfterCommitStatusSucceedAndApprovalForAgitFlow(t *testing.
 		assert.Empty(t, pr.MergedCommitID)
 
 		// update commit status to success, then it should be merged automatically
-		baseGitRepo, err := gitrepo.OpenRepository(baseRepo)
+		baseGitRepo, err := git.OpenRepository(baseRepo)
 		assert.NoError(t, err)
 		sha, err := baseGitRepo.GetRefCommitID(t.Context(), pr.GetGitHeadRefName())
 		assert.NoError(t, err)

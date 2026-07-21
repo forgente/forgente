@@ -15,7 +15,7 @@ import (
 	repo_model "forgente.com/models/repo"
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/gitrepo"
+	"forgente.com/modules/git"
 	"forgente.com/modules/setting"
 	"forgente.com/modules/test"
 	"forgente.com/services/migrations"
@@ -60,14 +60,14 @@ func testMirrorPush(t *testing.T, u *url.URL) {
 	ok := mirror_service.SyncPushMirror(t.Context(), mirrors[0].ID)
 	assert.True(t, ok)
 
-	srcGitRepo, err := gitrepo.OpenRepository(srcRepo)
+	srcGitRepo, err := git.OpenRepository(srcRepo)
 	assert.NoError(t, err)
 	defer srcGitRepo.Close()
 
 	srcCommit, err := srcGitRepo.GetBranchCommit(t.Context(), "master")
 	assert.NoError(t, err)
 
-	mirrorGitRepo, err := gitrepo.OpenRepository(mirrorRepo)
+	mirrorGitRepo, err := git.OpenRepository(mirrorRepo)
 	assert.NoError(t, err)
 	defer mirrorGitRepo.Close()
 
@@ -101,9 +101,9 @@ func testMirrorPushWikiDefaultBranchMismatch(t *testing.T, u *url.URL) {
 	mirrorRepo.DefaultBranch = "mirror-head"
 	assert.NoError(t, repo_model.UpdateRepositoryColsNoAutoTime(t.Context(), mirrorRepo, "default_branch"))
 
-	wikiCommitID, err := gitrepo.GetBranchCommitID(t.Context(), mirrorRepo.WikiStorageRepo(), mirrorRepo.DefaultWikiBranch)
+	wikiCommitID, err := git.GetBranchCommitID(t.Context(), mirrorRepo.WikiStorageRepo(), mirrorRepo.DefaultWikiBranch)
 	assert.NoError(t, err)
-	assert.NoError(t, gitrepo.CreateBranch(t.Context(), mirrorRepo.WikiStorageRepo(), "mirror-head", wikiCommitID))
+	assert.NoError(t, git.CreateBranch(t.Context(), mirrorRepo.WikiStorageRepo(), "mirror-head", wikiCommitID))
 
 	session := loginUser(t, user.Name)
 
