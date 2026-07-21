@@ -54,7 +54,6 @@ cpu.out
 *.log
 *.log.*.gz
 
-/gitea
 /forgente
 /debug
 

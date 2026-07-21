@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+"$FORGENTE_ROOT/forgente" hook --config="$FORGENTE_ROOT/$FORGENTE_CONF" pre-receive

@@ -119,19 +119,19 @@ End-to-end tests drive a running Gitea instance with [Playwright](https://playwr
 make test-e2e
 ```
 
-To run a single e2e test file, pass it via `GITEA_TEST_E2E_FLAGS`:
+To run a single e2e test file, pass it via `FORGENTE_TEST_E2E_FLAGS`:
 
 ```bash
-GITEA_TEST_E2E_FLAGS='<filepath>' make test-e2e
+FORGENTE_TEST_E2E_FLAGS='<filepath>' make test-e2e
 ```
 
 Useful environment variables:
 
 | Variable | Description |
 | :--- | :--- |
-| `GITEA_TEST_E2E_DEBUG` | When set, show the Gitea server output. |
-| `GITEA_TEST_E2E_FLAGS` | Additional flags passed to Playwright, e.g. `--ui`. |
-| `GITEA_TEST_E2E_TIMEOUT_FACTOR` | Timeout multiplier (default: 4 on CI, 1 locally). |
+| `FORGENTE_TEST_E2E_DEBUG` | When set, show the Gitea server output. |
+| `FORGENTE_TEST_E2E_FLAGS` | Additional flags passed to Playwright, e.g. `--ui`. |
+| `FORGENTE_TEST_E2E_TIMEOUT_FACTOR` | Timeout multiplier (default: 4 on CI, 1 locally). |
 
 ## Migration tests
 

@@ -70,7 +70,7 @@ func SetupGiteaTestEnv() {
 	}
 
 	initGiteaConf := func() string {
-		// giteaConf (GITEA_CONF) must be relative because it is used in the git hooks as "$GITEA_ROOT/$GITEA_CONF"
+		// giteaConf (FORGENTE_CONF) must be relative because it is used in the git hooks as "$FORGENTE_ROOT/$FORGENTE_CONF"
 		giteaConf := os.Getenv("GITEA_TEST_CONF")
 		if giteaConf == "" {
 			// if no GITEA_TEST_CONF, then it is in unit test, use a temp (non-existing / empty) config file
@@ -88,10 +88,12 @@ func SetupGiteaTestEnv() {
 	}
 
 	cleanUpEnv := func() {
-		// also unset unnecessary env vars for testing (only keep "GITEA_TEST_*" ones)
+		// also unset unnecessary env vars for testing (only keep "GITEA_TEST_*" / "FORGENTE_TEST_*" ones)
 		UnsetUnnecessaryEnvVars()
 		for _, env := range os.Environ() {
-			if strings.HasPrefix(env, "GIT_") || (strings.HasPrefix(env, "GITEA_") && !strings.HasPrefix(env, "GITEA_TEST_")) {
+			isGitea := strings.HasPrefix(env, "GITEA_") && !strings.HasPrefix(env, "GITEA_TEST_")
+			isForgente := strings.HasPrefix(env, "FORGENTE_") && !strings.HasPrefix(env, "FORGENTE_TEST_")
+			if strings.HasPrefix(env, "GIT_") || isGitea || isForgente {
 				k, _, _ := strings.Cut(env, "=")
 				_ = os.Unsetenv(k)
 			}
@@ -122,8 +124,8 @@ func SetupGiteaTestEnv() {
 	}
 
 	// TODO: some git repo hooks (test fixtures) still use these env variables, need to be refactored in the future
-	_ = os.Setenv("GITEA_ROOT", giteaRoot)
-	_ = os.Setenv("GITEA_CONF", giteaConf) // test fixture git hooks use "$GITEA_ROOT/$GITEA_CONF" in their scripts
+	_ = os.Setenv("FORGENTE_ROOT", giteaRoot)
+	_ = os.Setenv("FORGENTE_CONF", giteaConf) // test fixture git hooks use "$FORGENTE_ROOT/$FORGENTE_CONF" in their scripts
 }
 
 func PrepareIntegrationTestConfig() error {
