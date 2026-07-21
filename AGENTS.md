@@ -21,19 +21,20 @@
 
 ## Forgente-specific
 
-- Forgente is its own project; it builds on Gitea and tracks it as an
-  upstream. Frame docs, posts, and PR descriptions Forgente-first — upstream
-  tracking is a build mechanism, not the project's identity.
-- Read [FORGENTE.md](FORGENTE.md) before changing anything: upstream-tracking
-  model, sync workflow, rebrand state, sync-conflict file list, ecosystem map.
-  Strategy and hard-fork triggers live in [ROADMAP.md](ROADMAP.md).
+- Forgente is its own project; it started from Gitea and hard-forked at the
+  Phase 2 cutover (2026-07). Frame docs, posts, and PR descriptions
+  Forgente-first — the Gitea lineage is history, not identity.
+- Read [FORGENTE.md](FORGENTE.md) before changing anything: post-fork
+  upstream model (advisory watch + cherry-picks), rebrand state, ecosystem
+  map. Strategy lives in [ROADMAP.md](ROADMAP.md).
 - Never commit directly to `main` — feature branches and PRs only. Feature/fix
-  PRs are squash-merged with the `(#N)` title suffix.
-- Upstream-sync PRs (`chore: sync upstream gitea`) are merged with a MERGE
-  COMMIT, never squashed — squashing flattens upstream history and makes every
-  future sync re-conflict.
-- Prefer additive changes and compat shims over renaming upstream identifiers;
-  every renamed surface is a future merge conflict.
-- The executable is `forgente` (the build creates a `gitea` symlink for test
-  fixtures); container internals intentionally keep the `GITEA_*`/`gitea`
-  layout for compatibility — do not "finish" that rename.
+  PRs (including upstream cherry-picks) are squash-merged with the `(#N)`
+  title suffix.
+- Cherry-pick upstream Gitea fixes with `contrib/forgente/pick-upstream.sh`
+  (it rewrites the upstream `gitea.dev` module path to `forgente.com`).
+- The API wire surface stays Gitea-compatible on purpose: never rename
+  `X-Gitea-*` headers, the `gitea` webhook type, `GITEA_TOKEN`, or the
+  `GITEA__*` config-env prefix — these keep the unforked ecosystem tools
+  (tea, SDKs, act_runner) working. Runtime env is `FORGENTE_*` with legacy
+  `GITEA_*` fallback; do not remove the fallbacks without a deprecation
+  cycle.
