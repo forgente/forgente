@@ -86,18 +86,18 @@ Also we always try to support the latest on main branch, so if you are using the
 
 ## Versions
 
-Gitea has the `main` branch as a tip branch and has version branches
+Forgente has the `main` branch as a tip branch and has version branches
 such as `release/v1.19`. `release/v1.19` is a release branch and we will
 tag `v1.19.0` for binary download. If `v1.19.0` has bugs, we will accept
 pull requests on the `release/v1.19` branch and publish a `v1.19.1` tag,
 after bringing the bug fix also to the main branch.
 
-Since the `main` branch is a tip version, if you wish to use Gitea
+Since the `main` branch is a tip version, if you wish to use Forgente
 in production, please download the latest release tag version. All the
 branches will be protected via GitHub, all the PRs to every branch must
 be reviewed by two maintainers and must pass the automatic tests.
 
-## Releasing Gitea
+## Releasing Forgente
 
 - Let MAJOR, MINOR and PATCH be Major, Minor and Patch version numbers, PATCH should be rc1, rc2, 0, 1, ...... MAJOR.MINOR will be kept the same as milestones on github or gitea in future.
 - Before releasing, confirm all the version's milestone issues or PRs has been resolved. Then discuss the release on Discord channel #maintainers and get agreed with almost all the owners and mergers. Or you can declare the version and if nobody is against it in about several hours.
@@ -108,8 +108,8 @@ be reviewed by two maintainers and must pass the automatic tests.
 - Add a tag as `git tag -s -F release.notes vMAJOR.MINOR.PATCH`, release.notes file could be a temporary file to only include the changelog this version which you added to `CHANGELOG.md`.
 - And then push the tag as `git push origin vMAJOR.MINOR.$`. CI will automatically create a release and upload all the compiled binary. (But currently it doesn't add the release notes automatically. Maybe we should fix that.)
 - If needed send a frontport PR for the changelog to branch `main` and update the version in `docs/config.yaml` to refer to the new version.
-- Send PR to [blog repository](https://gitea.com/gitea/blog) announcing the release.
-- Verify all release assets were correctly published through CI on dl.gitea.com and GitHub releases. Once ACKed:
-  - bump the version of https://dl.gitea.com/gitea/version.json
+- Send PR to [blog repository](https://github.com/forgente/blog) announcing the release.
+- Verify all release assets were correctly published through CI on dl.forgente.com and GitHub releases. Once ACKed:
+  - bump the version of https://dl.forgente.com/forgente/version.json
   - merge the blog post PR
   - announce the release in discord `#announcements`

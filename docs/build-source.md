@@ -1,6 +1,6 @@
 # Prepare build environment
 
-Complete the steps in [build-setup.md](build-setup.md) to prepare your environment for building Gitea from source.
+Complete the steps in [build-setup.md](build-setup.md) to prepare your environment for building Forgente from source.
 
 ## Choose a branch
 
@@ -17,7 +17,7 @@ git fetch origin pull/123456/head:pr-123456
 
 # Build
 
-Various [make tasks](https://github.com/go-gitea/gitea/blob/main/Makefile)
+Various [make tasks](https://github.com/forgente/forgente/blob/main/Makefile)
 are provided to keep the build process as simple as possible.
 
 Depending on requirements, the following build tags can be included.
@@ -42,8 +42,8 @@ GOOS=windows TAGS="bindata gogit" make build
 
 ## Changing default paths
 
-Gitea will search for a number of things from the _`CustomPath`_.
-By default, this is the `custom/` directory in the current working directory when running Gitea.
+Forgente will search for a number of things from the _`CustomPath`_.
+By default, this is the `custom/` directory in the current working directory when running Forgente.
 It will also look for its configuration file _`CustomConf`_ in `$(CustomPath)/conf/app.ini`,
 and will use the current working directory as the relative base path _`AppWorkPath`_.
 
@@ -53,9 +53,9 @@ For packagers who need to use paths like `/etc/gitea/app.ini`,
 they should define these values at build time for `make build` by environment variable like
 `LDFLAGS='-X "module.Var1=Value1" -X "module.Var2=Value2"' TAGS="bindata" make build`.
 
-- _`CustomConf`_: `-X "gitea.dev/modules/setting.CustomConf=/etc/gitea/app.ini"`
-- _`AppWorkPath`_: `-X "gitea.dev/modules/setting.AppWorkPath=/var/lib/gitea"`
-- _`CustomPath`_: `-X "gitea.dev/modules/setting.CustomPath=/var/lib/gitea/custom"`
+- _`CustomConf`_: `-X "forgente.com/modules/setting.CustomConf=/etc/forgente/app.ini"`
+- _`AppWorkPath`_: `-X "forgente.com/modules/setting.AppWorkPath=/var/lib/forgente"`
+- _`CustomPath`_: `-X "forgente.com/modules/setting.CustomPath=/var/lib/forgente/custom"`
 - Default PID file location: `-X "gitea.dev/cmd.PIDFile=/run/gitea.pid"`
 
 Add as many of the strings with their preceding `-X` to the `LDFLAGS` variable and run `make build`
@@ -65,7 +65,7 @@ Running `gitea help` will allow you to review what the computed settings will be
 
 ## Cross Build
 
-Gitea use's Golang's toolchain variables for cross-building.
+Forgente use's Golang's toolchain variables for cross-building.
 
 For example, to cross build for Linux ARM64:
 
@@ -85,7 +85,7 @@ Details on how to load the completion for your shell can be found in the complet
 
 ## Source Maps
 
-By default, gitea generates reduced source maps for frontend files to conserve space. This can be controlled with the `ENABLE_SOURCEMAP` environment variable:
+By default, Forgente generates reduced source maps for frontend files to conserve space. This can be controlled with the `ENABLE_SOURCEMAP` environment variable:
 
 - `ENABLE_SOURCEMAP=true` generates all source maps, the default for development builds
 - `ENABLE_SOURCEMAP=reduced` generates limited source maps, the default for production builds

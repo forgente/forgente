@@ -85,16 +85,16 @@ verified by reviewers and the merger to reference an existing upstream commit.
 
 ## API v1
 
-The API is documented with [Swagger](https://gitea.com/api/swagger) and is modelled
+The API is documented with [Swagger](https://forgente.com/api/swagger) and is modelled
 on [the GitHub API](https://docs.github.com/en/rest).
 
 ### GitHub API compatibility
 
-Gitea's API should use the same endpoints and fields as the GitHub API where
+Forgente's API should use the same endpoints and fields as the GitHub API where
 possible, unless there is a good reason to deviate.
 
-- If Gitea offers functionality GitHub does not, a new endpoint may be added.
-- If Gitea exposes information the GitHub API does not, a new field may be added as
+- If Forgente offers functionality GitHub does not, a new endpoint may be added.
+- If Forgente exposes information the GitHub API does not, a new field may be added as
   long as it does not collide with a GitHub field.
 - Existing fields should not be removed unless there is a strong reason; the same
   applies to status responses.

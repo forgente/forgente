@@ -1,201 +1,80 @@
-# Gitea
+<div align="center">
+  <img src="public/assets/img/logo.svg" alt="Forgente" width="96"/>
 
-[![](https://github.com/go-gitea/gitea/actions/workflows/release-nightly.yml/badge.svg?branch=main)](https://github.com/go-gitea/gitea/actions/workflows/release-nightly.yml?query=branch%3Amain "Release Nightly")
-[![](https://img.shields.io/discord/322538954119184384.svg?logo=discord&logoColor=white&label=Discord&color=5865F2)](https://discord.gg/Gitea "Join the Discord chat at https://discord.gg/Gitea")
-[![](https://goreportcard.com/badge/gitea.dev)](https://goreportcard.com/report/gitea.dev "Go Report Card")
-[![](https://pkg.go.dev/badge/gitea.dev?status.svg)](https://pkg.go.dev/gitea.dev "GoDoc")
-[![](https://img.shields.io/github/release/go-gitea/gitea.svg)](https://github.com/go-gitea/gitea/releases/latest "GitHub release")
-[![](https://www.codetriage.com/go-gitea/gitea/badges/users.svg)](https://www.codetriage.com/go-gitea/gitea "Help Contribute to Open Source")
-[![](https://opencollective.com/gitea/tiers/backers/badge.svg?label=backers&color=brightgreen)](https://opencollective.com/gitea "Become a backer/sponsor of gitea")
+# Forgente
+
+[![](https://github.com/forgente/forgente/actions/workflows/release-nightly.yml/badge.svg?branch=main)](https://github.com/forgente/forgente/actions/workflows/release-nightly.yml?query=branch%3Amain "Release Nightly")
 [![](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT "License: MIT")
-[![](https://badges.crowdin.net/gitea/localized.svg)](https://translate.gitea.com "Crowdin")
+
+**您完全擁有的完整軟體協作平台。**
+
+</div>
 
 [English](./README.md) | [简体中文](./README.zh-cn.md)
 
-## 目的
+Forgente 是一個一體化的軟體開發服務：Git 代管、程式碼審查、問題追蹤、專案看板、
+Wiki、套件登錄檔，以及與 GitHub Actions 工作流程相容的 CI/CD。使用 Go 撰寫，可作
+為單一二進位檔案運行在 Linux、macOS、FreeBSD/OpenBSD 和 Windows 上──執行在您自
+己的硬體上，由您掌控，沒有遙測。
 
-這個項目的目標是提供最簡單、最快速、最無痛的方式來設置自託管的 Git 服務。
+Forgente 的發展方向請見 [ROADMAP.md](ROADMAP.md)；它的建置與發佈方式記錄在
+[FORGENTE.md](FORGENTE.md) 中。
 
-由於 Gitea 是用 Go 語言編寫的，它可以在 Go 支援的所有平台和架構上運行，包括 Linux、macOS 和 Windows 的 x86、amd64、ARM 和 PowerPC 架構。這個項目自 2016 年 11 月從 [Gogs](https://gogs.io) [分叉](https://blog.gitea.com/welcome-to-gitea/) 而來，但已經有了很多變化。
+## 安裝
 
-在線演示可以訪問 [demo.gitea.com](https://demo.gitea.com)。
+**容器**（建議）：
 
-要訪問免費的 Gitea 服務（有一定數量的倉庫限制），可以訪問 [gitea.com](https://gitea.com/user/login)。
+```bash
+docker run -p 3000:3000 -p 2222:22 forgente/forgente:latest
+```
 
-要快速部署您自己的專用 Gitea 實例，可以在 [cloud.gitea.com](https://cloud.gitea.com) 開始免費試用。
+映像檔發佈於 [Docker Hub](https://hub.docker.com/r/forgente/forgente) 與
+[GHCR](https://github.com/forgente/forgente/pkgs/container/forgente)，標籤包含每
+次發佈對應的 `latest`、`<major>`、`<major.minor>`、`<version>`，以及
+`main-nightly` 開發建置版本（皆提供 `-rootless` 變體）。既有的 Gitea 容器設定（資
+料卷、`GITEA_*` 環境變數）無需更動即可繼續使用。
+
+**二進位檔案**：每個平台的簽章建置版本會附加在
+[GitHub Releases](https://github.com/forgente/forgente/releases) 中，並鏡像至
+[dl.forgente.com](https://dl.forgente.com/forgente/)（每夜建置版本位於
+[`main-nightly`](https://dl.forgente.com/forgente/main-nightly/)）──每個檔案都附
+有 SHA-256 校驗碼、GPG 簽章（金鑰
+`67129BAD57A2C8D2186032489D6FD2FD6E0B9BA5`）以及 sigstore 簽章包。
+
+**Snap**：
+
+```bash
+sudo snap install forgente --edge
+```
+
+## 從原始碼建置
+
+請參閱 [docs/build-setup.md](docs/build-setup.md) 了解前置需求，以及
+[docs/development.md](docs/development.md) 了解開發環境。
+
+```bash
+TAGS="bindata" make build
+./forgente web
+```
 
 ## 文件
 
-您可以在我們的官方 [文件網站](https://docs.gitea.com/) 上找到全面的文件。
+文件位於 [docs.forgente.com](https://docs.forgente.com)。Forgente 特有的行為與維
+運說明記錄在 [FORGENTE.md](FORGENTE.md) 中。
 
-它包括安裝、管理、使用、開發、貢獻指南等，幫助您快速入門並有效地探索所有功能。
+## 基於 Gitea 建置
 
-如果您有任何建議或想要貢獻，可以訪問 [文件倉庫](https://gitea.com/gitea/docs)
-
-## 構建
-
-從源代碼樹的根目錄運行：
-
-    TAGS="bindata" make build
-
-`build` 目標分為兩個子目標：
-
-- `make backend` 需要 [Go Stable](https://go.dev/dl/)，所需版本在 [go.mod](/go.mod) 中定義。
-- `make frontend` 需要 [Node.js LTS](https://nodejs.org/en/download/) 或更高版本以及 [pnpm](https://pnpm.io/installation)。
-
-需要互聯網連接來下載 go 和 npm 模塊。從包含預構建前端文件的官方源代碼壓縮包構建時，不會觸發 `frontend` 目標，因此可以在沒有 Node.js 的情況下構建。
-
-更多信息：https://docs.gitea.com/installation/install-from-source
-
-## 使用
-
-構建後，默認情況下會在源代碼樹的根目錄生成一個名為 `gitea` 的二進制文件。要運行它，請使用：
-
-    ./gitea web
-
-> [!注意]
-> 如果您對使用我們的 API 感興趣，我們提供了實驗性支援，並附有 [文件](https://docs.gitea.com/api)。
+Forgente 基於 [Gitea](https://github.com/go-gitea/gitea) 建置，並將其作為上游持
+續追蹤：Gitea 的改進與安全修復會持續合併進來，同時 Forgente 在此基礎上建置自己的
+功能，並與 Gitea 保持設定與 API 相容。非常感謝 Gitea 的維護者與貢獻者。追蹤機制的
+細節記錄在 [FORGENTE.md](FORGENTE.md) 中。
 
 ## 貢獻
 
-預期的工作流程是：Fork -> Patch -> Push -> Pull Request
+Fork → 修改 → 推送 → 發起 Pull Request。請先閱讀
+[貢獻者指南](CONTRIBUTING.md)。安全性問題請私下寫信至 security@forgente.com。
 
-> [!注意]
->
-> 1. **在開始進行 Pull Request 之前，您必須閱讀 [貢獻者指南](CONTRIBUTING.md)。**
-> 2. 如果您在項目中發現了漏洞，請私下寫信給 **security@gitea.io**。謝謝！
+## 授權條款
 
-## 翻譯
-
-[![Crowdin](https://badges.crowdin.net/gitea/localized.svg)](https://translate.gitea.com)
-
-翻譯通過 [Crowdin](https://translate.gitea.com) 進行。如果您想翻譯成新的語言，請在 Crowdin 項目中請求管理員添加新語言。
-
-您也可以創建一個 issue 來添加語言，或者在 discord 的 #translation 頻道上詢問。如果您需要上下文或發現一些翻譯問題，可以在字符串上留言或在 Discord 上詢問。對於一般的翻譯問題，文檔中有一個部分。目前有點空，但我們希望隨著問題的出現而填充它。
-
-更多信息請參閱 [文件](https://docs.gitea.com/contributing/localization)。
-
-## 官方和第三方項目
-
-我們提供了一個官方的 [go-sdk](https://gitea.com/gitea/go-sdk)，一個名為 [tea](https://gitea.com/gitea/tea) 的 CLI 工具和一個 Gitea Action 的 [action runner](https://gitea.com/gitea/act_runner)。
-
-我們在 [gitea/awesome-gitea](https://gitea.com/gitea/awesome-gitea) 維護了一個 Gitea 相關項目的列表，您可以在那裡發現更多的第三方項目，包括 SDK、插件、主題等。
-
-## 通訊
-
-[![](https://img.shields.io/discord/322538954119184384.svg?logo=discord&logoColor=white&label=Discord&color=5865F2)](https://discord.gg/Gitea "Join the Discord chat at https://discord.gg/Gitea")
-
-如果您有任何文件未涵蓋的問題，可以在我們的 [Discord 服務器](https://discord.gg/Gitea) 上與我們聯繫，或者在 [discourse 論壇](https://forum.gitea.com/) 上創建帖子。
-
-## 作者
-
-- [維護者](https://github.com/orgs/go-gitea/people)
-- [貢獻者](https://github.com/go-gitea/gitea/graphs/contributors)
-- [翻譯者](options/locale/TRANSLATORS)
-
-## 支持者
-
-感謝所有支持者！ 🙏 [[成為支持者](https://opencollective.com/gitea#backer)]
-
-<a href="https://opencollective.com/gitea#backers" target="_blank"><img src="https://opencollective.com/gitea/backers.svg?width=890"></a>
-
-## 贊助商
-
-通過成為贊助商來支持這個項目。您的標誌將顯示在這裡，並帶有鏈接到您的網站。 [[成為贊助商](https://opencollective.com/gitea#sponsor)]
-
-<a href="https://opencollective.com/gitea/sponsor/0/website" target="_blank"><img src="https://opencollective.com/gitea/sponsor/0/avatar.svg"></a>
-<a href="https://opencollective.com/gitea/sponsor/1/website" target="_blank"><img src="https://opencollective.com/gitea/sponsor/1/avatar.svg"></a>
-<a href="https://opencollective.com/gitea/sponsor/2/website" target="_blank"><img src="https://opencollective.com/gitea/sponsor/2/avatar.svg"></a>
-<a href="https://opencollective.com/gitea/sponsor/3/website" target="_blank"><img src="https://opencollective.com/gitea/sponsor/3/avatar.svg"></a>
-<a href="https://opencollective.com/gitea/sponsor/4/website" target="_blank"><img src="https://opencollective.com/gitea/sponsor/4/avatar.svg"></a>
-<a href="https://opencollective.com/gitea/sponsor/5/website" target="_blank"><img src="https://opencollective.com/gitea/sponsor/5/avatar.svg"></a>
-<a href="https://opencollective.com/gitea/sponsor/6/website" target="_blank"><img src="https://opencollective.com/gitea/sponsor/6/avatar.svg"></a>
-<a href="https://opencollective.com/gitea/sponsor/7/website" target="_blank"><img src="https://opencollective.com/gitea/sponsor/7/avatar.svg"></a>
-<a href="https://opencollective.com/gitea/sponsor/8/website" target="_blank"><img src="https://opencollective.com/gitea/sponsor/8/avatar.svg"></a>
-<a href="https://opencollective.com/gitea/sponsor/9/website" target="_blank"><img src="https://opencollective.com/gitea/sponsor/9/avatar.svg"></a>
-
-## 常見問題
-
-**Gitea 怎麼發音？**
-
-Gitea 的發音是 [/ɡɪ’ti:/](https://youtu.be/EM71-2uDAoY)，就像 "gi-tea" 一樣，g 是硬音。
-
-**為什麼這個項目沒有託管在 Gitea 實例上？**
-
-我們正在 [努力](https://github.com/go-gitea/gitea/issues/1029)。
-
-**在哪裡可以找到安全補丁？**
-
-在 [發佈日誌](https://github.com/go-gitea/gitea/releases) 或 [變更日誌](https://github.com/go-gitea/gitea/blob/main/CHANGELOG.md) 中，搜索關鍵詞 `SECURITY` 以找到安全補丁。
-
-## 許可證
-
-這個項目是根據 MIT 許可證授權的。
-請參閱 [LICENSE](https://github.com/go-gitea/gitea/blob/main/LICENSE) 文件以獲取完整的許可證文本。
-
-## 進一步信息
-
-<details>
-<summary>尋找界面概述？查看這裡！</summary>
-
-### 登錄/註冊頁面
-
-![Login](https://dl.gitea.com/screenshots/login.png)
-![Register](https://dl.gitea.com/screenshots/register.png)
-
-### 用戶儀表板
-
-![Home](https://dl.gitea.com/screenshots/home.png)
-![Issues](https://dl.gitea.com/screenshots/issues.png)
-![Pull Requests](https://dl.gitea.com/screenshots/pull_requests.png)
-![Milestones](https://dl.gitea.com/screenshots/milestones.png)
-
-### 用戶資料
-
-![Profile](https://dl.gitea.com/screenshots/user_profile.png)
-
-### 探索
-
-![Repos](https://dl.gitea.com/screenshots/explore_repos.png)
-![Users](https://dl.gitea.com/screenshots/explore_users.png)
-![Orgs](https://dl.gitea.com/screenshots/explore_orgs.png)
-
-### 倉庫
-
-![Home](https://dl.gitea.com/screenshots/repo_home.png)
-![Commits](https://dl.gitea.com/screenshots/repo_commits.png)
-![Branches](https://dl.gitea.com/screenshots/repo_branches.png)
-![Labels](https://dl.gitea.com/screenshots/repo_labels.png)
-![Milestones](https://dl.gitea.com/screenshots/repo_milestones.png)
-![Releases](https://dl.gitea.com/screenshots/repo_releases.png)
-![Tags](https://dl.gitea.com/screenshots/repo_tags.png)
-
-#### 倉庫問題
-
-![List](https://dl.gitea.com/screenshots/repo_issues.png)
-![Issue](https://dl.gitea.com/screenshots/repo_issue.png)
-
-#### 倉庫拉取請求
-
-![List](https://dl.gitea.com/screenshots/repo_pull_requests.png)
-![Pull Request](https://dl.gitea.com/screenshots/repo_pull_request.png)
-![File](https://dl.gitea.com/screenshots/repo_pull_request_file.png)
-![Commits](https://dl.gitea.com/screenshots/repo_pull_request_commits.png)
-
-#### 倉庫操作
-
-![List](https://dl.gitea.com/screenshots/repo_actions.png)
-![Details](https://dl.gitea.com/screenshots/repo_actions_run.png)
-
-#### 倉庫活動
-
-![Activity](https://dl.gitea.com/screenshots/repo_activity.png)
-![Contributors](https://dl.gitea.com/screenshots/repo_contributors.png)
-![Code Frequency](https://dl.gitea.com/screenshots/repo_code_frequency.png)
-![Recent Commits](https://dl.gitea.com/screenshots/repo_recent_commits.png)
-
-### 組織
-
-![Home](https://dl.gitea.com/screenshots/org_home.png)
-
-</details>
+Forgente 依據 [MIT 授權條款](LICENSE) 授權，其所基於的 Gitea 程式碼亦同。Gitea
+的名稱與標誌是其各自所有者的商標；Forgente 使用自己的名稱與標誌。
