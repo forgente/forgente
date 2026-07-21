@@ -13,17 +13,22 @@ if [ -f /data/git/.ssh/authorized_keys ]; then
     chmod 600 /data/git/.ssh/authorized_keys
 fi
 
+# git-over-ssh reads this file for the forgente serv/hook subprocess env; emit
+# FORGENTE_CUSTOM (primary, no deprecation warning) and keep GITEA_CUSTOM for
+# any external tooling still reading the legacy name.
 if [ ! -f /data/git/.ssh/environment ]; then
-    echo "GITEA_CUSTOM=$GITEA_CUSTOM" >| /data/git/.ssh/environment
+    echo "FORGENTE_CUSTOM=$FORGENTE_CUSTOM" >| /data/git/.ssh/environment
+    echo "GITEA_CUSTOM=$FORGENTE_CUSTOM" >> /data/git/.ssh/environment
     chmod 600 /data/git/.ssh/environment
 
-elif ! grep -q "^GITEA_CUSTOM=$GITEA_CUSTOM$" /data/git/.ssh/environment; then
-    sed -i /^GITEA_CUSTOM=/d /data/git/.ssh/environment
-    echo "GITEA_CUSTOM=$GITEA_CUSTOM" >> /data/git/.ssh/environment
+elif ! grep -q "^FORGENTE_CUSTOM=$FORGENTE_CUSTOM$" /data/git/.ssh/environment; then
+    sed -i -e /^FORGENTE_CUSTOM=/d -e /^GITEA_CUSTOM=/d /data/git/.ssh/environment
+    echo "FORGENTE_CUSTOM=$FORGENTE_CUSTOM" >> /data/git/.ssh/environment
+    echo "GITEA_CUSTOM=$FORGENTE_CUSTOM" >> /data/git/.ssh/environment
 fi
 
-if [ ! -f ${GITEA_CUSTOM}/conf/app.ini ]; then
-    mkdir -p ${GITEA_CUSTOM}/conf
+if [ ! -f ${FORGENTE_CUSTOM}/conf/app.ini ]; then
+    mkdir -p ${FORGENTE_CUSTOM}/conf
 
     # Set INSTALL_LOCK to true only if SECRET_KEY is not empty and
     # INSTALL_LOCK is empty
@@ -51,13 +56,13 @@ if [ ! -f ${GITEA_CUSTOM}/conf/app.ini ]; then
     DISABLE_REGISTRATION=${DISABLE_REGISTRATION:-"false"} \
     REQUIRE_SIGNIN_VIEW=${REQUIRE_SIGNIN_VIEW:-"false"} \
     SECRET_KEY=${SECRET_KEY:-""} \
-    envsubst < /etc/templates/app.ini > ${GITEA_CUSTOM}/conf/app.ini
+    envsubst < /etc/templates/app.ini > ${FORGENTE_CUSTOM}/conf/app.ini
 
-    chown ${USER}:git ${GITEA_CUSTOM}/conf/app.ini
+    chown ${USER}:git ${FORGENTE_CUSTOM}/conf/app.ini
 fi
 
 # Replace app.ini settings with env variables in the form FORGENTE__SECTION_NAME__KEY_NAME (or the legacy GITEA__ form)
-environment-to-ini --config ${GITEA_CUSTOM}/conf/app.ini
+environment-to-ini --config ${FORGENTE_CUSTOM}/conf/app.ini
 
 # only chown if current owner is not already the gitea ${USER}. No recursive check to save time
 if ! [[ $(ls -ld /data/gitea   | awk '{print $3}') = ${USER} ]]; then chown -R ${USER}:git /data/gitea;   fi

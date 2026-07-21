@@ -11,5 +11,5 @@ FORGENTE="/app/forgente/forgente"
 WORK_DIR="/data/gitea"
 CUSTOM_PATH="/data/gitea"
 
-# Provide docker defaults
-GITEA_WORK_DIR="${GITEA_WORK_DIR:-$WORK_DIR}" GITEA_CUSTOM="${GITEA_CUSTOM:-$CUSTOM_PATH}" exec -a "$0" "$FORGENTE" $CONF_ARG "$@"
+# Provide docker defaults; FORGENTE_* is primary, GITEA_* honored as a deprecated fallback
+FORGENTE_WORK_DIR="${FORGENTE_WORK_DIR:-${GITEA_WORK_DIR:-$WORK_DIR}}" FORGENTE_CUSTOM="${FORGENTE_CUSTOM:-${GITEA_CUSTOM:-$CUSTOM_PATH}}" exec -a "$0" "$FORGENTE" $CONF_ARG "$@"

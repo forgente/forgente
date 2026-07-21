@@ -80,7 +80,7 @@ RUN ln -s /app/forgente /app/gitea
 
 ENV USER=git
 # /data/gitea is kept as-is (not /data/forgente): existing volumes already have data under /data/gitea/...
-ENV GITEA_CUSTOM=/data/gitea
+ENV FORGENTE_CUSTOM=/data/gitea
 
 VOLUME ["/data"]
 
