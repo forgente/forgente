@@ -98,32 +98,36 @@ configured).
 
 ### Shipping a tagged release
 
-Forgente versions are `v<upstream version>-<forgente release>`, e.g.
-`v1.26.4-1` is the first Forgente release of Gitea 1.26.4 (the Forgejo
-convention). Post-hard-fork, main has diverged from upstream, so this scheme
-is an open question for the first post-fork release (tracked in
-[ROADMAP.md](ROADMAP.md)). Upstream tags mirrored before the cutover remain
-in this repository, so plain `vX.Y.Z` names are taken — pushing such a tag is
-harmless by design: it runs the workflow file *at that tag*, which targets
-upstream's private runners and just queues (cancel it).
+Forgente versions are Forgente-native semver starting at **v2.0.0** (decided
+2026-07-21 with the hard fork): the pre-fork `v<upstream>-<N>` releases
+(`v1.26.4-1`, `v1.27.0-1`) remain valid history, and v2.0.0 will be the
+first post-fork release — a semver **major** on purpose, since the cutover
+changes operator-facing surfaces (see
+[docs/migration-hard-fork.md](docs/migration-hard-fork.md)). The v1.x tag
+namespace is retired: upstream tags mirrored before the cutover live there,
+so plain `v1.Y.Z` names are taken — pushing such a mirrored tag is harmless
+by design: it runs the workflow file *at that tag*, which targets upstream's
+private runners and just queues (cancel it).
 
 Release procedure:
 
-1. Branch `forgente/vX.Y` from the upstream tag being shipped (NOT
-   `release/vX.Y*` — the sync routine owns `release/v*` as pure upstream
-   mirrors, and `release-nightly` triggers on that pattern). Cherry-pick the
-   rebrand commits (the conflict-file list below is the checklist) onto it.
-2. Dry-run with an rc tag first (`vX.Y.Z-N-rc1`): `release-tag-rc` builds
+1. Branch `forgente/vX.Y` (e.g. `forgente/v2.0`) from `main` at the chosen
+   release point (NOT `release/vX.Y*` — those are frozen pre-fork upstream
+   mirrors, and `release-nightly` triggers on that pattern). Main is the
+   single source of truth now; there are no rebrand commits to cherry-pick.
+2. Dry-run with an rc tag first (`vX.Y.Z-rc1`): `release-tag-rc` builds
    binaries and rc images and creates a *draft* GitHub release — delete the
    draft after verifying.
-3. Push an **annotated** tag `vX.Y.Z-N` whose message is the release notes
-   (`gh release create --notes-from-tag`): "based on Gitea X.Y.Z" + link to
-   upstream's changelog + the Forgente delta.
+3. Push an **annotated** tag `vX.Y.Z` whose message is the release notes
+   (`gh release create --notes-from-tag`): the Forgente changelog, the
+   upstream baseline it forked from (for v2.0.0: Gitea main as of
+   2026-07-21 / #47), and for v2.0.0 a prominent link to the migration
+   guide.
 4. `release-tag-version` publishes binaries to GitHub + S3 and container
-   images tagged `latest`, `<major>`, `<major.minor>`, `<upstream version>`,
-   `<full version>` (+ `-rootless`). The workflow uses `type=match` docker
-   tag patterns because semver types would treat the `-N` suffix as a
-   prerelease and skip `latest`/major/minor.
+   images tagged `latest`, `<major>`, `<major.minor>`, `<full version>`
+   (+ `-rootless`). The workflow keeps `type=match` docker tag patterns
+   (they cover both the new plain-semver tags and the historical `-N`
+   suffixed ones, which semver types would treat as prereleases).
 5. Fan out: `forgente/deployment` version.json (update checker),
    `homebrew-forgente` versioned formula, `helm-forgente` chart pin, and
    pin the forgente.com instance to the new tag (compose image bump —

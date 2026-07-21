@@ -55,9 +55,11 @@ The cutover ran as one deliberate campaign of five stacked PRs. What shipped
    (contrib/forgente/pick-upstream.sh).
 7. Ecosystem table re-checked: no API divergence, table stands.
 
-Open item from the cutover: the `vX.Y.Z-N` version scheme was defined by
-"based on Gitea X.Y.Z" and decouples now that main has diverged — decide the
-scheme for the first post-fork release.
+Version scheme (decided 2026-07-21, closing the cutover's open item):
+Forgente-native semver from **v2.0.0** — the major bump signals the
+operator-facing breaking changes of the cutover, and the v1.x namespace is
+retired to the pre-fork `v<upstream>-<N>` releases and mirrored upstream
+tags. Release mechanics in [FORGENTE.md](FORGENTE.md).
 
 ## Standing rule — security
 
