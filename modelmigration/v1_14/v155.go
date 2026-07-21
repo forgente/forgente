@@ -6,7 +6,7 @@ package v1_14
 import (
 	"fmt"
 
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 )
 
 func AddChangedProtectedFilesPullRequestColumn(x base.EngineMigration) error {

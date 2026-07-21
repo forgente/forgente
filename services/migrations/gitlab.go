@@ -15,12 +15,12 @@ import (
 	"strings"
 	"time"
 
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/log"
-	base "gitea.dev/modules/migration"
-	"gitea.dev/modules/structs"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/log"
+	base "forgente.com/modules/migration"
+	"forgente.com/modules/structs"
 
 	gitlab "gitlab.com/gitlab-org/api/client-go/v2"
 )

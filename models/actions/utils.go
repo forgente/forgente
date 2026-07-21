@@ -12,10 +12,10 @@ import (
 	"io"
 	"time"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/modules/log"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
 )
 
 func generateSaltedToken() (string, string, string, string) {

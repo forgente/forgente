@@ -9,7 +9,7 @@ package git
 import (
 	"context"
 
-	"gitea.dev/modules/log"
+	"forgente.com/modules/log"
 
 	"github.com/go-git/go-git/v5/plumbing"
 )

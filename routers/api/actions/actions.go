@@ -6,9 +6,9 @@ package actions
 import (
 	"net/http"
 
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/api/actions/ping"
-	"gitea.dev/routers/api/actions/runner"
+	"forgente.com/modules/web"
+	"forgente.com/routers/api/actions/ping"
+	"forgente.com/routers/api/actions/runner"
 )
 
 func Routes(prefix string) *web.Router {

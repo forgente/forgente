@@ -3,7 +3,7 @@
 
 package v1_14
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func CommentTypeDeleteBranchUseOldRef(x base.EngineMigration) error {
 	_, err := x.Exec("UPDATE comment SET old_ref = commit_sha, commit_sha = '' WHERE type = 11")

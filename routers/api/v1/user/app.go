@@ -10,14 +10,14 @@ import (
 	"strconv"
 	"strings"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/db"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
-	"gitea.dev/services/forms"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/db"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
+	"forgente.com/services/forms"
 )
 
 // ListAccessTokens list all the access tokens

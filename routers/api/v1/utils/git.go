@@ -6,11 +6,11 @@ package utils
 import (
 	"errors"
 
-	git_model "gitea.dev/models/git"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/reqctx"
-	"gitea.dev/services/context"
+	git_model "forgente.com/models/git"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/reqctx"
+	"forgente.com/services/context"
 )
 
 type RefCommit struct {

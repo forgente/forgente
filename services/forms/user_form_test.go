@@ -6,9 +6,9 @@ package forms
 import (
 	"testing"
 
-	"gitea.dev/modules/glob"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
+	"forgente.com/modules/glob"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
 
 	"github.com/stretchr/testify/assert"
 )

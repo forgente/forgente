@@ -6,12 +6,12 @@ package user
 import (
 	"net/http"
 
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
 )
 
 // SearchCandidates searches candidate users for dropdown list

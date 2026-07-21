@@ -8,14 +8,14 @@ import (
 	"net/url"
 	"time"
 
-	"gitea.dev/models/db"
-	packages_model "gitea.dev/models/packages"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/services/context"
-	packages_service "gitea.dev/services/packages"
-	packages_cleanup_service "gitea.dev/services/packages/cleanup"
+	"forgente.com/models/db"
+	packages_model "forgente.com/models/packages"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/services/context"
+	packages_service "forgente.com/services/packages"
+	packages_cleanup_service "forgente.com/services/packages/cleanup"
 )
 
 const (

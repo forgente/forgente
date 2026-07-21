@@ -7,7 +7,6 @@ import (
 	"testing"
 
 	runnerv1 "gitea.dev/actions-proto-go/runner/v1"
-
 	"github.com/stretchr/testify/assert"
 )
 

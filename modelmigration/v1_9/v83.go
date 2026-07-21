@@ -4,8 +4,8 @@
 package v1_9
 
 import (
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/timeutil"
 )
 
 func AddUploaderIDForAttachment(x base.EngineMigration) error {

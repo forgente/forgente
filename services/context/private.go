@@ -9,12 +9,12 @@ import (
 	"net/http"
 	"time"
 
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/private"
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/web"
-	web_types "gitea.dev/modules/web/types"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	"forgente.com/modules/private"
+	"forgente.com/modules/process"
+	"forgente.com/modules/web"
+	web_types "forgente.com/modules/web/types"
 )
 
 // PrivateContext represents a context for private routes

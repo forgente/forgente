@@ -6,8 +6,8 @@ package issues
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
 )
 
 // IssueLockOptions defines options for locking and/or unlocking an issue/PR

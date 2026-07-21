@@ -7,9 +7,9 @@ import (
 	"io"
 	"testing"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
+	"forgente.com/models/db"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

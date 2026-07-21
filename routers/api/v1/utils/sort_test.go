@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"testing"
 
-	"gitea.dev/models/db"
-	"gitea.dev/services/contexttest"
+	"forgente.com/models/db"
+	"forgente.com/services/contexttest"
 
 	"github.com/stretchr/testify/assert"
 )

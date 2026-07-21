@@ -8,12 +8,12 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/timeutil"
-	webhook_module "gitea.dev/modules/webhook"
+	"forgente.com/models/db"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/json"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/timeutil"
+	webhook_module "forgente.com/modules/webhook"
 
 	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"

@@ -11,14 +11,14 @@ import (
 	"sort"
 	"time"
 
-	packages_model "gitea.dev/models/packages"
-	"gitea.dev/modules/optional"
-	packages_module "gitea.dev/modules/packages"
-	goproxy_module "gitea.dev/modules/packages/goproxy"
-	"gitea.dev/modules/util"
-	"gitea.dev/routers/api/packages/helper"
-	"gitea.dev/services/context"
-	packages_service "gitea.dev/services/packages"
+	packages_model "forgente.com/models/packages"
+	"forgente.com/modules/optional"
+	packages_module "forgente.com/modules/packages"
+	goproxy_module "forgente.com/modules/packages/goproxy"
+	"forgente.com/modules/util"
+	"forgente.com/routers/api/packages/helper"
+	"forgente.com/services/context"
+	packages_service "forgente.com/services/packages"
 )
 
 func apiError(ctx *context.Context, status int, obj any) {

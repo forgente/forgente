@@ -8,12 +8,12 @@ import (
 	"fmt"
 	"strings"
 
-	"gitea.dev/models/db"
-	issue_model "gitea.dev/models/issues"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/indexer/issues/internal"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	issue_model "forgente.com/models/issues"
+	"forgente.com/modules/container"
+	"forgente.com/modules/indexer/issues/internal"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/util"
 )
 
 func ToDBOptions(ctx context.Context, options *internal.SearchOptions) (*issue_model.IssuesOptions, error) {

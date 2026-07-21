@@ -12,8 +12,8 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/log"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/log"
 )
 
 // lsFileLine is a Quadruplet struct (+error) representing a partially parsed line from ls-files

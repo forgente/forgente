@@ -6,14 +6,14 @@ package repo_test
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
+	"forgente.com/models/unittest"
 
-	_ "gitea.dev/models" // register table model
-	_ "gitea.dev/models/actions"
-	_ "gitea.dev/models/activities"
-	_ "gitea.dev/models/perm/access" // register table model
-	_ "gitea.dev/models/repo"        // register table model
-	_ "gitea.dev/models/user"        // register table model
+	_ "forgente.com/models" // register table model
+	_ "forgente.com/models/actions"
+	_ "forgente.com/models/activities"
+	_ "forgente.com/models/perm/access" // register table model
+	_ "forgente.com/models/repo"        // register table model
+	_ "forgente.com/models/user"        // register table model
 )
 
 func TestMain(m *testing.M) {

@@ -6,13 +6,13 @@ package actions
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/translation"
-	webhook_module "gitea.dev/modules/webhook"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/translation"
+	webhook_module "forgente.com/modules/webhook"
 
 	"xorm.io/builder"
 )

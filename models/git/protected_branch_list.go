@@ -7,9 +7,9 @@ import (
 	"context"
 	"sort"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/glob"
-	"gitea.dev/modules/optional"
+	"forgente.com/models/db"
+	"forgente.com/modules/glob"
+	"forgente.com/modules/optional"
 )
 
 type ProtectedBranchRules []*ProtectedBranch

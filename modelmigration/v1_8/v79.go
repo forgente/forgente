@@ -4,8 +4,8 @@
 package v1_8
 
 import (
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/setting"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/setting"
 )
 
 func AddCanCloseIssuesViaCommitInAnyBranch(x base.EngineMigration) error {

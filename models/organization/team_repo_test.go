@@ -6,11 +6,11 @@ package organization_test
 import (
 	"testing"
 
-	"gitea.dev/models/organization"
-	"gitea.dev/models/perm"
-	"gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	"gitea.dev/models/unittest"
+	"forgente.com/models/organization"
+	"forgente.com/models/perm"
+	"forgente.com/models/repo"
+	"forgente.com/models/unit"
+	"forgente.com/models/unittest"
 
 	"github.com/stretchr/testify/assert"
 )

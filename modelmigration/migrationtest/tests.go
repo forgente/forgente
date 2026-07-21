@@ -8,12 +8,12 @@ import (
 	"path/filepath"
 	"testing"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/models/db"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/testlogger"
+	"forgente.com/modelmigration/base"
+	"forgente.com/models/db"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/git"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/testlogger"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

@@ -10,10 +10,10 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/modules/indexer/issues/internal"
-	"gitea.dev/modules/indexer/issues/internal/tests"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/test"
+	"forgente.com/modules/indexer/issues/internal"
+	"forgente.com/modules/indexer/issues/internal/tests"
+	"forgente.com/modules/json"
+	"forgente.com/modules/test"
 
 	"github.com/meilisearch/meilisearch-go"
 	"github.com/stretchr/testify/assert"

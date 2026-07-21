@@ -8,10 +8,10 @@ import (
 	"net/url"
 	"testing"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	api "gitea.dev/modules/structs"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	api "forgente.com/modules/structs"
 
 	"github.com/stretchr/testify/assert"
 )

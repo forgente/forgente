@@ -10,7 +10,7 @@ package templates
 import (
 	"sync"
 
-	"gitea.dev/modules/assetfs"
+	"forgente.com/modules/assetfs"
 
 	_ "embed"
 )

@@ -8,12 +8,12 @@ import (
 	"strings"
 	"testing"
 
-	"gitea.dev/modules/emoji"
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/markup/markdown"
-	"gitea.dev/modules/setting"
-	testModule "gitea.dev/modules/test"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/emoji"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/markup/markdown"
+	"forgente.com/modules/setting"
+	testModule "forgente.com/modules/test"
+	"forgente.com/modules/util"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -3,7 +3,7 @@
 
 package v1_22
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddIndexToPullAutoMergeDoerID(x base.EngineMigration) error {
 	type PullAutoMerge struct {

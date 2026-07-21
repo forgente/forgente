@@ -9,8 +9,8 @@ import (
 	"io"
 	"regexp"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/validation"
+	"forgente.com/modules/json"
+	"forgente.com/modules/validation"
 
 	"github.com/hashicorp/go-version"
 )

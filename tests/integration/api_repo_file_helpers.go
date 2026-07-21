@@ -9,11 +9,11 @@ import (
 	"strings"
 	"testing"
 
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	files_service "gitea.dev/services/repository/files"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	files_service "forgente.com/services/repository/files"
 
 	"github.com/stretchr/testify/require"
 )

@@ -6,9 +6,9 @@ package v1_25
 import (
 	"testing"
 
-	"gitea.dev/modelmigration/migrationtest"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modelmigration/migrationtest"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/timeutil"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

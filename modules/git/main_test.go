@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"testing"
 
-	"gitea.dev/modules/git/gitcmd"
+	"forgente.com/modules/git/gitcmd"
 )
 
 const testReposDir = "tests/repos/"

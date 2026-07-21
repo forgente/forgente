@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"os/exec"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 var GitExecutable = "git" // the command name of git, will be updated to an absolute path during initialization

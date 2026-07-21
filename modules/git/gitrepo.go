@@ -7,9 +7,9 @@ import (
 	"context"
 	"io"
 
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/reqctx"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/reqctx"
+	"forgente.com/modules/util"
 )
 
 // contextKey is a value for use with context.WithValue.

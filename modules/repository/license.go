@@ -10,7 +10,7 @@ import (
 	"regexp"
 	"strings"
 
-	"gitea.dev/modules/options"
+	"forgente.com/modules/options"
 )
 
 type LicenseValues struct {

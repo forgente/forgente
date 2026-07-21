@@ -6,8 +6,8 @@ package actions
 import (
 	"context"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
 )
 
 // ComputeTaskTokenPermissions computes the effective permissions for a job token against the target repository.

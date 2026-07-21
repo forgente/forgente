@@ -6,15 +6,15 @@ package repo
 import (
 	"net/http"
 
-	issues_model "gitea.dev/models/issues"
-	access_model "gitea.dev/models/perm/access"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
-	issue_service "gitea.dev/services/issue"
+	issues_model "forgente.com/models/issues"
+	access_model "forgente.com/models/perm/access"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
+	issue_service "forgente.com/services/issue"
 )
 
 // AddIssueAssignees add assignees to an issue

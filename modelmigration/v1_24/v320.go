@@ -4,8 +4,8 @@
 package v1_24
 
 import (
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/json"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/json"
 
 	"xorm.io/xorm"
 )

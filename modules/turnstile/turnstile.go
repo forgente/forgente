@@ -11,10 +11,10 @@ import (
 	"net/url"
 	"strings"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/proxy"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/json"
+	"forgente.com/modules/proxy"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 // httpClient returns an HTTP client that honors Gitea's proxy configuration.

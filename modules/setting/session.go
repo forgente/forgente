@@ -8,9 +8,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 )
 
 // SessionConfig defines Session settings

@@ -7,9 +7,9 @@ import (
 	"context"
 	"fmt"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/setting"
 )
 
 // CreateTemporaryGitRepo creates a temporary Git repository empty directory (not initialized)

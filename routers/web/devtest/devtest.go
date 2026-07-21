@@ -13,17 +13,17 @@ import (
 	"time"
 	"unicode"
 
-	"gitea.dev/models/asymkey"
-	"gitea.dev/models/db"
-	"gitea.dev/models/gituser"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/badge"
-	"gitea.dev/modules/charset"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/indexer/code"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
+	"forgente.com/models/asymkey"
+	"forgente.com/models/db"
+	"forgente.com/models/gituser"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/badge"
+	"forgente.com/modules/charset"
+	"forgente.com/modules/git"
+	"forgente.com/modules/indexer/code"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
 )
 
 // List all devtest templates, they will be used for e2e tests for the UI components

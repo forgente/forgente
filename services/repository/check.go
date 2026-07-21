@@ -9,14 +9,14 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	system_model "gitea.dev/models/system"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/log"
-	repo_module "gitea.dev/modules/repository"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	system_model "forgente.com/models/system"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/log"
+	repo_module "forgente.com/modules/repository"
 
 	"xorm.io/builder"
 )

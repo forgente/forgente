@@ -8,12 +8,12 @@ import (
 	"net/http"
 	"testing"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/tests"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

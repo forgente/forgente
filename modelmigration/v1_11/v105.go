@@ -3,7 +3,7 @@
 
 package v1_11
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddTeamIncludesAllRepositories(x base.EngineMigration) error {
 	type Team struct {

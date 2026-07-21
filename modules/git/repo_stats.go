@@ -12,8 +12,8 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/git/gitcmd"
+	"forgente.com/modules/container"
+	"forgente.com/modules/git/gitcmd"
 )
 
 // CodeActivityStats represents git statistics data

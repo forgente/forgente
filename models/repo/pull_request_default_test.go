@@ -6,9 +6,9 @@ package repo
 import (
 	"testing"
 
-	"gitea.dev/models/unit"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/util"
+	"forgente.com/models/unit"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/util"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -10,12 +10,12 @@ import (
 	"net/http"
 	"strings"
 
-	"gitea.dev/models/avatars"
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/modules/htmlutil"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/templates"
-	"gitea.dev/services/context"
+	"forgente.com/models/avatars"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/modules/htmlutil"
+	"forgente.com/modules/log"
+	"forgente.com/modules/templates"
+	"forgente.com/services/context"
 
 	"github.com/sergi/go-diff/diffmatchpatch"
 )

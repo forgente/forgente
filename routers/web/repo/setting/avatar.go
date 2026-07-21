@@ -8,13 +8,13 @@ import (
 	"fmt"
 	"io"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/typesniffer"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	"gitea.dev/services/forms"
-	repo_service "gitea.dev/services/repository"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/typesniffer"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	"forgente.com/services/forms"
+	repo_service "forgente.com/services/repository"
 )
 
 // UpdateAvatarSetting update repo's avatar

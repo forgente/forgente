@@ -4,7 +4,7 @@
 package swagger
 
 import (
-	api "gitea.dev/modules/structs"
+	api "forgente.com/modules/structs"
 )
 
 // CronList

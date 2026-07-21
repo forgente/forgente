@@ -9,7 +9,7 @@ import (
 	"context"
 	"fmt"
 
-	"gitea.dev/modules/git"
+	"forgente.com/modules/git"
 
 	"github.com/go-git/go-git/v5/plumbing/object"
 )

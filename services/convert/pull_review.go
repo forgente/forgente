@@ -7,9 +7,9 @@ import (
 	"context"
 	"strings"
 
-	issues_model "gitea.dev/models/issues"
-	user_model "gitea.dev/models/user"
-	api "gitea.dev/modules/structs"
+	issues_model "forgente.com/models/issues"
+	user_model "forgente.com/models/user"
+	api "forgente.com/modules/structs"
 )
 
 // ToPullReview convert a review to api format

@@ -6,11 +6,11 @@ package issue
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	notify_service "gitea.dev/services/notify"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	notify_service "forgente.com/services/notify"
 )
 
 // CloseIssue close an issue.

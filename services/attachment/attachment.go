@@ -11,12 +11,12 @@ import (
 	"io"
 	"net/http"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/storage"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context/upload"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/storage"
+	"forgente.com/modules/util"
+	"forgente.com/services/context/upload"
 
 	"github.com/google/uuid"
 )

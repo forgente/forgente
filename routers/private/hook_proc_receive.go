@@ -7,14 +7,14 @@ import (
 	"errors"
 	"net/http"
 
-	issues_model "gitea.dev/models/issues"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/private"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/agit"
-	gitea_context "gitea.dev/services/context"
+	issues_model "forgente.com/models/issues"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	"forgente.com/modules/private"
+	"forgente.com/modules/web"
+	"forgente.com/services/agit"
+	gitea_context "forgente.com/services/context"
 )
 
 // HookProcReceive proc-receive hook - only handles agit Proc-Receive requests at present

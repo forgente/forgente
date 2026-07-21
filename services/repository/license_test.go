@@ -7,7 +7,7 @@ import (
 	"strings"
 	"testing"
 
-	repo_module "gitea.dev/modules/repository"
+	repo_module "forgente.com/modules/repository"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

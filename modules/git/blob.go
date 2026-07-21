@@ -12,7 +12,7 @@ import (
 	"io"
 	"strings"
 
-	"gitea.dev/modules/util"
+	"forgente.com/modules/util"
 )
 
 // This file contains common functions between the gogit and !gogit variants for git Blobs

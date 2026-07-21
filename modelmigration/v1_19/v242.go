@@ -4,8 +4,8 @@
 package v1_19
 
 import (
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/setting"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/setting"
 )
 
 // AlterPublicGPGKeyImportContentFieldToMediumText: set GPGKeyImport Content field to MEDIUMTEXT

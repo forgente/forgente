@@ -6,7 +6,7 @@ package v1_15
 import (
 	"strings"
 
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 )
 
 func AddPrimaryEmail2EmailAddress(x base.EngineMigration) error {

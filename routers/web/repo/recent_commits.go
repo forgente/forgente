@@ -6,8 +6,8 @@ package repo
 import (
 	"net/http"
 
-	"gitea.dev/modules/templates"
-	"gitea.dev/services/context"
+	"forgente.com/modules/templates"
+	"forgente.com/services/context"
 )
 
 const (

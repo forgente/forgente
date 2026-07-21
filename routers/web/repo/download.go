@@ -7,16 +7,16 @@ package repo
 import (
 	"time"
 
-	auth_model "gitea.dev/models/auth"
-	git_model "gitea.dev/models/git"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/httpcache"
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/lfs"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/storage"
-	"gitea.dev/routers/common"
-	"gitea.dev/services/context"
+	auth_model "forgente.com/models/auth"
+	git_model "forgente.com/models/git"
+	"forgente.com/modules/git"
+	"forgente.com/modules/httpcache"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/lfs"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/storage"
+	"forgente.com/routers/common"
+	"forgente.com/services/context"
 )
 
 func checkDownloadTokenScope(ctx *context.Context) bool {

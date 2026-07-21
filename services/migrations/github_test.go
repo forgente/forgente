@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/models/unittest"
-	base "gitea.dev/modules/migration"
+	"forgente.com/models/unittest"
+	base "forgente.com/modules/migration"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

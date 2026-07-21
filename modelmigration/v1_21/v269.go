@@ -3,7 +3,7 @@
 
 package v1_21
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func DropDeletedBranchTable(x base.EngineMigration) error {
 	return x.DropTables("deleted_branch")

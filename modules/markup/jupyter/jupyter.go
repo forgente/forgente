@@ -11,14 +11,14 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/highlight"
-	"gitea.dev/modules/htmlutil"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/markup/markdown"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/highlight"
+	"forgente.com/modules/htmlutil"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/markup/markdown"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 func init() {

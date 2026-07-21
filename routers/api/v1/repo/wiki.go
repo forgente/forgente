@@ -9,16 +9,16 @@ import (
 	"net/http"
 	"net/url"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
-	notify_service "gitea.dev/services/notify"
-	wiki_service "gitea.dev/services/wiki"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
+	notify_service "forgente.com/services/notify"
+	wiki_service "forgente.com/services/wiki"
 )
 
 // NewWikiPage response for wiki create request

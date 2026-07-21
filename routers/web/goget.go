@@ -11,14 +11,14 @@ import (
 	"path"
 	"strings"
 
-	auth_model "gitea.dev/models/auth"
-	access_model "gitea.dev/models/perm/access"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
+	auth_model "forgente.com/models/auth"
+	access_model "forgente.com/models/perm/access"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
 )
 
 func goGet(ctx *context.Context) {

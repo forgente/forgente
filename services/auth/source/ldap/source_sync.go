@@ -7,17 +7,17 @@ import (
 	"context"
 	"strings"
 
-	asymkey_model "gitea.dev/models/asymkey"
-	"gitea.dev/models/db"
-	"gitea.dev/models/organization"
-	user_model "gitea.dev/models/user"
-	auth_module "gitea.dev/modules/auth"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/optional"
-	asymkey_service "gitea.dev/services/asymkey"
-	source_service "gitea.dev/services/auth/source"
-	user_service "gitea.dev/services/user"
+	asymkey_model "forgente.com/models/asymkey"
+	"forgente.com/models/db"
+	"forgente.com/models/organization"
+	user_model "forgente.com/models/user"
+	auth_module "forgente.com/modules/auth"
+	"forgente.com/modules/container"
+	"forgente.com/modules/log"
+	"forgente.com/modules/optional"
+	asymkey_service "forgente.com/services/asymkey"
+	source_service "forgente.com/services/auth/source"
+	user_service "forgente.com/services/user"
 )
 
 // Sync causes this ldap source to synchronize its users with the db

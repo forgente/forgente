@@ -6,8 +6,8 @@ package organization_test
 import (
 	"testing"
 
-	org_model "gitea.dev/models/organization"
-	"gitea.dev/models/unittest"
+	org_model "forgente.com/models/organization"
+	"forgente.com/models/unittest"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -7,13 +7,13 @@ import (
 	"context"
 	"fmt"
 
-	org_model "gitea.dev/models/organization"
-	packages_model "gitea.dev/models/packages"
-	access_model "gitea.dev/models/perm/access"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/util"
+	org_model "forgente.com/models/organization"
+	packages_model "forgente.com/models/packages"
+	access_model "forgente.com/models/perm/access"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/util"
 )
 
 func LinkToRepository(ctx context.Context, pkg *packages_model.Package, repo *repo_model.Repository, doer *user_model.User) error {

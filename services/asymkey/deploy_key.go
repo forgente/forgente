@@ -7,9 +7,9 @@ import (
 	"context"
 	"fmt"
 
-	asymkey_model "gitea.dev/models/asymkey"
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
+	asymkey_model "forgente.com/models/asymkey"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
 )
 
 // DeleteRepoDeployKeys deletes all deploy keys of a repository. permissions check should be done outside

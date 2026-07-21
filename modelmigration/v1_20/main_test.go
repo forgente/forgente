@@ -6,7 +6,7 @@ package v1_20
 import (
 	"testing"
 
-	"gitea.dev/modelmigration/migrationtest"
+	"forgente.com/modelmigration/migrationtest"
 )
 
 func TestMain(m *testing.M) {

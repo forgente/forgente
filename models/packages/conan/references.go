@@ -8,11 +8,11 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/packages"
-	conan_module "gitea.dev/modules/packages/conan"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	"forgente.com/models/packages"
+	conan_module "forgente.com/modules/packages/conan"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
 
 	"xorm.io/builder"
 )

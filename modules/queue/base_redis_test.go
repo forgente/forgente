@@ -10,9 +10,9 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/modules/nosql"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
+	"forgente.com/modules/nosql"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

@@ -6,8 +6,8 @@ package db
 import (
 	"context"
 
-	"gitea.dev/models/auth"
-	user_model "gitea.dev/models/user"
+	"forgente.com/models/auth"
+	user_model "forgente.com/models/user"
 )
 
 // Source is a password authentication service

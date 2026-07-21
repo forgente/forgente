@@ -6,8 +6,8 @@ package payload
 import (
 	"context"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/util"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/util"
 )
 
 const forgenteNewIssuePayloadVersion1 byte = 1

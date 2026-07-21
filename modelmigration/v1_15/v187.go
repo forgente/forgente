@@ -4,7 +4,7 @@
 package v1_15
 
 import (
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 )
 
 func DropWebhookColumns(x base.EngineMigration) error {

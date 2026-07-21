@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"path"
 
-	"gitea.dev/models/renderhelper"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/markup"
-	"gitea.dev/services/context"
+	"forgente.com/models/renderhelper"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	"forgente.com/modules/markup"
+	"forgente.com/services/context"
 )
 
 // RenderFile renders a file by repos path

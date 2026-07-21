@@ -4,7 +4,7 @@
 
 package paginator
 
-import "gitea.dev/modules/util"
+import "forgente.com/modules/util"
 
 /*
 In template:

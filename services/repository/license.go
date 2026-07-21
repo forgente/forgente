@@ -8,14 +8,14 @@ import (
 	"fmt"
 	"io"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/options"
-	"gitea.dev/modules/queue"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/container"
+	"forgente.com/modules/git"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	"forgente.com/modules/options"
+	"forgente.com/modules/queue"
 
 	licenseclassifier "github.com/google/licenseclassifier/v2"
 )

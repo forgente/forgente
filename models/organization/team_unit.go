@@ -6,9 +6,9 @@ package organization
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/perm"
-	"gitea.dev/models/unit"
+	"forgente.com/models/db"
+	"forgente.com/models/perm"
+	"forgente.com/models/unit"
 )
 
 // TeamUnit describes all units of a repository

@@ -6,13 +6,13 @@ package misc
 import (
 	"net/http"
 
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web/middleware"
-	"gitea.dev/services/context"
-	user_service "gitea.dev/services/user"
-	"gitea.dev/services/webtheme"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web/middleware"
+	"forgente.com/services/context"
+	user_service "forgente.com/services/user"
+	"forgente.com/services/webtheme"
 )
 
 func WebThemeList(ctx *context.Context) {

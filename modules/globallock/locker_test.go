@@ -10,8 +10,8 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/modules/test"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/test"
+	"forgente.com/modules/util"
 
 	"github.com/go-redsync/redsync/v4"
 	"github.com/stretchr/testify/assert"

@@ -6,7 +6,7 @@ package v1_21
 import (
 	"fmt"
 
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 )
 
 // AddGitSizeAndLFSSizeToRepositoryTable: add GitSize and LFSSize columns to Repository

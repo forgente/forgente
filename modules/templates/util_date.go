@@ -10,8 +10,8 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/timeutil"
 )
 
 type DateUtils struct{}

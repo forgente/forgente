@@ -7,9 +7,9 @@ import (
 	"context"
 	"testing"
 
-	"gitea.dev/models/auth"
-	"gitea.dev/modules/test"
-	"gitea.dev/services/auth/source/ldap"
+	"forgente.com/models/auth"
+	"forgente.com/modules/test"
+	"forgente.com/services/auth/source/ldap"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/urfave/cli/v3"

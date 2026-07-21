@@ -13,14 +13,14 @@ import (
 	"strings"
 	"time"
 
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
-	asymkey_service "gitea.dev/services/asymkey"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
+	asymkey_service "forgente.com/services/asymkey"
 )
 
 type mergeContext struct {

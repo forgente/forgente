@@ -6,14 +6,14 @@ package notify
 import (
 	"context"
 
-	actions_model "gitea.dev/models/actions"
-	git_model "gitea.dev/models/git"
-	issues_model "gitea.dev/models/issues"
-	packages_model "gitea.dev/models/packages"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/repository"
+	actions_model "forgente.com/models/actions"
+	git_model "forgente.com/models/git"
+	issues_model "forgente.com/models/issues"
+	packages_model "forgente.com/models/packages"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/repository"
 )
 
 // Notifier defines an interface to notify receiver

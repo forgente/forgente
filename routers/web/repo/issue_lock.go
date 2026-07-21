@@ -4,10 +4,10 @@
 package repo
 
 import (
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	"gitea.dev/services/forms"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	"forgente.com/services/forms"
 )
 
 // LockIssue locks an issue. This would limit commenting abilities to

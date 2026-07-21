@@ -9,12 +9,12 @@ import (
 	"fmt"
 	"strings"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
-	pwd "gitea.dev/modules/auth/password"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
+	pwd "forgente.com/modules/auth/password"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
 
 	"github.com/urfave/cli/v3"
 )

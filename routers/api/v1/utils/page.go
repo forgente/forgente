@@ -4,9 +4,9 @@
 package utils
 
 import (
-	"gitea.dev/models/db"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
+	"forgente.com/models/db"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
 )
 
 // GetListOptions returns list options using the page and limit parameters

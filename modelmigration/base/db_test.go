@@ -6,9 +6,9 @@ package base_test
 import (
 	"testing"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modelmigration/migrationtest"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modelmigration/migrationtest"
+	"forgente.com/modules/timeutil"
 
 	"xorm.io/xorm/names"
 )

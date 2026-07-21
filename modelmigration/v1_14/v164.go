@@ -6,7 +6,7 @@ package v1_14
 import (
 	"fmt"
 
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 )
 
 // OAuth2Grant here is a snapshot of models.OAuth2Grant for this version

@@ -9,11 +9,11 @@ import (
 	"slices"
 	"strings"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	project_model "gitea.dev/models/project"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/optional"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	project_model "forgente.com/models/project"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/optional"
 
 	"xorm.io/builder"
 )

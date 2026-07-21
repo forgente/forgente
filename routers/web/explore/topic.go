@@ -6,11 +6,11 @@ package explore
 import (
 	"net/http"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	api "forgente.com/modules/structs"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
 )
 
 // TopicSearch search for creating topic

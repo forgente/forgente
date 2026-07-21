@@ -6,8 +6,8 @@ package templates
 import (
 	"context"
 
-	git_model "gitea.dev/models/git"
-	actions_module "gitea.dev/modules/actions"
+	git_model "forgente.com/models/git"
+	actions_module "forgente.com/modules/actions"
 )
 
 type ActionsUtils struct {

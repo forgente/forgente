@@ -11,9 +11,9 @@ import (
 	"runtime"
 	"strings"
 
-	"gitea.dev/modules/auth/password/hash"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/auth/password/hash"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 
 	"github.com/kballard/go-shellquote"
 )

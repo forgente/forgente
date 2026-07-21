@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"strings"
 
-	"gitea.dev/modules/util"
+	"forgente.com/modules/util"
 )
 
 // ErrNotExist commit not exist error

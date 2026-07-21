@@ -6,9 +6,9 @@ package setting
 import (
 	"net/http"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/routers/web/repo"
-	"gitea.dev/services/context"
+	"forgente.com/modules/git"
+	"forgente.com/routers/web/repo"
+	"forgente.com/services/context"
 )
 
 // GitHooks hooks of a repository

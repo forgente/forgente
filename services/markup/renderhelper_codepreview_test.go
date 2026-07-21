@@ -6,11 +6,11 @@ package markup
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/contexttest"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/util"
+	"forgente.com/services/contexttest"
 
 	"github.com/stretchr/testify/assert"
 )

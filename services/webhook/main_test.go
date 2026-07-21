@@ -6,12 +6,12 @@ package webhook
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/hostmatcher"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/hostmatcher"
+	"forgente.com/modules/setting"
 
-	_ "gitea.dev/models"
-	_ "gitea.dev/models/actions"
+	_ "forgente.com/models"
+	_ "forgente.com/models/actions"
 )
 
 func TestMain(m *testing.M) {

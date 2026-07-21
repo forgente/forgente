@@ -7,9 +7,9 @@ import (
 	"context"
 	"fmt"
 
-	"gitea.dev/modelmigration/base"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
+	"forgente.com/modelmigration/base"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
 )
 
 func FixReleaseSha1OnReleaseTable(ctx context.Context, x base.EngineMigration) error {

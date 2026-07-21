@@ -3,7 +3,7 @@
 
 package v1_22
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func DropWronglyCreatedTable(x base.EngineMigration) error {
 	return x.DropTables("o_auth2_application")

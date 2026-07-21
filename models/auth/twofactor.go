@@ -13,11 +13,11 @@ import (
 	"encoding/hex"
 	"fmt"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/secret"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	"forgente.com/modules/secret"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
 
 	"github.com/pquerna/otp/totp"
 	"golang.org/x/crypto/pbkdf2"

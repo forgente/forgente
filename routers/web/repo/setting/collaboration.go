@@ -8,16 +8,16 @@ import (
 	"net/http"
 	"strings"
 
-	"gitea.dev/models/organization"
-	"gitea.dev/models/perm"
-	repo_model "gitea.dev/models/repo"
-	unit_model "gitea.dev/models/unit"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/context"
-	"gitea.dev/services/mailer"
-	repo_service "gitea.dev/services/repository"
+	"forgente.com/models/organization"
+	"forgente.com/models/perm"
+	repo_model "forgente.com/models/repo"
+	unit_model "forgente.com/models/unit"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/services/context"
+	"forgente.com/services/mailer"
+	repo_service "forgente.com/services/repository"
 )
 
 // Collaboration render a repository's collaboration page

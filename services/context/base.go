@@ -12,14 +12,14 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/reqctx"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/translation"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web/middleware"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/reqctx"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/translation"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web/middleware"
 )
 
 type BaseContextKeyType struct{}

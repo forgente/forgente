@@ -8,9 +8,9 @@ import (
 	"reflect"
 	"sync"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 )
 
 type CfgSecKey struct {

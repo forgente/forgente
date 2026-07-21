@@ -9,10 +9,10 @@ import (
 	"strings"
 	"testing"
 
-	"gitea.dev/modules/htmlutil"
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/markup/markdown"
-	testModule "gitea.dev/modules/test"
+	"forgente.com/modules/htmlutil"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/markup/markdown"
+	testModule "forgente.com/modules/test"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

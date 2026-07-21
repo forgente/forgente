@@ -12,8 +12,8 @@ import (
 	"strings"
 	"testing"
 
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/setting"
 
 	"github.com/42wim/sshsig"
 	"github.com/stretchr/testify/assert"

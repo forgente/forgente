@@ -10,14 +10,14 @@ import (
 	"os"
 	"strings"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	base "gitea.dev/modules/migration"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/convert"
-	"gitea.dev/services/migrations"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	base "forgente.com/modules/migration"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/services/convert"
+	"forgente.com/services/migrations"
 
 	"github.com/urfave/cli/v3"
 )

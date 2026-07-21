@@ -8,8 +8,8 @@ import (
 	"fmt"
 	"strings"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/timeutil"
 
 	"github.com/tstranex/u2f"
 	"xorm.io/xorm/schemas"

@@ -9,8 +9,8 @@ import (
 	"errors"
 	"strings"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
 
 	"golang.org/x/sync/errgroup"
 )

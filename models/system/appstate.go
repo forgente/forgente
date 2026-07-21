@@ -6,7 +6,7 @@ package system
 import (
 	"context"
 
-	"gitea.dev/models/db"
+	"forgente.com/models/db"
 
 	"xorm.io/builder"
 )

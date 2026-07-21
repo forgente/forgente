@@ -3,7 +3,7 @@
 
 package v1_10
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddEmailNotificationEnabledToUser(x base.EngineMigration) error {
 	// User see models/user.go

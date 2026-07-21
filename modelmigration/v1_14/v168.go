@@ -3,7 +3,7 @@
 
 package v1_14
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func RecreateUserTableToFixDefaultValues(_ base.EngineMigration) error {
 	return nil

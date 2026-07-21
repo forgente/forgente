@@ -4,10 +4,10 @@
 package admin
 
 import (
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/api/v1/repo"
-	"gitea.dev/services/context"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/routers/api/v1/repo"
+	"forgente.com/services/context"
 )
 
 // CreateRepo api for creating a repository

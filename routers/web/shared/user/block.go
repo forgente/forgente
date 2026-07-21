@@ -6,13 +6,13 @@ package user
 import (
 	"errors"
 
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	"gitea.dev/services/forms"
-	user_service "gitea.dev/services/user"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	"forgente.com/services/forms"
+	user_service "forgente.com/services/user"
 )
 
 func BlockedUsers(ctx *context.Context, blocker *user_model.User) {

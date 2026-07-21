@@ -6,10 +6,10 @@ package repository
 import (
 	"context"
 
-	"gitea.dev/models/organization"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/organization"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
 )
 
 // CanUserForkBetweenOwners returns true if user can fork between owners.

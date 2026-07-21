@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"testing"
 
-	"gitea.dev/tests"
+	"forgente.com/tests"
 )
 
 // TestUpdateIssueLabelForeignLabel verifies that the web issue-label action rejects a

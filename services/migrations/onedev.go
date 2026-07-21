@@ -13,10 +13,10 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	base "gitea.dev/modules/migration"
-	"gitea.dev/modules/structs"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	base "forgente.com/modules/migration"
+	"forgente.com/modules/structs"
 
 	"github.com/hashicorp/go-version"
 )

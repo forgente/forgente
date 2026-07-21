@@ -8,15 +8,15 @@ import (
 	"fmt"
 	"time"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/actions"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
-	webhook_module "gitea.dev/modules/webhook"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/actions"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
+	webhook_module "forgente.com/modules/webhook"
 )
 
 // StopZombieTasks stops tasks in running/cancelling status that haven't been updated for a long time

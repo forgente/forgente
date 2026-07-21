@@ -10,9 +10,9 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 
 	"github.com/Necoro/html2text"
 	gomail "github.com/wneessen/go-mail"

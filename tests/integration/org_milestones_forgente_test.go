@@ -8,7 +8,7 @@ import (
 	"net/url"
 	"testing"
 
-	issues_model "gitea.dev/models/issues"
+	issues_model "forgente.com/models/issues"
 
 	"github.com/stretchr/testify/assert"
 )

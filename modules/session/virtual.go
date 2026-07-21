@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"sync"
 
-	"gitea.dev/modules/json"
+	"forgente.com/modules/json"
 
 	"gitea.com/go-chi/session"
 	couchbase "gitea.com/go-chi/session/couchbase"

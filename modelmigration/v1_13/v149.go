@@ -6,8 +6,8 @@ package v1_13
 import (
 	"fmt"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/timeutil"
 )
 
 func AddCreatedAndUpdatedToMilestones(x base.EngineMigration) error {

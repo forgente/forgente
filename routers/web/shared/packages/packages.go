@@ -8,16 +8,16 @@ import (
 	"net/http"
 	"time"
 
-	packages_model "gitea.dev/models/packages"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	"gitea.dev/services/forms"
-	cargo_service "gitea.dev/services/packages/cargo"
-	container_service "gitea.dev/services/packages/container"
+	packages_model "forgente.com/models/packages"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	"forgente.com/services/forms"
+	cargo_service "forgente.com/services/packages/cargo"
+	container_service "forgente.com/services/packages/container"
 )
 
 func SetPackagesContext(ctx *context.Context, owner *user_model.User) {

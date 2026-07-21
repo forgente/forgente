@@ -7,10 +7,10 @@ import (
 	"encoding/base64"
 	"net/http"
 
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	repo_service "gitea.dev/services/repository"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	repo_service "forgente.com/services/repository"
 )
 
 // UpdateAvatar updates the Avatar of a Repo

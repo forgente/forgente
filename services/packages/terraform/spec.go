@@ -6,12 +6,12 @@ package terraform
 import (
 	"context"
 
-	packages_model "gitea.dev/models/packages"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/optional"
-	terraform_module "gitea.dev/modules/packages/terraform"
-	"gitea.dev/modules/util"
-	packages_service "gitea.dev/services/packages"
+	packages_model "forgente.com/models/packages"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/optional"
+	terraform_module "forgente.com/modules/packages/terraform"
+	"forgente.com/modules/util"
+	packages_service "forgente.com/services/packages"
 )
 
 type Specialization struct{}

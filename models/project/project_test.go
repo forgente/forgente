@@ -6,9 +6,9 @@ package project
 import (
 	"testing"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/timeutil"
 
 	"github.com/stretchr/testify/assert"
 )

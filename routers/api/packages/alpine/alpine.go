@@ -13,15 +13,15 @@ import (
 	"net/http"
 	"strings"
 
-	packages_model "gitea.dev/models/packages"
-	"gitea.dev/modules/json"
-	packages_module "gitea.dev/modules/packages"
-	alpine_module "gitea.dev/modules/packages/alpine"
-	"gitea.dev/modules/util"
-	"gitea.dev/routers/api/packages/helper"
-	"gitea.dev/services/context"
-	packages_service "gitea.dev/services/packages"
-	alpine_service "gitea.dev/services/packages/alpine"
+	packages_model "forgente.com/models/packages"
+	"forgente.com/modules/json"
+	packages_module "forgente.com/modules/packages"
+	alpine_module "forgente.com/modules/packages/alpine"
+	"forgente.com/modules/util"
+	"forgente.com/routers/api/packages/helper"
+	"forgente.com/services/context"
+	packages_service "forgente.com/services/packages"
+	alpine_service "forgente.com/services/packages/alpine"
 )
 
 func apiError(ctx *context.Context, status int, obj any) {

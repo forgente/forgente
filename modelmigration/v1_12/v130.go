@@ -4,9 +4,9 @@
 package v1_12
 
 import (
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/setting"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/json"
+	"forgente.com/modules/setting"
 )
 
 func ExpandWebhooks(x base.EngineMigration) error {

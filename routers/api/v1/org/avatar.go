@@ -7,10 +7,10 @@ import (
 	"encoding/base64"
 	"net/http"
 
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	user_service "gitea.dev/services/user"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	user_service "forgente.com/services/user"
 )
 
 // UpdateAvatarupdates the Avatar of an Organisation

@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"strings"
 
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
-	"gitea.dev/services/mailer"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
+	"forgente.com/services/mailer"
 
 	"go.yaml.in/yaml/v4"
 )

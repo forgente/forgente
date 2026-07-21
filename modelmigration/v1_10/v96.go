@@ -6,9 +6,9 @@ package v1_10
 import (
 	"path/filepath"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 func DeleteOrphanedAttachments(x base.EngineMigration) error {

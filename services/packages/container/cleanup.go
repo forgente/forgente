@@ -7,11 +7,11 @@ import (
 	"context"
 	"time"
 
-	packages_model "gitea.dev/models/packages"
-	container_model "gitea.dev/models/packages/container"
-	"gitea.dev/modules/optional"
-	container_module "gitea.dev/modules/packages/container"
-	packages_service "gitea.dev/services/packages"
+	packages_model "forgente.com/models/packages"
+	container_model "forgente.com/models/packages/container"
+	"forgente.com/modules/optional"
+	container_module "forgente.com/modules/packages/container"
+	packages_service "forgente.com/services/packages"
 
 	"github.com/opencontainers/go-digest"
 )

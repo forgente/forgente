@@ -8,13 +8,13 @@ import (
 	"net/url"
 	"time"
 
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	api "gitea.dev/modules/structs"
-	ctx "gitea.dev/services/context"
-	"gitea.dev/services/gitdiff"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	api "forgente.com/modules/structs"
+	ctx "forgente.com/services/context"
+	"forgente.com/services/gitdiff"
 )
 
 // ToCommitUser convert a git.Signature to an api.CommitUser

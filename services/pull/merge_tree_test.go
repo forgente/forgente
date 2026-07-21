@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"testing"
 
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/git/gitcmd"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/git/gitcmd"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

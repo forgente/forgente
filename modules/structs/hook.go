@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/json"
+	"forgente.com/modules/json"
 )
 
 // ErrInvalidReceiveHook FIXME

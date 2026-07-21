@@ -3,7 +3,7 @@
 
 package v1_10
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddOriginalMigrationInfo(x base.EngineMigration) error {
 	// Issue see models/issue.go

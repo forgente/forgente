@@ -8,12 +8,12 @@ import (
 	"net/http"
 	"net/url"
 
-	"gitea.dev/modules/options"
-	repo_module "gitea.dev/modules/repository"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
+	"forgente.com/modules/options"
+	repo_module "forgente.com/modules/repository"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
 )
 
 // Returns a list of all License templates

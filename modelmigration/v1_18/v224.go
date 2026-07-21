@@ -3,7 +3,7 @@
 
 package v1_18
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func CreateUserBadgesTable(x base.EngineMigration) error {
 	type Badge struct {

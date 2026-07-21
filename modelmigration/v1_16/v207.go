@@ -3,7 +3,7 @@
 
 package v1_16
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddWebAuthnCred(x base.EngineMigration) error {
 	// NO-OP Don't migrate here - let v210 do this.

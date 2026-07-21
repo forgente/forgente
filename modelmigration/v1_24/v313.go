@@ -4,7 +4,7 @@
 package v1_24
 
 import (
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 )
 
 func MovePinOrderToTableIssuePin(x base.EngineMigration) error {

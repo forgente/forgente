@@ -11,14 +11,14 @@ import (
 	"io"
 	"strconv"
 
-	git_model "gitea.dev/models/git"
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/git/pipeline"
-	"gitea.dev/modules/lfs"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	git_model "forgente.com/models/git"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/git/pipeline"
+	"forgente.com/modules/lfs"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 
 	"golang.org/x/sync/errgroup"
 )

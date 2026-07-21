@@ -6,7 +6,7 @@ package pipeline
 import (
 	"testing"
 
-	"gitea.dev/modules/git"
+	"forgente.com/modules/git"
 )
 
 func TestMain(m *testing.M) {

@@ -6,13 +6,13 @@ package integration
 import (
 	"testing"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/util"
-	repo_service "gitea.dev/services/repository"
-	user_service "gitea.dev/services/user"
-	"gitea.dev/tests"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/util"
+	repo_service "forgente.com/services/repository"
+	user_service "forgente.com/services/user"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -9,10 +9,10 @@ import (
 	"io"
 	"os"
 
-	packages_model "gitea.dev/models/packages"
-	packages_module "gitea.dev/modules/packages"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/tempdir"
+	packages_model "forgente.com/models/packages"
+	packages_module "forgente.com/modules/packages"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/tempdir"
 )
 
 var (

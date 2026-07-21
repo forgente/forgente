@@ -3,7 +3,7 @@
 
 package internal
 
-import "gitea.dev/modules/timeutil"
+import "forgente.com/modules/timeutil"
 
 type FileUpdate struct {
 	Filename string

@@ -8,9 +8,9 @@ import (
 	"fmt"
 	"sort"
 
-	"gitea.dev/models/db"
-	access_model "gitea.dev/models/perm/access"
-	user_model "gitea.dev/models/user"
+	"forgente.com/models/db"
+	access_model "forgente.com/models/perm/access"
+	user_model "forgente.com/models/user"
 
 	"xorm.io/builder"
 )

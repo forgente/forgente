@@ -4,9 +4,9 @@
 package v1_17
 
 import (
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/timeutil"
 
 	"xorm.io/xorm/schemas"
 )

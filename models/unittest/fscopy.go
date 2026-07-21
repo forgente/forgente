@@ -9,8 +9,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 // SyncFile synchronizes the two files. This is skipped if both files

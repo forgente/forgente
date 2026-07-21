@@ -9,11 +9,11 @@ import (
 	"io"
 	"unicode/utf8"
 
-	"gitea.dev/modules/htmlutil"
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/public"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/htmlutil"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/public"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 type frontendRenderer struct {

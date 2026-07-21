@@ -7,14 +7,14 @@ package context
 import (
 	"strings"
 
-	"gitea.dev/models/organization"
-	"gitea.dev/models/perm"
-	"gitea.dev/models/unit"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/markup/markdown"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/structs"
+	"forgente.com/models/organization"
+	"forgente.com/models/perm"
+	"forgente.com/models/unit"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/markup/markdown"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/structs"
 )
 
 // Organization contains organization context

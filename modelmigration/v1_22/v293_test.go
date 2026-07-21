@@ -6,8 +6,8 @@ package v1_22
 import (
 	"testing"
 
-	"gitea.dev/modelmigration/migrationtest"
-	"gitea.dev/models/project"
+	"forgente.com/modelmigration/migrationtest"
+	"forgente.com/models/project"
 
 	"github.com/stretchr/testify/assert"
 )

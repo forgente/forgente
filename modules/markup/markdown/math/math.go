@@ -4,8 +4,8 @@
 package math
 
 import (
-	"gitea.dev/modules/markup/internal"
-	giteaUtil "gitea.dev/modules/util"
+	"forgente.com/modules/markup/internal"
+	giteaUtil "forgente.com/modules/util"
 
 	"github.com/yuin/goldmark"
 	"github.com/yuin/goldmark/parser"

@@ -8,9 +8,9 @@ import (
 	"strings"
 	"testing"
 
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/markup/orgmode"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/markup/orgmode"
+	"forgente.com/modules/setting"
 
 	"github.com/stretchr/testify/assert"
 )

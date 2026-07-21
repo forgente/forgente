@@ -8,11 +8,11 @@ import (
 	"maps"
 	"slices"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	git_model "gitea.dev/models/git"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/log"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/db"
+	git_model "forgente.com/models/git"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/log"
 )
 
 // CommitActionsStatusMap maps CommitStatus.ID to the live ActionRunJob status

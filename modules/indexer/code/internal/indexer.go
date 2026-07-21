@@ -7,10 +7,10 @@ import (
 	"context"
 	"errors"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/indexer"
-	"gitea.dev/modules/indexer/internal"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/indexer"
+	"forgente.com/modules/indexer/internal"
 )
 
 // Indexer defines an interface to index and search code contents

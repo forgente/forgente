@@ -4,8 +4,8 @@
 package v1_20
 
 import (
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/log"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/log"
 )
 
 // FixIncorrectProjectType: set individual project's type from 3(TypeOrganization) to 1(TypeIndividual)

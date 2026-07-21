@@ -6,15 +6,15 @@ package org
 import (
 	"net/http"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	shared_user "gitea.dev/routers/web/shared/user"
-	"gitea.dev/services/context"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	shared_user "forgente.com/routers/web/shared/user"
+	"forgente.com/services/context"
 )
 
 const tplForgenteMilestonesOverview templates.TplName = "org/forgente_milestones_overview"

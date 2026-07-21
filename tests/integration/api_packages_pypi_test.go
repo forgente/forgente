@@ -13,11 +13,11 @@ import (
 	"strings"
 	"testing"
 
-	"gitea.dev/models/packages"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/packages/pypi"
-	"gitea.dev/tests"
+	"forgente.com/models/packages"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/packages/pypi"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

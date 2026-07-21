@@ -6,10 +6,10 @@ package issues_test
 import (
 	"testing"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/timeutil"
 
 	"github.com/stretchr/testify/assert"
 )

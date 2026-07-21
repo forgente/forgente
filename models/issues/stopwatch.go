@@ -7,11 +7,11 @@ import (
 	"context"
 	"time"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	"forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
 
 	"xorm.io/builder"
 )

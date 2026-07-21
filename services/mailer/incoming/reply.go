@@ -8,7 +8,7 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/util"
+	"forgente.com/modules/util"
 )
 
 const (

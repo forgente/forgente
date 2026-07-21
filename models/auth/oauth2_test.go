@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/timeutil"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/timeutil"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

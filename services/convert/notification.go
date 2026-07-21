@@ -7,10 +7,10 @@ import (
 	"context"
 	"net/url"
 
-	activities_model "gitea.dev/models/activities"
-	access_model "gitea.dev/models/perm/access"
-	"gitea.dev/modules/log"
-	api "gitea.dev/modules/structs"
+	activities_model "forgente.com/models/activities"
+	access_model "forgente.com/models/perm/access"
+	"forgente.com/modules/log"
+	api "forgente.com/modules/structs"
 )
 
 // ToNotificationThread convert a Notification to api.NotificationThread

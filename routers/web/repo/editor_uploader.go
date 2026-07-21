@@ -6,12 +6,12 @@ package repo
 import (
 	"net/http"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
-	"gitea.dev/services/context/upload"
-	files_service "gitea.dev/services/repository/files"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
+	"forgente.com/services/context/upload"
+	files_service "forgente.com/services/repository/files"
 )
 
 // UploadFileToServer upload file to server file dir not git

@@ -14,12 +14,12 @@ import (
 	"net/http"
 	"testing"
 
-	"gitea.dev/models/packages"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	alpine_module "gitea.dev/modules/packages/alpine"
-	alpine_service "gitea.dev/services/packages/alpine"
-	"gitea.dev/tests"
+	"forgente.com/models/packages"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	alpine_module "forgente.com/modules/packages/alpine"
+	alpine_service "forgente.com/services/packages/alpine"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

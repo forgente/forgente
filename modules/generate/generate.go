@@ -17,8 +17,8 @@ import (
 	"io"
 	"time"
 
-	"gitea.dev/modules/consts"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/consts"
+	"forgente.com/modules/util"
 
 	"github.com/golang-jwt/jwt/v5"
 	"golang.org/x/crypto/ssh"

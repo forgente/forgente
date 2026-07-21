@@ -3,7 +3,7 @@
 
 package v1_19
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 // AddCardTypeToProjectTable: add CardType column, setting existing rows to CardTypeTextOnly
 func AddCardTypeToProjectTable(x base.EngineMigration) error {

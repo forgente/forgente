@@ -4,7 +4,7 @@
 package v1_14
 
 import (
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 )
 
 func ConvertTopicNameFrom25To50(x base.EngineMigration) error {

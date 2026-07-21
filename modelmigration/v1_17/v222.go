@@ -8,8 +8,8 @@ import (
 	"errors"
 	"fmt"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/timeutil"
 )
 
 func DropOldCredentialIDColumn(x base.EngineMigration) error {

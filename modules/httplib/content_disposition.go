@@ -7,7 +7,7 @@ import (
 	"mime"
 	"strings"
 
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/setting"
 )
 
 type ContentDispositionType string

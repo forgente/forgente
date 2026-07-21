@@ -9,17 +9,17 @@ import (
 	"fmt"
 	"slices"
 
-	"gitea.dev/models/db"
-	git_model "gitea.dev/models/git"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/cache"
-	"gitea.dev/modules/commitstatus"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	repo_module "gitea.dev/modules/repository"
-	"gitea.dev/services/notify"
+	"forgente.com/models/db"
+	git_model "forgente.com/models/git"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/cache"
+	"forgente.com/modules/commitstatus"
+	"forgente.com/modules/git"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	repo_module "forgente.com/modules/repository"
+	"forgente.com/services/notify"
 )
 
 func getCacheKey(repoID int64, brancheName string) string {

@@ -4,7 +4,7 @@
 package v1_11
 
 import (
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 )
 
 func DropColumnHeadUserNameOnPullRequest(x base.EngineMigration) error {

@@ -9,9 +9,9 @@ import (
 	"text/template"
 	"time"
 
-	"gitea.dev/modules/consts"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/consts"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 
 	gossh "golang.org/x/crypto/ssh"
 )

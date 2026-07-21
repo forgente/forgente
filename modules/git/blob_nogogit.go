@@ -9,7 +9,7 @@ import (
 	"context"
 	"io"
 
-	"gitea.dev/modules/log"
+	"forgente.com/modules/log"
 )
 
 // Blob represents a Git object.

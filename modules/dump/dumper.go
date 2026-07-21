@@ -16,9 +16,9 @@ import (
 	"slices"
 	"strings"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/timeutil"
 
 	"github.com/mholt/archives"
 )

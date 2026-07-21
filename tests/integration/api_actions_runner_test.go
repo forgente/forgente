@@ -9,9 +9,9 @@ import (
 	"slices"
 	"testing"
 
-	auth_model "gitea.dev/models/auth"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/tests"
+	auth_model "forgente.com/models/auth"
+	api "forgente.com/modules/structs"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

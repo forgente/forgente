@@ -6,14 +6,14 @@ package setting
 import (
 	"net/http"
 
-	asymkey_model "gitea.dev/models/asymkey"
-	"gitea.dev/models/db"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/web"
-	asymkey_service "gitea.dev/services/asymkey"
-	"gitea.dev/services/context"
-	"gitea.dev/services/forms"
+	asymkey_model "forgente.com/models/asymkey"
+	"forgente.com/models/db"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/web"
+	asymkey_service "forgente.com/services/asymkey"
+	"forgente.com/services/context"
+	"forgente.com/services/forms"
 )
 
 // DeployKeys render the deploy keys list of a repository page

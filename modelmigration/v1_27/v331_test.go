@@ -8,7 +8,7 @@ import (
 	"slices"
 	"testing"
 
-	"gitea.dev/modelmigration/migrationtest"
+	"forgente.com/modelmigration/migrationtest"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

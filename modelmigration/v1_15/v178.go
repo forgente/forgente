@@ -3,7 +3,7 @@
 
 package v1_15
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddLFSMirrorColumns(x base.EngineMigration) error {
 	type Mirror struct {

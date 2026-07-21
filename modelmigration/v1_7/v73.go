@@ -3,7 +3,7 @@
 
 package v1_7
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddMustChangePassword(x base.EngineMigration) error {
 	// User see models/user.go

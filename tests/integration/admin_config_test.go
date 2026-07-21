@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"testing"
 
-	"gitea.dev/models/system"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/setting/config"
-	"gitea.dev/modules/test"
-	"gitea.dev/tests"
+	"forgente.com/models/system"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/setting/config"
+	"forgente.com/modules/test"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

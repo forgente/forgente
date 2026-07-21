@@ -6,9 +6,9 @@ package gituser
 import (
 	"context"
 
-	"gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
+	"forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
 )
 
 // AvatarStackData is the view-model for the AvatarStack render helpers. Participants[0] is

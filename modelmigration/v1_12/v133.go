@@ -3,7 +3,7 @@
 
 package v1_12
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddEmailHashTable(x base.EngineMigration) error {
 	// EmailHash represents a pre-generated hash map

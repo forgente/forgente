@@ -3,7 +3,7 @@
 
 package v1_20
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddNeedApprovalToActionRun(x base.EngineMigration) error {
 	/*

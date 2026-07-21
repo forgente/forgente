@@ -9,12 +9,12 @@ import (
 	"net/http"
 	"reflect"
 
-	issues_model "gitea.dev/models/issues"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
-	issue_service "gitea.dev/services/issue"
+	issues_model "forgente.com/models/issues"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
+	issue_service "forgente.com/services/issue"
 )
 
 // ListIssueLabels list all the labels of an issue

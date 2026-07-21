@@ -6,14 +6,14 @@ package repo
 import (
 	"strconv"
 
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
-	"gitea.dev/services/gitdiff"
-	user_service "gitea.dev/services/user"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
+	"forgente.com/services/gitdiff"
+	user_service "forgente.com/services/user"
 )
 
 // SetEditorconfigIfExists set editor config as render variable

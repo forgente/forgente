@@ -7,13 +7,13 @@ import (
 	"testing"
 	"time"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/contexttest"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/json"
+	"forgente.com/modules/util"
+	"forgente.com/services/contexttest"
 
-	_ "gitea.dev/models/actions"
+	_ "forgente.com/models/actions"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

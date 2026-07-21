@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"net/url"
 
-	activities_model "gitea.dev/models/activities"
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/context"
+	activities_model "forgente.com/models/activities"
+	"forgente.com/modules/setting"
+	"forgente.com/services/context"
 )
 
 func prepareHeatmapURL(ctx *context.Context) {

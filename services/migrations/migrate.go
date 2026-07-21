@@ -13,16 +13,16 @@ import (
 	"path/filepath"
 	"strings"
 
-	repo_model "gitea.dev/models/repo"
-	system_model "gitea.dev/models/system"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/hostmatcher"
-	"gitea.dev/modules/log"
-	base "gitea.dev/modules/migration"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	repo_model "forgente.com/models/repo"
+	system_model "forgente.com/models/system"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/git"
+	"forgente.com/modules/hostmatcher"
+	"forgente.com/modules/log"
+	base "forgente.com/modules/migration"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 // MigrateOptions is equal to base.MigrateOptions

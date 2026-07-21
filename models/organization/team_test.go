@@ -6,12 +6,12 @@ package organization_test
 import (
 	"testing"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/organization"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/structs"
+	"forgente.com/models/db"
+	"forgente.com/models/organization"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/structs"
 
 	"github.com/stretchr/testify/assert"
 )

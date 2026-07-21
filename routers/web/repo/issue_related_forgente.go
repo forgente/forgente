@@ -8,8 +8,8 @@ import (
 	"strconv"
 	"strings"
 
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/services/context"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/services/context"
 )
 
 // ForgenteAddRelatedIssue relates another issue of the same repository to this issue.

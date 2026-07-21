@@ -7,11 +7,11 @@ import (
 	"net/http"
 	"testing"
 
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/contexttest"
-	"gitea.dev/services/forms"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/web"
+	"forgente.com/services/contexttest"
+	"forgente.com/services/forms"
 
 	"github.com/stretchr/testify/assert"
 )

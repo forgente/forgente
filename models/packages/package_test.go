@@ -6,13 +6,13 @@ package packages_test
 import (
 	"testing"
 
-	packages_model "gitea.dev/models/packages"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
+	packages_model "forgente.com/models/packages"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
 
-	_ "gitea.dev/models"
-	_ "gitea.dev/models/actions"
-	_ "gitea.dev/models/activities"
+	_ "forgente.com/models"
+	_ "forgente.com/models/actions"
+	_ "forgente.com/models/activities"
 
 	"github.com/stretchr/testify/assert"
 )

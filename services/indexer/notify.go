@@ -6,16 +6,16 @@ package indexer
 import (
 	"context"
 
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	code_indexer "gitea.dev/modules/indexer/code"
-	issue_indexer "gitea.dev/modules/indexer/issues"
-	stats_indexer "gitea.dev/modules/indexer/stats"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/repository"
-	"gitea.dev/modules/setting"
-	notify_service "gitea.dev/services/notify"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	code_indexer "forgente.com/modules/indexer/code"
+	issue_indexer "forgente.com/modules/indexer/issues"
+	stats_indexer "forgente.com/modules/indexer/stats"
+	"forgente.com/modules/log"
+	"forgente.com/modules/repository"
+	"forgente.com/modules/setting"
+	notify_service "forgente.com/services/notify"
 )
 
 type indexerNotifier struct {

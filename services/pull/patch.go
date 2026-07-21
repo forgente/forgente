@@ -12,14 +12,14 @@ import (
 	"path/filepath"
 	"strings"
 
-	git_model "gitea.dev/models/git"
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/glob"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/util"
+	git_model "forgente.com/models/git"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/glob"
+	"forgente.com/modules/log"
+	"forgente.com/modules/process"
+	"forgente.com/modules/util"
 )
 
 // DownloadDiffOrPatch will write the patch for the pr to the writer

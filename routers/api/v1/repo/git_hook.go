@@ -7,11 +7,11 @@ import (
 	"errors"
 	"net/http"
 
-	"gitea.dev/modules/git"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
+	"forgente.com/modules/git"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
 )
 
 // ListGitHooks list all Git hooks of a repository

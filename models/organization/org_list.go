@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"strings"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/perm"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/structs"
+	"forgente.com/models/db"
+	"forgente.com/models/perm"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/structs"
 
 	"xorm.io/builder"
 )

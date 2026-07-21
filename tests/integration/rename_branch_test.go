@@ -8,10 +8,10 @@ import (
 	"net/url"
 	"testing"
 
-	git_model "gitea.dev/models/git"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	"gitea.dev/tests"
+	git_model "forgente.com/models/git"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

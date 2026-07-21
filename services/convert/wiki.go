@@ -6,8 +6,8 @@ package convert
 import (
 	"time"
 
-	"gitea.dev/modules/git"
-	api "gitea.dev/modules/structs"
+	"forgente.com/modules/git"
+	api "forgente.com/modules/structs"
 )
 
 // ToWikiCommit convert a git commit into a WikiCommit

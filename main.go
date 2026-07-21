@@ -10,16 +10,16 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/cmd"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/cmd"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 
 	// register supported doc types
-	_ "gitea.dev/modules/markup/console"
-	_ "gitea.dev/modules/markup/csv"
-	_ "gitea.dev/modules/markup/jupyter"
-	_ "gitea.dev/modules/markup/markdown"
-	_ "gitea.dev/modules/markup/orgmode"
+	_ "forgente.com/modules/markup/console"
+	_ "forgente.com/modules/markup/csv"
+	_ "forgente.com/modules/markup/jupyter"
+	_ "forgente.com/modules/markup/markdown"
+	_ "forgente.com/modules/markup/orgmode"
 
 	"github.com/urfave/cli/v3"
 )

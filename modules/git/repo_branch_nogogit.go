@@ -12,8 +12,8 @@ import (
 	"io"
 	"strings"
 
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/log"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/log"
 )
 
 // IsObjectExist returns true if the given object exists in the repository.

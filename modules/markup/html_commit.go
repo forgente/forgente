@@ -8,9 +8,9 @@ import (
 	"slices"
 	"strings"
 
-	"gitea.dev/modules/base"
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/references"
+	"forgente.com/modules/base"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/references"
 
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"

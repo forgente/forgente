@@ -3,7 +3,7 @@
 
 package v1_19
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func DropForeignReferenceTable(x base.EngineMigration) error {
 	// Drop the table introduced in `v211`, it's considered badly designed and doesn't look like to be used.

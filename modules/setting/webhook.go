@@ -6,7 +6,7 @@ package setting
 import (
 	"net/url"
 
-	"gitea.dev/modules/log"
+	"forgente.com/modules/log"
 )
 
 // Webhook settings

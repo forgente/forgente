@@ -6,7 +6,7 @@ package v1_16
 import (
 	"fmt"
 
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 )
 
 func AddTableCommitStatusIndex(x base.EngineMigration) error {

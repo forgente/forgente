@@ -8,9 +8,9 @@ import (
 	"errors"
 	"fmt"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/util"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/util"
 )
 
 // CompareInfo represents needed information for comparing references.

@@ -3,7 +3,7 @@
 
 package v1_22
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 type BadgeUnique struct {
 	ID   int64  `xorm:"pk autoincr"`

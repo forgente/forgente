@@ -6,10 +6,10 @@ package v1_11
 import (
 	"path/filepath"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 
 	"xorm.io/builder"
 )

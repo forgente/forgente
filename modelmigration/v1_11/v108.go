@@ -3,7 +3,7 @@
 
 package v1_11
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddCommentIDOnNotification(x base.EngineMigration) error {
 	type Notification struct {

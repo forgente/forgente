@@ -6,11 +6,11 @@ package repo_test
 import (
 	"testing"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/perm"
-	access_model "gitea.dev/models/perm/access"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
+	"forgente.com/models/db"
+	"forgente.com/models/perm"
+	access_model "forgente.com/models/perm/access"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
 
 	"github.com/stretchr/testify/assert"
 )

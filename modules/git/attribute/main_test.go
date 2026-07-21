@@ -8,9 +8,9 @@ import (
 	"os"
 	"testing"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/git"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 func testRun(m *testing.M) error {

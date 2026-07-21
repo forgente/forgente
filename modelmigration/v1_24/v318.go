@@ -4,8 +4,8 @@
 package v1_24
 
 import (
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/models/perm"
+	"forgente.com/modelmigration/base"
+	"forgente.com/models/perm"
 
 	"xorm.io/xorm"
 )

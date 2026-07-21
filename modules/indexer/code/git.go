@@ -8,12 +8,12 @@ import (
 	"strconv"
 	"strings"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/indexer/code/internal"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/indexer/code/internal"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 func getDefaultBranchSha(ctx context.Context, repo *repo_model.Repository) (string, error) {

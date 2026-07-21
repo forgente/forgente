@@ -4,8 +4,8 @@
 package v1_20
 
 import (
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/log"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/log"
 )
 
 func FixIncorrectAdminTeamUnitAccessMode(x base.EngineMigration) error {

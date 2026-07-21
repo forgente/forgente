@@ -6,10 +6,10 @@ package repo
 import (
 	"slices"
 
-	"gitea.dev/models/perm"
-	"gitea.dev/models/unit"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/util"
+	"forgente.com/models/perm"
+	"forgente.com/models/unit"
+	"forgente.com/modules/json"
+	"forgente.com/modules/util"
 )
 
 // ActionsTokenPermissionMode defines the default permission mode for Actions tokens

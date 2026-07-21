@@ -24,10 +24,10 @@ import (
 	"strings"
 	"time"
 
-	user_model "gitea.dev/models/user"
-	chef_module "gitea.dev/modules/packages/chef"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/auth"
+	user_model "forgente.com/models/user"
+	chef_module "forgente.com/modules/packages/chef"
+	"forgente.com/modules/util"
+	"forgente.com/services/auth"
 )
 
 const (

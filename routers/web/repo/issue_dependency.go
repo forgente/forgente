@@ -6,10 +6,10 @@ package repo
 import (
 	"net/http"
 
-	issues_model "gitea.dev/models/issues"
-	access_model "gitea.dev/models/perm/access"
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/context"
+	issues_model "forgente.com/models/issues"
+	access_model "forgente.com/models/perm/access"
+	"forgente.com/modules/setting"
+	"forgente.com/services/context"
 )
 
 // AddDependency adds new dependencies

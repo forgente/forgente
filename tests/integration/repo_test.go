@@ -1,7 +1,7 @@
 // Copyright 2017 The Gitea Authors. All rights reserved.
 // SPDX-License-Identifier: MIT
 
-//nolint:govet // disable "composites: gitea.dev/modules/git.FastImportFile struct literal uses unkeyed fields"
+//nolint:govet // disable "composites: forgente.com/modules/git.FastImportFile struct literal uses unkeyed fields"
 package integration
 
 import (
@@ -14,18 +14,18 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
-	"gitea.dev/modules/util"
-	repo_service "gitea.dev/services/repository"
-	"gitea.dev/tests"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
+	"forgente.com/modules/util"
+	repo_service "forgente.com/services/repository"
+	"forgente.com/tests"
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/stretchr/testify/assert"

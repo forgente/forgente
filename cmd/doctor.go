@@ -12,13 +12,13 @@ import (
 	"strings"
 	"text/tabwriter"
 
-	"gitea.dev/modelmigration"
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/models/db"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/doctor"
+	"forgente.com/modelmigration"
+	"forgente.com/modelmigration/base"
+	"forgente.com/models/db"
+	"forgente.com/modules/container"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/services/doctor"
 
 	"github.com/urfave/cli/v3"
 )

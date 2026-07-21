@@ -11,10 +11,10 @@ import (
 	"testing"
 	"time"
 
-	auth_model "gitea.dev/models/auth"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/routers/web/shared/user"
+	auth_model "forgente.com/models/auth"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/routers/web/shared/user"
 
 	"github.com/stretchr/testify/assert"
 )

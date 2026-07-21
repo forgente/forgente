@@ -11,10 +11,10 @@ import (
 	"sync/atomic"
 	"time"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/process"
+	"forgente.com/modules/setting"
 )
 
 // WorkerPoolQueue is a queue that uses a pool of workers to process items

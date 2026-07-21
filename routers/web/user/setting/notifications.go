@@ -6,13 +6,13 @@ package setting
 import (
 	"net/http"
 
-	"gitea.dev/models/unit"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/services/context"
-	"gitea.dev/services/user"
+	"forgente.com/models/unit"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/services/context"
+	"forgente.com/services/user"
 )
 
 const tplSettingsNotifications templates.TplName = "user/settings/notifications"

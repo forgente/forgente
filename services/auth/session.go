@@ -6,8 +6,8 @@ package auth
 import (
 	"net/http"
 
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
 )
 
 // Ensure the struct implements the interface.

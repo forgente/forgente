@@ -8,16 +8,16 @@ import (
 	"errors"
 	"fmt"
 
-	git_model "gitea.dev/models/git"
-	issues_model "gitea.dev/models/issues"
-	access_model "gitea.dev/models/perm/access"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/globallock"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/repository"
+	git_model "forgente.com/models/git"
+	issues_model "forgente.com/models/issues"
+	access_model "forgente.com/models/perm/access"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unit"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/globallock"
+	"forgente.com/modules/log"
+	"forgente.com/modules/repository"
 )
 
 // Update updates pull request with base branch.

@@ -10,11 +10,11 @@ import (
 	"strings"
 	"unicode"
 
-	packages_model "gitea.dev/models/packages"
-	packages_module "gitea.dev/modules/packages"
-	"gitea.dev/routers/api/packages/helper"
-	"gitea.dev/services/context"
-	packages_service "gitea.dev/services/packages"
+	packages_model "forgente.com/models/packages"
+	packages_module "forgente.com/modules/packages"
+	"forgente.com/routers/api/packages/helper"
+	"forgente.com/services/context"
+	packages_service "forgente.com/services/packages"
 )
 
 var (

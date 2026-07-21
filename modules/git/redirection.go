@@ -3,7 +3,7 @@
 
 package git
 
-import "gitea.dev/modules/git/gitcmd"
+import "forgente.com/modules/git/gitcmd"
 
 func HandleGitCmdHTTPRedirection(cmd *gitcmd.Command, targets ...string) {
 	// Protect from SSRF vector (e.g. migrating from an attacker URL).

@@ -7,9 +7,9 @@ import (
 	"context"
 	"net/url"
 
-	"gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/git"
+	"forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/git"
 )
 
 // CommitParticipant is one participant of a commit (its author or a co-author):

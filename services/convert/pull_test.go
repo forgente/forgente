@@ -6,12 +6,12 @@ package convert
 import (
 	"testing"
 
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/models/perm"
-	access_model "gitea.dev/models/perm/access"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/structs"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/models/perm"
+	access_model "forgente.com/models/perm/access"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/structs"
 
 	"github.com/stretchr/testify/assert"
 )

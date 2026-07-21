@@ -14,10 +14,10 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/container"
+	"forgente.com/modules/log"
+	"forgente.com/modules/process"
+	"forgente.com/modules/util"
 
 	"github.com/fsnotify/fsnotify"
 )

@@ -3,7 +3,7 @@
 
 package v1_7
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddApprovalWhitelistsToProtectedBranches(x base.EngineMigration) error {
 	type ProtectedBranch struct {

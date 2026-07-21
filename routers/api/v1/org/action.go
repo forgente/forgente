@@ -7,17 +7,17 @@ import (
 	"errors"
 	"net/http"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	secret_model "gitea.dev/models/secret"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/api/v1/shared"
-	"gitea.dev/routers/api/v1/utils"
-	actions_service "gitea.dev/services/actions"
-	"gitea.dev/services/context"
-	secret_service "gitea.dev/services/secrets"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/db"
+	secret_model "forgente.com/models/secret"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web"
+	"forgente.com/routers/api/v1/shared"
+	"forgente.com/routers/api/v1/utils"
+	actions_service "forgente.com/services/actions"
+	"forgente.com/services/context"
+	secret_service "forgente.com/services/secrets"
 )
 
 // ListActionsSecrets list an organization's actions secrets

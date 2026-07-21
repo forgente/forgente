@@ -6,9 +6,9 @@ package repo
 import (
 	"net/http"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/context"
-	files_service "gitea.dev/services/repository/files"
+	"forgente.com/modules/setting"
+	"forgente.com/services/context"
+	files_service "forgente.com/services/repository/files"
 )
 
 func DiffPreviewPost(ctx *context.Context) {

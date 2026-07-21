@@ -6,14 +6,14 @@ package repo
 import (
 	"net/http"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/git"
-	code_indexer "gitea.dev/modules/indexer/code"
-	"gitea.dev/modules/indexer/code/gitgrep"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/routers/common"
-	"gitea.dev/services/context"
+	"forgente.com/models/db"
+	"forgente.com/modules/git"
+	code_indexer "forgente.com/modules/indexer/code"
+	"forgente.com/modules/indexer/code/gitgrep"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/routers/common"
+	"forgente.com/services/context"
 )
 
 const tplSearch templates.TplName = "repo/search"

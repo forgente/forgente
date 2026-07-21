@@ -9,8 +9,8 @@ import (
 	"fmt"
 	"strings"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/private"
+	"forgente.com/modules/log"
+	"forgente.com/modules/private"
 
 	"github.com/urfave/cli/v3"
 )

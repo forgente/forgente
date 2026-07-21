@@ -6,7 +6,7 @@ package db
 import (
 	"context"
 
-	"gitea.dev/modules/indexer/internal"
+	"forgente.com/modules/indexer/internal"
 )
 
 var _ internal.Indexer = &Indexer{}

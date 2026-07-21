@@ -10,8 +10,8 @@ import (
 	"fmt"
 	"os"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
 )
 
 func checkAttrCommand(ctx context.Context, gitRepo *git.Repository, treeish string, filenames, attributes []string) (*gitcmd.Command, []string, func(), error) {

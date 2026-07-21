@@ -8,11 +8,11 @@ import (
 	"context"
 	"fmt"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	repo_module "gitea.dev/modules/repository"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	repo_module "forgente.com/modules/repository"
 
 	"github.com/urfave/cli/v3"
 )

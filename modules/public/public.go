@@ -12,12 +12,12 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/assetfs"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/httpcache"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/assetfs"
+	"forgente.com/modules/container"
+	"forgente.com/modules/httpcache"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 
 	"github.com/go-chi/cors"
 )

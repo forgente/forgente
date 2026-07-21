@@ -12,8 +12,8 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 
 	"gopkg.in/ini.v1" //nolint:depguard // wrapper for this package
 )

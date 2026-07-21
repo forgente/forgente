@@ -10,10 +10,10 @@ import (
 	"strings"
 	"sync/atomic"
 
-	"gitea.dev/models/perm"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/perm"
+	"forgente.com/modules/container"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 // Type is Unit's Type

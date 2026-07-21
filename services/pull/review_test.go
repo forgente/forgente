@@ -6,10 +6,10 @@ package pull_test
 import (
 	"testing"
 
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	pull_service "gitea.dev/services/pull"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	pull_service "forgente.com/services/pull"
 
 	"github.com/stretchr/testify/assert"
 )

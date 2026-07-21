@@ -6,10 +6,10 @@ package issues
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	project_model "gitea.dev/models/project"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	project_model "forgente.com/models/project"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/util"
 )
 
 // LoadProjects loads all projects the issue is assigned to

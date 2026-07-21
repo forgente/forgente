@@ -6,12 +6,12 @@ package admin
 import (
 	"net/http"
 
-	"gitea.dev/models/auth"
-	"gitea.dev/models/db"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	user_setting "gitea.dev/routers/web/user/setting"
-	"gitea.dev/services/context"
+	"forgente.com/models/auth"
+	"forgente.com/models/db"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	user_setting "forgente.com/routers/web/user/setting"
+	"forgente.com/services/context"
 )
 
 var (

@@ -6,8 +6,8 @@ package v1_18
 import (
 	"fmt"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/models/issues"
+	"forgente.com/modelmigration/base"
+	"forgente.com/models/issues"
 
 	"xorm.io/builder"
 )

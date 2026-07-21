@@ -14,10 +14,10 @@ import (
 	"strings"
 	"sync/atomic"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/cache"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	"forgente.com/modules/cache"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 
 	"strk.kbt.io/projects/go/libravatar"
 	"xorm.io/builder"

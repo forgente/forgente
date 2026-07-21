@@ -8,7 +8,7 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/util"
+	"forgente.com/modules/util"
 )
 
 // https://docs.github.com/en/actions/learn-github-actions/variables#naming-conventions-for-configuration-variables

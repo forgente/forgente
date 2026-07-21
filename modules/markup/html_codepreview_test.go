@@ -9,8 +9,8 @@ import (
 	"strings"
 	"testing"
 
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/markup/markdown"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/markup/markdown"
 
 	"github.com/stretchr/testify/assert"
 )

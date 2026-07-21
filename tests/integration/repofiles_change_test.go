@@ -12,12 +12,12 @@ import (
 	"testing"
 	"time"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/services/contexttest"
-	files_service "gitea.dev/services/repository/files"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/services/contexttest"
+	files_service "forgente.com/services/repository/files"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

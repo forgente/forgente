@@ -12,15 +12,15 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/base"
-	"gitea.dev/modules/htmlutil"
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/public"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/svg"
-	"gitea.dev/modules/templates/eval"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/gitdiff"
+	"forgente.com/modules/base"
+	"forgente.com/modules/htmlutil"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/public"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/svg"
+	"forgente.com/modules/templates/eval"
+	"forgente.com/modules/util"
+	"forgente.com/services/gitdiff"
 )
 
 func newFuncMapWebPage() template.FuncMap {

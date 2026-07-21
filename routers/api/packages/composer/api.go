@@ -8,11 +8,11 @@ import (
 	"net/url"
 	"time"
 
-	packages_model "gitea.dev/models/packages"
-	access_model "gitea.dev/models/perm/access"
-	"gitea.dev/modules/log"
-	composer_module "gitea.dev/modules/packages/composer"
-	"gitea.dev/services/context"
+	packages_model "forgente.com/models/packages"
+	access_model "forgente.com/models/perm/access"
+	"forgente.com/modules/log"
+	composer_module "forgente.com/modules/packages/composer"
+	"forgente.com/services/context"
 )
 
 // ServiceIndexResponse contains registry endpoints

@@ -6,7 +6,7 @@ package git
 import (
 	"context"
 
-	"gitea.dev/modules/git/gitcmd"
+	"forgente.com/modules/git/gitcmd"
 )
 
 // CloneExternalRepo clones an external repository to the managed repository.

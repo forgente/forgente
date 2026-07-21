@@ -7,14 +7,14 @@ import (
 	"fmt"
 	"net/http"
 
-	"gitea.dev/models/db"
-	git_model "gitea.dev/models/git"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
-	commitstatus_service "gitea.dev/services/repository/commitstatus"
+	"forgente.com/models/db"
+	git_model "forgente.com/models/git"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/web"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
+	commitstatus_service "forgente.com/services/repository/commitstatus"
 )
 
 // NewCommitStatus creates a new CommitStatus

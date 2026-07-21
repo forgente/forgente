@@ -6,11 +6,11 @@ package repo
 import (
 	"strings"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/context"
-	incoming_payload "gitea.dev/services/mailer/incoming/payload"
-	"gitea.dev/services/mailer/token"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/services/context"
+	incoming_payload "forgente.com/services/mailer/incoming/payload"
+	"forgente.com/services/mailer/token"
 )
 
 // forgentePrepareNewIssueMailAddress exposes a "New issue via email" mailto address on the issue

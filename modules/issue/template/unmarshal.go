@@ -9,11 +9,11 @@ import (
 	"path"
 	"strconv"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/markup/markdown"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/git"
+	"forgente.com/modules/markup/markdown"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
 
 	"go.yaml.in/yaml/v4"
 )

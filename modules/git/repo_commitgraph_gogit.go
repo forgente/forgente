@@ -10,8 +10,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/log"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/log"
 
 	commitgraph "github.com/go-git/go-git/v5/plumbing/format/commitgraph/v2"
 	cgobject "github.com/go-git/go-git/v5/plumbing/object/commitgraph"

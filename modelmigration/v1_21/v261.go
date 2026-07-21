@@ -4,8 +4,8 @@
 package v1_21
 
 import (
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/timeutil"
 )
 
 func CreateVariableTable(x base.EngineMigration) error {

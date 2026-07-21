@@ -6,16 +6,16 @@ package issues
 import (
 	"testing"
 
-	"gitea.dev/models/db"
-	"gitea.dev/models/issues"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/indexer/issues/internal"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	"forgente.com/models/issues"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/indexer/issues/internal"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
 
-	_ "gitea.dev/models"
-	_ "gitea.dev/models/actions"
-	_ "gitea.dev/models/activities"
+	_ "forgente.com/models"
+	_ "forgente.com/models/actions"
+	_ "forgente.com/models/activities"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

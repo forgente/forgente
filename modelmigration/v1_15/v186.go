@@ -4,8 +4,8 @@
 package v1_15
 
 import (
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/timeutil"
 )
 
 func CreateProtectedTagTable(x base.EngineMigration) error {

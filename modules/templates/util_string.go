@@ -8,7 +8,7 @@ import (
 	"html/template"
 	"strings"
 
-	"gitea.dev/modules/util"
+	"forgente.com/modules/util"
 )
 
 type StringUtils struct{}

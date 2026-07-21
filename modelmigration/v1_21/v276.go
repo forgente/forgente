@@ -6,10 +6,10 @@ package v1_21
 import (
 	"context"
 
-	"gitea.dev/modelmigration/base"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/setting"
+	"forgente.com/modelmigration/base"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/setting"
 )
 
 func AddRemoteAddressToMirrors(x base.EngineMigration) error {

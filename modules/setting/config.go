@@ -7,8 +7,8 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting/config"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting/config"
 )
 
 type PictureStruct struct {

@@ -7,7 +7,7 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/translation"
+	"forgente.com/modules/translation"
 )
 
 // Seconds-based time units

@@ -8,11 +8,11 @@ import (
 	"errors"
 	"fmt"
 
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/auth/password"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
-	user_service "gitea.dev/services/user"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/auth/password"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
+	user_service "forgente.com/services/user"
 
 	"github.com/urfave/cli/v3"
 )

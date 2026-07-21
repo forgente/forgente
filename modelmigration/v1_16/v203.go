@@ -3,7 +3,7 @@
 
 package v1_16
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddProjectIssueSorting(x base.EngineMigration) error {
 	// ProjectIssue saves relation from issue to a project

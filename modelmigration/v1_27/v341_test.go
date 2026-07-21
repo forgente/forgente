@@ -7,9 +7,9 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modelmigration/migrationtest"
-	"gitea.dev/modules/setting"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modelmigration/migrationtest"
+	"forgente.com/modules/setting"
 
 	"github.com/stretchr/testify/require"
 )

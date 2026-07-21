@@ -4,9 +4,9 @@
 package v1_19
 
 import (
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/models/db"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modelmigration/base"
+	"forgente.com/models/db"
+	"forgente.com/modules/timeutil"
 )
 
 func AddActionsTables(x base.EngineMigration) error {

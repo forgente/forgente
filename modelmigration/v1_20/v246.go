@@ -3,7 +3,7 @@
 
 package v1_20
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddNewColumnForProject(x base.EngineMigration) error {
 	type Project struct {

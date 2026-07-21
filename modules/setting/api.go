@@ -7,7 +7,7 @@ import (
 	"net/url"
 	"path"
 
-	"gitea.dev/modules/log"
+	"forgente.com/modules/log"
 )
 
 // API settings

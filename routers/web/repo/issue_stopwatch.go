@@ -4,10 +4,10 @@
 package repo
 
 import (
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/modules/eventsource"
-	"gitea.dev/services/context"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/modules/eventsource"
+	"forgente.com/services/context"
 )
 
 // IssueStartStopwatch creates a stopwatch for the given issue.

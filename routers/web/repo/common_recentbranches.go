@@ -4,12 +4,12 @@
 package repo
 
 import (
-	git_model "gitea.dev/models/git"
-	access_model "gitea.dev/models/perm/access"
-	unit_model "gitea.dev/models/unit"
-	"gitea.dev/modules/log"
-	"gitea.dev/services/context"
-	repo_service "gitea.dev/services/repository"
+	git_model "forgente.com/models/git"
+	access_model "forgente.com/models/perm/access"
+	unit_model "forgente.com/models/unit"
+	"forgente.com/modules/log"
+	"forgente.com/services/context"
+	repo_service "forgente.com/services/repository"
 )
 
 type RecentBranchesPromptDataStruct struct {

@@ -7,9 +7,9 @@ import (
 	"context"
 	"fmt"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/util"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/util"
 )
 
 type RepoComment struct {

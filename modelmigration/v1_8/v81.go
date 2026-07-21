@@ -6,7 +6,7 @@ package v1_8
 import (
 	"fmt"
 
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 
 	"xorm.io/xorm/schemas"
 )

@@ -6,13 +6,13 @@ package explore
 import (
 	"net/http"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/sitemap"
-	"gitea.dev/modules/templates"
-	"gitea.dev/services/context"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/sitemap"
+	"forgente.com/modules/templates"
+	"forgente.com/services/context"
 )
 
 const (

@@ -10,13 +10,13 @@ import (
 	"os"
 	"strings"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/queue"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
-	notify_service "gitea.dev/services/notify"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	"forgente.com/modules/queue"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
+	notify_service "forgente.com/services/notify"
 )
 
 func initGlobalRunnerToken(ctx context.Context) error {

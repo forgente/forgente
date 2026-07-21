@@ -7,10 +7,10 @@ import (
 	"crypto/tls"
 	"net/http"
 
-	"gitea.dev/modules/hostmatcher"
-	"gitea.dev/modules/proxy"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/hostmatcher"
+	"forgente.com/modules/proxy"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 // migrationHTTPClient is the shared migration client. Callers that would otherwise build a client per

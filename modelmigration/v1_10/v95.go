@@ -3,7 +3,7 @@
 
 package v1_10
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddCrossReferenceColumns(x base.EngineMigration) error {
 	// Comment see models/comment.go

@@ -8,12 +8,12 @@ import (
 	"strings"
 	"sync"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/options"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/svg"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/options"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/svg"
+	"forgente.com/modules/util"
 )
 
 type materialIconRulesData struct {

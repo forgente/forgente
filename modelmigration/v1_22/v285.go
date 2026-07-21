@@ -6,7 +6,7 @@ package v1_22
 import (
 	"time"
 
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 
 	"xorm.io/xorm"
 )

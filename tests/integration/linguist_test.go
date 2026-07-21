@@ -10,14 +10,14 @@ import (
 	"testing"
 	"time"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/indexer/stats"
-	"gitea.dev/modules/queue"
-	repo_service "gitea.dev/services/repository"
-	files_service "gitea.dev/services/repository/files"
-	"gitea.dev/tests"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/indexer/stats"
+	"forgente.com/modules/queue"
+	repo_service "forgente.com/services/repository"
+	files_service "forgente.com/services/repository/files"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

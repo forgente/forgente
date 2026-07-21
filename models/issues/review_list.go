@@ -8,11 +8,11 @@ import (
 	"slices"
 	"sort"
 
-	"gitea.dev/models/db"
-	organization_model "gitea.dev/models/organization"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/optional"
+	"forgente.com/models/db"
+	organization_model "forgente.com/models/organization"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/optional"
 
 	"xorm.io/builder"
 )

@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"strings"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/log"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/log"
 )
 
 // unknownAccessTokenScope represents the scope for an access token that isn't

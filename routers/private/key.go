@@ -6,10 +6,10 @@ package private
 import (
 	"net/http"
 
-	asymkey_model "gitea.dev/models/asymkey"
-	"gitea.dev/modules/private"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/services/context"
+	asymkey_model "forgente.com/models/asymkey"
+	"forgente.com/modules/private"
+	"forgente.com/modules/timeutil"
+	"forgente.com/services/context"
 )
 
 // UpdatePublicKeyInRepo update public key and deploy key updates

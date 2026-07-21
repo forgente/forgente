@@ -13,8 +13,8 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/validation"
+	"forgente.com/modules/util"
+	"forgente.com/modules/validation"
 )
 
 var (

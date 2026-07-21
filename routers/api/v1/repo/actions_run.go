@@ -4,9 +4,9 @@
 package repo
 
 import (
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/routers/common"
-	"gitea.dev/services/context"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/routers/common"
+	"forgente.com/services/context"
 )
 
 func DownloadActionsRunJobLogs(ctx *context.APIContext) {

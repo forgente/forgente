@@ -9,14 +9,14 @@ import (
 	"net/url"
 	"testing"
 
-	asymkey_model "gitea.dev/models/asymkey"
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/perm"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/tests"
+	asymkey_model "forgente.com/models/asymkey"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/perm"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	api "forgente.com/modules/structs"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

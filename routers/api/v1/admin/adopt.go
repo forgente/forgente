@@ -6,12 +6,12 @@ package admin
 import (
 	"net/http"
 
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/routers/api/v1/utils"
-	"gitea.dev/services/context"
-	repo_service "gitea.dev/services/repository"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/routers/api/v1/utils"
+	"forgente.com/services/context"
+	repo_service "forgente.com/services/repository"
 )
 
 // ListUnadoptedRepositories lists the unadopted repositories that match the provided names

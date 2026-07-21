@@ -3,7 +3,7 @@
 
 package v1_15
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddIssueResourceIndexTable(x base.EngineMigration) error {
 	type ResourceIndex struct {

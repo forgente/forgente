@@ -7,12 +7,12 @@ import (
 	"net/http"
 	"strings"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/storage"
-	"gitea.dev/services/context"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/storage"
+	"forgente.com/services/context"
 )
 
 // IsArtifactV4 detects whether the artifact is likely from v4.

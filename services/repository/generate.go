@@ -18,14 +18,14 @@ import (
 	"sync"
 	"time"
 
-	git_model "gitea.dev/models/git"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/glob"
-	"gitea.dev/modules/log"
-	repo_module "gitea.dev/modules/repository"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	git_model "forgente.com/models/git"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/glob"
+	"forgente.com/modules/log"
+	repo_module "forgente.com/modules/repository"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 
 	"github.com/huandu/xstrings"
 )

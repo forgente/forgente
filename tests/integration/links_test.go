@@ -9,10 +9,10 @@ import (
 	"path"
 	"testing"
 
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/test"
-	"gitea.dev/tests"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/test"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -7,13 +7,13 @@ import (
 	"path"
 	"time"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/httpcache"
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/structs"
-	"gitea.dev/services/context"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/httpcache"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/structs"
+	"forgente.com/services/context"
 )
 
 // ServeBlob download a git.Blob

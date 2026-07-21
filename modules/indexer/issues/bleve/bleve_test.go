@@ -6,8 +6,8 @@ package bleve
 import (
 	"testing"
 
-	"gitea.dev/modules/indexer/issues/internal"
-	"gitea.dev/modules/indexer/issues/internal/tests"
+	"forgente.com/modules/indexer/issues/internal"
+	"forgente.com/modules/indexer/issues/internal/tests"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

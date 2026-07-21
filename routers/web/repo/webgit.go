@@ -4,12 +4,12 @@
 package repo
 
 import (
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
-	files_service "gitea.dev/services/repository/files"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
+	files_service "forgente.com/services/repository/files"
 )
 
 func WebGitOperationCommonData(ctx *context.Context) {

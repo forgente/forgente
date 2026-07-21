@@ -3,7 +3,7 @@
 
 package v1_21
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AlterActionArtifactTable(x base.EngineMigration) error {
 	// ActionArtifact is a file that is stored in the artifact storage.

@@ -6,9 +6,9 @@ package asymkey
 import (
 	"context"
 
-	asymkey_model "gitea.dev/models/asymkey"
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
+	asymkey_model "forgente.com/models/asymkey"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
 )
 
 // DeletePublicKey deletes SSH key information both in database and authorized_keys file.

@@ -12,13 +12,13 @@ import (
 	"strings"
 	"testing"
 
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/models/packages"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/json"
-	vagrant_module "gitea.dev/modules/packages/vagrant"
-	"gitea.dev/tests"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/models/packages"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/json"
+	vagrant_module "forgente.com/modules/packages/vagrant"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -10,11 +10,11 @@ import (
 	"strings"
 	"time"
 
-	actions_model "gitea.dev/models/actions"
-	auth_model "gitea.dev/models/auth"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
+	actions_model "forgente.com/models/actions"
+	auth_model "forgente.com/models/auth"
+	"forgente.com/modules/log"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
 
 	"connectrpc.com/connect"
 	"google.golang.org/grpc/codes"

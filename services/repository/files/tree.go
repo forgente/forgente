@@ -12,14 +12,14 @@ import (
 	"sort"
 	"strings"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/base"
-	"gitea.dev/modules/fileicon"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/base"
+	"forgente.com/modules/fileicon"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
 )
 
 // GetTreeBySHA get the GitTreeResponse of a repository using a sha hash (id of a commit or a tree)

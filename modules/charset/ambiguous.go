@@ -8,7 +8,7 @@ import (
 	"strings"
 	"unicode"
 
-	"gitea.dev/modules/translation"
+	"forgente.com/modules/translation"
 )
 
 // AmbiguousTablesForLocale provides the table of ambiguous characters for this locale.

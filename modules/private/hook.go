@@ -8,10 +8,10 @@ import (
 	"fmt"
 	"net/url"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/repository"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/git"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/repository"
+	"forgente.com/modules/setting"
 )
 
 // Git environment variables

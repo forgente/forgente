@@ -12,15 +12,15 @@ import (
 	"strings"
 	"time"
 
-	actions_model "gitea.dev/models/actions"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web"
-	"gitea.dev/routers/web/repo/actions"
-	"gitea.dev/services/context"
+	actions_model "forgente.com/models/actions"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web"
+	"forgente.com/routers/web/repo/actions"
+	"forgente.com/services/context"
 )
 
 type generateMockStepsLogOptions struct {

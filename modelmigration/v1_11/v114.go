@@ -6,7 +6,7 @@ package v1_11
 import (
 	"net/url"
 
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 )
 
 func SanitizeOriginalURL(x base.EngineMigration) error {

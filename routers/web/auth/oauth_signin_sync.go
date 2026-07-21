@@ -6,15 +6,15 @@ package auth
 import (
 	"fmt"
 
-	asymkey_model "gitea.dev/models/asymkey"
-	"gitea.dev/models/auth"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
-	asymkey_service "gitea.dev/services/asymkey"
-	"gitea.dev/services/auth/source/oauth2"
-	"gitea.dev/services/context"
-	user_service "gitea.dev/services/user"
+	asymkey_model "forgente.com/models/asymkey"
+	"forgente.com/models/auth"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
+	asymkey_service "forgente.com/services/asymkey"
+	"forgente.com/services/auth/source/oauth2"
+	"forgente.com/services/context"
+	user_service "forgente.com/services/user"
 
 	"github.com/markbates/goth"
 )

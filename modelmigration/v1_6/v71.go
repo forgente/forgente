@@ -6,9 +6,9 @@ package v1_6
 import (
 	"fmt"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
 )
 
 func AddScratchHash(x base.EngineMigration) error {

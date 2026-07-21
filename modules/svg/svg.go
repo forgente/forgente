@@ -10,9 +10,9 @@ import (
 	"strings"
 	"sync"
 
-	gitea_html "gitea.dev/modules/htmlutil"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/public"
+	gitea_html "forgente.com/modules/htmlutil"
+	"forgente.com/modules/log"
+	"forgente.com/modules/public"
 )
 
 type svgIconItem struct {

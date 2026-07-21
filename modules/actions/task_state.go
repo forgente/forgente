@@ -4,7 +4,7 @@
 package actions
 
 import (
-	actions_model "gitea.dev/models/actions"
+	actions_model "forgente.com/models/actions"
 )
 
 const (

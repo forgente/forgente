@@ -13,15 +13,15 @@ import (
 	"sync"
 	"time"
 
-	"gitea.dev/models/avatars"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/cache"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	api "gitea.dev/modules/structs"
+	"forgente.com/models/avatars"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/cache"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	api "forgente.com/modules/structs"
 )
 
 const (

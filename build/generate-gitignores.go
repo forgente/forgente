@@ -18,7 +18,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	"gitea.dev/modules/util"
+	"forgente.com/modules/util"
 )
 
 func main() {

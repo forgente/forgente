@@ -10,10 +10,10 @@ import (
 	"net/textproto"
 	"strings"
 
-	auth_model "gitea.dev/models/auth"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/util"
+	auth_model "forgente.com/models/auth"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/util"
 )
 
 // Authenticate queries if the provided login/password is authenticates against the SMTP server

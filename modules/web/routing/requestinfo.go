@@ -9,8 +9,8 @@ import (
 	"sync/atomic"
 	"time"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 // NewRequestInfoHandler is a handler that saves request info into request context.

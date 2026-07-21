@@ -6,8 +6,8 @@ package v1_21
 import (
 	"time"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/timeutil"
 )
 
 func AddExpiredUnixColumnInActionArtifactTable(x base.EngineMigration) error {

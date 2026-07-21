@@ -4,7 +4,7 @@
 package db
 
 import (
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/setting"
 
 	"xorm.io/xorm/schemas"
 )

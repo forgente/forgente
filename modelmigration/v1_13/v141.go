@@ -6,7 +6,7 @@ package v1_13
 import (
 	"fmt"
 
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 )
 
 func AddKeepActivityPrivateUserColumn(x base.EngineMigration) error {

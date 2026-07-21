@@ -6,7 +6,7 @@ package git
 import (
 	"context"
 
-	"gitea.dev/modules/git/gitcmd"
+	"forgente.com/modules/git/gitcmd"
 )
 
 // FetchRemoteCommit fetches a specific commit and its related objects from a remote

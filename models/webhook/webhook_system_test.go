@@ -6,8 +6,8 @@ package webhook
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/optional"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/optional"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

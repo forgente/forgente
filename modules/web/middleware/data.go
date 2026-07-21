@@ -7,9 +7,9 @@ import (
 	"context"
 	"time"
 
-	"gitea.dev/modules/public"
-	"gitea.dev/modules/reqctx"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/public"
+	"forgente.com/modules/reqctx"
+	"forgente.com/modules/setting"
 )
 
 const ContextDataKeySignedUser = "SignedUser"

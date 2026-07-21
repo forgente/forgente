@@ -7,8 +7,8 @@ import (
 	"encoding/base32"
 	"fmt"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/timeutil"
 )
 
 func StoreWebauthnCredentialIDAsBytes(x base.EngineMigration) error {

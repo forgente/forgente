@@ -12,8 +12,8 @@ import (
 	"slices"
 	"strings"
 
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/paginator"
+	"forgente.com/modules/container"
+	"forgente.com/modules/paginator"
 )
 
 // Pagination provides a pagination via paginator.Paginator and additional configurations for the link params used in rendering

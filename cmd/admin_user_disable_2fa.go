@@ -9,9 +9,9 @@ import (
 	"fmt"
 	"strings"
 
-	auth_model "gitea.dev/models/auth"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
+	auth_model "forgente.com/models/auth"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
 
 	"github.com/urfave/cli/v3"
 )

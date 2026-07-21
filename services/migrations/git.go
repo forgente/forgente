@@ -6,7 +6,7 @@ package migrations
 import (
 	"context"
 
-	base "gitea.dev/modules/migration"
+	base "forgente.com/modules/migration"
 )
 
 var _ base.Downloader = &PlainGitDownloader{}

@@ -6,7 +6,7 @@ package timeutil
 import (
 	"time"
 
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/setting"
 )
 
 // TimeStamp defines a timestamp

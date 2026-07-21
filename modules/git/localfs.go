@@ -11,8 +11,8 @@ import (
 	"os"
 	"path/filepath"
 
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/util"
 )
 
 // IsRepositoryExist returns true if the repository directory exists in the disk

@@ -7,14 +7,14 @@ import (
 	"errors"
 	"net/http"
 
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/auth/openid"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web"
-	"gitea.dev/services/context"
-	"gitea.dev/services/forms"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/auth/openid"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web"
+	"forgente.com/services/context"
+	"forgente.com/services/forms"
 )
 
 // OpenIDPost response for change user's openid

@@ -8,9 +8,9 @@ package private
 import (
 	"net/http"
 
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/private"
-	"gitea.dev/services/context"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/private"
+	"forgente.com/services/context"
 )
 
 // Restart is not implemented for Windows based servers as they can't fork

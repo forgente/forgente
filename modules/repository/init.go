@@ -10,11 +10,11 @@ import (
 	"sort"
 	"strings"
 
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/modules/label"
-	"gitea.dev/modules/options"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/modules/label"
+	"forgente.com/modules/options"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 )
 
 type OptionFile struct {

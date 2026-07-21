@@ -9,11 +9,11 @@ import (
 	"path/filepath"
 	"strings"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/modules/badge"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/modules/badge"
+	"forgente.com/modules/git"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
 )
 
 func GetWorkflowBadge(ctx *context.Context) {

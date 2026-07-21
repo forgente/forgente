@@ -6,7 +6,7 @@ package v1_12
 import (
 	"fmt"
 
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 )
 
 func AddBranchProtectionProtectedFilesColumn(x base.EngineMigration) error {

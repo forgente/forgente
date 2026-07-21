@@ -3,7 +3,7 @@
 
 package v1_24
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func UpdateOwnerIDOfRepoLevelActionsTables(x base.EngineMigration) error {
 	if _, err := x.Exec("UPDATE `action_runner` SET `owner_id` = 0 WHERE `repo_id` > 0 AND `owner_id` > 0"); err != nil {

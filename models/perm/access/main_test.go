@@ -6,13 +6,13 @@ package access_test
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
+	"forgente.com/models/unittest"
 
-	_ "gitea.dev/models"
-	_ "gitea.dev/models/actions"
-	_ "gitea.dev/models/activities"
-	_ "gitea.dev/models/repo"
-	_ "gitea.dev/models/user"
+	_ "forgente.com/models"
+	_ "forgente.com/models/actions"
+	_ "forgente.com/models/activities"
+	_ "forgente.com/models/repo"
+	_ "forgente.com/models/user"
 )
 
 func TestMain(m *testing.M) {

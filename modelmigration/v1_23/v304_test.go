@@ -6,8 +6,8 @@ package v1_23
 import (
 	"testing"
 
-	"gitea.dev/modelmigration/migrationtest"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modelmigration/migrationtest"
+	"forgente.com/modules/timeutil"
 
 	"github.com/stretchr/testify/assert"
 )

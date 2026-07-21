@@ -12,10 +12,10 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/mailer/token"
+	"forgente.com/modules/log"
+	"forgente.com/modules/process"
+	"forgente.com/modules/setting"
+	"forgente.com/services/mailer/token"
 
 	"github.com/emersion/go-imap"
 	"github.com/emersion/go-imap/client"

@@ -7,14 +7,14 @@ import (
 	"context"
 	"fmt"
 
-	actions_model "gitea.dev/models/actions"
-	activities_model "gitea.dev/models/activities"
-	issues_model "gitea.dev/models/issues"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	issue_service "gitea.dev/services/issue"
-	notify_service "gitea.dev/services/notify"
+	actions_model "forgente.com/models/actions"
+	activities_model "forgente.com/models/activities"
+	issues_model "forgente.com/models/issues"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	issue_service "forgente.com/services/issue"
+	notify_service "forgente.com/services/notify"
 )
 
 type mailNotifier struct {

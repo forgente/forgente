@@ -6,13 +6,13 @@ package user
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	password_module "gitea.dev/modules/auth/password"
-	"gitea.dev/modules/optional"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/structs"
-	"gitea.dev/modules/test"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	password_module "forgente.com/modules/auth/password"
+	"forgente.com/modules/optional"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/structs"
+	"forgente.com/modules/test"
 
 	"github.com/stretchr/testify/assert"
 )

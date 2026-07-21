@@ -10,13 +10,13 @@ import (
 	"slices"
 	"time"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/actions/jobparser"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
-	webhook_module "gitea.dev/modules/webhook"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/actions/jobparser"
+	"forgente.com/modules/log"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
+	webhook_module "forgente.com/modules/webhook"
 
 	"xorm.io/builder"
 )

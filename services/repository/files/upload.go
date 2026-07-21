@@ -10,9 +10,9 @@ import (
 	"path"
 	"sync"
 
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
 )
 
 // UploadRepoFileOptions contains the uploaded repository file options

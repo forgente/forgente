@@ -7,8 +7,8 @@ import (
 	"context"
 	"strings"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/util"
+	"forgente.com/models/db"
+	"forgente.com/modules/util"
 
 	"xorm.io/builder"
 )

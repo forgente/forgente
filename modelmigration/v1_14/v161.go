@@ -6,7 +6,7 @@ package v1_14
 import (
 	"context"
 
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 )
 
 func ConvertTaskTypeToString(x base.EngineMigration) error {

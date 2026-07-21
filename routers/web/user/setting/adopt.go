@@ -4,11 +4,11 @@
 package setting
 
 import (
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/context"
-	repo_service "gitea.dev/services/repository"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/setting"
+	"forgente.com/services/context"
+	repo_service "forgente.com/services/repository"
 )
 
 // AdoptOrDeleteRepository adopts or deletes a repository

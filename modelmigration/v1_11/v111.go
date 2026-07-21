@@ -7,7 +7,7 @@ import (
 	"fmt"
 	"slices"
 
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 )
 
 func AddBranchProtectionCanPushAndEnableWhitelist(x base.EngineMigration) error {

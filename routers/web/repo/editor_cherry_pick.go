@@ -7,11 +7,11 @@ import (
 	"bytes"
 	"net/http"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/util"
-	"gitea.dev/services/context"
-	"gitea.dev/services/forms"
-	"gitea.dev/services/repository/files"
+	"forgente.com/modules/git"
+	"forgente.com/modules/util"
+	"forgente.com/services/context"
+	"forgente.com/services/forms"
+	"forgente.com/services/repository/files"
 )
 
 func CherryPick(ctx *context.Context) {

@@ -7,8 +7,8 @@ import (
 	"fmt"
 	"time"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/timeutil"
 )
 
 func CreatePushMirrorTable(x base.EngineMigration) error {

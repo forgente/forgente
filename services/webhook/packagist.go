@@ -8,11 +8,11 @@ import (
 	"fmt"
 	"net/http"
 
-	webhook_model "gitea.dev/models/webhook"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	api "gitea.dev/modules/structs"
-	webhook_module "gitea.dev/modules/webhook"
+	webhook_model "forgente.com/models/webhook"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	api "forgente.com/modules/structs"
+	webhook_module "forgente.com/modules/webhook"
 )
 
 type (

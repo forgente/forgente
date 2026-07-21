@@ -9,7 +9,7 @@ import (
 	"net/url"
 	"regexp"
 
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/setting"
 
 	"github.com/microcosm-cc/bluemonday"
 )

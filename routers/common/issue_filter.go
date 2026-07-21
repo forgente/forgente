@@ -4,7 +4,7 @@
 package common
 
 import (
-	"gitea.dev/modules/optional"
+	"forgente.com/modules/optional"
 )
 
 func ParseIssueFilterStateIsClosed(state string) optional.Option[bool] {

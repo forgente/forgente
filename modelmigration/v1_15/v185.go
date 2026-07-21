@@ -3,7 +3,7 @@
 
 package v1_15
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddRepoArchiver(x base.EngineMigration) error {
 	// RepoArchiver represents all archivers

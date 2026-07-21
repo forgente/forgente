@@ -4,8 +4,8 @@
 package admin
 
 import (
-	"gitea.dev/routers/api/v1/shared"
-	"gitea.dev/services/context"
+	"forgente.com/routers/api/v1/shared"
+	"forgente.com/services/context"
 )
 
 // https://docs.github.com/en/rest/actions/self-hosted-runners?apiVersion=2022-11-28#create-a-registration-token-for-an-organization

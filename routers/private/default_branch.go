@@ -7,11 +7,11 @@ import (
 	"fmt"
 	"net/http"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/private"
-	gitea_context "gitea.dev/services/context"
-	repo_service "gitea.dev/services/repository"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/git"
+	"forgente.com/modules/private"
+	gitea_context "forgente.com/services/context"
+	repo_service "forgente.com/services/repository"
 )
 
 // SetDefaultBranch updates the default branch

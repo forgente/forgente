@@ -3,7 +3,7 @@
 
 package v1_9
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddHTTPMethodToWebhook(x base.EngineMigration) error {
 	type Webhook struct {

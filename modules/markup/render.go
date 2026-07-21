@@ -15,12 +15,12 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/htmlutil"
-	"gitea.dev/modules/markup/internal"
-	"gitea.dev/modules/public"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/typesniffer"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/htmlutil"
+	"forgente.com/modules/markup/internal"
+	"forgente.com/modules/public"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/typesniffer"
+	"forgente.com/modules/util"
 
 	"golang.org/x/sync/errgroup"
 )

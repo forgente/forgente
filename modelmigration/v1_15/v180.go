@@ -4,9 +4,9 @@
 package v1_15
 
 import (
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/util"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/json"
+	"forgente.com/modules/util"
 
 	"xorm.io/builder"
 )

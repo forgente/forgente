@@ -10,9 +10,9 @@ import (
 	"net/url"
 	"testing"
 
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/reqctx"
-	"gitea.dev/modules/test"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/reqctx"
+	"forgente.com/modules/test"
 
 	"github.com/stretchr/testify/assert"
 )

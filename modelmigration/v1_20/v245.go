@@ -6,8 +6,8 @@ package v1_20
 import (
 	"context"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/setting"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/setting"
 )
 
 func RenameWebhookOrgToOwner(x base.EngineMigration) error {

@@ -7,11 +7,11 @@ import (
 	"context"
 	"fmt"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	"gitea.dev/modules/actions/jobparser"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/db"
+	"forgente.com/modules/actions/jobparser"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
 
 	act_model "gitea.com/gitea/runner/act/model"
 	"go.yaml.in/yaml/v4"

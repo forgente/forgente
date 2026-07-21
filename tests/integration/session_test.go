@@ -6,9 +6,9 @@ package integration
 import (
 	"testing"
 
-	"gitea.dev/models/auth"
-	"gitea.dev/models/unittest"
-	"gitea.dev/tests"
+	"forgente.com/models/auth"
+	"forgente.com/models/unittest"
+	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
 )

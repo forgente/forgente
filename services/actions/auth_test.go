@@ -7,8 +7,8 @@ import (
 	"net/http"
 	"testing"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/json"
+	"forgente.com/modules/setting"
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/stretchr/testify/assert"

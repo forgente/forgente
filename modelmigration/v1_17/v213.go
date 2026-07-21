@@ -3,7 +3,7 @@
 
 package v1_17
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddAllowMaintainerEdit(x base.EngineMigration) error {
 	// PullRequest represents relation between pull request and repositories.

@@ -7,16 +7,16 @@ import (
 	"errors"
 	"net/http"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/web"
-	shared_user "gitea.dev/routers/web/shared/user"
-	actions_service "gitea.dev/services/actions"
-	"gitea.dev/services/context"
-	"gitea.dev/services/forms"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/db"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/web"
+	shared_user "forgente.com/routers/web/shared/user"
+	actions_service "forgente.com/services/actions"
+	"forgente.com/services/context"
+	"forgente.com/services/forms"
 )
 
 const (

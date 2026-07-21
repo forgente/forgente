@@ -7,10 +7,10 @@ import (
 	"fmt"
 	"testing"
 
-	issues_model "gitea.dev/models/issues"
-	project_model "gitea.dev/models/project"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
+	issues_model "forgente.com/models/issues"
+	project_model "forgente.com/models/project"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

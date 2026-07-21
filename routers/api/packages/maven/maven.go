@@ -19,15 +19,15 @@ import (
 	"strconv"
 	"strings"
 
-	packages_model "gitea.dev/models/packages"
-	"gitea.dev/modules/globallock"
-	"gitea.dev/modules/json"
-	packages_module "gitea.dev/modules/packages"
-	maven_module "gitea.dev/modules/packages/maven"
-	"gitea.dev/modules/util"
-	"gitea.dev/routers/api/packages/helper"
-	"gitea.dev/services/context"
-	packages_service "gitea.dev/services/packages"
+	packages_model "forgente.com/models/packages"
+	"forgente.com/modules/globallock"
+	"forgente.com/modules/json"
+	packages_module "forgente.com/modules/packages"
+	maven_module "forgente.com/modules/packages/maven"
+	"forgente.com/modules/util"
+	"forgente.com/routers/api/packages/helper"
+	"forgente.com/services/context"
+	packages_service "forgente.com/services/packages"
 )
 
 const (

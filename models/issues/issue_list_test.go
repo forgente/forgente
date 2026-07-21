@@ -6,9 +6,9 @@ package issues_test
 import (
 	"testing"
 
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/setting"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/setting"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

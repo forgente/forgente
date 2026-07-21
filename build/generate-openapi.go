@@ -25,7 +25,7 @@ import (
 	"sort"
 	"strings"
 
-	"gitea.dev/build/openapi3gen"
+	"forgente.com/build/openapi3gen"
 
 	"github.com/getkin/kin-openapi/openapi3"
 )

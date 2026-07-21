@@ -10,11 +10,11 @@ import (
 	"sort"
 	"strings"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/storage"
+	"forgente.com/models/db"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/storage"
 )
 
 // Check represents a Doctor check

@@ -6,10 +6,10 @@ package actions
 import (
 	"testing"
 
-	actions_model "gitea.dev/models/actions"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/util"
+	actions_model "forgente.com/models/actions"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
+	"forgente.com/modules/util"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

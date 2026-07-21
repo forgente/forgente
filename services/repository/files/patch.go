@@ -8,15 +8,15 @@ import (
 	"fmt"
 	"strings"
 
-	git_model "gitea.dev/models/git"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	asymkey_service "gitea.dev/services/asymkey"
+	git_model "forgente.com/models/git"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/log"
+	"forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	asymkey_service "forgente.com/services/asymkey"
 )
 
 // ErrUserCannotCommit represents "UserCannotCommit" kind of error.

@@ -6,8 +6,8 @@ package agit
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/util"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/util"
 
 	"github.com/stretchr/testify/assert"
 )

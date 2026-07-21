@@ -6,11 +6,11 @@ package asymkey
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
+	"forgente.com/models/unittest"
 
-	_ "gitea.dev/models"
-	_ "gitea.dev/models/actions"
-	_ "gitea.dev/models/activities"
+	_ "forgente.com/models"
+	_ "forgente.com/models/actions"
+	_ "forgente.com/models/activities"
 )
 
 func TestMain(m *testing.M) {

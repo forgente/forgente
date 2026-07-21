@@ -3,7 +3,7 @@
 
 package v1_18
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 // AddConfidentialColumnToOAuth2ApplicationTable: add ConfidentialClient column, setting existing rows to true
 func AddConfidentialClientColumnToOAuth2ApplicationTable(x base.EngineMigration) error {

@@ -8,7 +8,7 @@ import (
 	"slices"
 	"strings"
 
-	"gitea.dev/models/perm"
+	"forgente.com/models/perm"
 )
 
 // AccessTokenScopeCategory represents the scope category for an access token

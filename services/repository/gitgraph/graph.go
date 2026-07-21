@@ -8,9 +8,9 @@ import (
 	"bytes"
 	"context"
 
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/gitcmd"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/gitcmd"
+	"forgente.com/modules/setting"
 )
 
 // GetCommitGraph return a list of commit (GraphItems) from all branches

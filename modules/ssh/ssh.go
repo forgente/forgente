@@ -19,12 +19,12 @@ import (
 	"sync"
 	"syscall"
 
-	asymkey_model "gitea.dev/models/asymkey"
-	"gitea.dev/modules/generate"
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/setting"
+	asymkey_model "forgente.com/models/asymkey"
+	"forgente.com/modules/generate"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	"forgente.com/modules/process"
+	"forgente.com/modules/setting"
 
 	"github.com/gliderlabs/ssh"
 	gossh "golang.org/x/crypto/ssh"

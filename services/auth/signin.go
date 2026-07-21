@@ -7,18 +7,18 @@ import (
 	"context"
 	"strings"
 
-	"gitea.dev/models/auth"
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/optional"
-	"gitea.dev/services/auth/source/oauth2"
-	"gitea.dev/services/auth/source/smtp"
+	"forgente.com/models/auth"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	"forgente.com/modules/optional"
+	"forgente.com/services/auth/source/oauth2"
+	"forgente.com/services/auth/source/smtp"
 
-	_ "gitea.dev/services/auth/source/db"   // register the sources (and below)
-	_ "gitea.dev/services/auth/source/ldap" // register the ldap source
-	_ "gitea.dev/services/auth/source/pam"  // register the pam source
-	_ "gitea.dev/services/auth/source/sspi" // register the sspi source
+	_ "forgente.com/services/auth/source/db"   // register the sources (and below)
+	_ "forgente.com/services/auth/source/ldap" // register the ldap source
+	_ "forgente.com/services/auth/source/pam"  // register the pam source
+	_ "forgente.com/services/auth/source/sspi" // register the sspi source
 
 	"xorm.io/builder"
 )

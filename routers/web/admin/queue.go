@@ -7,9 +7,9 @@ import (
 	"net/http"
 	"strconv"
 
-	"gitea.dev/modules/queue"
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/context"
+	"forgente.com/modules/queue"
+	"forgente.com/modules/setting"
+	"forgente.com/services/context"
 )
 
 func Queues(ctx *context.Context) {

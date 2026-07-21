@@ -6,8 +6,8 @@ package paginator
 import (
 	"testing"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/db"
+	"forgente.com/modules/setting"
 
 	"github.com/stretchr/testify/assert"
 )

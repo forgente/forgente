@@ -8,12 +8,12 @@ import (
 	"errors"
 	"time"
 
-	"gitea.dev/models/db"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/timeutil"
-	webhook_module "gitea.dev/modules/webhook"
+	"forgente.com/models/db"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/timeutil"
+	webhook_module "forgente.com/modules/webhook"
 
 	gouuid "github.com/google/uuid"
 	"xorm.io/builder"

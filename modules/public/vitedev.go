@@ -13,11 +13,11 @@ import (
 	"sync/atomic"
 	"time"
 
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web/routing"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web/routing"
 )
 
 const viteDevPortFile = "public/assets/.vite/dev-port"

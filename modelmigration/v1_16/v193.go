@@ -3,7 +3,7 @@
 
 package v1_16
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddRepoIDForAttachment(x base.EngineMigration) error {
 	type Attachment struct {

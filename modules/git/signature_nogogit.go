@@ -10,7 +10,7 @@ import (
 	"fmt"
 	"time"
 
-	"gitea.dev/modules/util"
+	"forgente.com/modules/util"
 )
 
 // Signature represents the Author, Committer or Tagger information.

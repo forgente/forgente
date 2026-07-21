@@ -7,7 +7,7 @@ package migration
 import (
 	"context"
 
-	"gitea.dev/modules/structs"
+	"forgente.com/modules/structs"
 )
 
 // Downloader downloads the site repo information

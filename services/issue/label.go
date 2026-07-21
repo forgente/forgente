@@ -6,11 +6,11 @@ package issue
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	issues_model "gitea.dev/models/issues"
-	access_model "gitea.dev/models/perm/access"
-	user_model "gitea.dev/models/user"
-	notify_service "gitea.dev/services/notify"
+	"forgente.com/models/db"
+	issues_model "forgente.com/models/issues"
+	access_model "forgente.com/models/perm/access"
+	user_model "forgente.com/models/user"
+	notify_service "forgente.com/services/notify"
 )
 
 // ClearLabels clears all of an issue's labels

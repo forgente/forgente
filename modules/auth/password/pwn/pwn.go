@@ -14,7 +14,7 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/setting"
 )
 
 const passwordURL = "https://api.pwnedpasswords.com/range/"

@@ -9,15 +9,15 @@ import (
 	"strings"
 	"unicode"
 
-	issues_model "gitea.dev/models/issues"
-	access_model "gitea.dev/models/perm/access"
-	"gitea.dev/models/unit"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/util"
-	issue_service "gitea.dev/services/issue"
-	incoming_payload "gitea.dev/services/mailer/incoming/payload"
-	"gitea.dev/services/mailer/token"
+	issues_model "forgente.com/models/issues"
+	access_model "forgente.com/models/perm/access"
+	"forgente.com/models/unit"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	"forgente.com/modules/util"
+	issue_service "forgente.com/services/issue"
+	incoming_payload "forgente.com/services/mailer/incoming/payload"
+	"forgente.com/services/mailer/token"
 )
 
 // init registers ForgenteNewIssueHandler additively, without touching the upstream

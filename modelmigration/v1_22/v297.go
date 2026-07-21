@@ -4,8 +4,8 @@
 package v1_22
 
 import (
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/models/perm"
+	"forgente.com/modelmigration/base"
+	"forgente.com/models/perm"
 )
 
 func AddRepoUnitEveryoneAccessMode(x base.EngineMigration) error {

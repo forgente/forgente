@@ -6,8 +6,8 @@ package repo
 import (
 	"context"
 
-	"gitea.dev/models/unit"
-	"gitea.dev/modules/util"
+	"forgente.com/models/unit"
+	"forgente.com/modules/util"
 )
 
 func (repo *Repository) GetPullRequestTargetBranch(ctx context.Context) string {

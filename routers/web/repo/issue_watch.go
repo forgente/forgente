@@ -6,10 +6,10 @@ package repo
 import (
 	"net/http"
 
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/templates"
-	"gitea.dev/services/context"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/modules/log"
+	"forgente.com/modules/templates"
+	"forgente.com/services/context"
 )
 
 const (

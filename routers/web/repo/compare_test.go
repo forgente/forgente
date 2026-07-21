@@ -7,14 +7,14 @@ import (
 	"strings"
 	"testing"
 
-	asymkey_model "gitea.dev/models/asymkey"
-	git_model "gitea.dev/models/git"
-	"gitea.dev/models/gituser"
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/setting"
-	git_service "gitea.dev/services/git"
-	"gitea.dev/services/gitdiff"
+	asymkey_model "forgente.com/models/asymkey"
+	git_model "forgente.com/models/git"
+	"forgente.com/models/gituser"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/modules/git"
+	"forgente.com/modules/setting"
+	git_service "forgente.com/services/git"
+	"forgente.com/services/gitdiff"
 
 	"github.com/stretchr/testify/assert"
 )

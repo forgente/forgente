@@ -6,9 +6,9 @@ package repo
 import (
 	"net/http"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/templates"
-	"gitea.dev/services/context"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/templates"
+	"forgente.com/services/context"
 )
 
 const tplStarUnstar templates.TplName = "repo/header/star"

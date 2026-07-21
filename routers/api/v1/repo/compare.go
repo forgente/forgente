@@ -6,12 +6,12 @@ package repo
 import (
 	"net/http"
 
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/git"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
-	git_service "gitea.dev/services/git"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/git"
+	api "forgente.com/modules/structs"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
+	git_service "forgente.com/services/git"
 )
 
 // CompareDiff compare two branches or commits

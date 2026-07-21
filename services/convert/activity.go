@@ -6,12 +6,12 @@ package convert
 import (
 	"context"
 
-	activities_model "gitea.dev/models/activities"
-	perm_model "gitea.dev/models/perm"
-	access_model "gitea.dev/models/perm/access"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	api "gitea.dev/modules/structs"
+	activities_model "forgente.com/models/activities"
+	perm_model "forgente.com/models/perm"
+	access_model "forgente.com/models/perm/access"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	api "forgente.com/modules/structs"
 )
 
 func ToActivity(ctx context.Context, ac *activities_model.Action, doer *user_model.User) *api.Activity {

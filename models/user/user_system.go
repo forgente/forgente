@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/modules/structs"
+	"forgente.com/modules/structs"
 )
 
 const (

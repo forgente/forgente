@@ -13,11 +13,11 @@ import (
 	"strconv"
 	"strings"
 
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/process"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	"forgente.com/modules/process"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 
 	"github.com/caddyserver/certmagic"
 )

@@ -9,9 +9,9 @@ import (
 	"html/template"
 	"strings"
 
-	"gitea.dev/modules/highlight"
-	"gitea.dev/modules/indexer/code/internal"
-	"gitea.dev/modules/timeutil"
+	"forgente.com/modules/highlight"
+	"forgente.com/modules/indexer/code/internal"
+	"forgente.com/modules/timeutil"
 )
 
 // Result a search result to display

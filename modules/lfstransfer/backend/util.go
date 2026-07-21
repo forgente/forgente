@@ -11,10 +11,10 @@ import (
 	"net/url"
 	"strings"
 
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/private"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/private"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 
 	"github.com/charmbracelet/git-lfs-transfer/transfer"
 )

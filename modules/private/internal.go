@@ -14,11 +14,11 @@ import (
 	"sync"
 	"time"
 
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/proxyprotocol"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/json"
+	"forgente.com/modules/log"
+	"forgente.com/modules/proxyprotocol"
+	"forgente.com/modules/setting"
 )
 
 // Response is used for internal request response (for user message and error message)

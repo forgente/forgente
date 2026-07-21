@@ -4,8 +4,8 @@
 package v1_18
 
 import (
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/setting"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/setting"
 )
 
 func AlterPublicGPGKeyContentFieldsToMediumText(x base.EngineMigration) error {

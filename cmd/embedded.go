@@ -11,14 +11,14 @@ import (
 	"path/filepath"
 	"strings"
 
-	"gitea.dev/modules/assetfs"
-	"gitea.dev/modules/glob"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/options"
-	"gitea.dev/modules/public"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/assetfs"
+	"forgente.com/modules/glob"
+	"forgente.com/modules/log"
+	"forgente.com/modules/options"
+	"forgente.com/modules/public"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/modules/util"
 
 	"github.com/urfave/cli/v3"
 )

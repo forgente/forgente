@@ -6,9 +6,9 @@ package fileicon_test
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/fileicon"
-	"gitea.dev/modules/git"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/fileicon"
+	"forgente.com/modules/git"
 
 	"github.com/stretchr/testify/assert"
 )

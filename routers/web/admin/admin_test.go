@@ -7,10 +7,10 @@ import (
 	"net/http"
 	"testing"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/test"
-	"gitea.dev/services/contexttest"
+	"forgente.com/modules/json"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/test"
+	"forgente.com/services/contexttest"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

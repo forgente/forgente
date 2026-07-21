@@ -4,8 +4,8 @@
 package convert
 
 import (
-	project_model "gitea.dev/models/project"
-	api "gitea.dev/modules/structs"
+	project_model "forgente.com/models/project"
+	api "forgente.com/modules/structs"
 )
 
 // ToAPIProject converts a Project to API format

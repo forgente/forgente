@@ -7,9 +7,9 @@ import (
 	"errors"
 	"strconv"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 func UpdateCodeCommentReplies(x base.EngineMigration) error {

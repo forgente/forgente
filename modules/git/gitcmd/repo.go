@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"sync/atomic"
 
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/setting"
 )
 
 type RepositoryFacade interface {

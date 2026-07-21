@@ -3,7 +3,7 @@
 
 package v1_10
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func AddOriginalAuthorOnMigratedReleases(x base.EngineMigration) error {
 	type Release struct {

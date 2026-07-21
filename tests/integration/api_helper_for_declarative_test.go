@@ -12,13 +12,13 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/models/auth"
-	"gitea.dev/models/perm"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/queue"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/services/forms"
+	"forgente.com/models/auth"
+	"forgente.com/models/perm"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/json"
+	"forgente.com/modules/queue"
+	api "forgente.com/modules/structs"
+	"forgente.com/services/forms"
 
 	"github.com/stretchr/testify/assert"
 )

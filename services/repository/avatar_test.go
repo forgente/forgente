@@ -9,9 +9,9 @@ import (
 	"image/png"
 	"testing"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	"gitea.dev/modules/avatar"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	"forgente.com/modules/avatar"
 
 	"github.com/stretchr/testify/assert"
 )

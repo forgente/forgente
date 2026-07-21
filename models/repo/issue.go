@@ -6,9 +6,9 @@ package repo
 import (
 	"context"
 
-	"gitea.dev/models/unit"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/models/unit"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 // ___________.__             ___________                     __

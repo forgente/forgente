@@ -13,9 +13,9 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/queue"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/log"
+	"forgente.com/modules/queue"
+	"forgente.com/modules/util"
 )
 
 var (

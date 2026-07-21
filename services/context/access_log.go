@@ -12,10 +12,10 @@ import (
 	"time"
 	"unicode"
 
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/web/middleware"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/web/middleware"
 )
 
 type accessLoggerTmplData struct {

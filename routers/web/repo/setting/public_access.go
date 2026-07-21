@@ -8,12 +8,12 @@ import (
 	"slices"
 	"strconv"
 
-	"gitea.dev/models/perm"
-	"gitea.dev/models/repo"
-	"gitea.dev/models/unit"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/services/context"
+	"forgente.com/models/perm"
+	"forgente.com/models/repo"
+	"forgente.com/models/unit"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/services/context"
 )
 
 const tplRepoSettingsPublicAccess templates.TplName = "repo/settings/public_access"

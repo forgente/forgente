@@ -7,7 +7,7 @@ import (
 	"bytes"
 	"io"
 
-	"gitea.dev/modules/log"
+	"forgente.com/modules/log"
 )
 
 // DummySender Sender sendmail mail sender

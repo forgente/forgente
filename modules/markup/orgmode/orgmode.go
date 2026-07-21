@@ -9,11 +9,11 @@ import (
 	"io"
 	"strings"
 
-	"gitea.dev/modules/highlight"
-	"gitea.dev/modules/htmlutil"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/markup"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/highlight"
+	"forgente.com/modules/htmlutil"
+	"forgente.com/modules/log"
+	"forgente.com/modules/markup"
+	"forgente.com/modules/setting"
 
 	"github.com/alecthomas/chroma/v2"
 	"github.com/niklasfasching/go-org/org"

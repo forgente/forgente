@@ -3,7 +3,7 @@
 
 package v1_21
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func ReduceCommitStatus(x base.EngineMigration) error {
 	sess := x.NewSession()

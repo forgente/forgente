@@ -8,12 +8,12 @@ import (
 	"fmt"
 	"time"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/timeutil"
-	"gitea.dev/modules/util"
-	webhook_module "gitea.dev/modules/webhook"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/timeutil"
+	"forgente.com/modules/util"
+	webhook_module "forgente.com/modules/webhook"
 )
 
 // ActionSchedule represents a schedule of a workflow file

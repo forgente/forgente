@@ -4,9 +4,9 @@
 package v1_17
 
 import (
-	"gitea.dev/modelmigration/base"
-	packages_model "gitea.dev/models/packages"
-	container_module "gitea.dev/modules/packages/container"
+	"forgente.com/modelmigration/base"
+	packages_model "forgente.com/models/packages"
+	container_module "forgente.com/modules/packages/container"
 
 	"xorm.io/xorm/schemas"
 )

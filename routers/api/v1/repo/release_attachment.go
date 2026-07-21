@@ -8,16 +8,16 @@ import (
 	"net/http"
 	"strings"
 
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/web"
-	attachment_service "gitea.dev/services/attachment"
-	"gitea.dev/services/context"
-	"gitea.dev/services/context/upload"
-	"gitea.dev/services/convert"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/modules/web"
+	attachment_service "forgente.com/services/attachment"
+	"forgente.com/services/context"
+	"forgente.com/services/context/upload"
+	"forgente.com/services/convert"
 )
 
 func checkReleaseMatchRepo(ctx *context.APIContext, releaseID int64) bool {

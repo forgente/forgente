@@ -8,11 +8,11 @@ import (
 	"context"
 	"io"
 
-	"gitea.dev/modules/analyze"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/git/attribute"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/optional"
+	"forgente.com/modules/analyze"
+	"forgente.com/modules/git"
+	"forgente.com/modules/git/attribute"
+	"forgente.com/modules/log"
+	"forgente.com/modules/optional"
 
 	"github.com/go-enry/go-enry/v2"
 )

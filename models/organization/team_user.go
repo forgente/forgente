@@ -6,8 +6,8 @@ package organization
 import (
 	"context"
 
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
 
 	"xorm.io/builder"
 )

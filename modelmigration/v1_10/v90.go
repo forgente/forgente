@@ -3,7 +3,7 @@
 
 package v1_10
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func ChangeSomeColumnsLengthOfRepo(x base.EngineMigration) error {
 	type Repository struct {

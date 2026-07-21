@@ -4,7 +4,7 @@
 package v1_21
 
 import (
-	"gitea.dev/modelmigration/base"
+	"forgente.com/modelmigration/base"
 )
 
 func DropCustomLabelsColumnOfActionRunner(x base.EngineMigration) error {

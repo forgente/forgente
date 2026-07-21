@@ -6,8 +6,8 @@ package db
 import (
 	"strings"
 
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 
 	"xorm.io/builder"
 )

@@ -6,13 +6,13 @@ package auth_test
 import (
 	"testing"
 
-	"gitea.dev/models/unittest"
+	"forgente.com/models/unittest"
 
-	_ "gitea.dev/models"
-	_ "gitea.dev/models/actions"
-	_ "gitea.dev/models/activities"
-	_ "gitea.dev/models/auth"
-	_ "gitea.dev/models/perm/access"
+	_ "forgente.com/models"
+	_ "forgente.com/models/actions"
+	_ "forgente.com/models/activities"
+	_ "forgente.com/models/auth"
+	_ "forgente.com/models/perm/access"
 )
 
 func TestMain(m *testing.M) {

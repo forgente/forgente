@@ -7,9 +7,9 @@ import (
 	"context"
 	"errors"
 
-	"gitea.dev/modules/git/gitcmd"
-	giturl "gitea.dev/modules/git/url"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/git/gitcmd"
+	giturl "forgente.com/modules/git/url"
+	"forgente.com/modules/util"
 )
 
 type RemoteOption string

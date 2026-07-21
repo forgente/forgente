@@ -8,9 +8,9 @@ import (
 	"crypto/sha256"
 	"fmt"
 
-	"gitea.dev/modules/cache"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
+	"forgente.com/modules/cache"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
 )
 
 func getCacheKey(repoPath, commitID, entryPath string) string {

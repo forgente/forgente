@@ -6,12 +6,12 @@ package actions
 import (
 	"context"
 
-	"gitea.dev/modules/actions/jobparser"
-	"gitea.dev/modules/git"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	webhook_module "gitea.dev/modules/webhook"
+	"forgente.com/modules/actions/jobparser"
+	"forgente.com/modules/git"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	webhook_module "forgente.com/modules/webhook"
 )
 
 // ListScopedWorkflows lists scoped workflow files (under SCOPED_WORKFLOW_DIRS) at the given commit.

@@ -8,7 +8,7 @@ import (
 	"context"
 	"fmt"
 
-	"gitea.dev/modules/git/gitcmd"
+	"forgente.com/modules/git/gitcmd"
 )
 
 type FastImportFile struct {

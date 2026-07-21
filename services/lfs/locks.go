@@ -8,16 +8,16 @@ import (
 	"strconv"
 	"strings"
 
-	auth_model "gitea.dev/models/auth"
-	git_model "gitea.dev/models/git"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/modules/json"
-	lfs_module "gitea.dev/modules/lfs"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	api "gitea.dev/modules/structs"
-	"gitea.dev/services/context"
-	"gitea.dev/services/convert"
+	auth_model "forgente.com/models/auth"
+	git_model "forgente.com/models/git"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/modules/json"
+	lfs_module "forgente.com/modules/lfs"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	api "forgente.com/modules/structs"
+	"forgente.com/services/context"
+	"forgente.com/services/convert"
 )
 
 func handleLockListOut(ctx *context.Context, repo *repo_model.Repository, lock *git_model.LFSLock, err error) {

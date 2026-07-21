@@ -9,13 +9,13 @@ import (
 	"net/http"
 	"strings"
 
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/structs"
-	"gitea.dev/modules/util"
-	"gitea.dev/modules/validation"
-	"gitea.dev/modules/web/middleware"
-	"gitea.dev/services/context"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/structs"
+	"forgente.com/modules/util"
+	"forgente.com/modules/validation"
+	"forgente.com/modules/web/middleware"
+	"forgente.com/services/context"
 
 	"gitea.com/go-chi/binding"
 )

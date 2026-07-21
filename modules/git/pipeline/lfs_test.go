@@ -7,7 +7,7 @@ import (
 	"testing"
 	"time"
 
-	"gitea.dev/modules/git"
+	"forgente.com/modules/git"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

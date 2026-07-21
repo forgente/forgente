@@ -3,7 +3,7 @@
 
 package v1_16
 
-import "gitea.dev/modelmigration/base"
+import "forgente.com/modelmigration/base"
 
 func IncreaseCredentialIDTo410(x base.EngineMigration) error {
 	// no-op

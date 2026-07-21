@@ -6,8 +6,8 @@ package v1_13
 import (
 	"fmt"
 
-	"gitea.dev/modelmigration/base"
-	"gitea.dev/modules/setting"
+	"forgente.com/modelmigration/base"
+	"forgente.com/modules/setting"
 )
 
 func FixLanguageStatsToSaveSize(x base.EngineMigration) error {

@@ -8,8 +8,8 @@ import (
 	"io"
 	"net/http"
 
-	"gitea.dev/modules/httplib"
-	"gitea.dev/modules/json"
+	"forgente.com/modules/httplib"
+	"forgente.com/modules/json"
 )
 
 // ResponseText is used to get the response as text, instead of parsing it as JSON.

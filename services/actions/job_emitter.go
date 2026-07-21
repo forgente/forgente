@@ -8,14 +8,14 @@ import (
 	"errors"
 	"fmt"
 
-	actions_model "gitea.dev/models/actions"
-	"gitea.dev/models/db"
-	"gitea.dev/modules/container"
-	"gitea.dev/modules/graceful"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/queue"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/util"
+	actions_model "forgente.com/models/actions"
+	"forgente.com/models/db"
+	"forgente.com/modules/container"
+	"forgente.com/modules/graceful"
+	"forgente.com/modules/log"
+	"forgente.com/modules/queue"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/util"
 
 	"xorm.io/builder"
 )

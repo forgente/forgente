@@ -17,11 +17,11 @@ import (
 	"sync/atomic"
 	texttemplate "text/template"
 
-	"gitea.dev/modules/assetfs"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates/scopedtmpl"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/assetfs"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates/scopedtmpl"
+	"forgente.com/modules/util"
 )
 
 type TemplateExecutor scopedtmpl.TemplateExecutor

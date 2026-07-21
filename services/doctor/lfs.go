@@ -8,9 +8,9 @@ import (
 	"errors"
 	"time"
 
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/setting"
-	"gitea.dev/services/repository"
+	"forgente.com/modules/log"
+	"forgente.com/modules/setting"
+	"forgente.com/services/repository"
 )
 
 func init() {

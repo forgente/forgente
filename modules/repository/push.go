@@ -4,7 +4,7 @@
 package repository
 
 import (
-	"gitea.dev/modules/git"
+	"forgente.com/modules/git"
 )
 
 // PushUpdateOptions defines the push update options

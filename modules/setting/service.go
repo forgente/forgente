@@ -9,9 +9,9 @@ import (
 	"strings"
 	"time"
 
-	"gitea.dev/modules/glob"
-	"gitea.dev/modules/log"
-	"gitea.dev/modules/structs"
+	"forgente.com/modules/glob"
+	"forgente.com/modules/log"
+	"forgente.com/modules/structs"
 )
 
 // enumerates all the types of captchas

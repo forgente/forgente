@@ -5,13 +5,13 @@
 package admin
 
 import (
-	"gitea.dev/models/db"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/structs"
-	"gitea.dev/modules/templates"
-	"gitea.dev/routers/web/explore"
-	"gitea.dev/services/context"
+	"forgente.com/models/db"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/structs"
+	"forgente.com/modules/templates"
+	"forgente.com/routers/web/explore"
+	"forgente.com/services/context"
 )
 
 const (

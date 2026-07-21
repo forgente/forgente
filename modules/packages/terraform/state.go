@@ -6,8 +6,8 @@ package terraform
 import (
 	"io"
 
-	"gitea.dev/modules/json"
-	"gitea.dev/modules/util"
+	"forgente.com/modules/json"
+	"forgente.com/modules/util"
 )
 
 // Note: this is a subset of the Terraform state file format as the full one has two forms.

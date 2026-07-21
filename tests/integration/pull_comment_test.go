@@ -11,9 +11,9 @@ import (
 	"testing"
 	"time"
 
-	issues_model "gitea.dev/models/issues"
-	"gitea.dev/models/unittest"
-	issues_service "gitea.dev/services/issue"
+	issues_model "forgente.com/models/issues"
+	"forgente.com/models/unittest"
+	issues_service "forgente.com/services/issue"
 
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"

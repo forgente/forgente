@@ -6,10 +6,10 @@ package packages
 import (
 	"net/http"
 
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/log"
-	"gitea.dev/services/auth"
-	"gitea.dev/services/packages"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/log"
+	"forgente.com/services/auth"
+	"forgente.com/services/packages"
 )
 
 var _ auth.Method = &Auth{}

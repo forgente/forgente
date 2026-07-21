@@ -7,14 +7,14 @@ import (
 	"net/http"
 	"slices"
 
-	"gitea.dev/models/db"
-	repo_model "gitea.dev/models/repo"
-	code_indexer "gitea.dev/modules/indexer/code"
-	"gitea.dev/modules/setting"
-	"gitea.dev/modules/templates"
-	"gitea.dev/routers/common"
-	shared_user "gitea.dev/routers/web/shared/user"
-	"gitea.dev/services/context"
+	"forgente.com/models/db"
+	repo_model "forgente.com/models/repo"
+	code_indexer "forgente.com/modules/indexer/code"
+	"forgente.com/modules/setting"
+	"forgente.com/modules/templates"
+	"forgente.com/routers/common"
+	shared_user "forgente.com/routers/web/shared/user"
+	"forgente.com/services/context"
 )
 
 const (

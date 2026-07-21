@@ -6,14 +6,14 @@ package private
 import (
 	"testing"
 
-	issues_model "gitea.dev/models/issues"
-	pull_model "gitea.dev/models/pull"
-	repo_model "gitea.dev/models/repo"
-	"gitea.dev/models/unittest"
-	user_model "gitea.dev/models/user"
-	"gitea.dev/modules/private"
-	repo_module "gitea.dev/modules/repository"
-	"gitea.dev/services/contexttest"
+	issues_model "forgente.com/models/issues"
+	pull_model "forgente.com/models/pull"
+	repo_model "forgente.com/models/repo"
+	"forgente.com/models/unittest"
+	user_model "forgente.com/models/user"
+	"forgente.com/modules/private"
+	repo_module "forgente.com/modules/repository"
+	"forgente.com/services/contexttest"
 
 	"github.com/stretchr/testify/assert"
 )
