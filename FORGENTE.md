@@ -53,11 +53,13 @@ and `gitea.dev/actions-proto-go` modules) and leaves real conflicts for
 manual resolution. Cherry-pick PRs follow the normal feature-PR flow
 (squash-merged with the `(#N)` title suffix).
 
-The same daily run still sweeps the ecosystem forks (docs, blog,
-helm-forgente, homebrew-forgente), which remain soft forks of their gitea.com
-upstreams: merged with merge commits, conflicts keep the Forgente identity
-surfaces (chart appVersion/icon, docusaurus title/urls, `.github/` workflows,
-formula versions).
+The same daily run still sweeps the ecosystem forks (docs, helm-forgente,
+homebrew-forgente), which remain soft forks of their gitea.com upstreams:
+merged with merge commits, conflicts keep the Forgente identity surfaces
+(chart appVersion/icon, docusaurus title/urls, `.github/` workflows, formula
+versions). The blog is **no longer** in this sweep — as of 2026-07-22 it
+publishes Forgente-native content only (see the blog table row below), so it
+is a normal Forgente repo, not a soft fork.
 
 ## CI/CD and releases
 
@@ -145,7 +147,7 @@ Release procedure:
 | https://forgente.com | hosted instance (anonymous visitors redirect to about) | forgente/infra (private runbook) |
 | https://about.forgente.com | landing page | served from the instance host |
 | https://docs.forgente.com | documentation | [forgente/docs](https://github.com/forgente/docs) |
-| https://blog.forgente.com | blog (infra live; content policy pending — currently builds upstream posts) | [forgente/blog](https://github.com/forgente/blog) |
+| https://blog.forgente.com | blog (Forgente-native content only since 2026-07-22; no longer tracks the upstream Gitea blog) | [forgente/blog](https://github.com/forgente/blog) |
 | https://dl.forgente.com | signed binaries + `forgente/version.json` (update checker) + `charts/` (helm repo index) | release workflows + [forgente/deployment](https://github.com/forgente/deployment) + [forgente/helm-forgente](https://github.com/forgente/helm-forgente) |
 
 The private [forgente/infra](https://github.com/forgente/infra) repo holds the
@@ -208,8 +210,10 @@ Complete disposition of all active gitea.com/gitea repos (audited 2026-07-11):
 **Forked under the forgente org:** `gitea` (this repo),
 `docs` → [forgente/docs](https://github.com/forgente/docs) (docs.forgente.com),
 `blog` → [forgente/blog](https://github.com/forgente/blog) (blog.forgente.com;
-forked 2026-07-16 ahead of its first-post trigger to stand up the S3+CloudFront
-publish infra — Forgente-only content policy still to apply),
+forked 2026-07-16 to stand up the S3+CloudFront publish infra, then cut over to
+Forgente-native content only on 2026-07-22 — the inherited upstream posts were
+removed and it dropped out of the daily sync, so it no longer tracks
+gitea.com/gitea/blog),
 `helm-gitea` → [forgente/helm-forgente](https://github.com/forgente/helm-forgente),
 `homebrew-gitea` → [forgente/homebrew-forgente](https://github.com/forgente/homebrew-forgente),
 and `infrastructure`/`deployment` → forgente/infra (private; includes the
