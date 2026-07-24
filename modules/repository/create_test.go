@@ -19,6 +19,6 @@ func TestGetDirectorySize(t *testing.T) {
 	assert.NoError(t, err)
 	size, err := git.CalcRepositorySize(repo)
 	assert.NoError(t, err)
-	repo.Size = 8165 // real size on the disk
+	repo.Size = 8213 // real size on the disk (forgente delegate-hook fixtures, see #50)
 	assert.Equal(t, repo.Size, size)
 }
