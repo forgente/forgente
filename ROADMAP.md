@@ -61,6 +61,41 @@ operator-facing breaking changes of the cutover, and the v1.x namespace is
 retired to the pre-fork `v<upstream>-<N>` releases and mirrored upstream
 tags. Release mechanics in [FORGENTE.md](FORGENTE.md).
 
+## Phase 3 — agent-native forge (current)
+
+With infrastructure, identity, and release independence settled, Phase 3 is
+the first *directional* phase: Forgente becomes the forge where AI agents are
+first-class, governed principals. The parity target is GitHub's AI surface —
+coding agent, code review, mission control, custom agents, MCP — with two
+deliberate divergences: agents are governed rather than exempted from
+governance, and the model provider is configured by the operator rather than
+bundled and sold.
+
+Design and rationale live in
+[docs/agent-native-program.md](docs/agent-native-program.md). The layers, in
+build order, each shippable on its own:
+
+- **L0 — agent identity and governance.** Organization-owned agent accounts,
+  permissions through ordinary team membership, provenance badges, an
+  organization-wide kill switch. A 2026-07-17 spike proved this needs no
+  authentication work: `UserTypeBot` already authenticates and acts.
+- **L1 — first-party MCP server.** Fork `gitea-mcp` when it needs agent-token
+  awareness, per the fork-on-divergence policy.
+- **L2 — repository agent configuration and model providers.** Agent
+  definitions beside `AGENTS.md`; provider endpoint and credentials at the
+  instance and organization level.
+- **L3 — agent sessions.** Assigning an issue or review to an agent
+  dispatches an Actions run behind a session record with live logs, steering,
+  and links to what it produced. Actions and the runner fleet are already the
+  sandbox.
+- **L4 — tenants.** AI code review, issue triage, pull-request summaries —
+  built as agents on L0–L3 in their own repositories, not compiled into the
+  server.
+
+Non-goals are listed in the program document and are as load-bearing as the
+goals: no editor tooling, no hosted inference, no agent marketplace, no new
+permission system.
+
 ## Standing rule — security
 
 Forgente serves git over the network. Whatever the phase, there is never a
