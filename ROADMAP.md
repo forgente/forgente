@@ -85,8 +85,11 @@ shippable on its own:
   is not "agents": Forgente has no per-installation principal at all (OAuth2
   apps act as the authorizing user). Organization-owned agent accounts,
   permissions through ordinary team membership, provenance badges, an
-  organization-wide kill switch. A 2026-07-17 spike proved this needs no
-  authentication work: `UserTypeBot` already authenticates and acts.
+  organization-wide kill switch. Upstream is activating bot accounts at the
+  admin level in go-gitea/gitea#38181 and explicitly defers organization
+  ownership; Forgente builds the deferred layer and cherry-picks the rest.
+  Demand is long-standing and quantified (upstream #25900, #13044, #26754,
+  #33469).
 - **L1 — first-party MCP server.** Fork `gitea-mcp` when it needs agent-token
   awareness, per the fork-on-divergence policy.
 - **L2 — repository agent configuration and model providers.** Agent

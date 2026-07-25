@@ -119,6 +119,44 @@ Concretely: organization-owned agent principals, created from organization
 settings, permissioned through ordinary team and collaborator membership,
 token-authenticated, badged wherever they act, revocable in one place.
 
+**Upstream is activating the same primitive, and Forgente complements it
+rather than duplicating it.** go-gitea/gitea#38181 (approved, awaiting a
+final review at the time of writing) gives site admins bot-account creation,
+individual-to-bot conversion, admin-managed scoped tokens, and — importantly
+— closes real holes where a bot could obtain an interactive session through
+LDAP/SMTP/PAM fallback or reverse-proxy headers. It ships its own design
+note at `models/user/bot_user_design.md`.
+
+That work is cherry-picked when it merges, not reimplemented. What it
+deliberately leaves out is precisely Forgente's layer: it declares
+organization-managed bots out of scope because ownership "expands the
+permission and ownership model considerably (who owns the bot, who can
+rotate its tokens, visibility across orgs)", while noting the layer can be
+added later without breaking its model. The review thread goes further,
+sketching global, user-owned and org-owned levels and asking whether
+ownership needs its own table — the same conclusion reached here
+independently.
+
+The practical consequence for scope: build the ownership table, the
+organization-side management surface, the kill switch, and provenance.
+Do not build admin creation, conversion, or the interactive-auth hardening.
+The demand behind this is long-standing and quantified — upstream #25900
+(organization-level access tokens, 87 reactions since 2023), #13044 (bot
+accounts owned by a user or org, 38 reactions since 2020), #26754 (service
+accounts to shrink CI blast radius, 17), and #33469 (bot display, 4).
+
+The mechanism is already present: access tokens are per-user with a full
+scope system, so an organization-level access token *is* an org-owned bot
+holding a scoped token — the same way GitLab implements group tokens. No new
+token machinery is needed, and "organization-level access tokens" is the
+framing with the most demand behind it.
+
+One gap the spike did not catch: token authentication resolves a token
+straight to its user with no active-or-suspended check, so deactivating an
+account does not revoke its tokens. The kill switch therefore needs an
+explicit gate in the token path — the one piece of L0 that is not purely
+product surface, and worth reviewing on its own.
+
 A spike (2026-07-17, dev instance) established that this needs **no
 authentication work at all**. A `UserTypeBot` row already authenticates by
 access token, acts through the API and git-over-HTTP, and gains and loses
@@ -256,6 +294,15 @@ is "self-hosted and open", not "the only one who governs agents".
 - Whether to adopt the natural-language-compiled-to-YAML workflow shape at
   all, or to keep agent invocation explicit and leave workflow authoring to
   humans.
-- Whether upstream Gitea activating `UserTypeBot` would collide. The hedge is
-  the same additive discipline used for every Forgente feature so far:
-  explicit enum values, separate tables, no numbered migrations.
+- Upstream activating `UserTypeBot` is no longer hypothetical — see L0. The
+  open question is now narrower: if upstream later adds its own ownership
+  model, does Forgente converge on it or keep its own? Converging is
+  cheaper, and the review thread suggests upstream would land somewhere
+  close to this design anyway.
+- Whether apps may be owned by individual users as well as organizations.
+  Upstream #13044 asks for both and the review thread sketches three levels;
+  the first release is organizations only, which needs no schema change to
+  extend later.
+- Whether a bot should be capped at its owner's access, as proposed in the
+  upstream thread. It is a clean principle, but it interacts awkwardly with
+  organization ownership, where the "owner" is not a single principal.
