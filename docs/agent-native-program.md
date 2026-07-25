@@ -234,7 +234,7 @@ rather than re-describing the capability. Status is one of **shipped**,
 | ID | GitHub's shape | Forgente | Status |
 | --- | --- | --- | --- |
 | AN-MCP-1 | Official server, remote and local, with toolset toggles | `gitea-mcp` unforked, validated as an org-owned app | shipped |
-| AN-MCP-2 | Remote auth by OAuth or PAT | Static token only — remote clients cannot connect | L1 |
+| AN-MCP-2 | Remote auth by OAuth or PAT | OAuth 2.1 discovery served; the `401` challenge is the MCP server's half, upstream | L1, part shipped |
 | AN-MCP-3 | Repo-level MCP config; org/enterprise policy, disabled by default | — | L2 |
 | AN-MCP-4 | Registry, allowlists, runtime discovery (Agent Finder / ARD) | — | excluded — registry is a marketplace concern |
 
@@ -395,34 +395,62 @@ endpoint or run an external OAuth proxy, and the proxy still talks to the
 forge with one shared token, collapsing per-principal identity exactly where
 L0 was supposed to provide it.
 
-The forge is the right place to fix this and the standalone server is not,
-because the missing pieces are the forge's to serve. `gitea-mcp` issue #207
-proposes the server act as an OAuth 2.1 *resource server* delegating to the
-instance as authorization server; that requires the instance to publish
-`/.well-known/oauth-protected-resource` (RFC 9728), which Forgente does not,
-and it works around Dynamic Client Registration (RFC 7591) only because this
-lineage lacks it. Forgente already is an OAuth2/OIDC provider with PKCE, and
-its API already accepts OAuth2 bearer tokens, so the distance is short.
+**Corrected against the MCP authorization specification (2026-07-25).** An
+earlier revision of this section assigned the wrong work to the forge. The
+spec splits the roles cleanly, and reading it changes what L1 is:
+
+- "MCP servers **MUST** implement OAuth 2.0 Protected Resource Metadata
+  (RFC 9728)." The protected-resource document and the `401` with
+  `WWW-Authenticate` belong to the **resource server** — that is `gitea-mcp`,
+  not Forgente. This is upstream work, and `gitea-mcp` issue #207 is already
+  the right place for it.
+- "MCP authorization servers **MUST** provide at least one of the following
+  discovery mechanisms: OAuth 2.0 Authorization Server Metadata (RFC 8414)
+  [or] OpenID Connect Discovery 1.0", and clients **MUST** support both.
+  Forgente already serves `/.well-known/openid-configuration`, so it already
+  satisfies this MUST. The forge was never the blocker it was described as.
+- Dynamic Client Registration is now **deprecated** in the spec, "retained
+  for backwards compatibility with authorization servers that do not support
+  Client ID Metadata Documents". The open question in the previous revision
+  is therefore closed: do not build DCR.
 
 Forgejo's Authorized Integrations is the nearest prior art in this lineage —
 short-lived, externally-issued, forge-validated credentials with per-issuer
 capability grants — and worth studying before designing this, even though it
 solves inbound workload identity rather than delegated user authorization.
 
-**L1 is therefore forge-side authorization work, not a server.** In order:
+**What is actually left on the forge side** is narrower than "make OAuth
+work", and one item is a defect rather than a gap:
 
-1. Serve RFC 9728 metadata and answer unauthenticated MCP requests with `401`
-   and `WWW-Authenticate`, so a compliant client can discover where to
-   authenticate. This unblocks remote clients generally, not only MCP.
-2. Decide whether Dynamic Client Registration is worth supporting, or whether
-   pre-registered OAuth applications are enough. Pre-registration is enough
-   for Claude today and needs no new machinery.
-3. A "Connect an agent" panel on the app's settings page, for the local and
+1. RFC 8414 metadata at `/.well-known/oauth-authorization-server`. Redundant
+   against the MUST, since OIDC discovery already satisfies it, but real
+   clients probe it first — and unlike the OIDC document it can advertise the
+   API scopes a client may request. *Shipped.*
+2. **The full-access default is a bad default, not a consent bug.**
+   `GrantAdditionalScopes` treats a grant carrying only `openid`, `profile`,
+   `email` and `groups` as `AccessTokenScopeAll`, so an MCP client completing
+   an ordinary OIDC flow receives a token with full API access. The consent
+   screen is honest about it — with no API scopes requested, `grant.tmpl`
+   shows "it will be able to access and write to all your account
+   information, including private repos and organizations" — so the user is
+   told exactly what they are granting. The real problem was discoverability:
+   nothing advertised that `read:repository` or `write:issue` existed, so a
+   client had no narrower thing to ask for. Item 1 fixes that. Changing the
+   default itself is inherited 1.22 behaviour and would need a deprecation
+   cycle; with discovery in place it is no longer urgent.
+3. **RFC 8707 resource indicators, and audience binding.** Access tokens
+   carry `GrantID`, `Kind` and `ExpiresAt` and nothing else — the `aud` claim
+   is set only on the `id_token`. A resource server therefore cannot satisfy
+   the spec's "MCP servers **MUST** validate that access tokens were issued
+   specifically for them as the intended audience". This is the one item that
+   blocks the upstream work, not merely a missing nicety. RFC 9207 (`iss` in
+   the authorization response) is a smaller omission alongside it.
+4. A "Connect an agent" panel on the app's settings page, for the local and
    stdio case that already works — host, token, and a `GITEA_TOOLS` value
    derived from the token's real scopes, with an integration test pinning the
    scope-to-tools mapping.
 
-Item 3 addresses the second finding from the run: the server advertises all
+Item 4 addresses the second finding from the run: the server advertises all
 of its tools regardless of what the token can do, so `create_repo` was
 offered and then refused at call time for a missing scope. Token scopes are
 enforced by the forge, `GITEA_TOOLS` filters tools in the client, and nothing

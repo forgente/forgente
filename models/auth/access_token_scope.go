@@ -144,6 +144,12 @@ var allAccessTokenScopes = []AccessTokenScope{
 	AccessTokenScopeWriteUser, AccessTokenScopeReadUser,
 }
 
+// AllAccessTokenScopes returns every access token scope a client may request,
+// with "all" first because it subsumes the rest.
+func AllAccessTokenScopes() []AccessTokenScope {
+	return append([]AccessTokenScope{AccessTokenScopeAll}, allAccessTokenScopes...)
+}
+
 // allAccessTokenScopeBits contains all access token scopes.
 var allAccessTokenScopeBits = map[AccessTokenScope]accessTokenScopeBitmap{
 	AccessTokenScopeAll:               accessTokenScopeAllBits,
