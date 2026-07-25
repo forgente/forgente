@@ -38,6 +38,9 @@ func prepareContextForProfileBigAvatar(ctx *context.Context) {
 		return
 	}
 	ctx.Data["OpenIDs"] = openIDs
+
+	prepareContextForForgenteApp(ctx)
+
 	if len(ctx.ContextUser.Description) != 0 {
 		content, err := markdown.RenderString(markup.NewRenderContext(ctx).WithMetas(markup.ComposeSimpleDocumentMetas()), ctx.ContextUser.Description)
 		if err != nil {

@@ -126,6 +126,21 @@ func TestOrgApps(t *testing.T) {
 		unittest.AssertNotExistsBean(t, &auth_model.AccessToken{ID: token.ID})
 	})
 
+	t.Run("Provenance", func(t *testing.T) {
+		defer tests.PrintCurrentTest(t)()
+
+		body := MakeRequest(t, NewRequest(t, "GET", "/"+appName), http.StatusOK).Body.String()
+		assert.Contains(t, body, "Operated by")
+		assert.Contains(t, body, `href="/`+orgName+`"`)
+		assert.Contains(t, body, "ships things")
+		assert.Contains(t, body, "This is an automated account, not a person.")
+
+		// a person's profile says none of it
+		body = MakeRequest(t, NewRequest(t, "GET", "/user2"), http.StatusOK).Body.String()
+		assert.NotContains(t, body, "Operated by")
+		assert.NotContains(t, body, "This is an automated account, not a person.")
+	})
+
 	t.Run("SuspendAndResume", func(t *testing.T) {
 		defer tests.PrintCurrentTest(t)()
 

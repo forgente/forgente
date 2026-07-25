@@ -129,7 +129,7 @@
 			<div class="flex-text-inline">
 				{{if .Author}}
 					{{ctx.AvatarUtils.Avatar .Author 20}}
-					<strong>{{.Author.GetShortDisplayNameLinkHTML}}</strong>
+					<strong>{{.Author.GetShortDisplayNameLinkHTML}}</strong>{{template "shared/user/botlabel_forgente" .Author}}
 				{{else}}
 					{{ctx.AvatarUtils.AvatarByEmail .Commit.Author.Email .Commit.Author.Email 20}}
 					<strong>{{.Commit.Author.Name}}</strong>
@@ -143,7 +143,7 @@
 					<span class="tw-text-text-light">{{ctx.Locale.Tr "repo.diff.committed_by"}}</span>
 					{{if and .Verification.CommittingUser}}
 						{{ctx.AvatarUtils.Avatar .Verification.CommittingUser 20}}
-						<strong>{{.Verification.CommittingUser.GetShortDisplayNameLinkHTML}}</strong>
+						<strong>{{.Verification.CommittingUser.GetShortDisplayNameLinkHTML}}</strong>{{template "shared/user/botlabel_forgente" .Verification.CommittingUser}}
 					{{else}}
 						{{ctx.AvatarUtils.AvatarByEmail .Commit.Committer.Email .Commit.Committer.Email 20}}
 						<strong>{{.Commit.Committer.Name}}</strong>
