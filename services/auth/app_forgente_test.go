@@ -4,7 +4,6 @@
 package auth
 
 import (
-	"errors"
 	"testing"
 
 	"forgente.com/models/db"
@@ -32,17 +31,13 @@ func TestCheckForgenteAppSuspended(t *testing.T) {
 		return &user_model.User{ID: id, Type: user_model.UserTypeBot}
 	}
 
-	lookupErr := errors.New("lookup failed")
-
 	cases := []struct {
 		name    string
 		user    *user_model.User
-		inErr   error
 		wantErr error
 		wantNil bool
 	}{
 		{name: "nil user passes through", user: nil, wantNil: true},
-		{name: "preceding error is preserved", user: bot(suspendedAppUserID), inErr: lookupErr, wantErr: lookupErr},
 		{name: "individual is never an app", user: &user_model.User{ID: 2, Type: user_model.UserTypeIndividual}},
 		{name: "system bot is never an app", user: bot(user_model.ActionsUserID)},
 		{name: "bot without an app row is allowed", user: bot(unownedBotID)},
@@ -52,7 +47,7 @@ func TestCheckForgenteAppSuspended(t *testing.T) {
 
 	for _, c := range cases {
 		t.Run(c.name, func(t *testing.T) {
-			u, err := checkForgenteAppSuspended(ctx, c.user, c.inErr)
+			u, err := checkForgenteAppSuspended(ctx, c.user)
 			if c.wantErr != nil {
 				assert.ErrorIs(t, err, c.wantErr)
 			} else {

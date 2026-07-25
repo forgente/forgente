@@ -58,6 +58,9 @@ func ServNoCommand(ctx *context.PrivateContext) {
 			ctx.PrivateUserErrorf(http.StatusForbidden, "Your account is disabled.")
 			return
 		}
+		if rejectSuspendedForgenteApp(ctx, user) {
+			return
+		}
 		results.Owner = user
 	}
 	ctx.JSON(http.StatusOK, &results)
@@ -232,6 +235,10 @@ func ServCommand(ctx *context.PrivateContext) {
 
 		if !user.IsActive || user.ProhibitLogin {
 			ctx.PrivateUserErrorf(http.StatusForbidden, "Your account is disabled.")
+			return
+		}
+
+		if rejectSuspendedForgenteApp(ctx, user) {
 			return
 		}
 

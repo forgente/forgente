@@ -16,20 +16,20 @@ import (
 // unauthenticated, so a suspended app is refused exactly like an unknown token.
 var ErrForgenteAppSuspended = errors.New("forgente app is suspended")
 
-// checkForgenteAppSuspended rejects a token holder that is a suspended app.
+// checkForgenteAppSuspended rejects an authenticated user that is a suspended app.
 //
-// Token authentication resolves a token straight to its user and never consults
+// Authentication resolves a credential straight to its user and never consults
 // account state, so suspension cannot be expressed by deactivating the account —
-// that would revoke nothing. Every path that turns a token into a user therefore
-// passes the result through here.
+// that would revoke nothing. This is called once from Group.Verify, which every
+// auth method funnels through, so a method added later cannot miss it. Git over
+// SSH does not pass through here and is gated separately in routers/private.
 //
-// It takes the preceding lookup's error so call sites stay a single extra line,
-// and it short-circuits on anything that cannot be an app: system users have
+// It short-circuits on anything that cannot be an app: system users have
 // negative IDs (Ghost, the Actions user) and humans are not bots, so an ordinary
-// API request costs no additional query.
-func checkForgenteAppSuspended(ctx context.Context, u *user_model.User, err error) (*user_model.User, error) {
-	if err != nil || u == nil || u.ID <= 0 || !u.IsTypeBot() {
-		return u, err
+// request costs no additional query.
+func checkForgenteAppSuspended(ctx context.Context, u *user_model.User) (*user_model.User, error) {
+	if u == nil || u.ID <= 0 || !u.IsTypeBot() {
+		return u, nil
 	}
 
 	suspended, err := user_model.IsForgenteAppSuspended(ctx, u.ID)
