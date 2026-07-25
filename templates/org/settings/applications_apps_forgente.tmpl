@@ -1,0 +1,153 @@
+<h4 class="ui top attached header flex-text-block">
+	<span class="tw-flex-1">{{ctx.Locale.Tr "settings.apps"}}</span>
+	{{if .OrgApps}}
+		<form class="ui form ignore-dirty" action="{{.Link}}/apps/suspend" method="post">
+			{{.CsrfTokenHtml}}
+			<input type="hidden" name="suspend" value="{{if .OrgAppsAnyActive}}true{{else}}false{{end}}">
+			<button class="ui {{if .OrgAppsAnyActive}}red{{else}}basic{{end}} tiny button">
+				{{if .OrgAppsAnyActive}}
+					{{svg "octicon-circle-slash"}} {{ctx.Locale.Tr "settings.apps_suspend_all"}}
+				{{else}}
+					{{svg "octicon-play"}} {{ctx.Locale.Tr "settings.apps_resume_all"}}
+				{{end}}
+			</button>
+		</form>
+	{{end}}
+</h4>
+<div class="ui attached segment">
+	<div class="flex-divided-list items-with-main">
+		<div class="item">
+			{{ctx.Locale.Tr "settings.apps_desc"}}
+		</div>
+		{{range $app := .OrgApps}}
+			<div class="item">
+				<div class="item-leading">
+					<a href="{{.User.HomeLink}}">{{ctx.AvatarUtils.Avatar .User 32}}</a>
+				</div>
+				<div class="item-main">
+					<div class="item-title">
+						<a href="{{.User.HomeLink}}">{{.User.Name}}</a>
+						{{if .Suspended}}
+							<span class="ui red label">{{ctx.Locale.Tr "settings.app_suspended"}}</span>
+						{{end}}
+					</div>
+					<div class="item-body">
+						{{if .Description}}{{.Description}}{{end}}
+						<i>{{ctx.Locale.Tr "settings.added_on" (DateUtils.AbsoluteShort .CreatedUnix)}}</i>
+					</div>
+					<details class="tw-my-2">
+						<summary>{{ctx.Locale.Tr "settings.app_tokens"}} ({{len .Tokens}})</summary>
+						<div class="flex-divided-list items-with-main tw-my-2">
+							{{range .Tokens}}
+								<div class="item tw-items-center">
+									<div class="item-main">
+										<div class="item-title">{{.Name}}</div>
+										<div class="item-body"><i>
+											{{ctx.Locale.Tr "settings.added_on" (DateUtils.AbsoluteShort .CreatedUnix)}} —
+											{{if .HasUsed}}{{ctx.Locale.Tr "settings.last_used"}} {{DateUtils.AbsoluteShort .UpdatedUnix}}{{else}}{{ctx.Locale.Tr "settings.no_activity"}}{{end}}
+										</i></div>
+									</div>
+									<div class="item-trailing">
+										<button class="ui red tiny button link-action" data-modal-confirm="#delete-forgente-app-token"
+												data-url="{{$.Link}}/apps/{{$app.ID}}/tokens/delete?token_id={{.ID}}">
+											{{svg "octicon-trash"}}
+											{{ctx.Locale.Tr "settings.delete_token"}}
+										</button>
+									</div>
+								</div>
+							{{end}}
+						</div>
+						<form class="ui form ignore-dirty" action="{{$.Link}}/apps/{{.ID}}/tokens" method="post">
+							{{$.CsrfTokenHtml}}
+							<div class="field">
+								<label for="app-token-name-{{.ID}}">{{ctx.Locale.Tr "settings.token_name"}}</label>
+								<input id="app-token-name-{{.ID}}" name="name" required maxlength="255">
+							</div>
+							<div class="field">
+								<div class="tw-my-2">{{ctx.Locale.Tr "settings.repo_and_org_access"}}</div>
+								<label class="gt-checkbox">
+									<input type="radio" name="scope-public-only" value="{{$.AccessTokenScopePublicOnly}}"> {{ctx.Locale.Tr "settings.permissions_public_only"}}
+								</label>
+								<label class="gt-checkbox">
+									<input type="radio" name="scope-public-only" value="" checked> {{ctx.Locale.Tr "settings.permissions_access_all"}}
+								</label>
+							</div>
+							<table class="ui table unstackable tw-my-2">
+							{{range $category := $.TokenCategories}}
+								<tr>
+									<td>{{$category}}</td>
+									<td><label class="gt-checkbox"><input type="radio" name="scope-{{$category}}" value="" checked> {{ctx.Locale.Tr "settings.permission_no_access"}}</label></td>
+									<td><label class="gt-checkbox"><input type="radio" name="scope-{{$category}}" value="read:{{$category}}"> {{ctx.Locale.Tr "settings.permission_read"}}</label></td>
+									<td><label class="gt-checkbox"><input type="radio" name="scope-{{$category}}" value="write:{{$category}}"> {{ctx.Locale.Tr "settings.permission_write"}}</label></td>
+								</tr>
+							{{end}}
+							</table>
+							<button class="ui primary tiny button">{{ctx.Locale.Tr "settings.generate_token"}}</button>
+						</form>
+					</details>
+				</div>
+				<div class="item-trailing">
+					<form class="ui form ignore-dirty tw-inline-block" action="{{$.Link}}/apps/{{.ID}}/suspend" method="post">
+						{{$.CsrfTokenHtml}}
+						<input type="hidden" name="suspend" value="{{if .Suspended}}false{{else}}true{{end}}">
+						<button class="ui {{if .Suspended}}basic{{else}}orange{{end}} tiny button">
+							{{if .Suspended}}
+								{{svg "octicon-play"}} {{ctx.Locale.Tr "settings.app_resume"}}
+							{{else}}
+								{{svg "octicon-circle-slash"}} {{ctx.Locale.Tr "settings.app_suspend"}}
+							{{end}}
+						</button>
+					</form>
+					<button class="ui red tiny button link-action" data-modal-confirm="#delete-forgente-app"
+							data-url="{{$.Link}}/apps/delete?id={{.ID}}">
+						{{svg "octicon-trash"}}
+						{{ctx.Locale.Tr "settings.app_delete"}}
+					</button>
+				</div>
+			</div>
+		{{end}}
+	</div>
+
+	<div class="ui small modal" id="delete-forgente-app">
+		<div class="header">
+			{{svg "octicon-trash"}}
+			{{ctx.Locale.Tr "settings.app_deletion"}}
+		</div>
+		<div class="content">
+			<p>{{ctx.Locale.Tr "settings.app_deletion_desc"}}</p>
+		</div>
+		{{template "base/modal_actions_confirm" .}}
+	</div>
+
+	<div class="ui small modal" id="delete-forgente-app-token">
+		<div class="header">
+			{{svg "octicon-trash"}}
+			{{ctx.Locale.Tr "settings.access_token_deletion"}}
+		</div>
+		<div class="content">
+			<p>{{ctx.Locale.Tr "settings.access_token_deletion_desc"}}</p>
+		</div>
+		{{template "base/modal_actions_confirm" .}}
+	</div>
+</div>
+
+<div class="ui bottom attached segment">
+	<details {{if not .OrgApps}}open{{end}}>
+		<summary><h4 class="ui header tw-inline-block tw-my-2">{{ctx.Locale.Tr "settings.create_app"}}</h4></summary>
+		<form class="ui form ignore-dirty" action="{{.Link}}/apps" method="post">
+			{{.CsrfTokenHtml}}
+			<div class="field {{if .Err_Name}}error{{end}}">
+				<label for="app-name">{{ctx.Locale.Tr "settings.app_name"}}</label>
+				<input id="app-name" name="name" value="{{.name}}" required maxlength="40">
+				<p class="help">{{ctx.Locale.Tr "settings.app_name_helper"}}</p>
+			</div>
+			<div class="field {{if .Err_Description}}error{{end}}">
+				<label for="app-description">{{ctx.Locale.Tr "settings.app_description"}}</label>
+				<input id="app-description" name="description" value="{{.description}}" maxlength="255">
+			</div>
+			<button class="ui primary button">
+				{{ctx.Locale.Tr "settings.create_app_button"}}
+			</button>
+		</form>
+	</details>
+</div>

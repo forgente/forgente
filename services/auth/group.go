@@ -60,6 +60,13 @@ func (b *Group) Verify(req *http.Request, w http.ResponseWriter, store DataStore
 		// If any method returns a user, we can stop trying.
 		// Return the user and ignore any error returned by previous methods.
 		if user != nil {
+			// A suspended app must not authenticate by any means — token, SSH
+			// signature or proxy header — so the kill switch is enforced at this
+			// one choke point rather than inside each method, where a method
+			// added later would silently miss it.
+			if user, err = checkForgenteAppSuspended(req.Context(), user); err != nil {
+				return nil, err
+			}
 			if store.GetData()["AuthedMethod"] == nil {
 				store.GetData()["AuthedMethod"] = m.Name()
 			}
