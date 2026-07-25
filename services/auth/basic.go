@@ -75,6 +75,7 @@ func (b *Basic) VerifyAuthToken(req *http.Request, w http.ResponseWriter, store 
 		log.Trace("Basic Authorization: Valid OAuthAccessToken for user[%d]", uid)
 
 		u, err := user_model.GetUserByID(req.Context(), uid)
+		u, err = checkForgenteAppSuspended(req.Context(), u, err)
 		if err != nil {
 			log.Error("GetUserByID:  %v", err)
 			return nil, err
@@ -91,6 +92,7 @@ func (b *Basic) VerifyAuthToken(req *http.Request, w http.ResponseWriter, store 
 	if err == nil {
 		log.Trace("Basic Authorization: Valid AccessToken for user[%d]", uid)
 		u, err := user_model.GetUserByID(req.Context(), token.UID)
+		u, err = checkForgenteAppSuspended(req.Context(), u, err)
 		if err != nil {
 			log.Error("GetUserByID:  %v", err)
 			return nil, err

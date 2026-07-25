@@ -124,7 +124,8 @@ func (o *OAuth2) userFromToken(ctx context.Context, tokenSHA string, store DataS
 			store.GetData()["IsApiToken"] = true
 			store.GetData()["ApiTokenScope"] = accessTokenScope
 		}
-		return user_model.GetUserByID(ctx, uid)
+		u, err := user_model.GetUserByID(ctx, uid)
+		return checkForgenteAppSuspended(ctx, u, err)
 	}
 	t, err := auth_model.GetAccessTokenBySHA(ctx, tokenSHA)
 	if err != nil {
@@ -144,7 +145,8 @@ func (o *OAuth2) userFromToken(ctx context.Context, tokenSHA string, store DataS
 	}
 	store.GetData()["IsApiToken"] = true
 	store.GetData()["ApiTokenScope"] = t.Scope
-	return user_model.GetUserByID(ctx, t.UID)
+	u, err := user_model.GetUserByID(ctx, t.UID)
+	return checkForgenteAppSuspended(ctx, u, err)
 }
 
 // Verify extracts the user ID from the OAuth token in the query parameters
