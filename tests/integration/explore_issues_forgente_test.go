@@ -17,7 +17,7 @@ import (
 )
 
 // waitIssueIndexed queues an issue for indexing and polls until a scoped search finds
-// it, so the assertions below never race the async indexer queue.
+// it, so callers never race the async indexer queue.
 func waitIssueIndexed(t *testing.T, issueID, repoID int64, keyword string) {
 	t.Helper()
 	issue_indexer.UpdateIssueIndexer(t.Context(), issueID)
