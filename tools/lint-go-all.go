@@ -18,6 +18,7 @@ func lintGoHeader() bool {
 	headerRE := regexp.MustCompile(`^(// (Copyright [^\n]+|All rights reserved\.)\n)*// Copyright \d{4} (The Gogs Authors|The Gitea Authors|Gitea Authors|Gitea|The Forgente Authors)\.( All rights reserved\.)?\n(// (Copyright [^\n]+|All rights reserved\.)\n)*// SPDX-License-Identifier: [\w.-]+`)
 	generatedRE := regexp.MustCompile(`(?m)^// (Code|This file is) [Gg]enerated.*DO NOT EDIT`)
 	skipDirs := map[string]bool{
+		".claude":      true, // agent worktrees: checkouts of this repo, linted in their own right
 		".git":         true,
 		".venv":        true,
 		"node_modules": true,
