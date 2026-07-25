@@ -7,6 +7,7 @@ import (
 	auth_model "forgente.com/models/auth"
 	"forgente.com/models/db"
 	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
 	"forgente.com/modules/util"
 	"forgente.com/modules/web"
 	user_setting "forgente.com/routers/web/user/setting"
@@ -54,6 +55,8 @@ func loadOrgAppsData(ctx *context.Context) {
 	// while anything still runs, otherwise bring everything back
 	ctx.Data["OrgAppsAnyActive"] = anyActive
 
+	// the connect panel shows the host an MCP client points at
+	ctx.Data["AppURL"] = setting.AppURL
 	ctx.Data["AccessTokenScopePublicOnly"] = auth_model.AccessTokenScopePublicOnly
 	// an app is never an administrator, so the admin scope is not on offer
 	ctx.Data["TokenCategories"] = util.SliceRemoveAll(auth_model.GetAccessTokenCategories(), "admin")
