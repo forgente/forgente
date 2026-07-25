@@ -20,7 +20,6 @@ import (
 	"forgente.com/models/unit"
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
-	"forgente.com/modules/indexer/issues"
 	"forgente.com/modules/references"
 	"forgente.com/modules/setting"
 	api "forgente.com/modules/structs"
@@ -98,9 +97,8 @@ func TestViewIssuesKeyword(t *testing.T) {
 		RepoID: repo.ID,
 		Index:  1,
 	})
-	issues.UpdateIssueIndexer(t.Context(), issue.ID)
-	time.Sleep(time.Second * 1)
 	const keyword = "first"
+	waitIssueIndexed(t, issue.ID, repo.ID, keyword)
 	req := NewRequestf(t, "GET", "%s/issues?q=%s", repo.Link(), keyword)
 	resp := MakeRequest(t, req, http.StatusOK)
 
