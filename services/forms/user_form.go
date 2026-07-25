@@ -184,6 +184,9 @@ type AccessTokenForm struct {
 
 	// PKCE support
 	CodeVerifier string `json:"code_verifier"`
+
+	// RFC 8707 resource indicator, naming the resource server the token is for
+	Resource string `json:"resource"`
 }
 
 // Validate validates the fields

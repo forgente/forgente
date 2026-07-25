@@ -5,7 +5,9 @@ package oauth2_provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
+	"net/url"
 	"slices"
 	"strconv"
 	"strings"
@@ -40,7 +42,28 @@ const (
 	AccessTokenErrorCodeUnsupportedGrantType = "unsupported_grant_type"
 	// AccessTokenErrorCodeInvalidScope represents an error code specified in RFC 6749
 	AccessTokenErrorCodeInvalidScope = "invalid_scope"
+	// AccessTokenErrorCodeInvalidTarget represents an error code specified in RFC 8707
+	// https://www.rfc-editor.org/rfc/rfc8707.html#section-2
+	AccessTokenErrorCodeInvalidTarget = "invalid_target"
 )
+
+// ValidateResourceIndicator checks an RFC 8707 "resource" parameter. The value must
+// be an absolute URI without a fragment; RFC 8707 section 2 leaves anything further
+// to the authorization server, and Forgente keeps no registry of resource servers.
+func ValidateResourceIndicator(resource string) error {
+	parsed, err := url.Parse(resource)
+	if err != nil {
+		return fmt.Errorf("resource is not a valid URI: %w", err)
+	}
+	if !parsed.IsAbs() {
+		return errors.New("resource must be an absolute URI")
+	}
+	// url.Parse keeps a bare trailing "#" out of Fragment, so check the raw value too
+	if parsed.Fragment != "" || strings.Contains(resource, "#") {
+		return errors.New("resource must not contain a fragment")
+	}
+	return nil
+}
 
 // AccessTokenError represents an error response specified in RFC 6749
 // https://datatracker.ietf.org/doc/html/rfc6749#section-5.2
@@ -124,7 +147,18 @@ func NewJwtRegisteredClaimsFromUser(clientID string, grantUserID int64, exp *jwt
 	}
 }
 
-func NewAccessTokenResponse(ctx context.Context, grant *auth.OAuth2Grant, serverKey, clientKey JWTSigningKey) (*AccessTokenResponse, *AccessTokenError) {
+// NewAccessTokenResponse mints an access token for the grant. A non-empty resource
+// is the RFC 8707 indicator naming the resource server the token is meant for, and
+// becomes the token's audience so that server can tell the token was issued for it.
+func NewAccessTokenResponse(ctx context.Context, grant *auth.OAuth2Grant, resource string, serverKey, clientKey JWTSigningKey) (*AccessTokenResponse, *AccessTokenError) {
+	if resource != "" {
+		if err := ValidateResourceIndicator(resource); err != nil {
+			return nil, &AccessTokenError{
+				ErrorCode:        AccessTokenErrorCodeInvalidTarget,
+				ErrorDescription: err.Error(),
+			}
+		}
+	}
 	if setting.OAuth2.InvalidateRefreshTokens {
 		if err := grant.IncreaseCounter(ctx); err != nil {
 			return nil, &AccessTokenError{
@@ -141,6 +175,9 @@ func NewAccessTokenResponse(ctx context.Context, grant *auth.OAuth2Grant, server
 		RegisteredClaims: jwt.RegisteredClaims{
 			ExpiresAt: jwt.NewNumericDate(expirationDate.AsTime()),
 		},
+	}
+	if resource != "" {
+		accessToken.Audience = jwt.ClaimStrings{resource}
 	}
 	signedAccessToken, err := accessToken.SignToken(serverKey)
 	if err != nil {
