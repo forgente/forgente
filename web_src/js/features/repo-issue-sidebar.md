@@ -28,6 +28,7 @@ The menu items must have correct `href`, otherwise the links of synchronized (cl
 The `ui list` is optional, so a single dropdown can also work, to select items and update them to backend.
 
 Synchronization logic:
+
 * On page load:
   * If the dropdown menu contains checked items, there will be no synchronization.
     In this case, it's assumed that the dropdown menu is already in sync with the list.
@@ -40,6 +41,7 @@ Synchronization logic:
 The items with the same data-scope only allow one selected at a time.
 
 The dropdown selection could work in 2 modes:
+
 * single: only one item could be selected, it updates immediately when the item is selected.
 * multiple: multiple items could be selected, it defers the update until the dropdown is hidden.
 

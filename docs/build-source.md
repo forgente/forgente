@@ -76,6 +76,7 @@ GOOS=linux GOARCH=arm64 TAGS="bindata" make build
 ### Adding shell autocompletion
 
 Shell completion can be generated directly from binary with:
+
 ```sh
 gitea completion <shell>
 ```

@@ -2,7 +2,7 @@
 
 This document is used as aria/accessibility(a11y) reference for future developers.
 
-There are a lot of a11y problems in the Fomantic UI library. Files in 
+There are a lot of a11y problems in the Fomantic UI library. Files in
 `web_src/js/modules/fomantic/` are used as a workaround to make the UI more accessible.
 
 The aria-related code is designed to avoid touching the official Fomantic UI library,
