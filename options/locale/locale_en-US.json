@@ -669,6 +669,7 @@
   "settings.create_app_button": "Create App",
   "settings.create_app_success": "The app \"%s\" has been created. It has no access yet — add it to a team or a repository.",
   "settings.app_limit_reached": "This organization has reached its limit of apps.",
+  "settings.app_tokens": "Access Tokens",
   "settings.app_suspend": "Suspend",
   "settings.app_resume": "Resume",
   "settings.app_suspended": "Suspended",

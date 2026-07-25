@@ -1003,7 +1003,11 @@ func registerWebRoutes(m *web.Router, webAuth *AuthMiddleware) {
 						m.Post("", web.Bind(forms.CreateOrgAppForm{}), org.AppsPost)
 						m.Post("/suspend", org.AppsSuspendAllPost)
 						m.Post("/delete", org.DeleteApp)
-						m.Post("/{id}/suspend", org.AppSuspendPost)
+						m.Group("/{id}", func() {
+							m.Post("/suspend", org.AppSuspendPost)
+							m.Post("/tokens", web.Bind(forms.NewAccessTokenForm{}), org.AppTokenPost)
+							m.Post("/tokens/delete", org.AppTokenDelete)
+						})
 					})
 					// org-owned apps do not depend on the OAuth2 provider, so only
 					// the OAuth2 half of the page is gated on it

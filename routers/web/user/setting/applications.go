@@ -22,6 +22,57 @@ const (
 	tplSettingsApplications templates.TplName = "user/settings/applications"
 )
 
+// ParseAccessTokenScopeFromForm builds a normalized scope from the "scope-*"
+// fields of a token form. It reports false once it has written a response.
+func ParseAccessTokenScopeFromForm(ctx *context.Context) (auth_model.AccessTokenScope, bool) {
+	_ = ctx.Req.ParseForm()
+	var scopeNames []string
+	const accessTokenScopePrefix = "scope-"
+	for k, v := range ctx.Req.Form {
+		if strings.HasPrefix(k, accessTokenScopePrefix) {
+			scopeNames = append(scopeNames, v...)
+		}
+	}
+
+	scope, err := auth_model.AccessTokenScope(strings.Join(scopeNames, ",")).Normalize()
+	if err != nil {
+		ctx.ServerError("GetScope", err)
+		return "", false
+	}
+	return scope, true
+}
+
+// RestrictAccessTokenScopeToRequest keeps a token-authenticated request from minting
+// a token with a broader scope than its own, or from dropping the public-only
+// restriction. Web routes accept basic-auth PATs/OAuth tokens too, so this must
+// mirror the REST API guard in routers/api/v1/user/app.go. It reports false once
+// it has written a response.
+func RestrictAccessTokenScopeToRequest(ctx *context.Context, scope auth_model.AccessTokenScope) (auth_model.AccessTokenScope, bool) {
+	if ctx.Data["IsApiToken"] != true {
+		return scope, true
+	}
+
+	apiTokenScope, ok := ctx.Data["ApiTokenScope"].(auth_model.AccessTokenScope)
+	if !ok {
+		ctx.HTTPError(http.StatusForbidden, "the authenticating token has no scope")
+		return "", false
+	}
+	hasScope, err := apiTokenScope.CanCreateChildScope(scope)
+	if err != nil {
+		ctx.ServerError("CanCreateChildScope", err)
+		return "", false
+	}
+	if !hasScope {
+		ctx.HTTPError(http.StatusForbidden, "cannot create an access token with a broader scope than the authenticating token")
+		return "", false
+	}
+	if scope, err = scope.EnforcePublicOnlyFrom(apiTokenScope); err != nil {
+		ctx.ServerError("EnforcePublicOnlyFrom", err)
+		return "", false
+	}
+	return scope, true
+}
+
 // Applications render manage access token page
 func Applications(ctx *context.Context) {
 	ctx.Data["Title"] = ctx.Tr("settings.applications")
@@ -38,18 +89,8 @@ func ApplicationsPost(ctx *context.Context) {
 	ctx.Data["Title"] = ctx.Tr("settings_title")
 	ctx.Data["PageIsSettingsApplications"] = true
 
-	_ = ctx.Req.ParseForm()
-	var scopeNames []string
-	const accessTokenScopePrefix = "scope-"
-	for k, v := range ctx.Req.Form {
-		if strings.HasPrefix(k, accessTokenScopePrefix) {
-			scopeNames = append(scopeNames, v...)
-		}
-	}
-
-	scope, err := auth_model.AccessTokenScope(strings.Join(scopeNames, ",")).Normalize()
-	if err != nil {
-		ctx.ServerError("GetScope", err)
+	scope, ok := ParseAccessTokenScopeFromForm(ctx)
+	if !ok {
 		return
 	}
 	if !scope.HasPermissionScope() {
@@ -79,28 +120,8 @@ func ApplicationsPost(ctx *context.Context) {
 		return
 	}
 
-	// a token-authenticated request must not mint a token with a broader scope than its own, nor
-	// drop the public-only restriction. Web routes accept basic-auth PATs/OAuth tokens too, so this
-	// must mirror the REST API guard in routers/api/v1/user/app.go.
-	if ctx.Data["IsApiToken"] == true {
-		apiTokenScope, ok := ctx.Data["ApiTokenScope"].(auth_model.AccessTokenScope)
-		if !ok {
-			ctx.HTTPError(http.StatusForbidden, "the authenticating token has no scope")
-			return
-		}
-		hasScope, err := apiTokenScope.CanCreateChildScope(t.Scope)
-		if err != nil {
-			ctx.ServerError("CanCreateChildScope", err)
-			return
-		}
-		if !hasScope {
-			ctx.HTTPError(http.StatusForbidden, "cannot create an access token with a broader scope than the authenticating token")
-			return
-		}
-		if t.Scope, err = t.Scope.EnforcePublicOnlyFrom(apiTokenScope); err != nil {
-			ctx.ServerError("EnforcePublicOnlyFrom", err)
-			return
-		}
+	if t.Scope, ok = RestrictAccessTokenScopeToRequest(ctx, t.Scope); !ok {
+		return
 	}
 
 	if err := auth_model.NewAccessToken(ctx, t); err != nil {

@@ -4,9 +4,12 @@
 package org
 
 import (
+	auth_model "forgente.com/models/auth"
 	"forgente.com/models/db"
 	user_model "forgente.com/models/user"
+	"forgente.com/modules/util"
 	"forgente.com/modules/web"
+	user_setting "forgente.com/routers/web/user/setting"
 	"forgente.com/services/context"
 	"forgente.com/services/forms"
 	user_service "forgente.com/services/user"
@@ -16,7 +19,8 @@ import (
 // the administration state, the account holds the name and avatar the list shows.
 type orgAppView struct {
 	*user_model.ForgenteApp
-	User *user_model.User
+	User   *user_model.User
+	Tokens []*auth_model.AccessToken
 }
 
 // loadOrgAppsData fills in the apps section of the organization applications page.
@@ -35,7 +39,13 @@ func loadOrgAppsData(ctx *context.Context) {
 			ctx.ServerError("GetUserByID", err)
 			return
 		}
-		views = append(views, &orgAppView{ForgenteApp: app, User: botUser})
+		tokens, err := db.Find[auth_model.AccessToken](ctx, auth_model.ListAccessTokensOptions{UserID: app.UserID})
+		if err != nil {
+			ctx.ServerError("ListAccessTokens", err)
+			return
+		}
+
+		views = append(views, &orgAppView{ForgenteApp: app, User: botUser, Tokens: tokens})
 		anyActive = anyActive || !app.Suspended
 	}
 
@@ -43,10 +53,29 @@ func loadOrgAppsData(ctx *context.Context) {
 	// the org-wide switch offers whichever direction is useful: stop everything
 	// while anything still runs, otherwise bring everything back
 	ctx.Data["OrgAppsAnyActive"] = anyActive
+
+	ctx.Data["AccessTokenScopePublicOnly"] = auth_model.AccessTokenScopePublicOnly
+	// an app is never an administrator, so the admin scope is not on offer
+	ctx.Data["TokenCategories"] = util.SliceRemoveAll(auth_model.GetAccessTokenCategories(), "admin")
 }
 
 func redirectToOrgApplications(ctx *context.Context) {
 	ctx.Redirect(ctx.Org.OrgLink + "/settings/applications")
+}
+
+// getOrgAppFromPath resolves the {id} of an app route. It writes the response
+// itself on failure, so callers only need to return.
+func getOrgAppFromPath(ctx *context.Context) (*user_model.ForgenteApp, error) {
+	app, _, err := user_service.GetOrgApp(ctx, ctx.Org.Organization, ctx.PathParamInt64("id"))
+	if err != nil {
+		if user_model.IsErrForgenteAppNotExist(err) {
+			ctx.NotFound(err)
+		} else {
+			ctx.ServerError("GetOrgApp", err)
+		}
+		return nil, err
+	}
+	return app, nil
 }
 
 // AppsPost creates an organization-owned app.
@@ -84,13 +113,8 @@ func AppsPost(ctx *context.Context) {
 
 // AppSuspendPost flips the kill switch for a single app.
 func AppSuspendPost(ctx *context.Context) {
-	app, _, err := user_service.GetOrgApp(ctx, ctx.Org.Organization, ctx.PathParamInt64("id"))
+	app, err := getOrgAppFromPath(ctx)
 	if err != nil {
-		if user_model.IsErrForgenteAppNotExist(err) {
-			ctx.NotFound(err)
-		} else {
-			ctx.ServerError("GetOrgApp", err)
-		}
 		return
 	}
 
@@ -123,6 +147,86 @@ func AppsSuspendAllPost(ctx *context.Context) {
 		ctx.Flash.Success(ctx.Tr("settings.apps_resume_all_success", count))
 	}
 	redirectToOrgApplications(ctx)
+}
+
+// AppTokenPost mints an access token for one of the organization's apps.
+//
+// The token belongs to the app's account, so it carries the app's identity and
+// whatever access the app has been granted; the scope chosen here only narrows
+// which of that the token may use.
+func AppTokenPost(ctx *context.Context) {
+	form := web.GetForm(ctx).(*forms.NewAccessTokenForm)
+
+	app, err := getOrgAppFromPath(ctx)
+	if err != nil {
+		return
+	}
+
+	scope, ok := user_setting.ParseAccessTokenScopeFromForm(ctx)
+	if !ok {
+		return
+	}
+	if !scope.HasPermissionScope() {
+		ctx.Flash.Error(ctx.Tr("settings.at_least_one_permission"))
+		redirectToOrgApplications(ctx)
+		return
+	}
+	if ctx.HasError() {
+		ctx.Flash.Error(ctx.GetErrMsg())
+		redirectToOrgApplications(ctx)
+		return
+	}
+
+	t := &auth_model.AccessToken{
+		UID:   app.UserID,
+		Name:  form.Name,
+		Scope: scope,
+	}
+
+	exist, err := auth_model.AccessTokenByNameExists(ctx, t)
+	if err != nil {
+		ctx.ServerError("AccessTokenByNameExists", err)
+		return
+	}
+	if exist {
+		ctx.Flash.Error(ctx.Tr("settings.generate_token_name_duplicate", t.Name))
+		redirectToOrgApplications(ctx)
+		return
+	}
+
+	// an owner acting through a limited token must not mint a broader one for
+	// an app it controls, which would launder the restriction away
+	if t.Scope, ok = user_setting.RestrictAccessTokenScopeToRequest(ctx, t.Scope); !ok {
+		return
+	}
+
+	if err := auth_model.NewAccessToken(ctx, t); err != nil {
+		ctx.ServerError("NewAccessToken", err)
+		return
+	}
+
+	ctx.Flash.Success(ctx.Tr("settings.generate_token_success"))
+	// the only time the token is ever readable
+	ctx.Flash.Info(t.Token)
+	redirectToOrgApplications(ctx)
+}
+
+// AppTokenDelete revokes one of an app's access tokens.
+func AppTokenDelete(ctx *context.Context) {
+	app, err := getOrgAppFromPath(ctx)
+	if err != nil {
+		return
+	}
+
+	// scoping the delete to the app's account is what keeps one organization
+	// from revoking another's tokens by guessing an ID
+	if err := auth_model.DeleteAccessTokenByID(ctx, ctx.FormInt64("token_id"), app.UserID); err != nil {
+		ctx.Flash.Error("DeleteAccessTokenByID: " + err.Error())
+	} else {
+		ctx.Flash.Success(ctx.Tr("settings.delete_token_success"))
+	}
+
+	ctx.JSONRedirect(ctx.Org.OrgLink + "/settings/applications")
 }
 
 // DeleteApp deletes an app and the account behind it.

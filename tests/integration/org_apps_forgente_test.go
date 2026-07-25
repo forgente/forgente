@@ -10,6 +10,7 @@ import (
 	"strconv"
 	"testing"
 
+	auth_model "forgente.com/models/auth"
 	"forgente.com/models/organization"
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
@@ -66,6 +67,63 @@ func TestOrgApps(t *testing.T) {
 		owner.MakeRequest(t, req, http.StatusSeeOther)
 
 		unittest.AssertNotExistsBean(t, &user_model.ForgenteApp{UserID: 1})
+	})
+
+	t.Run("Tokens", func(t *testing.T) {
+		defer tests.PrintCurrentTest(t)()
+
+		botUser := unittest.AssertExistsAndLoadBean(t, &user_model.User{Name: appName})
+		app := unittest.AssertExistsAndLoadBean(t, &user_model.ForgenteApp{UserID: botUser.ID})
+		tokensLink := fmt.Sprintf("%s/apps/%d/tokens", appsLink, app.ID)
+
+		req := NewRequestWithValues(t, "POST", tokensLink, map[string]string{
+			"name":              "ci",
+			"scope-repository":  "write:repository",
+			"scope-user":        "read:user",
+			"scope-public-only": "",
+		})
+		owner.MakeRequest(t, req, http.StatusSeeOther)
+
+		// the raw token is shown once, in the flash
+		flashes := owner.GetCookieFlashMessage()
+		require.NotNil(t, flashes)
+		rawToken := flashes.InfoMsg
+		assert.NotEmpty(t, rawToken)
+
+		token := unittest.AssertExistsAndLoadBean(t, &auth_model.AccessToken{UID: botUser.ID, Name: "ci"})
+		hasScope, err := token.Scope.HasScope(auth_model.AccessTokenScopeWriteRepository, auth_model.AccessTokenScopeReadUser)
+		require.NoError(t, err)
+		assert.True(t, hasScope)
+		// nothing was granted beyond what the form asked for
+		hasScope, err = token.Scope.HasScope(auth_model.AccessTokenScopeWriteIssue)
+		require.NoError(t, err)
+		assert.False(t, hasScope)
+
+		// the token authenticates as the app, not as the owner who minted it
+		req = NewRequest(t, "GET", "/api/v1/user").AddTokenAuth(rawToken)
+		resp := MakeRequest(t, req, http.StatusOK)
+		var apiUser struct {
+			Login string `json:"login"`
+		}
+		DecodeJSON(t, resp, &apiUser)
+		assert.Equal(t, appName, apiUser.Login)
+
+		// a suspended app cannot use it
+		suspendReq := NewRequestWithURLValues(t, "POST",
+			fmt.Sprintf("%s/apps/%d/suspend", appsLink, app.ID), url.Values{"suspend": {"true"}})
+		owner.MakeRequest(t, suspendReq, http.StatusSeeOther)
+		MakeRequest(t, NewRequest(t, "GET", "/api/v1/user").AddTokenAuth(rawToken), http.StatusUnauthorized)
+
+		suspendReq = NewRequestWithURLValues(t, "POST",
+			fmt.Sprintf("%s/apps/%d/suspend", appsLink, app.ID), url.Values{"suspend": {"false"}})
+		owner.MakeRequest(t, suspendReq, http.StatusSeeOther)
+		MakeRequest(t, NewRequest(t, "GET", "/api/v1/user").AddTokenAuth(rawToken), http.StatusOK)
+
+		// revoking it is scoped to the app's account
+		revokeReq := NewRequestWithURLValues(t, "POST", tokensLink+"/delete",
+			url.Values{"token_id": {strconv.FormatInt(token.ID, 10)}})
+		owner.MakeRequest(t, revokeReq, http.StatusOK)
+		unittest.AssertNotExistsBean(t, &auth_model.AccessToken{ID: token.ID})
 	})
 
 	t.Run("SuspendAndResume", func(t *testing.T) {

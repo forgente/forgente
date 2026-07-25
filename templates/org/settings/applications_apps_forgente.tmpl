@@ -19,8 +19,8 @@
 		<div class="item">
 			{{ctx.Locale.Tr "settings.apps_desc"}}
 		</div>
-		{{range .OrgApps}}
-			<div class="item tw-items-center">
+		{{range $app := .OrgApps}}
+			<div class="item">
 				<div class="item-leading">
 					<a href="{{.User.HomeLink}}">{{ctx.AvatarUtils.Avatar .User 32}}</a>
 				</div>
@@ -35,6 +35,56 @@
 						{{if .Description}}{{.Description}}{{end}}
 						<i>{{ctx.Locale.Tr "settings.added_on" (DateUtils.AbsoluteShort .CreatedUnix)}}</i>
 					</div>
+					<details class="tw-my-2">
+						<summary>{{ctx.Locale.Tr "settings.app_tokens"}} ({{len .Tokens}})</summary>
+						<div class="flex-divided-list items-with-main tw-my-2">
+							{{range .Tokens}}
+								<div class="item tw-items-center">
+									<div class="item-main">
+										<div class="item-title">{{.Name}}</div>
+										<div class="item-body"><i>
+											{{ctx.Locale.Tr "settings.added_on" (DateUtils.AbsoluteShort .CreatedUnix)}} —
+											{{if .HasUsed}}{{ctx.Locale.Tr "settings.last_used"}} {{DateUtils.AbsoluteShort .UpdatedUnix}}{{else}}{{ctx.Locale.Tr "settings.no_activity"}}{{end}}
+										</i></div>
+									</div>
+									<div class="item-trailing">
+										<button class="ui red tiny button link-action" data-modal-confirm="#delete-forgente-app-token"
+												data-url="{{$.Link}}/apps/{{$app.ID}}/tokens/delete?token_id={{.ID}}">
+											{{svg "octicon-trash"}}
+											{{ctx.Locale.Tr "settings.delete_token"}}
+										</button>
+									</div>
+								</div>
+							{{end}}
+						</div>
+						<form class="ui form ignore-dirty" action="{{$.Link}}/apps/{{.ID}}/tokens" method="post">
+							{{$.CsrfTokenHtml}}
+							<div class="field">
+								<label for="app-token-name-{{.ID}}">{{ctx.Locale.Tr "settings.token_name"}}</label>
+								<input id="app-token-name-{{.ID}}" name="name" required maxlength="255">
+							</div>
+							<div class="field">
+								<div class="tw-my-2">{{ctx.Locale.Tr "settings.repo_and_org_access"}}</div>
+								<label class="gt-checkbox">
+									<input type="radio" name="scope-public-only" value="{{$.AccessTokenScopePublicOnly}}"> {{ctx.Locale.Tr "settings.permissions_public_only"}}
+								</label>
+								<label class="gt-checkbox">
+									<input type="radio" name="scope-public-only" value="" checked> {{ctx.Locale.Tr "settings.permissions_access_all"}}
+								</label>
+							</div>
+							<table class="ui table unstackable tw-my-2">
+							{{range $category := $.TokenCategories}}
+								<tr>
+									<td>{{$category}}</td>
+									<td><label class="gt-checkbox"><input type="radio" name="scope-{{$category}}" value="" checked> {{ctx.Locale.Tr "settings.permission_no_access"}}</label></td>
+									<td><label class="gt-checkbox"><input type="radio" name="scope-{{$category}}" value="read:{{$category}}"> {{ctx.Locale.Tr "settings.permission_read"}}</label></td>
+									<td><label class="gt-checkbox"><input type="radio" name="scope-{{$category}}" value="write:{{$category}}"> {{ctx.Locale.Tr "settings.permission_write"}}</label></td>
+								</tr>
+							{{end}}
+							</table>
+							<button class="ui primary tiny button">{{ctx.Locale.Tr "settings.generate_token"}}</button>
+						</form>
+					</details>
 				</div>
 				<div class="item-trailing">
 					<form class="ui form ignore-dirty tw-inline-block" action="{{$.Link}}/apps/{{.ID}}/suspend" method="post">
@@ -65,6 +115,17 @@
 		</div>
 		<div class="content">
 			<p>{{ctx.Locale.Tr "settings.app_deletion_desc"}}</p>
+		</div>
+		{{template "base/modal_actions_confirm" .}}
+	</div>
+
+	<div class="ui small modal" id="delete-forgente-app-token">
+		<div class="header">
+			{{svg "octicon-trash"}}
+			{{ctx.Locale.Tr "settings.access_token_deletion"}}
+		</div>
+		<div class="content">
+			<p>{{ctx.Locale.Tr "settings.access_token_deletion_desc"}}</p>
 		</div>
 		{{template "base/modal_actions_confirm" .}}
 	</div>
