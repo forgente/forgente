@@ -44,14 +44,35 @@ Surveyed from GitHub Docs and the changelog. Recorded because the strategy
 below only makes sense against an accurate baseline, and because an outdated
 baseline previously produced two wrong conclusions in this very document.
 
-Re-checked against the changelog on 2026-07-25; nothing below needed
-correcting. The entries that postdate the original survey all fit the map
-rather than breaking it: the GitHub MCP server moved to the next MCP
-specification (Jul 23), agent automation controls for issues reached public
-preview (Jul 23 — this is the approvals queue described below), the Copilot
-CLI stopped needing a personal access token inside Actions (Jul 2), and code
-review gained customization (Jul 17). Only the third implies work that is not
-already tracked here; see L3.
+**Which GitHub.** Copilot is not available on GitHub Enterprise Server at
+all — 3.20 (March 2026) ships none of it, and the cloud agent requires
+Enterprise Cloud. The parity target is therefore **github.com / Enterprise
+Cloud**, not GHES, and it should be read that way everywhere below. It also
+means a fully self-hosted agent-native forge does not exist from GitHub
+today, which is the single most important competitive fact in this document.
+
+**How to re-run this survey.** Walk the product documentation, not the
+changelog. A changelog reports what *changed* and will always give a
+window-shaped answer; the docs describe current state regardless of when each
+piece shipped. Start from the Copilot documentation tree — concepts, the
+agents sub-section, and the REST reference — and read the specifications
+themselves for anything being implemented rather than a vendor's paraphrase
+of them. Use the changelog only afterwards, to date things and catch
+deprecations, and read it by **month archive**: the label-filtered view
+silently renders empty month headers, which is how an earlier pass at this
+document missed June entirely. Survey the ecosystem in the same pass, not
+only the target. Re-read prior research before starting.
+
+Re-checked on 2026-07-25 by that method; nothing below needed correcting.
+The entries that postdate the original survey fit the map rather than
+breaking it: the GitHub MCP server moved to the next MCP specification
+(Jul 23), agent automation controls for issues reached public preview (Jul 23
+— this is the approvals queue described below), and code review gained
+customization (Jul 17). Two changes do imply work not otherwise tracked here:
+agents stopped needing a personal access token inside Actions (Jun 11 for
+agentic workflows, Jul 2 for the CLI), and **cloud *and local* sandboxes**
+reached public preview (Jun 2), which narrows what "self-hosted" buys us —
+see the honest-claims section.
 
 **The agent runtime.** "Copilot coding agent" is now **Copilot cloud
 agent**: it researches, plans, and pushes to a `copilot/` branch or the
@@ -144,21 +165,115 @@ at all is false, and it is the closest prior art to L1's direction.
 licence-gated. Their infrastructure work above continues regardless, so
 "culturally anti-AI" is not the same as "not building the plumbing".
 
-## Parity map
+## Capability spec (frozen, July 2026)
 
-| GitHub | Forgente today | What is missing |
-| ---- | ---- | ---- |
-| Agent apps installed as GitHub Apps; cloud agent acts under Copilot identity with the requester as co-author | Organization-owned apps shipped in #66; OAuth2 apps still act *as the authorizing user* | Per-installation scoping and user-owned apps; the primitive itself now exists |
-| Cloud agent: issue → sandboxed run → draft PR | Actions and a runner fleet already run untrusted workloads | Assignment, a session record, draft-PR wiring |
-| Agentic Workflows: Markdown compiled to Actions YAML | Actions runs hand-written YAML | The compile step and the safety envelope around it |
-| Session streaming and audit | Actions logs only | A session as a first-class, queryable object |
-| Custom agents (`.github/agents/NAME.md`, org and enterprise levels) | `AGENTS.md` is already an in-repo convention | Read agent profiles and offer them at assignment time |
-| Plugins, Agent Skills, Hooks | — | Adopt the open Agent Skills format rather than inventing one |
-| First-party MCP server | `gitea-mcp` works unforked against Forgente, validated as an org-owned app | Not a fork: OAuth 2.1 resource-server support so remote MCP clients can connect at all |
-| Enterprise plugin standards: central policy for agent tooling | Scoped Workflows already push central workflows across repositories | A policy vocabulary for agents, not only for workflows |
-| Cloud agent runs under least privilege | Actions token permissions, org and repo ceilings, fork downgrade, fork-run approval | Nothing — this is built; egress control is the gap (see L3) |
-| Copilot code review | — | A *tenant* of the layers above, not a layer itself |
-| Agentic autofix for scanning alerts (preview, July 2026) | no code scanning of any kind | Code scanning is the prerequisite; that is security work, not AI work |
+This replaces the earlier parity map. It is a **frozen** snapshot: the target
+moves weekly, and a target that moves is one nothing can ever be finished
+against. Build to this list; anything GitHub ships after it goes to a dated
+backlog and is considered at the next re-survey, not mid-flight.
+
+Rows carry stable IDs so pull requests and issues can cite `AN-IDENT-2`
+rather than re-describing the capability. Status is one of **shipped**,
+**Ln** (assigned to a layer), **open** (accepted, unassigned), or
+**excluded** (with a reason — those rows are the most useful ones here).
+
+### Identity and installation
+
+| ID | GitHub's shape | Forgente | Status |
+| --- | --- | --- | --- |
+| AN-IDENT-1 | Agent apps are GitHub Apps; two-step enable (install, then authorize agent features) | Organization-owned apps with scoped tokens | shipped (#66) |
+| AN-IDENT-2 | Partner identity carried by a JWT assertion GitHub issues; no user-managed credentials | Static scoped tokens only | open |
+| AN-IDENT-3 | Third-party agents install as hidden GitHub Apps (`anthropic code agent`, `openai code agent`), fully audit-logged | Apps are visible and org-owned by design | shipped (#66) |
+| AN-IDENT-4 | Attribution: agent-authored PRs in author search; release notes credit them | Bot label on comments; profile and commits pending | L0 follow-up |
+| AN-IDENT-5 | Per-installation permission scoping | Team and collaborator membership | shipped (#66) |
+
+### Runtime and sessions
+
+| ID | GitHub's shape | Forgente | Status |
+| --- | --- | --- | --- |
+| AN-RUN-1 | Cloud agent researches, plans, commits to a branch, opens a PR | Actions + runner fleet is the substrate | L3 |
+| AN-RUN-2 | Confidence rating; low-confidence changes held for review | — | L3 |
+| AN-RUN-3 | Cloud **and local** sandboxes (MXC; macOS/Linux/Windows) | Runners are already operator-hosted | shipped (substrate) |
+| AN-RUN-4 | Scheduled and event-triggered agent tasks | Actions triggers | L3 |
+| AN-RUN-5 | Agent tasks REST API: 5 endpoints, task/session objects, 8 states | — | L3 |
+| AN-RUN-6 | Session control page, session filters, cross-session insight | Actions logs only | L3 |
+| AN-RUN-7 | *No agent webhook events exist* — 75 events, none agent-related | — | open — see below |
+
+### Repository configuration
+
+| ID | GitHub's shape | Forgente | Status |
+| --- | --- | --- | --- |
+| AN-CFG-1 | Custom agents: `.github/agents/*.agent.md`; org in `.github`/`.github-private`; enterprise in a designated `.github-private`; precedence repo → org → enterprise | — | L2 |
+| AN-CFG-2 | Agent profile frontmatter: `description` (required), `name`, `target`, `tools`, `model`, `disable-model-invocation`, `user-invocable`, `mcp-servers`, `metadata`; prompt ≤ 30,000 chars | — | L2 |
+| AN-CFG-3 | Agent skills: `SKILL.md` folders at `.github/skills`, `.claude/skills`, `.agents/skills`; personal `~/.copilot/skills`, `~/.agents/skills` | — | L2 |
+| AN-CFG-4 | `AGENTS.md` for cross-tool conventions | Already an in-repo convention | shipped |
+| AN-CFG-5 | Plugins: `plugin.json` bundling agents, skills, `hooks.json`, `.mcp.json`, `lsp.json`; distributed via `marketplace.json` | — | excluded — plugin economy is a non-goal |
+| AN-CFG-6 | Instruction files: `.github/copilot-instructions.md`, `.github/instructions/**/*.instructions.md` | — | excluded — vendor-specific; `AGENTS.md` covers it |
+
+### Agentic workflows
+
+| ID | GitHub's shape | Forgente | Status |
+| --- | --- | --- | --- |
+| AN-WF-1 | Markdown + YAML frontmatter compiled to a hardened `.lock.yml`, both committed | Actions runs hand-written YAML | open — see the open questions |
+| AN-WF-2 | Read-only by default; writes confined to declared **safe outputs** | Token permission system already clamps | shipped (substrate) |
+| AN-WF-3 | Proposed outputs scanned before any write is applied | — | L3 |
+| AN-WF-4 | Secrets withheld from the agent runtime | — | L3 |
+| AN-WF-5 | Central workflow policy across repositories | Scoped Workflows | shipped (substrate) |
+
+### MCP
+
+| ID | GitHub's shape | Forgente | Status |
+| --- | --- | --- | --- |
+| AN-MCP-1 | Official server, remote and local, with toolset toggles | `gitea-mcp` unforked, validated as an org-owned app | shipped |
+| AN-MCP-2 | Remote auth by OAuth or PAT | Static token only — remote clients cannot connect | L1 |
+| AN-MCP-3 | Repo-level MCP config; org/enterprise policy, disabled by default | — | L2 |
+| AN-MCP-4 | Registry, allowlists, runtime discovery (Agent Finder / ARD) | — | excluded — registry is a marketplace concern |
+
+### Governance
+
+| ID | GitHub's shape | Forgente | Status |
+| --- | --- | --- | --- |
+| AN-GOV-1 | Enterprise → org (selectable by custom property) → repo → IDE, enterprise non-overridable | Instance → org → repo ceilings on Actions tokens | partial, shipped |
+| AN-GOV-2 | Agent session audit events; filterable recent view; audit streaming | — | L3 |
+| AN-GOV-3 | Agent output scanned by CodeQL, secret scanning, advisory DB — no GHAS licence needed | No code scanning of any kind | excluded — scanning is security work, on its own merits |
+| AN-GOV-4 | Branch protection applies; no self-approve, self-merge, or self-ready | — | L3 |
+| AN-GOV-5 | Egress firewall on agent runs | Nothing; runner exposes `network_mode`/`privileged` only | **L3 — the real gap** |
+| AN-GOV-6 | Signed agent commits | — | open |
+| AN-GOV-7 | Kill switch: installations can be suspended, and policy can disable agents per organization | Org-wide suspend enforced at the single auth choke point, covering every credential type including git-over-SSH | shipped (#66) |
+
+### Tenants
+
+| ID | GitHub's shape | Forgente | Status |
+| --- | --- | --- | --- |
+| AN-REV-1 | Code review: manual or automatic, effort levels, per-repo MCP servers, reads `AGENTS.md` and skills, self-hosted runner option | — | L4 |
+| AN-REV-2 | Issue triage and labelling with rationale and an approvals queue | — | L4 |
+| AN-REV-3 | Agentic autofix for scanning alerts | — | excluded — presupposes AN-GOV-3 |
+
+### Excluded wholesale
+
+Client-side tooling (IDE, CLI, desktop app, editor agent pickers), model
+hosting and inference resale, and the entire billing surface — credits, cost
+centers, per-user budgets, seat management, usage metrics. That last one is
+roughly a quarter of GitHub's agent-related changelog volume and is the
+scaffolding of a subscription business; its absence is one of the few things
+Forgente gets to claim outright.
+
+### The seam worth building into
+
+`AN-RUN-5` and `AN-RUN-7` together describe a structural limit in GitHub's
+design. The agent tasks API is authenticated **user-to-server only** —
+installation access tokens are explicitly unsupported — so an app cannot
+drive the agent API as itself, even though agent apps *are* GitHub Apps. And
+no webhook event reports agent activity at all, so sessions cannot be
+subscribed to, only polled or streamed to audit tooling.
+
+Forgente's app is a principal holding its own token, with no user delegation
+in the path, so neither limit is inherited. An agent API here can accept app
+tokens directly, and sessions can emit ordinary webhook events. Take the
+object model from GitHub — task and session, the eight states, the field
+names — and do not reproduce the authentication constraint. This is the
+clearest case in the spec where parity supplies the design and Forgente's
+identity model supplies the improvement.
 
 ## The layers
 
@@ -331,17 +446,32 @@ Two independent pieces of configuration:
   inventing a Forgente-specific one. Interoperating with agents people
   already run is worth more than a bespoke schema.
 
-  Two ecosystem facts should settle which convention. `gitea-tea-skill`
-  publishes an official skill teaching an agent to drive the `tea` CLI, laid
-  out under `.agents/skills/` — so the directory convention here is
-  `.agents/skills/`, not GitHub's `.github/agents/`, and the file is plain
-  Markdown with no frontmatter, so it is *not* Anthropic's `SKILL.md` schema
-  despite sharing the "Agent Skills" name. Do not conflate the two.
+  **Agent profiles and agent skills are different artifacts.** An earlier
+  revision of this document conflated them, and the distinction decides the
+  design. A *custom agent* is a persona — `.agent.md`, with a prompt, a tool
+  filter and MCP server declarations (`AN-CFG-1`, `AN-CFG-2`). A *skill* is a
+  packaged procedure — a folder containing `SKILL.md` plus optional
+  `scripts/`, `references/` and `assets/`, loaded by progressive disclosure:
+  name and description at discovery, full instructions only once a task
+  matches (`AN-CFG-3`). Build both; do not merge them.
 
-  That skill also implies a second, cheaper integration path this document
-  had not considered: an agent can drive `tea` instead of MCP, which needs no
-  server and no new protocol. It is the path upstream suggested in #36444.
-  Worth evaluating on cost before assuming MCP is the only surface.
+  Adopt the Agent Skills standard verbatim. It originated at Anthropic, is
+  now openly governed, and is implemented by around forty-five agent products
+  including Copilot, VS Code, Cursor, Codex and Gemini CLI — it is the actual
+  interoperability layer, not one vendor's convention. A previous revision
+  claimed `.agents/skills/` was an ecosystem convention *in conflict* with
+  GitHub's; that is wrong and should not be repeated. `.agents/skills` is one
+  of the locations GitHub itself reads, so there is no conflict to resolve
+  and no compromise to design around.
+
+  `gitea-tea-skill` publishes an official skill teaching an agent to drive
+  the `tea` CLI, under `.agents/skills/`. Its file is plain Markdown rather
+  than a conformant `SKILL.md`, so treat it as a useful precedent for the
+  location and not as a model for the format. It also implies a second,
+  cheaper integration path this document had not considered: an agent can
+  drive `tea` instead of MCP, needing no server and no new protocol. It is
+  the path upstream suggested in #36444, and it is worth costing before
+  assuming MCP is the only surface.
 - **Model providers.** Endpoint, credential, and model selection at the
   instance and organization level. Credentials are secrets and get handled as
   such: encrypted at rest, never rendered back, never logged, and never
@@ -411,11 +541,16 @@ inside L3 rather than in a "later" pile.
 
 What is left is narrower, and durable:
 
-- **Self-hosted.** GitHub's agent stack runs in GitHub's cloud. Forgente's
-  runs on the operator's hardware, against a model of their choosing,
-  including one that never leaves the network. For regulated, air-gapped, and
-  sovereignty-constrained users this is not a preference, it is the only
-  option.
+- **Self-hosted — but state it precisely.** GitHub now runs agents in *local*
+  sandboxes on the developer's own machine, included in the standard seat,
+  and code review can run on self-hosted runners, so "it runs on your
+  hardware" is no longer ours alone at the execution layer. What is still
+  true, and larger: the **forge** is cloud-only. Copilot does not exist on
+  GitHub Enterprise Server. An operator who must keep the forge itself inside
+  their network cannot have GitHub's agent stack at any price. For regulated,
+  air-gapped and sovereignty-constrained users that is not a preference, it
+  is the only option — and it is the claim to lead with, rather than the
+  weaker one about where code executes.
 - **No subscription gate.** GitHub's agent capabilities are inseparable from
   Copilot licensing, AI credits, and cost centers. Forgente's agent
   primitives are part of the forge.
