@@ -61,6 +61,56 @@ operator-facing breaking changes of the cutover, and the v1.x namespace is
 retired to the pre-fork `v<upstream>-<N>` releases and mirrored upstream
 tags. Release mechanics in [FORGENTE.md](FORGENTE.md).
 
+## Phase 3 — agent-native forge (current)
+
+With infrastructure, identity, and release independence settled, Phase 3 is
+the first *directional* phase: Forgente becomes the forge where agents are
+first-class principals, on infrastructure the operator owns. The parity
+target is GitHub's agent surface as surveyed in July 2026 — cloud agent,
+agentic workflows, agent sessions, custom agents, MCP, code review.
+
+What Forgente claims is deliberately narrow: self-hosted, no AI subscription
+gate, open formats (`AGENTS.md`, Agent Skills, MCP) over a proprietary
+hosted stack, and an installation-identity primitive this lineage never had.
+It is explicitly *not* "the only forge that governs agents" — GitHub's
+governance is strong, and matching it is a cost of entry, not an edge.
+
+Design and rationale live in
+[docs/agent-native-program.md](docs/agent-native-program.md), including a
+dated survey of the parity target, which moves fast enough that it should be
+re-run before any layer is scoped in detail. The layers, in build order, each
+shippable on its own:
+
+- **L0 — installation identity, agents as its first consumer.** The real gap
+  is not "agents": Forgente has no per-installation principal at all (OAuth2
+  apps act as the authorizing user). Organization-owned agent accounts,
+  permissions through ordinary team membership, provenance badges, an
+  organization-wide kill switch. Upstream is activating bot accounts at the
+  admin level in go-gitea/gitea#38181 and explicitly defers organization
+  ownership; Forgente builds the deferred layer and cherry-picks the rest.
+  Demand is long-standing and quantified (upstream #25900, #13044, #26754,
+  #33469).
+- **L1 — first-party MCP server.** Fork `gitea-mcp` when it needs agent-token
+  awareness, per the fork-on-divergence policy.
+- **L2 — repository agent configuration and model providers.** Agent
+  definitions beside `AGENTS.md`, following the open Agent Skills format;
+  provider endpoint and credentials at the instance and organization level.
+- **L3 — agent sessions and the sandbox contract.** Assigning an issue or
+  review to an agent dispatches an Actions run behind a session record with
+  live logs, steering, and links to what it produced. Actions and the runner
+  fleet are already the sandbox. The contract around it — read-only by
+  default, egress control, no self-approval or self-merge, attributable
+  sessions, propose-and-approve for low-confidence actions — is a precondition
+  for the layer, not later polish.
+- **L4 — tenants.** AI code review, issue triage, pull-request summaries —
+  built as agents on L0–L3 in their own repositories, not compiled into the
+  server.
+
+Non-goals are listed in the program document and are as load-bearing as the
+goals: no editor tooling, no hosted inference, no agent marketplace or plugin
+economy, no new permission system, and no attempt at parity across every
+surface GitHub ships.
+
 ## Standing rule — security
 
 Forgente serves git over the network. Whatever the phase, there is never a
