@@ -112,8 +112,8 @@ func (p *Profile) IsModelInvocable() bool {
 // An unrecognised extension yields an empty string.
 func ProfileIDFromFileName(fileName string) string {
 	for _, ext := range []string{".agent.md", ".md"} {
-		if strings.HasSuffix(fileName, ext) {
-			return strings.TrimSuffix(fileName, ext)
+		if id, ok := strings.CutSuffix(fileName, ext); ok {
+			return id
 		}
 	}
 	return ""
