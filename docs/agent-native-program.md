@@ -426,19 +426,25 @@ work", and one item is a defect rather than a gap:
    against the MUST, since OIDC discovery already satisfies it, but real
    clients probe it first — and unlike the OIDC document it can advertise the
    API scopes a client may request. *Shipped.*
-2. **`scopes_supported` and the full-access default.** The OIDC document
-   advertises only `openid`, `profile`, `email` and `groups`, so a client has
-   no way to discover Forgente's API scopes. Worse, `GrantAdditionalScopes`
-   treats a grant carrying *only* those four as `AccessTokenScopeAll`: an MCP
-   client completing an ordinary OIDC flow receives a token with **full API
-   access**. That is the opposite of least privilege and it silently undoes
-   the per-principal scoping L0 exists to provide. The behaviour is inherited
-   and deliberate — the code notes it preserves 1.22 compatibility — so
-   changing the default needs a deprecation cycle, not a patch.
-3. RFC 9207 (`iss` in the authorization response) and RFC 8707 (`resource`)
-   are unimplemented. Clients **MUST** send `resource` regardless of server
-   support, so nothing breaks today, but without it tokens carry no audience
-   binding.
+2. **The full-access default is a bad default, not a consent bug.**
+   `GrantAdditionalScopes` treats a grant carrying only `openid`, `profile`,
+   `email` and `groups` as `AccessTokenScopeAll`, so an MCP client completing
+   an ordinary OIDC flow receives a token with full API access. The consent
+   screen is honest about it — with no API scopes requested, `grant.tmpl`
+   shows "it will be able to access and write to all your account
+   information, including private repos and organizations" — so the user is
+   told exactly what they are granting. The real problem was discoverability:
+   nothing advertised that `read:repository` or `write:issue` existed, so a
+   client had no narrower thing to ask for. Item 1 fixes that. Changing the
+   default itself is inherited 1.22 behaviour and would need a deprecation
+   cycle; with discovery in place it is no longer urgent.
+3. **RFC 8707 resource indicators, and audience binding.** Access tokens
+   carry `GrantID`, `Kind` and `ExpiresAt` and nothing else — the `aud` claim
+   is set only on the `id_token`. A resource server therefore cannot satisfy
+   the spec's "MCP servers **MUST** validate that access tokens were issued
+   specifically for them as the intended audience". This is the one item that
+   blocks the upstream work, not merely a missing nicety. RFC 9207 (`iss` in
+   the authorization response) is a smaller omission alongside it.
 4. A "Connect an agent" panel on the app's settings page, for the local and
    stdio case that already works — host, token, and a `GITEA_TOOLS` value
    derived from the token's real scopes, with an integration test pinning the
