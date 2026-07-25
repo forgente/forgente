@@ -64,37 +64,49 @@ tags. Release mechanics in [FORGENTE.md](FORGENTE.md).
 ## Phase 3 — agent-native forge (current)
 
 With infrastructure, identity, and release independence settled, Phase 3 is
-the first *directional* phase: Forgente becomes the forge where AI agents are
-first-class, governed principals. The parity target is GitHub's AI surface —
-coding agent, code review, mission control, custom agents, MCP — with two
-deliberate divergences: agents are governed rather than exempted from
-governance, and the model provider is configured by the operator rather than
-bundled and sold.
+the first *directional* phase: Forgente becomes the forge where agents are
+first-class principals, on infrastructure the operator owns. The parity
+target is GitHub's agent surface as surveyed in July 2026 — cloud agent,
+agentic workflows, agent sessions, custom agents, MCP, code review.
+
+What Forgente claims is deliberately narrow: self-hosted, no AI subscription
+gate, open formats (`AGENTS.md`, Agent Skills, MCP) over a proprietary
+hosted stack, and an installation-identity primitive this lineage never had.
+It is explicitly *not* "the only forge that governs agents" — GitHub's
+governance is strong, and matching it is a cost of entry, not an edge.
 
 Design and rationale live in
-[docs/agent-native-program.md](docs/agent-native-program.md). The layers, in
-build order, each shippable on its own:
+[docs/agent-native-program.md](docs/agent-native-program.md), including a
+dated survey of the parity target, which moves fast enough that it should be
+re-run before any layer is scoped in detail. The layers, in build order, each
+shippable on its own:
 
-- **L0 — agent identity and governance.** Organization-owned agent accounts,
+- **L0 — installation identity, agents as its first consumer.** The real gap
+  is not "agents": Forgente has no per-installation principal at all (OAuth2
+  apps act as the authorizing user). Organization-owned agent accounts,
   permissions through ordinary team membership, provenance badges, an
   organization-wide kill switch. A 2026-07-17 spike proved this needs no
   authentication work: `UserTypeBot` already authenticates and acts.
 - **L1 — first-party MCP server.** Fork `gitea-mcp` when it needs agent-token
   awareness, per the fork-on-divergence policy.
 - **L2 — repository agent configuration and model providers.** Agent
-  definitions beside `AGENTS.md`; provider endpoint and credentials at the
-  instance and organization level.
-- **L3 — agent sessions.** Assigning an issue or review to an agent
-  dispatches an Actions run behind a session record with live logs, steering,
-  and links to what it produced. Actions and the runner fleet are already the
-  sandbox.
+  definitions beside `AGENTS.md`, following the open Agent Skills format;
+  provider endpoint and credentials at the instance and organization level.
+- **L3 — agent sessions and the sandbox contract.** Assigning an issue or
+  review to an agent dispatches an Actions run behind a session record with
+  live logs, steering, and links to what it produced. Actions and the runner
+  fleet are already the sandbox. The contract around it — read-only by
+  default, egress control, no self-approval or self-merge, attributable
+  sessions, propose-and-approve for low-confidence actions — is a precondition
+  for the layer, not later polish.
 - **L4 — tenants.** AI code review, issue triage, pull-request summaries —
   built as agents on L0–L3 in their own repositories, not compiled into the
   server.
 
 Non-goals are listed in the program document and are as load-bearing as the
-goals: no editor tooling, no hosted inference, no agent marketplace, no new
-permission system.
+goals: no editor tooling, no hosted inference, no agent marketplace or plugin
+economy, no new permission system, and no attempt at parity across every
+surface GitHub ships.
 
 ## Standing rule — security
 
