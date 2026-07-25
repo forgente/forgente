@@ -14,6 +14,7 @@ import (
 	"forgente.com/models/organization"
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
+	"forgente.com/modules/setting"
 	org_service "forgente.com/services/org"
 	"forgente.com/tests"
 
@@ -139,6 +140,18 @@ func TestOrgApps(t *testing.T) {
 		body = MakeRequest(t, NewRequest(t, "GET", "/user2"), http.StatusOK).Body.String()
 		assert.NotContains(t, body, "Operated by")
 		assert.NotContains(t, body, "This is an automated account, not a person.")
+	})
+
+	t.Run("ConnectPanel", func(t *testing.T) {
+		defer tests.PrintCurrentTest(t)()
+
+		body := owner.MakeRequest(t, NewRequest(t, "GET", appsLink), http.StatusOK).Body.String()
+		assert.Contains(t, body, "Connect an Agent")
+		assert.Contains(t, body, "GITEA_HOST="+setting.AppURL)
+		assert.Contains(t, body, "GITEA_ACCESS_TOKEN=")
+		// the team step is the one an operator otherwise has to guess
+		assert.Contains(t, body, "cannot see any repository until it is added to one")
+		assert.Contains(t, body, fmt.Sprintf(`href="/org/%s/teams"`, orgName))
 	})
 
 	t.Run("SuspendAndResume", func(t *testing.T) {

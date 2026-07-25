@@ -85,6 +85,16 @@
 							<button class="ui primary tiny button">{{ctx.Locale.Tr "settings.generate_token"}}</button>
 						</form>
 					</details>
+					<details class="tw-my-2">
+						<summary>{{ctx.Locale.Tr "settings.app_connect"}}</summary>
+						<div class="tw-my-2">
+							<p>{{ctx.Locale.Tr "settings.app_connect_desc"}}</p>
+							<p>{{ctx.Locale.Tr "settings.app_connect_team_prereq" .User.Name}} <a href="{{$.OrgLink}}/teams">{{ctx.Locale.Tr "settings.app_connect_team_link"}}</a></p>
+							<pre class="tw-p-2 tw-overflow-x-auto"><code>GITEA_HOST={{$.AppURL}}
+GITEA_ACCESS_TOKEN={{ctx.Locale.Tr "settings.app_connect_token_placeholder"}}</code></pre>
+							<p class="help">{{ctx.Locale.Tr "settings.app_connect_token_hint"}}</p>
+						</div>
+					</details>
 				</div>
 				<div class="item-trailing">
 					<form class="ui form ignore-dirty tw-inline-block" action="{{$.Link}}/apps/{{.ID}}/suspend" method="post">

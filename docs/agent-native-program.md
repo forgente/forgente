@@ -458,26 +458,31 @@ work", and one item is a defect rather than a gap:
    tokens" is in tension with that design, and resolving it is upstream's
    call, not something the forge can decide alone.
 4. A "Connect an agent" panel on the app's settings page, for the local and
-   stdio case that already works — host, token, and a `GITEA_TOOLS` value
-   derived from the token's real scopes, with an integration test pinning the
-   scope-to-tools mapping.
+   stdio case that already works. *Shipped, minus the tool list — see below.*
 
-Item 4 addresses the second finding from the run: the server advertises all
-of its tools regardless of what the token can do, so `create_repo` was
-offered and then refused at call time for a missing scope. Token scopes are
-enforced by the forge, `GITEA_TOOLS` filters tools in the client, and nothing
-reconciles the two, so an agent discovers its limits by failing and an
-operator reading the tool list gets a false picture of what the token
-permits. Only the forge knows a token's real scopes, so only the forge can
-emit a list that agrees with them by construction. This is already filed
-upstream as `gitea-mcp` issue #79, and MCP tool annotations (issue #173) may
-be a better carrier than an environment variable — prefer contributing there
-over keeping a Forgente-only workaround.
+The panel carries the host, the token placeholder, and the step an operator
+otherwise has to guess: an app has no repository access until it is added to
+a team. That is correct behaviour — access is granted the ordinary way — but
+it sits silently between creating an app and having a working agent, and it
+was the third finding from the validation run.
 
-A third, smaller finding: an app has no repository access until it is added
-to a team, which is correct — access is granted the ordinary way — but it is
-an undocumented step between creating an app and having a working agent. The
-panel should name it or handle it.
+**The scope-derived tool list was deliberately not built.** The original plan
+was to emit a `GITEA_TOOLS` value matching the token's real scopes, because
+the server advertises every tool regardless of what the token can do:
+`create_repo` was offered and then refused at call time. The reasoning still
+holds — only the forge knows a token's scopes — but the implementation does
+not survive contact with the format. `GITEA_TOOLS` is an allowlist of
+**individual tool names**, not toolset groups (`pkg/tool/tool.go` filters on
+`flag.AllowedTools[st.Tool.Name]`), so honouring it means hardcoding roughly
+fifty of another project's internal identifiers, pinned to a commit, in
+Forgente. That table would agree with the token by manual synchronisation, not
+by construction, and it would break silently the first time upstream renames
+or adds a tool.
+
+The rationale for the feature argues against this carrier for it. Filed
+upstream as `gitea-mcp` issue #79, with MCP tool annotations (issue #173) the
+better vehicle — contribute there rather than keeping a Forgente-only table
+that drifts.
 
 Watch item, not a fork trigger: `gitea-mcp` builds on `mark3labs/mcp-go` with
 open requests to move to the official Go SDK, while GitHub's server already
