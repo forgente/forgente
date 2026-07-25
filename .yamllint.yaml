@@ -40,3 +40,4 @@ rules:
 ignore: |
   .venv
   node_modules
+  .claude

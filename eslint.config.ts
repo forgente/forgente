@@ -35,6 +35,7 @@ export default defineConfig([
     'web_src/js/vendor',
     'web_src/fomantic',
     'public/assets/js',
+    '.claude', // agent worktrees: checkouts of this repo, linted in their own right
   ]),
   {
     files: [`**/*.{${[...jsExts, ...tsExts].join(',')}}`],
