@@ -488,6 +488,17 @@ work", and one item is a defect rather than a gap:
    is where the second credential would have to come from.
 4. A "Connect an agent" panel on the app's settings page, for the local and
    stdio case that already works. *Shipped, minus the tool list — see below.*
+5. **`plain` PKCE is still accepted.** OAuth 2.1 removed it, and the MCP
+   specification requires authorization servers to implement OAuth 2.1, so
+   advertising and accepting it in `code_challenge_methods_supported` is a
+   standing compliance gap. It is narrow rather than alarming: `plain` means
+   the challenge equals the verifier, so it only fails against an attacker who
+   can observe the authorization request *and* intercept the code, and every
+   MCP client is required to use `S256` regardless. Removing it is a breaking
+   change for whatever still uses it, so it wants a deprecation cycle or an
+   instance setting rather than a quiet deletion — but it should not stay
+   undocumented, because both discovery documents currently advertise it as
+   supported.
 
 The panel carries the host, the token placeholder, and the step an operator
 otherwise has to guess: an app has no repository access until it is added to
