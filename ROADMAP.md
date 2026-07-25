@@ -116,10 +116,11 @@ build order, each shippable on its own:
   specification rather than paraphrasing it shrank the layer twice: the
   resource-server half (RFC 9728, the `401` challenge) belongs to the MCP
   server and is an upstream contribution, and Dynamic Client Registration is
-  deprecated so it will not be built. What shipped is the forge's half —
-  RFC 8414 authorization-server metadata advertising the API scopes, RFC 8707
-  resource indicators bound to the token audience so a resource server can
-  validate a token was issued for it, and a connect panel. One tension is
+  optional and on its way out, so it will not be built. What shipped is the
+  forge's half — RFC 8414 authorization-server metadata advertising the API
+  scopes, RFC 8707 resource indicators bound to the token audience so a
+  resource server can validate a token was issued for it, and a connect
+  panel. One tension is
   recorded rather than resolved: `gitea-mcp` forwards the caller's token to
   the API, which the specification forbids, and that is upstream's design
   question to settle.

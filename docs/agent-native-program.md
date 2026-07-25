@@ -64,8 +64,9 @@ document missed June entirely. Survey the ecosystem in the same pass, not
 only the target. Re-read prior research before starting.
 
 **Deliberately not surveyed**, recorded so the next pass does not mistake
-these for oversights: the exact MCP specification version `gitea-mcp` targets
-(matters when L1 is built, not scoped); whether `tea` and the Gitea SDK have
+these for oversights: ~~the exact MCP specification version `gitea-mcp`
+targets~~ (checked 2026-07-26 — 2025-11-25, via `mcp-go` v0.56.0; see L1);
+whether `tea` and the Gitea SDK have
 agent affordances (matters when the MCP-versus-CLI question in the open
 questions is decided); GitLab Duo and Bitbucket Rovo, last checked
 2026-07-20 (they do not change a GitHub-parity plan); and changelog history
@@ -397,7 +398,15 @@ L0 was supposed to provide it.
 
 **Corrected against the MCP authorization specification (2026-07-25).** An
 earlier revision of this section assigned the wrong work to the forge. The
-spec splits the roles cleanly, and reading it changes what L1 is:
+spec splits the roles cleanly, and reading it changes what L1 is.
+
+*Which version.* This was first read against the `draft` specification, which
+was the wrong document to build from: `gitea-mcp` depends on `mcp-go` v0.56.0,
+whose `LATEST_PROTOCOL_VERSION` is **2025-11-25**. Re-checked against
+2025-11-25 on 2026-07-26 — every point below holds there too, with one wording
+correction noted. This closes the "which MCP specification version does
+`gitea-mcp` target" item that the July survey deliberately deferred; pin any
+future reading to the version the server actually implements, not to `draft`.
 
 - "MCP servers **MUST** implement OAuth 2.0 Protected Resource Metadata
   (RFC 9728)." The protected-resource document and the `401` with
@@ -409,10 +418,21 @@ spec splits the roles cleanly, and reading it changes what L1 is:
   [or] OpenID Connect Discovery 1.0", and clients **MUST** support both.
   Forgente already serves `/.well-known/openid-configuration`, so it already
   satisfies this MUST. The forge was never the blocker it was described as.
-- Dynamic Client Registration is now **deprecated** in the spec, "retained
-  for backwards compatibility with authorization servers that do not support
-  Client ID Metadata Documents". The open question in the previous revision
-  is therefore closed: do not build DCR.
+- Dynamic Client Registration is optional and on its way out. 2025-11-25 says
+  authorization servers "**MAY** support" it and that it "is included for
+  backwards compatibility with earlier versions of the MCP authorization
+  spec"; `draft` goes further and calls it deprecated. An earlier revision of
+  this document reported the `draft` wording as though it were current — the
+  conclusion is unchanged under either, so do not build DCR, but the
+  characterisation was drawn from the wrong document.
+
+Two requirements in 2025-11-25 that the `draft` reading did not surface, both
+already satisfied: an authorization server serving OpenID Connect Discovery
+**MUST** include `code_challenge_methods_supported`, or clients refuse to
+proceed for lack of PKCE evidence — Forgente's OIDC document has always
+carried it, and the RFC 8414 document carries it too. Support for Client ID
+Metadata Documents is advertised by `client_id_metadata_document_supported`;
+Forgente does not implement CIMD, and omitting the field correctly says so.
 
 Forgejo's Authorized Integrations is the nearest prior art in this lineage —
 short-lived, externally-issued, forge-validated credentials with per-issuer
@@ -453,12 +473,32 @@ work", and one item is a defect rather than a gap:
    Note what this does **not** do: Forgente's own API still ignores `aud`, by
    necessity. `gitea-mcp` is a facade over the same instance and forwards the
    caller's token to the API, so enforcing the audience at the API would
-   break the only architecture the ecosystem server actually has. The MCP
-   specification's "MCP servers **MUST NOT** accept or transit any other
-   tokens" is in tension with that design, and resolving it is upstream's
-   call, not something the forge can decide alone.
+   break the only architecture the ecosystem server actually has.
+
+   2025-11-25 is blunt about this, and more so than the `draft` wording first
+   quoted here: "If the MCP server makes requests to upstream APIs, it may act
+   as an OAuth client to them. The access token used at the upstream API is a
+   separate token, issued by the upstream authorization server. The MCP server
+   **MUST NOT** pass through the token it received from the MCP client."
+
+   So the tension is not a reading of ours — a compliant `gitea-mcp` would
+   need its own credential at the forge, distinct from the caller's token.
+   That is a real design change for upstream and the substance of what to
+   raise on issue #207. It is upstream's call, not the forge's, but the forge
+   is where the second credential would have to come from.
 4. A "Connect an agent" panel on the app's settings page, for the local and
    stdio case that already works. *Shipped, minus the tool list — see below.*
+5. **`plain` PKCE is still accepted.** OAuth 2.1 removed it, and the MCP
+   specification requires authorization servers to implement OAuth 2.1, so
+   advertising and accepting it in `code_challenge_methods_supported` is a
+   standing compliance gap. It is narrow rather than alarming: `plain` means
+   the challenge equals the verifier, so it only fails against an attacker who
+   can observe the authorization request *and* intercept the code, and every
+   MCP client is required to use `S256` regardless. Removing it is a breaking
+   change for whatever still uses it, so it wants a deprecation cycle or an
+   instance setting rather than a quiet deletion — but it should not stay
+   undocumented, because both discovery documents currently advertise it as
+   supported.
 
 The panel carries the host, the token placeholder, and the step an operator
 otherwise has to guess: an app has no repository access until it is added to
