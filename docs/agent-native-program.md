@@ -44,6 +44,15 @@ Surveyed from GitHub Docs and the changelog. Recorded because the strategy
 below only makes sense against an accurate baseline, and because an outdated
 baseline previously produced two wrong conclusions in this very document.
 
+Re-checked against the changelog on 2026-07-25; nothing below needed
+correcting. The entries that postdate the original survey all fit the map
+rather than breaking it: the GitHub MCP server moved to the next MCP
+specification (Jul 23), agent automation controls for issues reached public
+preview (Jul 23 — this is the approvals queue described below), the Copilot
+CLI stopped needing a personal access token inside Actions (Jul 2), and code
+review gained customization (Jul 17). Only the third implies work that is not
+already tracked here; see L3.
+
 **The agent runtime.** "Copilot coding agent" is now **Copilot cloud
 agent**: it researches, plans, and pushes to a `copilot/` branch or the
 pull request's own branch, in a sandbox, opening a draft pull request.
@@ -85,17 +94,69 @@ Adding the agent as a ruleset **bypass actor** is available, but it is an
 opt-in escape hatch, not the default posture. Any claim that GitHub exempts
 agents from governance is false and must not be repeated.
 
+## Where the ecosystem already is (July 2026)
+
+Surveyed 2026-07-25. This document originally surveyed the parity target but
+never surveyed the substrate, which produced scope that was too large in one
+place and too small in another. Both corrections are load-bearing.
+
+**Much of the L3 sandbox contract is already in this tree.** Actions has a
+GitHub-compatible `permissions:` key, Permissive and Restricted default
+modes, `MaxTokenPermissions` ceilings at both repository and organization
+level, a cross-repository allow-list, an automatic downgrade to read-only for
+fork pull requests, and an approval gate on fork runs. It is wired end to end,
+settings UI included, and documented in
+[services/actions/token_permission_design.md](../services/actions/token_permission_design.md).
+The organization-level ceiling is stronger than GitHub's equivalent, which has
+no such clamp. Read-only-by-default is therefore not work to schedule.
+
+**Scoped Workflows** run workflows from one central repository against many
+others, in each consuming repository's own context, configured by
+`SCOPED_WORKFLOW_DIRS`. That is the substrate's answer to centrally-mandated
+automation, and it is the natural delivery vehicle for organization-mandated
+agent policy.
+
+**Upstream has already settled the question L1 answers, the same way.**
+go-gitea/gitea#35506 proposed implementing MCP inside the forge; the
+maintainers converged on keeping the server standalone precisely because the
+protocol moves faster than forge releases, with importing it as an optional
+module the furthest anyone was willing to go. Independent agreement is worth
+more here than this document's own reasoning.
+
+**Upstream's AI code review request is blocked on the primitive L0 ships.**
+go-gitea/gitea#36444 stalled on the view that the right shape is generic bot
+management, where a review bot is a bot holding a "review" skill — which is
+L0 plus L4 as described below, stated upstream. The same thread's other
+suggestion is that agents drive the `tea` CLI rather than MCP; see L2.
+
+**A sibling fork already shipped a machine-identity primitive.** Forgejo v16
+(2026-07-16) authenticates API, git and package access with JWTs issued by an
+external system — Forgejo Actions, GitHub Actions, GitLab CI, AWS — with no
+static credentials, short expiry, rotatable signing keys, and per-integration
+validation and capability grants. This is *workload* identity: it authenticates
+an external system authenticating inward. It is not an owned principal, and it
+carries no profile, provenance or kill switch, so it does not overlap L0's
+design. It does mean the claim that this lineage has no machine-identity work
+at all is false, and it is the closest prior art to L1's direction.
+
+**Forgejo's position on agents has hardened, not moved.** As of their March
+2026 report, AI-generated work is prohibited outright rather than
+licence-gated. Their infrastructure work above continues regardless, so
+"culturally anti-AI" is not the same as "not building the plumbing".
+
 ## Parity map
 
 | GitHub | Forgente today | What is missing |
 | ---- | ---- | ---- |
-| Agent apps installed as GitHub Apps; cloud agent acts under Copilot identity with the requester as co-author | `UserTypeBot` exists but dormant; OAuth2 apps act *as the authorizing user*, so there is no installation identity at all | The App-installation primitive itself — this is the real gap, and it predates AI |
+| Agent apps installed as GitHub Apps; cloud agent acts under Copilot identity with the requester as co-author | Organization-owned apps shipped in #66; OAuth2 apps still act *as the authorizing user* | Per-installation scoping and user-owned apps; the primitive itself now exists |
 | Cloud agent: issue → sandboxed run → draft PR | Actions and a runner fleet already run untrusted workloads | Assignment, a session record, draft-PR wiring |
 | Agentic Workflows: Markdown compiled to Actions YAML | Actions runs hand-written YAML | The compile step and the safety envelope around it |
 | Session streaming and audit | Actions logs only | A session as a first-class, queryable object |
 | Custom agents (`.github/agents/NAME.md`, org and enterprise levels) | `AGENTS.md` is already an in-repo convention | Read agent profiles and offer them at assignment time |
 | Plugins, Agent Skills, Hooks | — | Adopt the open Agent Skills format rather than inventing one |
-| First-party MCP server | `gitea-mcp` works unforked against Forgente | Fork trigger is agent-token awareness, not API divergence |
+| First-party MCP server | `gitea-mcp` works unforked against Forgente, validated as an org-owned app | Not a fork: OAuth 2.1 resource-server support so remote MCP clients can connect at all |
+| Enterprise plugin standards: central policy for agent tooling | Scoped Workflows already push central workflows across repositories | A policy vocabulary for agents, not only for workflows |
+| Cloud agent runs under least privilege | Actions token permissions, org and repo ceilings, fork downgrade, fork-run approval | Nothing — this is built; egress control is the gap (see L3) |
 | Copilot code review | — | A *tenant* of the layers above, not a layer itself |
 | Agentic autofix for scanning alerts (preview, July 2026) | no code scanning of any kind | Code scanning is the prerequisite; that is security work, not AI work |
 
@@ -169,10 +230,12 @@ behavior; do not "fix" it.
 
 ### L1 — First-party MCP server
 
-Do not fork `gitea-mcp`. A validation run (2026-07-25, local build of `main`
-at `58c57191f4`) drove the upstream server unmodified against a Forgente
-instance, authenticating as an organization-owned app, and it works: a clean
-handshake, 53 tools, and real work committed to a repository.
+Do not fork `gitea-mcp`. A validation run (2026-07-25, Forgente `main` at
+`58c57191f4`, `gitea-mcp` at `18fcd663e0f0`) drove the upstream server
+unmodified against a Forgente instance, authenticating as an
+organization-owned app, and it works: a clean handshake, 53 tools, and real
+work committed to a repository. Upstream reached the same conclusion about
+in-tree MCP servers for its own reasons; see the ecosystem survey above.
 
 With `GITEA_ACCESS_TOKEN` set to a token minted through the organization's
 Applications page and `GITEA_HOST` pointed at the instance:
@@ -198,26 +261,63 @@ L0 plus the upstream server therefore already delivers a working agent
 principal, and the fork-on-divergence bar in [FORGENTE.md](../FORGENTE.md)
 is not met. Forking now would buy nothing and cost a permanent merge burden.
 
-One real gap did surface. The server advertises all of its tools regardless
-of what the token can do, so `create_repo` was offered and then refused at
-call time for a missing scope. Token scopes are enforced by the forge;
-`GITEA_TOOLS` filters tools in the client; nothing reconciles the two. An
-agent discovers its limits by failing, and an operator reading the tool list
-gets a false picture of what the token permits.
+**The validation's own blind spot, and what it makes L1.** That run used the
+stdio transport, so it never exercised how a *remote* MCP client connects.
+Remote clients — Claude's web, mobile and desktop connectors, ChatGPT,
+Copilot — cannot send a static bearer token at all; they support only
+unauthenticated servers or the OAuth 2.1 flow in the MCP authorization spec.
+A self-hosted operator today must therefore expose an unauthenticated
+endpoint or run an external OAuth proxy, and the proxy still talks to the
+forge with one shared token, collapsing per-principal identity exactly where
+L0 was supposed to provide it.
 
-The fix belongs in the forge rather than in a fork, because only the forge
-knows a token's real scopes: it can emit a `GITEA_TOOLS` value derived from
-them, making the two lists agree by construction.
+The forge is the right place to fix this and the standalone server is not,
+because the missing pieces are the forge's to serve. `gitea-mcp` issue #207
+proposes the server act as an OAuth 2.1 *resource server* delegating to the
+instance as authorization server; that requires the instance to publish
+`/.well-known/oauth-protected-resource` (RFC 9728), which Forgente does not,
+and it works around Dynamic Client Registration (RFC 7591) only because this
+lineage lacks it. Forgente already is an OAuth2/OIDC provider with PKCE, and
+its API already accepts OAuth2 bearer tokens, so the distance is short.
 
-L1 is therefore a small product surface, not a server. A "Connect an agent"
-panel on the app's settings page emits ready-to-paste MCP configuration —
-host, token, and the scope-derived tool list — and an integration test pins
-the scope-to-tools mapping so the two cannot drift apart again.
+Forgejo's Authorized Integrations is the nearest prior art in this lineage —
+short-lived, externally-issued, forge-validated credentials with per-issuer
+capability grants — and worth studying before designing this, even though it
+solves inbound workload identity rather than delegated user authorization.
 
-A second, smaller finding: an app has no repository access until it is added
+**L1 is therefore forge-side authorization work, not a server.** In order:
+
+1. Serve RFC 9728 metadata and answer unauthenticated MCP requests with `401`
+   and `WWW-Authenticate`, so a compliant client can discover where to
+   authenticate. This unblocks remote clients generally, not only MCP.
+2. Decide whether Dynamic Client Registration is worth supporting, or whether
+   pre-registered OAuth applications are enough. Pre-registration is enough
+   for Claude today and needs no new machinery.
+3. A "Connect an agent" panel on the app's settings page, for the local and
+   stdio case that already works — host, token, and a `GITEA_TOOLS` value
+   derived from the token's real scopes, with an integration test pinning the
+   scope-to-tools mapping.
+
+Item 3 addresses the second finding from the run: the server advertises all
+of its tools regardless of what the token can do, so `create_repo` was
+offered and then refused at call time for a missing scope. Token scopes are
+enforced by the forge, `GITEA_TOOLS` filters tools in the client, and nothing
+reconciles the two, so an agent discovers its limits by failing and an
+operator reading the tool list gets a false picture of what the token
+permits. Only the forge knows a token's real scopes, so only the forge can
+emit a list that agrees with them by construction. This is already filed
+upstream as `gitea-mcp` issue #79, and MCP tool annotations (issue #173) may
+be a better carrier than an environment variable — prefer contributing there
+over keeping a Forgente-only workaround.
+
+A third, smaller finding: an app has no repository access until it is added
 to a team, which is correct — access is granted the ordinary way — but it is
 an undocumented step between creating an app and having a working agent. The
 panel should name it or handle it.
+
+Watch item, not a fork trigger: `gitea-mcp` builds on `mark3labs/mcp-go` with
+open requests to move to the official Go SDK, while GitHub's server already
+tracks the next MCP specification. Protocol drift is worth monitoring.
 
 ### L2 — Repository agent configuration and providers
 
@@ -227,9 +327,21 @@ Two independent pieces of configuration:
   test, and style instructions. Named agent personas belong beside it, and
   the forge surfaces them wherever an agent can be assigned. Follow the
   established shape — a Markdown profile with prompt, tool allow-list, and
-  MCP server declarations — and adopt the open Agent Skills format rather
-  than inventing a Forgente-specific one. Interoperating with agents people
+  MCP server declarations — and adopt an existing convention rather than
+  inventing a Forgente-specific one. Interoperating with agents people
   already run is worth more than a bespoke schema.
+
+  Two ecosystem facts should settle which convention. `gitea-tea-skill`
+  publishes an official skill teaching an agent to drive the `tea` CLI, laid
+  out under `.agents/skills/` — so the directory convention here is
+  `.agents/skills/`, not GitHub's `.github/agents/`, and the file is plain
+  Markdown with no frontmatter, so it is *not* Anthropic's `SKILL.md` schema
+  despite sharing the "Agent Skills" name. Do not conflate the two.
+
+  That skill also implies a second, cheaper integration path this document
+  had not considered: an agent can drive `tea` instead of MCP, which needs no
+  server and no new protocol. It is the path upstream suggested in #36444.
+  Worth evaluating on cost before assuming MCP is the only surface.
 - **Model providers.** Endpoint, credential, and model selection at the
   instance and organization level. Credentials are secrets and get handled as
   such: encrypted at rest, never rendered back, never logged, and never
@@ -246,17 +358,31 @@ GitHub uses — and GitHub's own choice to compile agentic workflows down to
 ordinary Actions YAML is direct evidence this is the right substrate.
 
 The sandbox *contract* is not optional polish, and matching it is a
-precondition for letting agents near real repositories:
+precondition for letting agents near real repositories. Less of it is
+outstanding than this document assumed — the permissions half is built, per
+the ecosystem survey above — so the list is marked with what remains:
 
-- Read-only permissions by default; write scopes granted explicitly.
+- ~~Read-only permissions by default; write scopes granted explicitly.~~
+  **Built.** Actions already clamps job tokens against organization and
+  repository ceilings. What an agent session adds is choosing the mode
+  deliberately at dispatch rather than inheriting the repository's default.
 - Egress control on agent runs — the operator decides what the sandbox may
-  reach.
+  reach. **This is the real gap.** Nothing in the tree expresses an egress
+  policy; the runner exposes container `network_mode` and `privileged`, which
+  are deployment settings, not policy the forge can state or enforce. Of the
+  whole contract this is the piece that most needs designing, and shipping
+  agent sessions without it is probably not defensible.
 - Agents cannot approve, cannot merge, and cannot mark their own work ready
   for review. Branch protection and required checks apply unchanged.
 - Untrusted input is treated as untrusted: the issue body an agent reads is
   data, not instruction.
 - Every action is attributable — which agent, which organization, which
   session, on whose behalf — and the session log is queryable and exportable.
+  A session running on Actions should authenticate *as its app*, not carry a
+  personal access token into the runner. GitHub removed exactly that
+  requirement from the Copilot CLI in July 2026, and the same reasoning
+  applies here: a long-lived personal credential inside a sandbox is the
+  thing L0 exists to avoid.
 - Confidence and approvals for low-stakes automation: an agent may propose
   rather than apply, with its reasoning attached, and a human accepts or
   declines. This pattern is cheap, it is proven, and it fits a self-hosted
@@ -297,13 +423,21 @@ What is left is narrower, and durable:
   format, and MCP are open; Marketplace agent apps, plugin standards, and the
   Copilot SDK are GitHub's. Building on the open half is both cheaper and
   more defensible for a fork with Forgente's resources.
-- **A primitive the codebase never had.** Installation identity is missing
-  from this lineage entirely. Whoever adds it defines how bots, integrations,
-  and agents work here.
+- **A primitive this codebase never had.** Neither Gitea nor Forgejo has an
+  owned agent principal: an account belonging to an organization, permissioned
+  through ordinary membership, badged where it acts, revocable in one place.
+  An earlier draft claimed installation identity was missing from this lineage
+  *entirely*; that is wrong and should not be repeated. Forgejo v16 ships
+  Authorized Integrations, and upstream #38181 will ship admin-managed bot
+  accounts. Both are real machine identity. Neither is *owned* identity, which
+  is the narrower and still-true claim.
 
-Forgejo, by contrast, banned agent contributions outright. Between a
-proprietary hosted stack and a prohibition there is real room — but the room
-is "self-hosted and open", not "the only one who governs agents".
+Forgejo, by contrast, prohibits AI-generated contributions outright — and is
+nonetheless building the plumbing agents need, which is worth remembering
+before reading their policy as a vacated field. Between a proprietary hosted
+stack and a prohibition there is real room, but the room is "self-hosted and
+open", not "the only one who governs agents" and not "the only one building
+machine identity".
 
 ## Non-goals
 
@@ -340,6 +474,15 @@ is "self-hosted and open", not "the only one who governs agents".
 - Whether to adopt the natural-language-compiled-to-YAML workflow shape at
   all, or to keep agent invocation explicit and leave workflow authoring to
   humans.
+- Whether MCP is the primary agent surface or merely the first one. Driving
+  the `tea` CLI through a published skill needs no server, no protocol, and
+  no OAuth work, and is what upstream suggests; MCP buys reach into hosted
+  clients that cannot run a CLI. The honest answer is probably both, but the
+  ordering is not decided.
+- Whether Forgente wants inbound workload identity at all — Forgejo's
+  Authorized Integrations shape, letting an external CI system authenticate
+  with a short-lived JWT — or whether org-owned apps holding scoped tokens
+  cover enough of the same ground to skip it.
 - Upstream activating `UserTypeBot` is no longer hypothetical — see L0. The
   open question is now narrower: if upstream later adds its own ownership
   model, does Forgente converge on it or keep its own? Converging is

@@ -81,27 +81,34 @@ dated survey of the parity target, which moves fast enough that it should be
 re-run before any layer is scoped in detail. The layers, in build order, each
 shippable on its own:
 
-- **L0 — installation identity, agents as its first consumer.** The real gap
-  is not "agents": Forgente has no per-installation principal at all (OAuth2
-  apps act as the authorizing user). Organization-owned agent accounts,
-  permissions through ordinary team membership, provenance badges, an
-  organization-wide kill switch. Upstream is activating bot accounts at the
-  admin level in go-gitea/gitea#38181 and explicitly defers organization
-  ownership; Forgente builds the deferred layer and cherry-picks the rest.
-  Demand is long-standing and quantified (upstream #25900, #13044, #26754,
-  #33469).
-- **L1 — first-party MCP server.** Fork `gitea-mcp` when it needs agent-token
-  awareness, per the fork-on-divergence policy.
+- **L0 — installation identity, agents as its first consumer.** *Shipped in
+  #66.* The real gap was not "agents": Forgente had no per-installation
+  principal at all (OAuth2 apps act as the authorizing user).
+  Organization-owned agent accounts, permissions through ordinary team
+  membership, provenance badges, an organization-wide kill switch. Upstream is
+  activating bot accounts at the admin level in go-gitea/gitea#38181 and
+  explicitly defers organization ownership; Forgente builds the deferred layer
+  and cherry-picks the rest. Demand is long-standing and quantified (upstream
+  #25900, #13044, #26754, #33469).
+- **L1 — connecting agents, not a server.** Do not fork `gitea-mcp`: it was
+  validated unforked against Forgente as an organization-owned app, and
+  upstream independently settled on keeping the server standalone. The forge
+  work is authorization — OAuth 2.1 resource-server metadata (RFC 9728) so
+  remote MCP clients can connect at all, since they cannot send a static
+  token — plus a connect panel emitting scope-derived tool configuration for
+  local clients.
 - **L2 — repository agent configuration and model providers.** Agent
-  definitions beside `AGENTS.md`, following the open Agent Skills format;
-  provider endpoint and credentials at the instance and organization level.
+  definitions beside `AGENTS.md`, following the `.agents/skills/` convention
+  the ecosystem already uses; provider endpoint and credentials at the
+  instance and organization level.
 - **L3 — agent sessions and the sandbox contract.** Assigning an issue or
   review to an agent dispatches an Actions run behind a session record with
   live logs, steering, and links to what it produced. Actions and the runner
-  fleet are already the sandbox. The contract around it — read-only by
-  default, egress control, no self-approval or self-merge, attributable
-  sessions, propose-and-approve for low-confidence actions — is a precondition
-  for the layer, not later polish.
+  fleet are already the sandbox, and its token-permission system already
+  delivers least privilege. The rest of the contract — egress control, no
+  self-approval or self-merge, attributable sessions, propose-and-approve for
+  low-confidence actions — is a precondition for the layer, not later polish.
+  Egress control is the piece with nothing behind it yet.
 - **L4 — tenants.** AI code review, issue triage, pull-request summaries —
   built as agents on L0–L3 in their own repositories, not compiled into the
   server.
