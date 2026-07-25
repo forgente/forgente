@@ -112,10 +112,12 @@ build order, each shippable on its own:
 - **L1 — connecting agents, not a server.** Do not fork `gitea-mcp`: it was
   validated unforked against Forgente as an organization-owned app, and
   upstream independently settled on keeping the server standalone. The forge
-  work is authorization — OAuth 2.1 resource-server metadata (RFC 9728) so
-  remote MCP clients can connect at all, since they cannot send a static
-  token — plus a connect panel emitting scope-derived tool configuration for
-  local clients.
+  work is authorization. The MCP specification puts the resource-server half
+  (RFC 9728, the `401` challenge) on the MCP server, not the forge, so that
+  part is an upstream contribution; the forge's half is authorization-server
+  discovery — RFC 8414 metadata, now served — plus advertising API scopes,
+  and a connect panel emitting scope-derived tool configuration for local
+  clients.
 - **L2 — repository agent configuration and model providers.** Agent
   definitions beside `AGENTS.md`, following the `.agents/skills/` convention
   the ecosystem already uses; provider endpoint and credentials at the
