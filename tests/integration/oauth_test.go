@@ -130,6 +130,7 @@ func TestOAuth2(t *testing.T) {
 		t.Run("OAuthGrantScopesReadRepositoryFailOrganization", testOAuthGrantScopesReadRepositoryFailOrganization)
 		t.Run("OAuthGrantScopesClaimPublicOnlyGroups", testOAuthGrantScopesClaimPublicOnlyGroups)
 		t.Run("OAuthGrantScopesClaimAllGroups", testOAuthGrantScopesClaimAllGroups)
+		t.Run("AccessTokenExchangeResourceIndicator", testAccessTokenExchangeResourceIndicator)
 		t.Run("OAuth2WellKnown", testOAuth2WellKnown)
 	})
 	t.Run("Client", func(t *testing.T) {
@@ -269,6 +270,89 @@ func testAccessTokenExchange(t *testing.T) {
 	assert.NoError(t, json.Unmarshal(resp.Body.Bytes(), parsed))
 	assert.Greater(t, len(parsed.AccessToken), 10)
 	assert.Greater(t, len(parsed.RefreshToken), 10)
+}
+
+// decodeJWTClaims reads a JWT payload without verifying it, which is enough to
+// assert on claims the server set.
+func decodeJWTClaims(t *testing.T, token string) map[string]any {
+	t.Helper()
+	parts := strings.Split(token, ".")
+	require.Len(t, parts, 3)
+	payload, err := base64.RawURLEncoding.DecodeString(parts[1])
+	require.NoError(t, err)
+	claims := map[string]any{}
+	require.NoError(t, json.Unmarshal(payload, &claims))
+	return claims
+}
+
+func testAccessTokenExchangeResourceIndicator(t *testing.T) {
+	user := unittest.AssertExistsAndLoadBean(t, &user_model.User{ID: 2})
+	redirectURI := "https://phase3.example/callback"
+	// a grant is unique per user and application, so each subtest needs its own app
+	newApp := func(t *testing.T, name string) *api.OAuth2Application {
+		t.Helper()
+		return createOAuthTestApplication(t, user.Name, name, []string{redirectURI})
+	}
+
+	t.Run("BindsAudience", func(t *testing.T) {
+		app := newApp(t, "phase3-resource-bind")
+		code, verifier := issueOAuthAuthorizationCode(t, user, app, redirectURI, "openid profile")
+		req := NewRequestWithValues(t, "POST", "/login/oauth/access_token", map[string]string{
+			"grant_type":    "authorization_code",
+			"client_id":     app.ClientID,
+			"client_secret": app.ClientSecret,
+			"redirect_uri":  redirectURI,
+			"code":          code,
+			"code_verifier": verifier,
+			"resource":      "https://mcp.phase3.example/mcp",
+		})
+		resp := MakeRequest(t, req, http.StatusOK)
+		parsed := struct {
+			AccessToken string `json:"access_token"`
+		}{}
+		require.NoError(t, json.Unmarshal(resp.Body.Bytes(), &parsed))
+		claims := decodeJWTClaims(t, parsed.AccessToken)
+		// RFC 8707 audiences are a list even when a single resource was requested
+		assert.Equal(t, []any{"https://mcp.phase3.example/mcp"}, claims["aud"])
+	})
+
+	t.Run("OmittedLeavesNoAudience", func(t *testing.T) {
+		app := newApp(t, "phase3-resource-omitted")
+		code, verifier := issueOAuthAuthorizationCode(t, user, app, redirectURI, "openid profile")
+		req := NewRequestWithValues(t, "POST", "/login/oauth/access_token", map[string]string{
+			"grant_type":    "authorization_code",
+			"client_id":     app.ClientID,
+			"client_secret": app.ClientSecret,
+			"redirect_uri":  redirectURI,
+			"code":          code,
+			"code_verifier": verifier,
+		})
+		resp := MakeRequest(t, req, http.StatusOK)
+		parsed := struct {
+			AccessToken string `json:"access_token"`
+		}{}
+		require.NoError(t, json.Unmarshal(resp.Body.Bytes(), &parsed))
+		claims := decodeJWTClaims(t, parsed.AccessToken)
+		assert.NotContains(t, claims, "aud")
+	})
+
+	t.Run("RejectsNonAbsoluteResource", func(t *testing.T) {
+		app := newApp(t, "phase3-resource-invalid")
+		code, verifier := issueOAuthAuthorizationCode(t, user, app, redirectURI, "openid profile")
+		req := NewRequestWithValues(t, "POST", "/login/oauth/access_token", map[string]string{
+			"grant_type":    "authorization_code",
+			"client_id":     app.ClientID,
+			"client_secret": app.ClientSecret,
+			"redirect_uri":  redirectURI,
+			"code":          code,
+			"code_verifier": verifier,
+			"resource":      "mcp.phase3.example",
+		})
+		resp := MakeRequest(t, req, http.StatusBadRequest)
+		parsedError := new(oauth2_provider.AccessTokenError)
+		require.NoError(t, json.Unmarshal(resp.Body.Bytes(), parsedError))
+		assert.Equal(t, "invalid_target", string(parsedError.ErrorCode))
+	})
 }
 
 func testAccessTokenExchangeRedirectURIMismatch(t *testing.T) {

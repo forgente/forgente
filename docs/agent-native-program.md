@@ -439,12 +439,24 @@ work", and one item is a defect rather than a gap:
    default itself is inherited 1.22 behaviour and would need a deprecation
    cycle; with discovery in place it is no longer urgent.
 3. **RFC 8707 resource indicators, and audience binding.** Access tokens
-   carry `GrantID`, `Kind` and `ExpiresAt` and nothing else — the `aud` claim
-   is set only on the `id_token`. A resource server therefore cannot satisfy
-   the spec's "MCP servers **MUST** validate that access tokens were issued
-   specifically for them as the intended audience". This is the one item that
-   blocks the upstream work, not merely a missing nicety. RFC 9207 (`iss` in
-   the authorization response) is a smaller omission alongside it.
+   carried `GrantID`, `Kind` and `ExpiresAt` and nothing else — the `aud`
+   claim was set only on the `id_token` — so a resource server could not
+   satisfy the spec's "MCP servers **MUST** validate that access tokens were
+   issued specifically for them as the intended audience". This was the item
+   blocking the upstream work rather than a missing nicety. *The token
+   endpoint now accepts `resource` and binds it as the audience.* What
+   remains is smaller: the authorization endpoint accepts `resource` but does
+   not persist it, so a token request is not checked against what was
+   authorized, and RFC 9207 (`iss` in the authorization response) is still
+   unimplemented.
+
+   Note what this does **not** do: Forgente's own API still ignores `aud`, by
+   necessity. `gitea-mcp` is a facade over the same instance and forwards the
+   caller's token to the API, so enforcing the audience at the API would
+   break the only architecture the ecosystem server actually has. The MCP
+   specification's "MCP servers **MUST NOT** accept or transit any other
+   tokens" is in tension with that design, and resolving it is upstream's
+   call, not something the forge can decide alone.
 4. A "Connect an agent" panel on the app's settings page, for the local and
    stdio case that already works — host, token, and a `GITEA_TOOLS` value
    derived from the token's real scopes, with an integration test pinning the
