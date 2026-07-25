@@ -15,6 +15,7 @@ import (
 	"forgente.com/modules/setting"
 	"forgente.com/modules/structs"
 	"forgente.com/modules/util"
+	org_service "forgente.com/services/org"
 )
 
 // maxAppsPerOrg bounds how many apps one organization may own. Apps are cheap
@@ -105,6 +106,51 @@ func CreateOrgApp(ctx context.Context, doer *user_model.User, org *organization.
 	}
 
 	return botUser, app, nil
+}
+
+// GetOrgApp resolves one of an organization's apps together with the account it
+// acts as.
+//
+// An app belonging to another organization is reported as missing rather than
+// forbidden, so app IDs cannot be probed across organizations.
+func GetOrgApp(ctx context.Context, org *organization.Organization, id int64) (*user_model.ForgenteApp, *user_model.User, error) {
+	app, err := user_model.GetForgenteAppByID(ctx, id)
+	if err != nil {
+		return nil, nil, err
+	}
+	if app.OwnerID != org.ID {
+		return nil, nil, user_model.ErrForgenteAppNotExist{ID: id}
+	}
+
+	botUser, err := user_model.GetUserByID(ctx, app.UserID)
+	if err != nil {
+		return nil, nil, err
+	}
+	return app, botUser, nil
+}
+
+// DeleteOrgApp removes an app and the account behind it.
+func DeleteOrgApp(ctx context.Context, org *organization.Organization, app *user_model.ForgenteApp, botUser *user_model.User) error {
+	if app.UserID != botUser.ID || !botUser.IsTypeBot() {
+		return fmt.Errorf("user %s[%d] is not the account of app %d", botUser.Name, botUser.ID, app.ID)
+	}
+
+	// Suspend first: deleting an account touches many tables and can fail
+	// partway, and a suspended app cannot act while that is unresolved.
+	if err := user_model.SetForgenteAppSuspended(ctx, app.ID, true); err != nil {
+		return err
+	}
+
+	// An app granted access through a team is a member of the organization, and
+	// DeleteUser refuses to delete a user that still belongs to one. Removing it
+	// here rather than purging keeps the failure modes honest: RemoveOrgUser
+	// reports the last-owner case instead of deleting the organization.
+	if err := org_service.RemoveOrgUser(ctx, org, botUser); err != nil {
+		return err
+	}
+
+	// Deleting the account drops the ownership row with it.
+	return DeleteUser(ctx, botUser, false)
 }
 
 // SuspendOrgApps flips the kill switch for every app an organization owns and

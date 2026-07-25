@@ -1,0 +1,92 @@
+<h4 class="ui top attached header flex-text-block">
+	<span class="tw-flex-1">{{ctx.Locale.Tr "settings.apps"}}</span>
+	{{if .OrgApps}}
+		<form class="ui form ignore-dirty" action="{{.Link}}/apps/suspend" method="post">
+			{{.CsrfTokenHtml}}
+			<input type="hidden" name="suspend" value="{{if .OrgAppsAnyActive}}true{{else}}false{{end}}">
+			<button class="ui {{if .OrgAppsAnyActive}}red{{else}}basic{{end}} tiny button">
+				{{if .OrgAppsAnyActive}}
+					{{svg "octicon-circle-slash"}} {{ctx.Locale.Tr "settings.apps_suspend_all"}}
+				{{else}}
+					{{svg "octicon-play"}} {{ctx.Locale.Tr "settings.apps_resume_all"}}
+				{{end}}
+			</button>
+		</form>
+	{{end}}
+</h4>
+<div class="ui attached segment">
+	<div class="flex-divided-list items-with-main">
+		<div class="item">
+			{{ctx.Locale.Tr "settings.apps_desc"}}
+		</div>
+		{{range .OrgApps}}
+			<div class="item tw-items-center">
+				<div class="item-leading">
+					<a href="{{.User.HomeLink}}">{{ctx.AvatarUtils.Avatar .User 32}}</a>
+				</div>
+				<div class="item-main">
+					<div class="item-title">
+						<a href="{{.User.HomeLink}}">{{.User.Name}}</a>
+						{{if .Suspended}}
+							<span class="ui red label">{{ctx.Locale.Tr "settings.app_suspended"}}</span>
+						{{end}}
+					</div>
+					<div class="item-body">
+						{{if .Description}}{{.Description}}{{end}}
+						<i>{{ctx.Locale.Tr "settings.added_on" (DateUtils.AbsoluteShort .CreatedUnix)}}</i>
+					</div>
+				</div>
+				<div class="item-trailing">
+					<form class="ui form ignore-dirty tw-inline-block" action="{{$.Link}}/apps/{{.ID}}/suspend" method="post">
+						{{$.CsrfTokenHtml}}
+						<input type="hidden" name="suspend" value="{{if .Suspended}}false{{else}}true{{end}}">
+						<button class="ui {{if .Suspended}}basic{{else}}orange{{end}} tiny button">
+							{{if .Suspended}}
+								{{svg "octicon-play"}} {{ctx.Locale.Tr "settings.app_resume"}}
+							{{else}}
+								{{svg "octicon-circle-slash"}} {{ctx.Locale.Tr "settings.app_suspend"}}
+							{{end}}
+						</button>
+					</form>
+					<button class="ui red tiny button link-action" data-modal-confirm="#delete-forgente-app"
+							data-url="{{$.Link}}/apps/delete?id={{.ID}}">
+						{{svg "octicon-trash"}}
+						{{ctx.Locale.Tr "settings.app_delete"}}
+					</button>
+				</div>
+			</div>
+		{{end}}
+	</div>
+
+	<div class="ui small modal" id="delete-forgente-app">
+		<div class="header">
+			{{svg "octicon-trash"}}
+			{{ctx.Locale.Tr "settings.app_deletion"}}
+		</div>
+		<div class="content">
+			<p>{{ctx.Locale.Tr "settings.app_deletion_desc"}}</p>
+		</div>
+		{{template "base/modal_actions_confirm" .}}
+	</div>
+</div>
+
+<div class="ui bottom attached segment">
+	<details {{if not .OrgApps}}open{{end}}>
+		<summary><h4 class="ui header tw-inline-block tw-my-2">{{ctx.Locale.Tr "settings.create_app"}}</h4></summary>
+		<form class="ui form ignore-dirty" action="{{.Link}}/apps" method="post">
+			{{.CsrfTokenHtml}}
+			<div class="field {{if .Err_Name}}error{{end}}">
+				<label for="app-name">{{ctx.Locale.Tr "settings.app_name"}}</label>
+				<input id="app-name" name="name" value="{{.name}}" required maxlength="40">
+				<p class="help">{{ctx.Locale.Tr "settings.app_name_helper"}}</p>
+			</div>
+			<div class="field {{if .Err_Description}}error{{end}}">
+				<label for="app-description">{{ctx.Locale.Tr "settings.app_description"}}</label>
+				<input id="app-description" name="description" value="{{.description}}" maxlength="255">
+			</div>
+			<button class="ui primary button">
+				{{ctx.Locale.Tr "settings.create_app_button"}}
+			</button>
+		</form>
+	</details>
+</div>

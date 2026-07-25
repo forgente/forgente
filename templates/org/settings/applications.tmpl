@@ -1,9 +1,13 @@
 {{template "org/settings/layout_head" (dict "pageClass" "organization settings options")}}
 			<div class="org-setting-content">
-				<h4 class="ui top attached header">
-					{{ctx.Locale.Tr "settings.applications"}}
-				</h4>
+				{{template "org/settings/applications_apps_forgente" .}}
 
-				{{template "user/settings/applications_oauth2_list" .}}
+				{{if .EnableOAuth2}}
+					<h4 class="ui top attached header">
+						{{ctx.Locale.Tr "settings.manage_oauth2_applications"}}
+					</h4>
+
+					{{template "user/settings/applications_oauth2_list" .}}
+				{{end}}
 			</div>
 {{template "org/settings/layout_footer" .}}

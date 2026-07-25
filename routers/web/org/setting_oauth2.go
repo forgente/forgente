@@ -30,20 +30,29 @@ func newOAuth2CommonHandlers(org *context.Organization) *user_setting.OAuth2Comm
 	}
 }
 
-// Applications render org applications page (for org, at the moment, there are only OAuth2 applications)
+// Applications render org applications page (org-owned apps, and OAuth2 applications when the provider is enabled)
 func Applications(ctx *context.Context) {
 	ctx.Data["Title"] = ctx.Tr("settings.applications")
 	ctx.Data["PageIsOrgSettings"] = true
 	ctx.Data["PageIsSettingsApplications"] = true
 
-	apps, err := db.Find[auth.OAuth2Application](ctx, auth.FindOAuth2ApplicationsOptions{
-		OwnerID: ctx.Org.Organization.ID,
-	})
-	if err != nil {
-		ctx.ServerError("GetOAuth2ApplicationsByUserID", err)
+	// the page is no longer OAuth2-only, so its OAuth2 half is loaded only when
+	// the provider is on
+	if setting.OAuth2.Enabled {
+		apps, err := db.Find[auth.OAuth2Application](ctx, auth.FindOAuth2ApplicationsOptions{
+			OwnerID: ctx.Org.Organization.ID,
+		})
+		if err != nil {
+			ctx.ServerError("GetOAuth2ApplicationsByUserID", err)
+			return
+		}
+		ctx.Data["Applications"] = apps
+	}
+
+	loadOrgAppsData(ctx)
+	if ctx.Written() {
 		return
 	}
-	ctx.Data["Applications"] = apps
 
 	if _, err := shared_user.RenderUserOrgHeader(ctx); err != nil {
 		ctx.ServerError("RenderUserOrgHeader", err)

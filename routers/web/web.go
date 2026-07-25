@@ -999,13 +999,23 @@ func registerWebRoutes(m *web.Router, webAuth *AuthMiddleware) {
 				m.Post("/avatar/delete", org.SettingsDeleteAvatar)
 				m.Group("/applications", func() {
 					m.Get("", org.Applications)
-					m.Post("/oauth2", web.Bind(forms.EditOAuth2ApplicationForm{}), org.OAuthApplicationsPost)
-					m.Group("/oauth2/{id}", func() {
-						m.Combo("").Get(org.OAuth2ApplicationShow).Post(web.Bind(forms.EditOAuth2ApplicationForm{}), org.OAuth2ApplicationEdit)
-						m.Post("/regenerate_secret", org.OAuthApplicationsRegenerateSecret)
-						m.Post("/delete", org.DeleteOAuth2Application)
+					m.Group("/apps", func() {
+						m.Post("", web.Bind(forms.CreateOrgAppForm{}), org.AppsPost)
+						m.Post("/suspend", org.AppsSuspendAllPost)
+						m.Post("/delete", org.DeleteApp)
+						m.Post("/{id}/suspend", org.AppSuspendPost)
 					})
-				}, oauth2Enabled)
+					// org-owned apps do not depend on the OAuth2 provider, so only
+					// the OAuth2 half of the page is gated on it
+					m.Group("/oauth2", func() {
+						m.Post("", web.Bind(forms.EditOAuth2ApplicationForm{}), org.OAuthApplicationsPost)
+						m.Group("/{id}", func() {
+							m.Combo("").Get(org.OAuth2ApplicationShow).Post(web.Bind(forms.EditOAuth2ApplicationForm{}), org.OAuth2ApplicationEdit)
+							m.Post("/regenerate_secret", org.OAuthApplicationsRegenerateSecret)
+							m.Post("/delete", org.DeleteOAuth2Application)
+						})
+					}, oauth2Enabled)
+				})
 
 				m.Group("/hooks", func() {
 					m.Get("", org.Webhooks)
