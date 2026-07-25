@@ -1243,8 +1243,30 @@ func testOAuth2WellKnown(t *testing.T) {
 		assert.Equal(t, "https://try.gitea.io/login/oauth/authorize", respMap["authorization_endpoint"])
 	})
 
+	urlAuthorizationServer := "/.well-known/oauth-authorization-server"
+
+	t.Run("AuthorizationServerMetadata", func(t *testing.T) {
+		req := NewRequest(t, "GET", urlAuthorizationServer)
+		resp := MakeRequest(t, req, http.StatusOK)
+		respMap := DecodeJSON(t, resp, map[string]any{})
+		assert.Equal(t, "https://try.gitea.io", respMap["issuer"])
+		assert.Equal(t, "https://try.gitea.io/login/oauth/authorize", respMap["authorization_endpoint"])
+		assert.Equal(t, "https://try.gitea.io/login/oauth/access_token", respMap["token_endpoint"])
+		assert.Equal(t, "https://try.gitea.io/login/oauth/keys", respMap["jwks_uri"])
+		// "id_token" belongs to the OIDC document, not this one
+		assert.Equal(t, []any{"code"}, respMap["response_types_supported"])
+		assert.Contains(t, respMap["code_challenge_methods_supported"], "S256")
+		assert.Contains(t, respMap["token_endpoint_auth_methods_supported"], "none")
+		// the API scopes are the reason this document exists next to the OIDC one
+		assert.Contains(t, respMap["scopes_supported"], "openid")
+		assert.Contains(t, respMap["scopes_supported"], "all")
+		assert.Contains(t, respMap["scopes_supported"], "read:repository")
+		assert.Contains(t, respMap["scopes_supported"], "write:issue")
+	})
+
 	defer test.MockVariableValue(&setting.OAuth2.Enabled, false)()
 	MakeRequest(t, NewRequest(t, "GET", urlOpenidConfiguration), http.StatusNotFound)
+	MakeRequest(t, NewRequest(t, "GET", urlAuthorizationServer), http.StatusNotFound)
 }
 
 func addOAuth2Source(t *testing.T, authName string, cfg oauth2.Source) {

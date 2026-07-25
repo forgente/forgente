@@ -466,6 +466,48 @@ func OIDCWellKnown(ctx *context.Context) {
 	ctx.JSONTemplate("user/auth/oidc_wellknown")
 }
 
+// OAuthAuthorizationServerWellKnown serves RFC 8414 authorization server metadata.
+// OIDC discovery already covers most clients, but MCP clients and other OAuth 2.1
+// clients probe this endpoint first, and unlike the OIDC document it advertises the
+// API token scopes a client can actually ask for.
+func OAuthAuthorizationServerWellKnown(ctx *context.Context) {
+	if !setting.OAuth2.Enabled {
+		http.NotFound(ctx.Resp, ctx.Req)
+		return
+	}
+
+	jwtRegisteredClaims := oauth2_provider.NewJwtRegisteredClaimsFromUser("well-known", 0, nil)
+	baseURL := strings.TrimSuffix(setting.AppURL, "/")
+
+	// the OIDC scopes come first because a grant carrying only those still yields an
+	// API token, see oauth2_provider.GrantAdditionalScopes
+	scopes := []string{"openid", "profile", "email", "groups"}
+	for _, scope := range auth.AllAccessTokenScopes() {
+		scopes = append(scopes, string(scope))
+	}
+
+	metadata := map[string]any{
+		"issuer":                 jwtRegisteredClaims.Issuer,
+		"authorization_endpoint": baseURL + "/login/oauth/authorize",
+		"token_endpoint":         baseURL + "/login/oauth/access_token",
+		"jwks_uri":               baseURL + "/login/oauth/keys",
+		"introspection_endpoint": baseURL + "/login/oauth/introspect",
+		"userinfo_endpoint":      baseURL + "/login/oauth/userinfo",
+		// "id_token" is an OIDC response type, so it is deliberately absent here
+		"response_types_supported":              []string{"code"},
+		"grant_types_supported":                 []string{"authorization_code", "refresh_token"},
+		"token_endpoint_auth_methods_supported": []string{"client_secret_basic", "client_secret_post", "none"},
+		"code_challenge_methods_supported":      []string{"plain", "S256"},
+		"scopes_supported":                      scopes,
+	}
+
+	ctx.Resp.Header().Set("Content-Type", "application/json")
+	enc := json.NewEncoder(ctx.Resp)
+	if err := enc.Encode(metadata); err != nil {
+		log.Error("Failed to encode authorization server metadata: %v", err)
+	}
+}
+
 // OIDCKeys generates the JSON Web Key Set
 func OIDCKeys(ctx *context.Context) {
 	jwk, err := oauth2_provider.DefaultSigningKey.ToJWK()
