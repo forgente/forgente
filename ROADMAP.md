@@ -109,15 +109,20 @@ build order, each shippable on its own:
   explicitly defers organization ownership; Forgente builds the deferred layer
   and cherry-picks the rest. Demand is long-standing and quantified (upstream
   #25900, #13044, #26754, #33469).
-- **L1 — connecting agents, not a server.** Do not fork `gitea-mcp`: it was
-  validated unforked against Forgente as an organization-owned app, and
-  upstream independently settled on keeping the server standalone. The forge
-  work is authorization. The MCP specification puts the resource-server half
-  (RFC 9728, the `401` challenge) on the MCP server, not the forge, so that
-  part is an upstream contribution; the forge's half is authorization-server
-  discovery — RFC 8414 metadata, now served — plus advertising API scopes,
-  and a connect panel emitting scope-derived tool configuration for local
-  clients.
+- **L1 — connecting agents, not a server.** *Shipped in #71, #72 and #73.*
+  Do not fork `gitea-mcp`: it was validated unforked against Forgente as an
+  organization-owned app, and upstream independently settled on keeping the
+  server standalone. The forge work was authorization, and reading the MCP
+  specification rather than paraphrasing it shrank the layer twice: the
+  resource-server half (RFC 9728, the `401` challenge) belongs to the MCP
+  server and is an upstream contribution, and Dynamic Client Registration is
+  deprecated so it will not be built. What shipped is the forge's half —
+  RFC 8414 authorization-server metadata advertising the API scopes, RFC 8707
+  resource indicators bound to the token audience so a resource server can
+  validate a token was issued for it, and a connect panel. One tension is
+  recorded rather than resolved: `gitea-mcp` forwards the caller's token to
+  the API, which the specification forbids, and that is upstream's design
+  question to settle.
 - **L2 — repository agent configuration and model providers.** Agent
   definitions beside `AGENTS.md`, following the `.agents/skills/` convention
   the ecosystem already uses; provider endpoint and credentials at the
