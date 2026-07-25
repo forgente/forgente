@@ -7,6 +7,7 @@ export default defineConfig([
     'custom/public',
     'data',
     '.venv',
+    '.claude', // agent worktrees: checkouts of this repo, linted in their own right
   ]),
   {
     files: ['**/*.json'],
