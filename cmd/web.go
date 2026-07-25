@@ -37,8 +37,8 @@ var PIDFile = "/run/gitea.pid"
 func newWebCommand() *cli.Command {
 	return &cli.Command{
 		Name:  "web",
-		Usage: "Start Gitea web server",
-		Description: `Gitea web server is the only thing you need to run,
+		Usage: "Start Forgente web server",
+		Description: `Forgente web server is the only thing you need to run,
 and it takes care of all the other things for you`,
 		Before: PrepareConsoleLoggerLevel(log.INFO),
 		Action: runWeb,
