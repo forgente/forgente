@@ -87,6 +87,26 @@ pushes — old hooks still point at the correct binary path — but
 `forgente doctor check --run hooks --fix` will flag and repair repositories
 until it is done.
 
+## Actions user renamed to `forgente-actions`
+
+The built-in Actions user (`gitea-actions`) is now `forgente-actions`, with
+display name "Forgente Actions". No action is required: the user is virtual
+and always resolved by its fixed ID `-2`, so there is no migration, and
+existing commits attributed to it stay attributed (the `-2+…@noreply.…`
+author address resolves by ID, not by name). `gitea-actions` stays reserved
+and still resolves, so old profile and avatar links keep working.
+
+One thing to check in your own workflows: `github.actor` is now
+`forgente-actions` for `schedule`-triggered runs. A condition written as
+`if: github.actor != 'gitea-actions'` no longer matches. Such guards are
+usually there to prevent trigger loops, which Forgente already blocks
+server-side — events whose doer is the Actions user never trigger a workflow
+— so the guard can normally just be deleted. To test for a scheduled run,
+use `github.event_name == 'schedule'`.
+
+Runner setup is unaffected: the Actions task-token basic-auth path ignores
+the username, so act_runner needs no change.
+
 ## Init scripts / packages
 
 `contrib/service/*` units are now named `forgente` (e.g.

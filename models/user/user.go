@@ -625,8 +625,9 @@ var (
 		"swagger.v1.json",
 		"openapi3.v1.json",
 
-		"ghost",         // reserved name for deleted users (id: -1)
-		"gitea-actions", // gitea builtin user (id: -2)
+		"ghost",            // reserved name for deleted users (id: -1)
+		"forgente-actions", // builtin Actions user (id: -2)
+		"gitea-actions",    // pre-hard-fork name of the Actions user, still resolvable
 	}
 
 	// These names are reserved for user accounts: user's keys, user's rss feed, user's avatar, etc.

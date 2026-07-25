@@ -149,6 +149,8 @@ func TestActionsJobTokenPermissiveAccess(t *testing.T) {
 				require.NoError(t, actions_model.UpdateRun(t.Context(), task.Job.Run, "is_fork_pull_request"))
 
 				testURL := *u
+				// the basic-auth username is ignored for task tokens; kept as the legacy
+				// name so this also covers an unforked act_runner still authenticating
 				testURL.User = url.UserPassword("gitea-actions", task.Token)
 
 				t.Run("ReadGitContent", func(t *testing.T) {

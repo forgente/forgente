@@ -169,7 +169,7 @@ func TestRenameUser(t *testing.T) {
 	})
 
 	t.Run("Non usable username", func(t *testing.T) {
-		usernames := []string{"--diff", ".well-known", "gitea-actions", "aaa.atom", "aa.png"}
+		usernames := []string{"--diff", ".well-known", "forgente-actions", "gitea-actions", "aaa.atom", "aa.png"}
 		for _, username := range usernames {
 			assert.Error(t, user_model.IsUsableUsername(username), "non-usable username: %s", username)
 			assert.Error(t, RenameUser(t.Context(), user, username, user), "non-usable username: %s", username)

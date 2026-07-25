@@ -34,8 +34,13 @@ func (u *User) IsGhost() bool {
 
 const (
 	ActionsUserID    int64 = -2
-	ActionsUserName        = "gitea-actions"
-	ActionsUserEmail       = "teabot@gitea.io"
+	ActionsUserName        = "forgente-actions"
+	ActionsUserEmail       = "forgente-actions@noreply.forgente.com"
+
+	// ActionsLegacyUserName is the pre-hard-fork name of the Actions user. The user is
+	// virtual and always resolved by ActionsUserID, so the rename needs no migration, but
+	// the old name still appears in links and webhook payloads emitted before the rename.
+	ActionsLegacyUserName = "gitea-actions"
 )
 
 // NewActionsUser creates and returns a fake user for running the actions.
@@ -45,7 +50,7 @@ func NewActionsUser() *User {
 		Name:             ActionsUserName,
 		LowerName:        ActionsUserName,
 		IsActive:         true,
-		FullName:         "Gitea Actions",
+		FullName:         "Forgente Actions",
 		Email:            ActionsUserEmail,
 		KeepEmailPrivate: true,
 		LoginName:        ActionsUserName,
@@ -83,7 +88,7 @@ func GetSystemUserByName(name string) *User {
 	if strings.EqualFold(name, GhostUserName) {
 		return NewGhostUser()
 	}
-	if strings.EqualFold(name, ActionsUserName) {
+	if strings.EqualFold(name, ActionsUserName) || strings.EqualFold(name, ActionsLegacyUserName) {
 		return NewActionsUser()
 	}
 	return nil
