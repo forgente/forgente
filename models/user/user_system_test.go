@@ -25,13 +25,18 @@ func TestSystemUser(t *testing.T) {
 	uid, u, err = GetPossibleUserByID(t.Context(), -2)
 	require.NoError(t, err)
 	assert.Equal(t, int64(-2), uid)
-	assert.Equal(t, "gitea-actions", u.Name)
-	assert.Equal(t, "gitea-actions", u.LowerName)
+	assert.Equal(t, "forgente-actions", u.Name)
+	assert.Equal(t, "forgente-actions", u.LowerName)
 	assert.True(t, u.IsGiteaActions())
 
+	u = GetSystemUserByName("Forgente-actionS")
+	require.NotNil(t, u)
+	assert.Equal(t, "Forgente Actions", u.FullName)
+
+	// the pre-hard-fork name still resolves, so old links and payloads keep working
 	u = GetSystemUserByName("Gitea-actionS")
 	require.NotNil(t, u)
-	assert.Equal(t, "Gitea Actions", u.FullName)
+	assert.Equal(t, "forgente-actions", u.Name)
 
 	uid, u, err = GetPossibleUserByID(t.Context(), 999999)
 	require.NoError(t, err)

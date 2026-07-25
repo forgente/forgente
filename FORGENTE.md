@@ -179,6 +179,16 @@ Since the Phase 2 cutover, build identity AND runtime surface are Forgente:
   regenerate derived files with `make generate-images`).
   `public/assets/img/gitea.svg` stays Gitea's mark on purpose (it represents
   Gitea as an external service in migration screens).
+- The built-in Actions user is `forgente-actions` ("Forgente Actions",
+  `forgente-actions@noreply.forgente.com`) — renamed from `gitea-actions` in a
+  later pass, since it is the author/attribution shown on Actions-driven
+  commits and events. The user is virtual: it is never a row in `user`, and
+  every lookup goes through its fixed ID `-2`, so the rename needs no
+  migration. `gitea-actions` stays reserved and still resolves via
+  `GetSystemUserByName`, which keeps pre-rename profile/avatar links and
+  webhook payload rendering working. It is *not* a wire surface: the Actions
+  task-token basic-auth path ignores the username, so an unforked act_runner
+  is unaffected.
 
 **Deliberately kept Gitea-compatible (wire/ecosystem surface — do not
 "finish" these renames):** the API routes and `X-Gitea-*` headers, webhook
