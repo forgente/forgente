@@ -63,6 +63,15 @@ silently renders empty month headers, which is how an earlier pass at this
 document missed June entirely. Survey the ecosystem in the same pass, not
 only the target. Re-read prior research before starting.
 
+**Deliberately not surveyed**, recorded so the next pass does not mistake
+these for oversights: the exact MCP specification version `gitea-mcp` targets
+(matters when L1 is built, not scoped); whether `tea` and the Gitea SDK have
+agent affordances (matters when the MCP-versus-CLI question in the open
+questions is decided); GitLab Duo and Bitbucket Rovo, last checked
+2026-07-20 (they do not change a GitHub-parity plan); and changelog history
+before May 2026 (superseded — the documentation already describes whatever
+survived from it).
+
 Re-checked on 2026-07-25 by that method; nothing below needed correcting.
 The entries that postdate the original survey fit the map rather than
 breaking it: the GitHub MCP server moved to the next MCP specification
