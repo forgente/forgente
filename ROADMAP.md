@@ -69,39 +69,65 @@ first-class principals, on infrastructure the operator owns. The parity
 target is GitHub's agent surface as surveyed in July 2026 — cloud agent,
 agentic workflows, agent sessions, custom agents, MCP, code review.
 
-What Forgente claims is deliberately narrow: self-hosted, no AI subscription
-gate, open formats (`AGENTS.md`, Agent Skills, MCP) over a proprietary
-hosted stack, and an installation-identity primitive this lineage never had.
-It is explicitly *not* "the only forge that governs agents" — GitHub's
-governance is strong, and matching it is a cost of entry, not an edge.
+**Reach parity first, then extend.** GitHub has already paid the
+product-design cost of this category — what an agent may do, what it must
+not, what configuration looks like, what a session is. That work is more
+expensive and riskier than the code. So their surface is treated as a proven
+specification to implement, not a set of ideas to improve on, and the
+novelty budget is spent afterwards. Four rules make that workable:
+
+- **The target is frozen.** GitHub ships faster than we can build, so parity
+  against a live target is permanently unreachable. The capability spec in
+  the program document is a dated snapshot; anything shipped after it waits
+  for the next re-survey rather than reopening scope mid-flight.
+- **"All capabilities" is smaller than it sounds.** Client tooling, model
+  hosting, and the entire billing surface are excluded, which leaves roughly
+  six forge-side areas. Naming the exclusions is what makes the goal
+  finishable.
+- **GitHub's semantics, the ecosystem's spelling.** Where the two conflict,
+  take behaviour, defaults and guardrails from GitHub, and names, paths and
+  wire formats from the Gitea ecosystem, so `tea`, the SDKs and the runner
+  keep working. The Actions token-permission system already does exactly
+  this: GitHub's `permissions:` semantics under `GITEA_TOKEN`.
+- **Our differentiators are constraints, not a later phase.** Self-hosting,
+  no subscription gate, open formats and owned agent identity are properties
+  of *how* each parity item gets built. L0 is the proof — agent apps are a
+  parity item and owned identity is the differentiator, shipped together.
 
 Design and rationale live in
-[docs/agent-native-program.md](docs/agent-native-program.md), including a
-dated survey of the parity target, which moves fast enough that it should be
-re-run before any layer is scoped in detail. The layers, in build order, each
-shippable on its own:
+[docs/agent-native-program.md](docs/agent-native-program.md), including the
+frozen capability spec, the exclusions and their reasons, and the method for
+re-running the survey before any layer is scoped in detail. The layers, in
+build order, each shippable on its own:
 
-- **L0 — installation identity, agents as its first consumer.** The real gap
-  is not "agents": Forgente has no per-installation principal at all (OAuth2
-  apps act as the authorizing user). Organization-owned agent accounts,
-  permissions through ordinary team membership, provenance badges, an
-  organization-wide kill switch. Upstream is activating bot accounts at the
-  admin level in go-gitea/gitea#38181 and explicitly defers organization
-  ownership; Forgente builds the deferred layer and cherry-picks the rest.
-  Demand is long-standing and quantified (upstream #25900, #13044, #26754,
-  #33469).
-- **L1 — first-party MCP server.** Fork `gitea-mcp` when it needs agent-token
-  awareness, per the fork-on-divergence policy.
+- **L0 — installation identity, agents as its first consumer.** *Shipped in
+  #66.* The real gap was not "agents": Forgente had no per-installation
+  principal at all (OAuth2 apps act as the authorizing user).
+  Organization-owned agent accounts, permissions through ordinary team
+  membership, provenance badges, an organization-wide kill switch. Upstream is
+  activating bot accounts at the admin level in go-gitea/gitea#38181 and
+  explicitly defers organization ownership; Forgente builds the deferred layer
+  and cherry-picks the rest. Demand is long-standing and quantified (upstream
+  #25900, #13044, #26754, #33469).
+- **L1 — connecting agents, not a server.** Do not fork `gitea-mcp`: it was
+  validated unforked against Forgente as an organization-owned app, and
+  upstream independently settled on keeping the server standalone. The forge
+  work is authorization — OAuth 2.1 resource-server metadata (RFC 9728) so
+  remote MCP clients can connect at all, since they cannot send a static
+  token — plus a connect panel emitting scope-derived tool configuration for
+  local clients.
 - **L2 — repository agent configuration and model providers.** Agent
-  definitions beside `AGENTS.md`, following the open Agent Skills format;
-  provider endpoint and credentials at the instance and organization level.
+  definitions beside `AGENTS.md`, following the `.agents/skills/` convention
+  the ecosystem already uses; provider endpoint and credentials at the
+  instance and organization level.
 - **L3 — agent sessions and the sandbox contract.** Assigning an issue or
   review to an agent dispatches an Actions run behind a session record with
   live logs, steering, and links to what it produced. Actions and the runner
-  fleet are already the sandbox. The contract around it — read-only by
-  default, egress control, no self-approval or self-merge, attributable
-  sessions, propose-and-approve for low-confidence actions — is a precondition
-  for the layer, not later polish.
+  fleet are already the sandbox, and its token-permission system already
+  delivers least privilege. The rest of the contract — egress control, no
+  self-approval or self-merge, attributable sessions, propose-and-approve for
+  low-confidence actions — is a precondition for the layer, not later polish.
+  Egress control is the piece with nothing behind it yet.
 - **L4 — tenants.** AI code review, issue triage, pull-request summaries —
   built as agents on L0–L3 in their own repositories, not compiled into the
   server.
