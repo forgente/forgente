@@ -106,6 +106,8 @@ assume earlier ones; nothing in the list requires the layer above it.
 
 ### L0 — Installation identity, with agents as its first consumer
 
+Shipped in #66, and validated end to end against a real MCP client — see L1.
+
 The framing correction that matters most: Forgente's gap is not "agents". It
 is that Forgente has **no installation-identity primitive**. OAuth2
 applications act as the authorizing user, and `UserTypeBot` rows have no
@@ -167,11 +169,55 @@ behavior; do not "fix" it.
 
 ### L1 — First-party MCP server
 
-Fork `gitea-mcp` into the Forgente organization once it needs to know about
-agent identity — minting and scoping tokens for an agent principal rather
-than reusing a human's. Until that divergence, the upstream server works
-against Forgente unmodified, consistent with the fork-on-divergence policy in
-[FORGENTE.md](../FORGENTE.md).
+Do not fork `gitea-mcp`. A validation run (2026-07-25, local build of `main`
+at `58c57191f4`) drove the upstream server unmodified against a Forgente
+instance, authenticating as an organization-owned app, and it works: a clean
+handshake, 53 tools, and real work committed to a repository.
+
+With `GITEA_ACCESS_TOKEN` set to a token minted through the organization's
+Applications page and `GITEA_HOST` pointed at the instance:
+
+- `get_me` returns the app, not a human.
+- An issue filed through the server is attributed to the app, and a file
+  committed through it carries the app as commit author, resolved back to
+  the app's user.
+- The bot label and the operating organization render on the issue and on
+  the app's profile.
+- A call needing a scope the token lacks is refused server-side, and the
+  refusal surfaces intact through MCP.
+- Suspending the app stops it immediately, and resuming restores it without
+  rotating the token.
+
+That last point is the one worth recording. The kill switch had only ever
+been exercised at the moment of authentication; this run held a single MCP
+process open across the whole sequence, so the suspension was observed
+cutting off an agent already connected and working, not merely refusing a
+fresh login.
+
+L0 plus the upstream server therefore already delivers a working agent
+principal, and the fork-on-divergence bar in [FORGENTE.md](../FORGENTE.md)
+is not met. Forking now would buy nothing and cost a permanent merge burden.
+
+One real gap did surface. The server advertises all of its tools regardless
+of what the token can do, so `create_repo` was offered and then refused at
+call time for a missing scope. Token scopes are enforced by the forge;
+`GITEA_TOOLS` filters tools in the client; nothing reconciles the two. An
+agent discovers its limits by failing, and an operator reading the tool list
+gets a false picture of what the token permits.
+
+The fix belongs in the forge rather than in a fork, because only the forge
+knows a token's real scopes: it can emit a `GITEA_TOOLS` value derived from
+them, making the two lists agree by construction.
+
+L1 is therefore a small product surface, not a server. A "Connect an agent"
+panel on the app's settings page emits ready-to-paste MCP configuration —
+host, token, and the scope-derived tool list — and an integration test pins
+the scope-to-tools mapping so the two cannot drift apart again.
+
+A second, smaller finding: an app has no repository access until it is added
+to a team, which is correct — access is granted the ordinary way — but it is
+an undocumented step between creating an app and having a working agent. The
+panel should name it or handle it.
 
 ### L2 — Repository agent configuration and providers
 
