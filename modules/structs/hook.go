@@ -397,6 +397,11 @@ type IssuePayload struct {
 	Changes *ChangesPayload `json:"changes,omitempty"`
 	// The issue that was acted upon
 	Issue *Issue `json:"issue"`
+	// The user assigned or unassigned, on those actions only. Without it a
+	// workflow cannot tell *who* was assigned — only that the issue changed —
+	// so a job cannot key on a particular assignee, which is the ordinary way
+	// to start work for one specific agent or person.
+	Assignee *User `json:"assignee,omitempty"`
 	// The repository containing the issue
 	Repository *Repository `json:"repository"`
 	// The user who performed the action
@@ -444,6 +449,9 @@ type PullRequestPayload struct {
 	Changes *ChangesPayload `json:"changes,omitempty"`
 	// The pull request that was acted upon
 	PullRequest *PullRequest `json:"pull_request"`
+	// The user assigned or unassigned, on those actions only. See the same
+	// field on IssuePayload for why it matters.
+	Assignee *User `json:"assignee,omitempty"`
 	// The reviewer that was requested (for review request actions)
 	RequestedReviewer *User `json:"requested_reviewer"`
 	// The repository containing the pull request

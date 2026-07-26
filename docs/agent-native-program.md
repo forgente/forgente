@@ -719,6 +719,20 @@ attached to the run that already happens, plus the runner routing above. That
 is the second time checking the substrate has shrunk this layer, after the
 permissions half.
 
+**One gap only the end-to-end run found (2026-07-26).** Reading the code
+established that assignment dispatches a workflow, and it does. What it did not
+establish is that a workflow can tell *who* was assigned: `IssuePayload` carried
+no `assignee`, so the GitHub-idiomatic guard
+`if: github.event.assignee.login == '<agent>'` silently matched nothing and the
+job was skipped rather than failing. Running it end to end is what surfaced
+this; four separate readings of the trigger path had not. The field is now
+populated on assign and unassign for both issues and pull requests, on the
+Actions and webhook paths alike.
+
+The lesson generalises past this one field: a trigger that fires is not the
+same as a trigger a workflow can *act* on, and only executing one distinguishes
+them.
+
 The sandbox *contract* is not optional polish, and matching it is a
 precondition for letting agents near real repositories. Less of it is
 outstanding than this document assumed — the permissions half is built, per
