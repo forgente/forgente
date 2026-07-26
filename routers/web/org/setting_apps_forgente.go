@@ -22,6 +22,8 @@ type orgAppView struct {
 	*user_model.ForgenteApp
 	User   *user_model.User
 	Tokens []*auth_model.AccessToken
+	// Grants are the repositories whose Actions runs may act as this app.
+	Grants []*grantView
 }
 
 // loadOrgAppsData fills in the apps section of the organization applications page.
@@ -46,7 +48,13 @@ func loadOrgAppsData(ctx *context.Context) {
 			return
 		}
 
-		views = append(views, &orgAppView{ForgenteApp: app, User: botUser, Tokens: tokens})
+		grants, err := loadAppRunGrants(ctx, app.ID)
+		if err != nil {
+			ctx.ServerError("loadAppRunGrants", err)
+			return
+		}
+
+		views = append(views, &orgAppView{ForgenteApp: app, User: botUser, Tokens: tokens, Grants: grants})
 		anyActive = anyActive || !app.Suspended
 	}
 

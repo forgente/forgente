@@ -24,3 +24,16 @@ func (f *CreateOrgAppForm) Validate(req *http.Request, errs binding.Errors) bind
 	ctx := context.GetValidateContext(req)
 	return middleware.Validate(errs, ctx.Data, f, ctx.Locale)
 }
+
+// GrantAppRunForm authorizes a repository's Actions runs to act as an app.
+// RepoName is left empty to mean every repository the organization owns; the
+// scope arrives through the same checkboxes access tokens use.
+type GrantAppRunForm struct {
+	RepoName string `binding:"MaxSize(100)"`
+}
+
+// Validate validates the fields
+func (f *GrantAppRunForm) Validate(req *http.Request, errs binding.Errors) binding.Errors {
+	ctx := context.GetValidateContext(req)
+	return middleware.Validate(errs, ctx.Data, f, ctx.Locale)
+}
