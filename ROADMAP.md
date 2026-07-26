@@ -69,6 +69,17 @@ first-class principals, on infrastructure the operator owns. The parity
 target is GitHub's agent surface as surveyed in July 2026 — cloud agent,
 agentic workflows, agent sessions, custom agents, MCP, code review.
 
+The position that falls out of it, and the one to lead with: **Forgente runs
+whichever agent you already chose.** Nothing in the forge requires buying a
+model or a harness from Forgente and no capability is gated behind doing so, so
+it has nothing to gain by steering anyone — while every serious competitor has
+agent capabilities inseparable from a licence, which is what makes the
+neutrality durable rather than copyable. Two precisions keep the claim true:
+GitHub's Agent HQ *does* host third-party agents, so the difference is a curated
+set on their infrastructure versus whatever you can run on yours; and the claim
+is "you never have to buy ours", not "we will never sell one" — a property that
+can be checked rather than a promise about the future.
+
 **Reach parity first, then extend.** GitHub has already paid the
 product-design cost of this category — what an agent may do, what it must
 not, what configuration looks like, what a session is. That work is more
@@ -93,6 +104,15 @@ novelty budget is spent afterwards. Four rules make that workable:
   no subscription gate, open formats and owned agent identity are properties
   of *how* each parity item gets built. L0 is the proof — agent apps are a
   parity item and owned identity is the differentiator, shipped together.
+- **Where the agent runs is not ours to fix.** Agent work executes in one of
+  four arrangements — the forge operator's own sandbox, the repository's own
+  runners, a developer's machine, or a third party's service — and GitHub
+  operates only the first, which is why several of its designs do not transfer
+  whole. Forgente stays neutral by keeping identity, credential and record
+  independent of where execution happened, not by building a runtime
+  abstraction. The corollary is a build order: the arrangement where forge,
+  runner and agent belong to *different* parties gets built first, and any
+  hosted Forgente is a deployment of that rather than a second path.
 
 Design and rationale live in
 [docs/agent-native-program.md](docs/agent-native-program.md), including the
@@ -124,10 +144,16 @@ build order, each shippable on its own:
   recorded rather than resolved: `gitea-mcp` forwards the caller's token to
   the API, which the specification forbids, and that is upstream's design
   question to settle.
-- **L2 — repository agent configuration and model providers.** Agent
-  definitions beside `AGENTS.md`, following the `.agents/skills/` convention
-  the ecosystem already uses; provider endpoint and credentials at the
-  instance and organization level.
+- **L2 — repository agent configuration and model providers.** *Agent
+  definitions shipped in #77, #79 and #80; providers unstarted.* Skills and
+  custom agent profiles are parsed in the formats the ecosystem already reads,
+  discovered from the default branch, and shown in repository settings. This is
+  where the neutrality claim is actually made: a repository declares the work in
+  a format any agent can read, so the agent is replaceable. Providers are
+  endpoint and credentials at the instance and organization level, configured
+  rather than supplied — and built so that a pre-configured provider is a
+  setting rather than a code path, since bring-your-own must stay the fully
+  capable route whatever else is ever offered alongside it.
 - **L3 — agent sessions and the sandbox contract.** Assigning an issue or
   review to an agent dispatches an Actions run behind a session record with
   live logs, steering, and links to what it produced. Actions and the runner
@@ -141,10 +167,22 @@ build order, each shippable on its own:
   routing agent sessions to runners an operator has designated as
   network-restricted, and refusing to dispatch when none exists —
   attestation, not enforcement, and the program document says so in those
-  words.
-- **L4 — tenants.** AI code review, issue triage, pull-request summaries —
-  built as agents on L0–L3 in their own repositories, not compiled into the
-  server.
+  words. How much that is worth scales with who runs the runners: where the
+  forge operator also operates the fleet, the designation is their own
+  assertion about their own machines and enforcement genuinely exists, one
+  layer down.
+
+  *The task half is shipped* — the model (#82), a task recorded when an issue
+  is assigned to an app (#84), the read API (#85), and the record shown on its
+  issue (#86). The next item is `AN-IDENT-2`: until a run can mint a
+  short-lived credential for its app, the only way to give an agent an identity
+  is a static token pasted into a repository secret, which is worse than what
+  the parity target offers third parties and defeats the point of L0. It blocks
+  every arrangement except one Forgente would operate itself, so it does not
+  wait on any hosting decision.
+- **L4 — tenants** — of the substrate, not multi-tenancy. AI code review,
+  issue triage, pull-request summaries — built as agents on L0–L3 in their own
+  repositories, not compiled into the server.
 
 Non-goals are listed in the program document and are as load-bearing as the
 goals: no editor tooling, no hosted inference, no agent marketplace or plugin

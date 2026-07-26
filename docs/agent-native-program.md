@@ -38,6 +38,64 @@ any of it.
 contract, repository agent configuration, a first-party MCP server, and the
 features that ride on them. The rest of this document is about those.
 
+## Where agents run, and why GitHub's answers do not transfer whole
+
+Agent work is dispatched, executed and reported somewhere, and there are four
+distinct arrangements. They matter because GitHub operates only the first, and
+several of its design choices are consequences of that rather than statements
+about the domain.
+
+| Arrangement | Executes on | Obtains forge identity via | Reports work by |
+| --- | --- | --- | --- |
+| Forge-hosted | The forge operator's own sandbox | Minted internally; never crosses a trust boundary | Writing session records directly |
+| Workflow-hosted | The repository's own runners, as a workflow step | A stored app credential exchanged for a short-lived token at job start | Editing a tracking comment |
+| Client-side | The developer's machine | The developer's own token, or an OAuth grant | Not at all — the forge sees ordinary API calls |
+| External service | A third party's infrastructure | An app token held out of band | Comments, commits, pull requests, statuses |
+
+Strip the runtimes away and every one of them needs the same three things from
+the forge: **an identity to act as, a way to obtain a credential for it, and a
+record that the work happened.** Only execution differs. That is why supporting
+all four needs no runtime abstraction and no pluggable interface — L0 supplies
+the first, `AN-IDENT-2` the second, L3 the third, and none of them has to know
+where the agent ran. Keep that neutrality in the data model, where it is free,
+rather than in an abstraction layer, where it would be expensive and would
+almost certainly put the seam in the wrong place.
+
+Client-side is L1's constituency and needs nothing further. Workflow-hosted is
+the arrangement a self-hosted forge can actually offer, and the one with a
+working third-party reference implementation to study. External services already
+work through ordinary app tokens. Forge-hosted is available to whoever operates
+the instance — which includes any operator running their own runner fleet, and
+Forgente on its own infrastructure; see the deployment posture below.
+
+**The test to apply when copying a GitHub design.** Ask: *would this shape exist
+if GitHub did not run the agent themselves?*
+
+If yes, it is modelling of the domain — copy it. Task and session as separate
+objects, the eight states, the field names, and assignment as the trigger are
+all in this category, and were taken as-is.
+
+If no, it encodes their operating position, and only the vocabulary transfers.
+Four examples, each of which misleads if copied literally:
+
+- **Sessions are read-only in their API** because their own runtime writes them
+  directly, so no external party exists who could legitimately write one. Copy
+  that constraint and Forgente's sessions stay permanently empty.
+- **No credential appears anywhere** in the cloud agent, because none crosses a
+  trust boundary. Every other arrangement crosses one.
+- **Progress is reported by editing a comment** — a workaround third parties
+  adopted because no session-write endpoint was ever offered to them.
+- **The agent stack is cloud-only**, because there is no self-hosted shape of a
+  runtime they operate.
+
+Underneath all four: GitHub can trust the runtime because it is theirs. Forge,
+runner and agent share one operator. Everywhere else those are up to three
+parties with no obligation to trust each other, and that single difference
+generates the rest.
+
+This is the wire-compatibility rule in [AGENTS.md](../AGENTS.md) one level up —
+keep the words the ecosystem depends on, own everything underneath.
+
 ## Where GitHub actually is (July 2026)
 
 Surveyed from GitHub Docs and the changelog. Recorded because the strategy
@@ -203,7 +261,7 @@ rather than re-describing the capability. Status is one of **shipped**,
 | ID | GitHub's shape | Forgente | Status |
 | --- | --- | --- | --- |
 | AN-IDENT-1 | Agent apps are GitHub Apps; two-step enable (install, then authorize agent features) | Organization-owned apps with scoped tokens | shipped (#66) |
-| AN-IDENT-2 | Partner identity carried by a JWT assertion GitHub issues; no user-managed credentials | Static scoped tokens only | open |
+| AN-IDENT-2 | Partner identity carried by a JWT assertion GitHub issues; no user-managed credentials | Static scoped tokens only — a short-lived token minted into a run from a stored app credential is the gap | **L3 — prerequisite for every arrangement** |
 | AN-IDENT-3 | Third-party agents install as hidden GitHub Apps (`anthropic code agent`, `openai code agent`), fully audit-logged | Apps are visible and org-owned by design | shipped (#66) |
 | AN-IDENT-4 | Attribution: agent-authored PRs in author search; release notes credit them | Bot label on comments; profile and commits pending | L0 follow-up |
 | AN-IDENT-5 | Per-installation permission scoping | Team and collaborator membership | shipped (#66) |
@@ -215,18 +273,18 @@ rather than re-describing the capability. Status is one of **shipped**,
 | AN-RUN-1 | Cloud agent researches, plans, commits to a branch, opens a PR | Actions + runner fleet is the substrate | L3 |
 | AN-RUN-2 | Confidence rating; low-confidence changes held for review | — | L3 |
 | AN-RUN-3 | Cloud **and local** sandboxes (MXC; macOS/Linux/Windows) | Runners are already operator-hosted | shipped (substrate) |
-| AN-RUN-4 | Scheduled and event-triggered agent tasks | Actions triggers | L3 |
-| AN-RUN-5 | Agent tasks REST API: 5 endpoints, task/session objects, 8 states | — | L3 |
-| AN-RUN-6 | Session control page, session filters, cross-session insight | Actions logs only | L3 |
+| AN-RUN-4 | Scheduled and event-triggered agent tasks | Assignment to an app records a task; scheduled dispatch not built | L3, part shipped (#84) |
+| AN-RUN-5 | Agent tasks REST API: 5 endpoints, task/session objects, 8 states | Task and session model with the same 8 states, plus list and get; the write half and sessions themselves are not built | L3, part shipped (#82, #85) |
+| AN-RUN-6 | Session control page, session filters, cross-session insight | The task record on the issue it belongs to; no session view, no cross-session anything | L3, part shipped (#86) |
 | AN-RUN-7 | *No agent webhook events exist* — 75 events, none agent-related | — | open — see below |
 
 ### Repository configuration
 
 | ID | GitHub's shape | Forgente | Status |
 | --- | --- | --- | --- |
-| AN-CFG-1 | Custom agents: `.github/agents/*.agent.md`; org in `.github`/`.github-private`; enterprise in a designated `.github-private`; precedence repo → org → enterprise | — | L2 |
-| AN-CFG-2 | Agent profile frontmatter: `description` (required), `name`, `target`, `tools`, `model`, `disable-model-invocation`, `user-invocable`, `mcp-servers`, `metadata`; prompt ≤ 30,000 chars | — | L2 |
-| AN-CFG-3 | Agent skills: `SKILL.md` folders at `.github/skills`, `.claude/skills`, `.agents/skills`; personal `~/.copilot/skills`, `~/.agents/skills` | — | L2 |
+| AN-CFG-1 | Custom agents: `.github/agents/*.agent.md`; org in `.github`/`.github-private`; enterprise in a designated `.github-private`; precedence repo → org → enterprise | `.github/agents` and `.claude/agents` read from the default branch; org and enterprise levels not built | L2, part shipped (#77, #79, #80) |
+| AN-CFG-2 | Agent profile frontmatter: `description` (required), `name`, `target`, `tools`, `model`, `disable-model-invocation`, `user-invocable`, `mcp-servers`, `metadata`; prompt ≤ 30,000 chars | Parsed, with absent distinguished from false for the two invocation flags; no prompt-length cap | L2, part shipped (#77) |
+| AN-CFG-3 | Agent skills: `SKILL.md` folders at `.github/skills`, `.claude/skills`, `.agents/skills`; personal `~/.copilot/skills`, `~/.agents/skills` | All three repository locations read; the personal ones are a client concern, not the forge's | L2, part shipped (#77, #79, #80) |
 | AN-CFG-4 | `AGENTS.md` for cross-tool conventions | Already an in-repo convention | shipped |
 | AN-CFG-5 | Plugins: `plugin.json` bundling agents, skills, `hooks.json`, `.mcp.json`, `lsp.json`; distributed via `marketplace.json` | — | excluded — plugin economy is a non-goal |
 | AN-CFG-6 | Instruction files: `.github/copilot-instructions.md`, `.github/instructions/**/*.instructions.md` | — | excluded — vendor-specific; `AGENTS.md` covers it |
@@ -295,6 +353,17 @@ object model from GitHub — task and session, the eight states, the field
 names — and do not reproduce the authentication constraint. This is the
 clearest case in the spec where parity supplies the design and Forgente's
 identity model supplies the improvement.
+
+**But do not let the record depend on the agent's cooperation.** The API is
+worth building for the reason above, and nothing in the ecosystem will call it
+on the day it ships: an agent written against GitHub reports progress by editing
+a comment, because a comment is all GitHub ever offered it. A session model that
+fills in only when an agent posts to it would stay empty for precisely the
+agents Forgente most wants to run. So derive what is derivable from what the
+forge already observes — the dispatched run, comments authored by the app, refs
+and pull requests it pushed — and treat a posted session as enrichment from
+agents that know about Forgente rather than as the source of truth. Deriving
+works for all four arrangements above; reporting works for one.
 
 ## The layers
 
@@ -365,6 +434,9 @@ are token-only, enforced by code that already exists. That block is correct
 behavior; do not "fix" it.
 
 ### L1 — First-party MCP server
+
+Shipped in #71, #72 and #73. Serves the client-side arrangement above, and
+needs nothing further from the other three.
 
 Do not fork `gitea-mcp`. A validation run (2026-07-25, Forgente `main` at
 `58c57191f4`, `gitea-mcp` at `18fcd663e0f0`) drove the upstream server
@@ -541,6 +613,15 @@ tracks the next MCP specification. Protocol drift is worth monitoring.
 
 ### L2 — Repository agent configuration and providers
 
+Half shipped. Agent definitions — skill and profile parsing, repository
+discovery, and the settings surface — landed in #77, #79 and #80. Model
+providers are unstarted.
+
+This is the layer the neutrality position is actually made of: a repository
+declares what it wants done in formats the ecosystem already reads, so the
+agent executing them is replaceable. Inventing a Forgente-specific schema here
+would forfeit the position while looking like ordinary product work.
+
 Two independent pieces of configuration:
 
 - **Agent definitions in the repository.** `AGENTS.md` already carries build,
@@ -583,6 +664,18 @@ Two independent pieces of configuration:
   exposed to repository code.
 
 ### L3 — Agent sessions and the sandbox contract
+
+Partly shipped, and the task half works end to end: the task and session model
+(#82), a task recorded when an issue is assigned to an app (#84), the read API
+(#85), and the record surfaced on the issue it belongs to (#86). What remains is
+the harder half — `AN-IDENT-2`, sessions themselves, the egress routing below,
+and the no-self-approve rules.
+
+Order the remainder by what blocks the most. `AN-IDENT-2` is first: until a run
+can obtain a short-lived credential for its app, an operator's only option is to
+paste a static token into a repository secret, which is worse than what the
+parity target offers third parties and defeats the reason L0 exists. It blocks
+every arrangement except the one Forgente would operate itself.
 
 The largest slice, and the one this document originally under-scoped.
 Assigning an issue or a review to an agent starts a *session*: a dispatched
@@ -678,7 +771,23 @@ network-restricted", never "Forgente enforces an egress firewall". The
 enforcement lives in the operator's runner deployment, and the forge's job is
 to make the designation explicit, routable and visible.
 
+**How strong that is depends on who operates the runners, and that is what makes
+it shippable.** Attestation is weak when the forge operator and the runner
+operator are different parties, because the forge is then trusting somebody
+else's assertion about somebody else's machines. Where they are the same party —
+an organization running its own fleet, or Forgente running the hosted instance —
+the label is an operator's assertion about their own infrastructure, and real
+enforcement exists; it simply lives in the runner deployment rather than in the
+forge. This document previously left open whether shipping sessions without
+egress control was defensible. The answer is that it depends on the arrangement,
+the forge's obligation is identical in both, and the claim must be worded per
+operator rather than per product.
+
 ### L4 — Tenants
+
+*Tenants of the substrate, not multi-tenancy.* The name has already been
+misread once; nothing in this layer is about hosting several customers on one
+instance. See the deployment posture below for that.
 
 The visible features everyone actually names: AI code review, issue triage
 and labelling, pull-request summaries. Each is an agent running on L0–L3
@@ -700,6 +809,43 @@ tracks it in go-gitea/gitea#37151 — filed explicitly because agentic workflows
 need kanban ordering over the API to pick up work in priority order. Building
 it is a reasonable contribution; assuming it exists is not.
 
+## Deployment posture: self-hosted first, hosted as a deployment of it
+
+Forgente may operate forgente.com as a hosted instance alongside self-hosting.
+Whether to do so is a business decision rather than a layer — it is a service
+obligation, not a feature — but it imposes one architectural constraint worth
+settling before anything depends on it, because getting the order backwards is
+expensive and hard to reverse.
+
+**Every layer must work when the forge operator, the runner operator and the
+agent vendor are three different parties.** Hosted operation is then the
+degenerate case where Forgente happens to be more than one of them: the same
+code path with different parties behind it, never a separate implementation.
+
+The failure mode is documented in the parity target itself. GitHub built hosted
+first, their agent architecture assumes they operate everything, and there is
+consequently no self-hosted shape of it to ship — Copilot does not exist on
+Enterprise Server at all. A hosted-first Forgente would reproduce exactly that,
+with the self-hosted path degrading into a lagging port of the real one.
+
+Two consequences, both checkable rather than aspirational:
+
+- Build the third-party arrangement first and let hosted inherit it. Concretely,
+  `AN-IDENT-2` is needed by every arrangement *except* the one Forgente would
+  operate itself, so it must not wait on any hosting decision.
+- A hosted instance may operate runners, supply a default app, and pre-configure
+  a provider for convenience. What it must never do is make that path better
+  than the one an operator assembles for themselves — see the inference
+  invariant in the non-goals, which is what the neutrality position rests on and
+  which binds a hosted instance exactly as it binds the software.
+
+Operating an instance is not the "agent hosting" excluded in the non-goals.
+That exclusion is about becoming a marketplace and a platform business for other
+people's agents. Running one's own software is an ordinary thing for an
+open-source project to do, and it has a second use — it is the standing proof
+that the self-hosted path works, but only for as long as it runs the same
+artifact everyone else runs.
+
 ## What Forgente can honestly claim
 
 An earlier draft of this document claimed the differentiator was governance —
@@ -712,7 +858,30 @@ streaming. Forgente does not get to win on that axis by default; it has to
 build most of it just to be credible, which is why the sandbox contract sits
 inside L3 rather than in a "later" pile.
 
-What is left is narrower, and durable:
+What is left is narrower, and durable. One of these is the position; the others
+are what make it credible rather than four unrelated boasts.
+
+**The position — Forgente runs whichever agent you already chose.** Nothing in
+the forge requires buying a model or a harness from Forgente, and no capability
+is gated behind doing so, which leaves it with nothing to gain by steering
+anyone. Every serious competitor in this category has the opposite arrangement:
+Copilot is GitHub's product, Duo is GitLab's, Rovo is Atlassian's, and in each
+case the agent capabilities are inseparable from the licence. Neutrality is
+therefore not merely unclaimed by them, it is structurally unavailable to them —
+which is what makes it durable rather than a feature copied next quarter.
+
+Note the claim is "you never have to buy ours", not "we will never sell one".
+The first is a property that can be held to and checked; the second is a promise
+about the future, and the non-goals below explain why that distinction is the
+one doing the work.
+
+State it precisely or it does not survive contact. GitHub's Agent HQ *does* host
+third-party agents, Codex and Claude among them. The difference is that theirs
+is a **curated** set on infrastructure they operate, and Forgente's is
+**whatever you can run, on infrastructure you operate**. "Only Forgente supports
+third-party agents" is false and must not be said.
+
+The rest are what that position rests on:
 
 - **Self-hosted — but state it precisely.** GitHub now runs agents in *local*
   sandboxes on the developer's own machine, included in the standard seat,
@@ -722,7 +891,7 @@ What is left is narrower, and durable:
   GitHub Enterprise Server. An operator who must keep the forge itself inside
   their network cannot have GitHub's agent stack at any price. For regulated,
   air-gapped and sovereignty-constrained users that is not a preference, it
-  is the only option — and it is the claim to lead with, rather than the
+  is the only option — and it is the *support* to lead with, rather than the
   weaker one about where code executes.
 - **No subscription gate.** GitHub's agent capabilities are inseparable from
   Copilot licensing, AI credits, and cost centers. Forgente's agent
@@ -730,7 +899,10 @@ What is left is narrower, and durable:
 - **Open formats over a proprietary stack.** `AGENTS.md`, the Agent Skills
   format, and MCP are open; Marketplace agent apps, plugin standards, and the
   Copilot SDK are GitHub's. Building on the open half is both cheaper and
-  more defensible for a fork with Forgente's resources.
+  more defensible for a fork with Forgente's resources. It is also the
+  mechanism the position above depends on: neutrality is a claim about formats
+  before it is a claim about intent, and an agent can only be swapped for
+  another if what the repository declares is not Forgente's own dialect.
 - **A primitive this codebase never had.** Neither Gitea nor Forgejo has an
   owned agent principal: an account belonging to an organization, permissioned
   through ordinary membership, badged where it acts, revocable in one place.
@@ -750,14 +922,25 @@ machine identity".
 ## Non-goals
 
 - **Editor and client tooling.** See above.
-- **Hosting or reselling model inference.** Providers are configured, not
-  supplied.
+- **Requiring Forgente's own inference.** Providers are configured, not
+  supplied. What protects the position, though, is the invariant behind that
+  rule rather than the rule itself, and it is written as an invariant on
+  purpose: **bring-your-own stays fully capable, and no forge capability is
+  gated behind buying inference from Forgente.** A flat ban on ever selling
+  inference is the kind of commitment that gets reversed under commercial
+  pressure and costs credibility when it does; these two conditions can be
+  checked instead, and they bind forgente.com exactly as they bind the
+  software. A hosted instance pre-configuring a provider for convenience
+  breaks neither of them. A managed path that is *better* than what an
+  operator can assemble breaks both.
 - **An agent marketplace, agent hosting, or a plugin economy.** GitHub has
   Marketplace agent apps and enterprise plugin standards; that is a platform
   business, not what a self-hosted forge is for. Note this is a *choice*, not
   a claim that the category is dead — an earlier draft wrongly recorded
   Copilot Extensions as deprecated in favour of MCP, when in fact GitHub's
-  extensibility surface grew.
+  extensibility surface grew. Note also what it does *not* exclude: operating
+  an instance of Forgente is not agent hosting, and the deployment posture
+  above governs that instead.
 - **A new permission system.** Agents use teams and collaborators. The spike
   confirmed the existing machinery has no user-type gate.
 - **Autofix.** It presupposes code scanning, which Forgente does not have.
@@ -769,16 +952,23 @@ machine identity".
 
 ## Open questions
 
-- Naming and positioning: "agents" reads forward-leaning and invites hype
-  scepticism; "service accounts done right" reads conservative and undersells
-  the direction. A third framing is now available and may be strongest —
-  lead with **installation identity** as infrastructure, with agents as the
-  headline consumer.
+- ~~Naming and positioning.~~ **Settled.** Lead with the neutrality position —
+  Forgente runs whichever agent you already chose — and carry installation
+  identity as the infrastructure claim underneath it rather than as the
+  headline. "Agents" as a word is unavoidable and fine; the hype scepticism it
+  invites is answered by being the substrate rather than by avoiding the term.
 - Whether L2's provider configuration belongs to the instance only, or to
   organizations as well, and how quota and cost controls work if the latter.
-- How much of the L3 sandbox contract is required for a first release versus
-  a credible one. Shipping agent sessions without egress control is probably
-  not defensible.
+- ~~How much of the L3 sandbox contract is required for a first release.~~
+  **Partly settled.** The egress half is answered under L3: the claim is worded
+  per operator and is defensible wherever the operator runs the runners. What
+  is still open is the rest of the contract, and in particular whether
+  propose-and-approve ships alongside the first sessions or after them.
+- Whether Forgente operates forgente.com as a hosted instance at all. The
+  architecture is settled either way by the deployment posture above, so this
+  is a question about appetite for a service obligation — support, uptime,
+  abuse, billing — and not an engineering decision waiting on an answer.
+  Nothing in the layers should block on it.
 - Whether to adopt the natural-language-compiled-to-YAML workflow shape at
   all, or to keep agent invocation explicit and leave workflow authoring to
   humans.
