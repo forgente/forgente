@@ -84,6 +84,9 @@ type swaggerParameterBodies struct {
 	MergePullRequestOption forms.MergePullRequestForm
 
 	// in:body
+	MintAppRunTokenOption api.MintAppRunTokenOption
+
+	// in:body
 	CreateReleaseOption api.CreateReleaseOption
 	// in:body
 	EditReleaseOption api.EditReleaseOption

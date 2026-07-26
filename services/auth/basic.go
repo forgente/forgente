@@ -116,6 +116,14 @@ func (b *Basic) VerifyAuthToken(req *http.Request, w http.ResponseWriter, store 
 		store.GetData()["LoginMethod"] = ActionTokenMethodName
 		return user_model.NewActionsUserWithTaskID(task.ID), nil
 	}
+
+	// an app run token, which reaches this path when the agent pushes: git over
+	// HTTP authenticates with basic auth, so an app that cannot be resolved here
+	// could call the API as itself but not commit as itself
+	if appUser := resolveForgenteAppRunToken(req.Context(), authToken, store); appUser != nil {
+		store.GetData()["LoginMethod"] = AccessTokenMethodName
+		return appUser, nil
+	}
 	return nil, nil //nolint:nilnil // the auth method is not applicable
 }
 

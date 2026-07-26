@@ -225,6 +225,7 @@ func registerRebuildIssueIndexer() {
 }
 
 func initExtendedTasks() {
+	registerCleanupAppRunTokens()
 	registerDeleteInactiveUsers()
 	registerDeleteRepositoryArchives()
 	registerGarbageCollectRepositories()

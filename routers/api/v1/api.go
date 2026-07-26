@@ -1352,6 +1352,10 @@ func Routes() *web.Router {
 				}, reqToken(), reqAdmin())
 				m.Group("/actions", func() {
 					m.Get("/tasks", repo.ListActionTasks)
+					// no reqToken: the caller is a running job authenticating with
+					// its own job token, and the handler refuses anything that is
+					// not one
+					m.Post("/app-token", bind(api.MintAppRunTokenOption{}), repo.MintAppRunToken)
 					m.Group("/runs", func() {
 						m.Group("/{run}", func() {
 							m.Get("", repo.GetWorkflowRun)

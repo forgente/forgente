@@ -301,10 +301,13 @@ func TestAPICron(t *testing.T) {
 			AddTokenAuth(token)
 		resp := MakeRequest(t, req, http.StatusOK)
 
-		assert.Equal(t, "29", resp.Header().Get("X-Total-Count"))
+		// a literal count, so registering any cron task breaks this until it is
+		// updated — which is the intent: the list is API surface, and a task
+		// appearing or vanishing should be a deliberate change
+		assert.Equal(t, "30", resp.Header().Get("X-Total-Count"))
 
 		crons := DecodeJSON(t, resp, []api.Cron{})
-		assert.Len(t, crons, 29)
+		assert.Len(t, crons, 30)
 	})
 
 	t.Run("Execute", func(t *testing.T) {
