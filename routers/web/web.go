@@ -1186,6 +1186,8 @@ func registerWebRoutes(m *web.Router, webAuth *AuthMiddleware) {
 
 		m.Combo("/public_access").Get(repo_setting.PublicAccess).Post(repo_setting.PublicAccessPost)
 
+		m.Get("/agents", repo_setting.Agents)
+
 		m.Group("/collaboration", func() {
 			m.Combo("").Get(repo_setting.Collaboration).Post(repo_setting.CollaborationPost)
 			m.Post("/access_mode", repo_setting.ChangeCollaborationAccessMode)

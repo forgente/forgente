@@ -1,0 +1,84 @@
+{{template "repo/settings/layout_head" (dict "pageClass" "repository settings")}}
+<div class="repo-setting-content">
+	<h4 class="ui top attached header">
+		{{ctx.Locale.Tr "repo.settings.agents"}}
+	</h4>
+	<div class="ui attached segment">
+		<p>{{ctx.Locale.Tr "repo.settings.agents_desc"}}</p>
+
+		{{if .AgentDefinitionErrors}}
+			<div class="ui negative message">
+				<div class="header">{{ctx.Locale.Tr "repo.settings.agents_errors"}}</div>
+				<div class="flex-divided-list items-with-main tw-my-2">
+					{{range .AgentDefinitionErrors}}
+						<div class="item">
+							<div class="item-main">
+								<div class="item-title"><code>{{.Path}}</code></div>
+								<div class="item-body">{{.Reason}}</div>
+							</div>
+						</div>
+					{{end}}
+				</div>
+			</div>
+		{{end}}
+
+		<h5 class="ui header">{{ctx.Locale.Tr "repo.settings.agents_skills"}}</h5>
+		{{if .AgentDefinitions.Skills}}
+			<div class="flex-divided-list items-with-main">
+				{{range .AgentDefinitions.Skills}}
+					<div class="item">
+						<div class="item-main">
+							<div class="item-title">{{.Name}}</div>
+							<div class="item-body">{{.Description}}</div>
+							{{if .Compatibility}}
+								<div class="item-body"><i>{{.Compatibility}}</i></div>
+							{{end}}
+						</div>
+					</div>
+				{{end}}
+			</div>
+		{{else}}
+			<p class="help">
+				{{ctx.Locale.Tr "repo.settings.agents_no_skills"}}
+				{{range $i, $dir := .SkillDirCandidates}}{{if $i}}, {{end}}<code>{{$dir}}/</code>{{end}}
+			</p>
+		{{end}}
+
+		<h5 class="ui header">{{ctx.Locale.Tr "repo.settings.agents_profiles"}}</h5>
+		{{if .AgentDefinitions.Profiles}}
+			<div class="flex-divided-list items-with-main">
+				{{range .AgentDefinitions.Profiles}}
+					<div class="item">
+						<div class="item-main">
+							<div class="item-title">
+								{{.DisplayName}}
+								{{if not .IsUserInvocable}}
+									<span class="ui basic label">{{ctx.Locale.Tr "repo.settings.agents_not_user_invocable"}}</span>
+								{{end}}
+								{{if not .IsModelInvocable}}
+									<span class="ui basic label">{{ctx.Locale.Tr "repo.settings.agents_not_model_invocable"}}</span>
+								{{end}}
+							</div>
+							<div class="item-body">{{.Description}}</div>
+							<div class="item-body"><i>
+								{{if .AllowsAllTools}}
+									{{ctx.Locale.Tr "repo.settings.agents_all_tools"}}
+								{{else if .Tools}}
+									{{ctx.Locale.Tr "repo.settings.agents_tools"}}: {{StringUtils.Join .Tools ", "}}
+								{{else}}
+									{{ctx.Locale.Tr "repo.settings.agents_no_tools"}}
+								{{end}}
+							</i></div>
+						</div>
+					</div>
+				{{end}}
+			</div>
+		{{else}}
+			<p class="help">
+				{{ctx.Locale.Tr "repo.settings.agents_no_profiles"}}
+				{{range $i, $dir := .ProfileDirCandidates}}{{if $i}}, {{end}}<code>{{$dir}}/</code>{{end}}
+			</p>
+		{{end}}
+	</div>
+</div>
+{{template "repo/settings/layout_footer" .}}
