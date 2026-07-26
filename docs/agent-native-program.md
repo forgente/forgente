@@ -273,18 +273,18 @@ rather than re-describing the capability. Status is one of **shipped**,
 | AN-RUN-1 | Cloud agent researches, plans, commits to a branch, opens a PR | Actions + runner fleet is the substrate | L3 |
 | AN-RUN-2 | Confidence rating; low-confidence changes held for review | — | L3 |
 | AN-RUN-3 | Cloud **and local** sandboxes (MXC; macOS/Linux/Windows) | Runners are already operator-hosted | shipped (substrate) |
-| AN-RUN-4 | Scheduled and event-triggered agent tasks | Actions triggers | L3 |
-| AN-RUN-5 | Agent tasks REST API: 5 endpoints, task/session objects, 8 states | — | L3 |
-| AN-RUN-6 | Session control page, session filters, cross-session insight | Actions logs only | L3 |
+| AN-RUN-4 | Scheduled and event-triggered agent tasks | Assignment to an app records a task; scheduled dispatch not built | L3, part shipped (#84) |
+| AN-RUN-5 | Agent tasks REST API: 5 endpoints, task/session objects, 8 states | Task and session model with the same 8 states, plus list and get; the write half and sessions themselves are not built | L3, part shipped (#82, #85) |
+| AN-RUN-6 | Session control page, session filters, cross-session insight | The task record on the issue it belongs to; no session view, no cross-session anything | L3, part shipped (#86) |
 | AN-RUN-7 | *No agent webhook events exist* — 75 events, none agent-related | — | open — see below |
 
 ### Repository configuration
 
 | ID | GitHub's shape | Forgente | Status |
 | --- | --- | --- | --- |
-| AN-CFG-1 | Custom agents: `.github/agents/*.agent.md`; org in `.github`/`.github-private`; enterprise in a designated `.github-private`; precedence repo → org → enterprise | — | L2 |
-| AN-CFG-2 | Agent profile frontmatter: `description` (required), `name`, `target`, `tools`, `model`, `disable-model-invocation`, `user-invocable`, `mcp-servers`, `metadata`; prompt ≤ 30,000 chars | — | L2 |
-| AN-CFG-3 | Agent skills: `SKILL.md` folders at `.github/skills`, `.claude/skills`, `.agents/skills`; personal `~/.copilot/skills`, `~/.agents/skills` | — | L2 |
+| AN-CFG-1 | Custom agents: `.github/agents/*.agent.md`; org in `.github`/`.github-private`; enterprise in a designated `.github-private`; precedence repo → org → enterprise | `.github/agents` and `.claude/agents` read from the default branch; org and enterprise levels not built | L2, part shipped (#77, #79, #80) |
+| AN-CFG-2 | Agent profile frontmatter: `description` (required), `name`, `target`, `tools`, `model`, `disable-model-invocation`, `user-invocable`, `mcp-servers`, `metadata`; prompt ≤ 30,000 chars | Parsed, with absent distinguished from false for the two invocation flags; no prompt-length cap | L2, part shipped (#77) |
+| AN-CFG-3 | Agent skills: `SKILL.md` folders at `.github/skills`, `.claude/skills`, `.agents/skills`; personal `~/.copilot/skills`, `~/.agents/skills` | All three repository locations read; the personal ones are a client concern, not the forge's | L2, part shipped (#77, #79, #80) |
 | AN-CFG-4 | `AGENTS.md` for cross-tool conventions | Already an in-repo convention | shipped |
 | AN-CFG-5 | Plugins: `plugin.json` bundling agents, skills, `hooks.json`, `.mcp.json`, `lsp.json`; distributed via `marketplace.json` | — | excluded — plugin economy is a non-goal |
 | AN-CFG-6 | Instruction files: `.github/copilot-instructions.md`, `.github/instructions/**/*.instructions.md` | — | excluded — vendor-specific; `AGENTS.md` covers it |
