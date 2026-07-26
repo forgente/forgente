@@ -1910,6 +1910,7 @@
   "repo.pulls.no_merge_helper": "Enable merge options in the repository settings or merge the pull request manually.",
   "repo.pulls.no_merge_wip": "This pull request cannot be merged because it is marked as being a work in progress.",
   "repo.pulls.no_merge_own_app": "An app cannot merge a pull request it opened. Someone else must merge it.",
+  "repo.pulls.no_ready_own_app": "An app cannot mark a pull request it opened as ready for review. Someone else must take it out of draft.",
   "repo.pulls.no_merge_not_ready": "This pull request is not ready to be merged. Check review status and status checks.",
   "repo.pulls.no_merge_access": "You are not authorized to merge this pull request.",
   "repo.pulls.merge_pull_request": "Create merge commit",

@@ -171,6 +171,45 @@ first unless you specifically want the second.
 Where the forge records agent work, it appears on the issue and through
 `/api/v1/repos/{owner}/{repo}/agent/tasks`.
 
+## What an app may not do to its own work
+
+Two things are refused outright, whoever the app is and however it is run:
+
+- **Merging a pull request it opened.** Someone else must merge it.
+- **Taking a pull request it opened out of draft.** Someone else must mark it
+  ready for review.
+
+Approving your own pull request was already refused for everyone. These extend
+the same idea to the two other moments where work would otherwise reach the
+default branch, or reach reviewers, with no second principal involved.
+
+Neither is configurable. A setting to switch one off is the whole guarantee. If
+you need an app to merge unattended, give a second app the job — that at least
+leaves two principals and an audit trail rather than one account signing off on
+itself.
+
+Both rules are about **who opened the pull request**, not about what the app may
+do in general. An app with write access merges other people's pull requests
+normally, and marks other people's drafts ready normally.
+
+The draft rule is worth reading carefully, because it is narrower than it
+sounds. It stops an app **removing** a work-in-progress prefix, not opening a
+pull request without one — an app that opens finished work is doing nothing
+unusual, and plenty of ordinary automation does exactly that. If you want the
+stronger guarantee, have the agent open its work as a draft:
+
+```yaml
+      - run: |
+          curl -sSf -X POST \
+            -H "Authorization: Bearer $TOKEN" \
+            -H "Content-Type: application/json" \
+            -d '{"title": "WIP: fix for #42", "head": "agent/issue-42", "base": "main"}' \
+            "${{ github.server_url }}/api/v1/repos/${{ github.repository }}/pulls"
+```
+
+From that point the forge holds the promotion for a person. The app can still
+push to the branch and rename its own draft; it cannot decide the work is ready.
+
 ## Stop an app
 
 Suspending an app stops it immediately, by every credential it holds — API
