@@ -833,10 +833,11 @@ Two consequences, both checkable rather than aspirational:
 - Build the third-party arrangement first and let hosted inherit it. Concretely,
   `AN-IDENT-2` is needed by every arrangement *except* the one Forgente would
   operate itself, so it must not wait on any hosting decision.
-- A hosted instance may operate runners and supply a default app. It must not
-  supply model inference. That is a standing non-goal below, and it is also what
-  keeps the neutrality claim honest: a forge that resells inference is no longer
-  neutral about which model you run.
+- A hosted instance may operate runners, supply a default app, and pre-configure
+  a provider for convenience. What it must never do is make that path better
+  than the one an operator assembles for themselves — see the inference
+  invariant in the non-goals, which is what the neutrality position rests on and
+  which binds a hosted instance exactly as it binds the software.
 
 Operating an instance is not the "agent hosting" excluded in the non-goals.
 That exclusion is about becoming a marketplace and a platform business for other
@@ -860,12 +861,19 @@ inside L3 rather than in a "later" pile.
 What is left is narrower, and durable. One of these is the position; the others
 are what make it credible rather than four unrelated boasts.
 
-**The position — Forgente runs whichever agent you already chose.** It sells
-neither a model nor a harness, so it has no reason to steer anyone toward one.
-Every serious competitor in this category does: Copilot is GitHub's product,
-Duo is GitLab's, Rovo is Atlassian's. Neutrality is therefore not merely
-unclaimed by them, it is structurally unavailable to them — which is what makes
-it durable rather than a feature that can be copied next quarter.
+**The position — Forgente runs whichever agent you already chose.** Nothing in
+the forge requires buying a model or a harness from Forgente, and no capability
+is gated behind doing so, which leaves it with nothing to gain by steering
+anyone. Every serious competitor in this category has the opposite arrangement:
+Copilot is GitHub's product, Duo is GitLab's, Rovo is Atlassian's, and in each
+case the agent capabilities are inseparable from the licence. Neutrality is
+therefore not merely unclaimed by them, it is structurally unavailable to them —
+which is what makes it durable rather than a feature copied next quarter.
+
+Note the claim is "you never have to buy ours", not "we will never sell one".
+The first is a property that can be held to and checked; the second is a promise
+about the future, and the non-goals below explain why that distinction is the
+one doing the work.
 
 State it precisely or it does not survive contact. GitHub's Agent HQ *does* host
 third-party agents, Codex and Claude among them. The difference is that theirs
@@ -914,11 +922,17 @@ machine identity".
 ## Non-goals
 
 - **Editor and client tooling.** See above.
-- **Hosting or reselling model inference.** Providers are configured, not
-  supplied. This one now load-bears: it is what keeps the neutrality position
-  honest, so it binds a hosted forgente.com exactly as it binds the software.
-  A hosted instance may operate runners and supply a default app; supplying
-  the model is where it would stop being neutral.
+- **Requiring Forgente's own inference.** Providers are configured, not
+  supplied. What protects the position, though, is the invariant behind that
+  rule rather than the rule itself, and it is written as an invariant on
+  purpose: **bring-your-own stays fully capable, and no forge capability is
+  gated behind buying inference from Forgente.** A flat ban on ever selling
+  inference is the kind of commitment that gets reversed under commercial
+  pressure and costs credibility when it does; these two conditions can be
+  checked instead, and they bind forgente.com exactly as they bind the
+  software. A hosted instance pre-configuring a provider for convenience
+  breaks neither of them. A managed path that is *better* than what an
+  operator can assemble breaks both.
 - **An agent marketplace, agent hosting, or a plugin economy.** GitHub has
   Marketplace agent apps and enterprise plugin standards; that is a platform
   business, not what a self-hosted forge is for. Note this is a *choice*, not

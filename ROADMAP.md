@@ -70,12 +70,15 @@ target is GitHub's agent surface as surveyed in July 2026 — cloud agent,
 agentic workflows, agent sessions, custom agents, MCP, code review.
 
 The position that falls out of it, and the one to lead with: **Forgente runs
-whichever agent you already chose.** It sells neither a model nor a harness, so
-it has no reason to steer anyone toward one — and every serious competitor in
-this category does, which makes the neutrality durable rather than copyable.
-Stated precisely, because GitHub's Agent HQ does host third-party agents: theirs
-is a curated set on infrastructure they operate, and Forgente's is whatever you
-can run, on infrastructure you operate.
+whichever agent you already chose.** Nothing in the forge requires buying a
+model or a harness from Forgente and no capability is gated behind doing so, so
+it has nothing to gain by steering anyone — while every serious competitor has
+agent capabilities inseparable from a licence, which is what makes the
+neutrality durable rather than copyable. Two precisions keep the claim true:
+GitHub's Agent HQ *does* host third-party agents, so the difference is a curated
+set on their infrastructure versus whatever you can run on yours; and the claim
+is "you never have to buy ours", not "we will never sell one" — a property that
+can be checked rather than a promise about the future.
 
 **Reach parity first, then extend.** GitHub has already paid the
 product-design cost of this category — what an agent may do, what it must
@@ -147,8 +150,10 @@ build order, each shippable on its own:
   discovered from the default branch, and shown in repository settings. This is
   where the neutrality claim is actually made: a repository declares the work in
   a format any agent can read, so the agent is replaceable. Providers are
-  endpoint and credentials at the instance and organization level — configured,
-  never supplied.
+  endpoint and credentials at the instance and organization level, configured
+  rather than supplied — and built so that a pre-configured provider is a
+  setting rather than a code path, since bring-your-own must stay the fully
+  capable route whatever else is ever offered alongside it.
 - **L3 — agent sessions and the sandbox contract.** Assigning an issue or
   review to an agent dispatches an Actions run behind a session record with
   live logs, steering, and links to what it produced. Actions and the runner
