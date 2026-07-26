@@ -20,6 +20,12 @@ type Task struct {
 	// Name is the human-readable title, usually taken from the issue or pull
 	// request that started the task.
 	Name string
+	// IssueID is the issue or pull request the work came from. Assignment is
+	// the trigger — an app is a bot account, CanBeAssigned does not exclude
+	// bots, and assigning one already fires an Actions event — so a task
+	// normally has one. Zero means it was created directly rather than by
+	// assignment, which the API path will allow.
+	IssueID int64 `xorm:"INDEX"`
 	// AppID is the organization-owned app acting as the principal, the L0
 	// primitive. A task always runs as an app rather than as a person, which
 	// is what makes its actions attributable.
