@@ -149,6 +149,13 @@ func DeleteOrgApp(ctx context.Context, org *organization.Organization, app *user
 		return err
 	}
 
+	// Run grants key on the app rather than on its account, so deleting the
+	// account does not take them with it. A left-behind grant would authorize
+	// the next app to reuse this id.
+	if err := user_model.DeleteForgenteAppRunGrantsByAppID(ctx, app.ID); err != nil {
+		return err
+	}
+
 	// Deleting the account drops the ownership row with it.
 	return DeleteUser(ctx, botUser, false)
 }
