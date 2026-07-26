@@ -181,6 +181,7 @@ func DeleteRepositoryDirectly(ctx context.Context, repoID int64, ignoreOrgTeams 
 		&actions_model.ActionRunnerToken{RepoID: repoID},
 		&actions_model.ActionScopedWorkflowSource{SourceRepoID: repoID},
 		&issues_model.IssuePin{RepoID: repoID},
+		&user_model.ForgenteAppRunGrant{RepoID: repoID},
 	); err != nil {
 		return fmt.Errorf("deleteBeans: %w", err)
 	}
