@@ -71,6 +71,21 @@ Many linters can fix issues automatically with `make lint-fix` (or the scoped
 `make lint-backend-fix` / `make lint-frontend-fix`). The combined consistency
 checks that CI runs are available as `make checks`.
 
+### Go lint issues in files that do not exist
+
+If `make lint-go` reports issues in files you cannot find on disk — paths under
+a second checkout of the repository, often one you have already deleted, and
+sometimes stray findings in generated `.pb.go` files — the golangci-lint cache
+is stale rather than your tree being broken. Two checkouts of the same commit
+are byte-identical under the same module path, so they share cache keys, and
+cached entries carry the paths of whichever checkout populated them first.
+
+Clear the cache and lint again:
+
+```bash
+golangci-lint cache clean
+```
+
 ## Building and adding SVGs
 
 SVG icons are built with `make svg`, which compiles the icon sources into
