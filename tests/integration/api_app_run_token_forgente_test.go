@@ -40,6 +40,13 @@ var runIndex int64 = 900
 // before reaching the handler.
 func newRunningTask(t *testing.T, repoID, ownerID int64, isFork bool) string {
 	t.Helper()
+	return newRunningTaskOnRunner(t, repoID, ownerID, isFork, 0)
+}
+
+// newRunningTaskOnRunner is the same, with the task attached to a specific
+// runner — which is what a grant restricted to a runner label turns on.
+func newRunningTaskOnRunner(t *testing.T, repoID, ownerID int64, isFork bool, runnerID int64) string {
+	t.Helper()
 
 	runIndex++
 	run := &actions_model.ActionRun{
@@ -80,6 +87,7 @@ func newRunningTask(t *testing.T, repoID, ownerID int64, isFork bool) string {
 		TokenHash:         auth_model.HashToken(token, salt),
 		TokenSalt:         salt,
 		TokenLastEight:    token[len(token)-8:],
+		RunnerID:          runnerID,
 	}
 	require.NoError(t, db.Insert(t.Context(), task))
 	return token
@@ -109,7 +117,7 @@ func TestAPIAppRunToken(t *testing.T) {
 	})
 
 	// read:user only, so the ceiling can be demonstrated as well as the identity
-	_, err = user_service.GrantAppToRepoRuns(t.Context(), doer, org, app.ID, repo.ID, auth_model.AccessTokenScopeReadUser)
+	_, err = user_service.GrantAppToRepoRuns(t.Context(), doer, org, app.ID, repo.ID, auth_model.AccessTokenScopeReadUser, "")
 	require.NoError(t, err)
 
 	var minted api.AppRunToken

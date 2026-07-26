@@ -4,9 +4,13 @@
 package org
 
 import (
+	"sort"
+
+	actions_model "forgente.com/models/actions"
 	auth_model "forgente.com/models/auth"
 	"forgente.com/models/db"
 	user_model "forgente.com/models/user"
+	"forgente.com/modules/container"
 	"forgente.com/modules/setting"
 	"forgente.com/modules/util"
 	"forgente.com/modules/web"
@@ -68,6 +72,39 @@ func loadOrgAppsData(ctx *context.Context) {
 	ctx.Data["AccessTokenScopePublicOnly"] = auth_model.AccessTokenScopePublicOnly
 	// an app is never an administrator, so the admin scope is not on offer
 	ctx.Data["TokenCategories"] = util.SliceRemoveAll(auth_model.GetAccessTokenCategories(), "admin")
+
+	labels, err := availableRunnerLabels(ctx)
+	if err != nil {
+		ctx.ServerError("availableRunnerLabels", err)
+		return
+	}
+	ctx.Data["RunnerLabels"] = labels
+}
+
+// availableRunnerLabels lists the labels the organization's runners currently
+// declare, so the grant form can name real ones rather than invite a typo that
+// would only surface as a refused token mid-run.
+//
+// It is a convenience, not a constraint: a designated runner may be registered
+// after the policy is set, so the field accepts labels that match nothing yet.
+func availableRunnerLabels(ctx *context.Context) ([]string, error) {
+	runners, err := db.Find[actions_model.ActionRunner](ctx, actions_model.FindRunnerOptions{
+		OwnerID:       ctx.Org.Organization.ID,
+		WithAvailable: true,
+	})
+	if err != nil {
+		return nil, err
+	}
+
+	seen := make(container.Set[string], 8)
+	for _, runner := range runners {
+		for _, label := range runner.AgentLabels {
+			seen.Add(label)
+		}
+	}
+	labels := seen.Values()
+	sort.Strings(labels)
+	return labels, nil
 }
 
 func redirectToOrgApplications(ctx *context.Context) {

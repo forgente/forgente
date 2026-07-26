@@ -5,6 +5,7 @@ package user
 
 import (
 	"context"
+	"errors"
 
 	actions_model "forgente.com/models/actions"
 	user_model "forgente.com/models/user"
@@ -30,6 +31,43 @@ func (err ErrForgenteAppRunTokenRefused) Error() string {
 
 func (err ErrForgenteAppRunTokenRefused) Unwrap() error {
 	return util.ErrPermissionDenied
+}
+
+// checkGrantRunnerLabel refuses a run that is not executing on a runner the
+// organization designated for this grant.
+//
+// The check belongs here rather than at scheduling because scheduling is not a
+// boundary anyone has to cross: a job's `runs-on` already routes it to a
+// labelled runner, but whoever can edit the workflow can edit that line, and
+// the app token would be minted regardless. Asking for the app's identity is
+// the boundary, so the designation is checked at the point the run tries to
+// cross it.
+//
+// It fails closed. A grant that names a label and a run whose runner cannot be
+// established is refused, because the alternative — issuing the app's identity
+// to a run whose location is unknown — is the thing the restriction exists to
+// prevent.
+func checkGrantRunnerLabel(ctx context.Context, task *actions_model.ActionTask, grant *user_model.ForgenteAppRunGrant) error {
+	if grant.RunnerLabel == "" {
+		return nil
+	}
+	if task.RunnerID == 0 {
+		return ErrForgenteAppRunTokenRefused{Reason: "the run is not attached to a runner"}
+	}
+
+	runner, err := actions_model.GetRunnerByID(ctx, task.RunnerID)
+	if err != nil {
+		if errors.Is(err, util.ErrNotExist) {
+			return ErrForgenteAppRunTokenRefused{Reason: "the runner this job is on no longer exists"}
+		}
+		return err
+	}
+	if !runner.CanMatchLabels([]string{grant.RunnerLabel}) {
+		return ErrForgenteAppRunTokenRefused{
+			Reason: "this app may only be claimed from a runner labelled " + grant.RunnerLabel,
+		}
+	}
+	return nil
 }
 
 // MintAppRunToken exchanges a running Actions task for a short-lived token
@@ -86,6 +124,10 @@ func MintAppRunToken(ctx context.Context, taskID, repoID int64, appName string) 
 		if user_model.IsErrForgenteAppRunGrantNotExist(err) {
 			return nil, ErrForgenteAppRunTokenRefused{Reason: "this repository has not been granted the app"}
 		}
+		return nil, err
+	}
+
+	if err := checkGrantRunnerLabel(ctx, task, grant); err != nil {
 		return nil, err
 	}
 
