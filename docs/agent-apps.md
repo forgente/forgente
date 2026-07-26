@@ -96,12 +96,29 @@ jobs:
 Mask the token as soon as you have it. It is short-lived, but a log is
 permanent.
 
-The same token works for git over HTTP, so the app can commit as itself:
+The same token works for git over HTTP, so the app can commit and push as
+itself:
 
 ```yaml
       - run: |
           git clone "https://x-access-token:${{ steps.app-token.outputs.token }}@example.com/${{ github.repository }}.git" work
+          cd work
+          git config user.name myagent
+          git config user.email myagent@noreply.example.com
 ```
+
+**Set the committer address to the app's own, or the commits will not be
+attributed to it.** A commit is linked to an account by its email address and
+by nothing else, so a plausible-looking address the app does not own produces
+commits from an author the forge cannot resolve — they render as a bare name,
+with no profile behind them and no bot label. Push access and attribution are
+separate things, and getting the first right tells you nothing about the
+second.
+
+The address to use is the app's, shown on its profile: its account name at the
+instance's no-reply domain (`NO_REPLY_ADDRESS`, `noreply.example.com` by
+default). Apps are created with a private email, so this is the address the
+forge expects to see.
 
 ### What the exchange refuses
 
