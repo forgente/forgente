@@ -151,6 +151,11 @@ func CheckPullMergeable(stdCtx context.Context, doer *user_model.User, perm *acc
 			return ErrIsClosed
 		}
 
+		// checked before the manual-merge shortcut below, which skips everything
+		if err := checkAppNotMergingOwnPull(ctx, doer, pr.Issue); err != nil {
+			return err
+		}
+
 		if allowedMerge, err := IsUserAllowedToMerge(ctx, pr, *perm, doer); err != nil {
 			log.Error("Error whilst checking if %-v is allowed to merge %-v: %v", doer, pr, err)
 			return err

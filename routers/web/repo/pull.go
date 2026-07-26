@@ -1080,6 +1080,8 @@ func MergePullRequest(ctx *context.Context) {
 			} else {
 				ctx.JSONError(ctx.Tr("repo.issues.closed_title"))
 			}
+		case errors.Is(err, pull_service.ErrAppCannotMergeOwnPull):
+			ctx.JSONError(ctx.Tr("repo.pulls.no_merge_own_app"))
 		case errors.Is(err, pull_service.ErrNoPermissionToMerge):
 			ctx.JSONError(ctx.Tr("repo.pulls.update_not_allowed"))
 		case errors.Is(err, pull_service.ErrHasMerged):
