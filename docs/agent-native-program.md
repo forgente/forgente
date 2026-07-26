@@ -270,7 +270,7 @@ row that under-reports invites rebuilding something that exists.
 | ID | GitHub's shape | Forgente | Status |
 | --- | --- | --- | --- |
 | AN-IDENT-1 | Agent apps are GitHub Apps; two-step enable (install, then authorize agent features) | Organization-owned apps with scoped tokens | shipped (#66) |
-| AN-IDENT-2 | Partner identity carried by a JWT assertion GitHub issues; no user-managed credentials | Static scoped tokens only — a short-lived token minted into a run from a stored app credential is the gap | **L3 — prerequisite for every arrangement** |
+| AN-IDENT-2 | Partner identity carried by a JWT assertion GitHub issues; no user-managed credentials | A run exchanges the job token it already holds for a short-lived token scoped by an organization's grant. No key or secret is stored anywhere, because the app is owned by the organization and the run is one the forge dispatched | shipped (#89, #90) |
 | AN-IDENT-3 | Third-party agents install as hidden GitHub Apps (`anthropic code agent`, `openai code agent`), fully audit-logged | Apps are visible and org-owned by design | shipped (#66) |
 | AN-IDENT-4 | Attribution: agent-authored PRs in author search; release notes credit them | Bot label on comments; profile and commits pending | L0 follow-up |
 | AN-IDENT-5 | Per-installation permission scoping | Team and collaborator membership | shipped (#66) |
@@ -680,11 +680,21 @@ Partly shipped, and the task half works end to end: the task and session model
 the harder half — `AN-IDENT-2`, sessions themselves, the egress routing below,
 and the no-self-approve rules.
 
-Order the remainder by what blocks the most. `AN-IDENT-2` is first: until a run
-can obtain a short-lived credential for its app, an operator's only option is to
-paste a static token into a repository secret, which is worse than what the
-parity target offers third parties and defeats the reason L0 exists. It blocks
-every arrangement except the one Forgente would operate itself.
+`AN-IDENT-2` is done (#89, #90), and it was first for a reason: until a run
+could obtain a short-lived credential for its app, an operator's only option was
+to paste a static token into a repository secret, which is worse than what the
+parity target offers third parties and defeats the reason L0 exists.
+
+What it settled is worth stating, because the shape differs from the parity
+target and the difference is the point. A run exchanges the job token the forge
+already gave it for a token belonging to the app, bounded by its task rather
+than only by a clock, and scoped by the grant rather than by everything the app
+can reach. No key is stored, because there is none to store: GitHub needs one
+only because their Apps are external to the repository, and an organization's
+own app is not.
+
+What remains in this layer is sessions themselves, the egress routing below,
+the no-self-approve rules, and a settings surface for managing grants.
 
 The largest slice, and the one this document originally under-scoped.
 Assigning an issue or a review to an agent starts a *session*: a dispatched
