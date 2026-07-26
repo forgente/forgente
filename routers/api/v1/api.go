@@ -1565,6 +1565,10 @@ func Routes() *web.Router {
 			m.Get("/issues/search", repo.SearchIssues)
 
 			m.Group("/{username}/{reponame}", func() {
+				m.Group("/agent/tasks", func() {
+					m.Get("", repo.ListAgentTasks)
+					m.Get("/{id}", repo.GetAgentTask)
+				}, reqRepoReader(unit.TypeIssues))
 				m.Group("/issues", func() {
 					m.Combo("").Get(repo.ListIssues).
 						Post(reqToken(), mustNotBeArchived, bind(api.CreateIssueOption{}), reqRepoReader(unit.TypeIssues), repo.CreateIssue)

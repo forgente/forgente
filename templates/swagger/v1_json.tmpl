@@ -6794,6 +6794,110 @@
         }
       }
     },
+    "/repos/{owner}/{repo}/agent/tasks": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "repository"
+        ],
+        "summary": "List a repository's agent tasks",
+        "operationId": "repoListAgentTasks",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "owner of the repo",
+            "name": "owner",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "name of the repo",
+            "name": "repo",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "filter by state, one of queued, in_progress, completed, failed, idle, waiting_for_user, timed_out, cancelled",
+            "name": "state",
+            "in": "query"
+          },
+          {
+            "type": "boolean",
+            "description": "include tasks archived on completion",
+            "name": "include_archived",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "description": "page number of results to return (1-based)",
+            "name": "page",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "description": "page size of results",
+            "name": "limit",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/AgentTaskList"
+          },
+          "422": {
+            "$ref": "#/responses/validationError"
+          }
+        }
+      }
+    },
+    "/repos/{owner}/{repo}/agent/tasks/{id}": {
+      "get": {
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "repository"
+        ],
+        "summary": "Get an agent task",
+        "operationId": "repoGetAgentTask",
+        "parameters": [
+          {
+            "type": "string",
+            "description": "owner of the repo",
+            "name": "owner",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "string",
+            "description": "name of the repo",
+            "name": "repo",
+            "in": "path",
+            "required": true
+          },
+          {
+            "type": "integer",
+            "format": "int64",
+            "description": "id of the task",
+            "name": "id",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/responses/AgentTask"
+          },
+          "404": {
+            "$ref": "#/responses/notFound"
+          }
+        }
+      }
+    },
     "/repos/{owner}/{repo}/archive/{archive}": {
       "get": {
         "produces": [
@@ -22801,6 +22905,58 @@
       },
       "x-go-package": "forgente.com/modules/structs"
     },
+    "AgentTask": {
+      "description": "AgentTask is a unit of work given to an agent. The field names follow\nGitHub's agent task object so a client written against that surface reads\nthis one, minus the usage and billing fields Forgente does not have.",
+      "type": "object",
+      "properties": {
+        "agent": {
+          "$ref": "#/definitions/User"
+        },
+        "archived_at": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "ArchivedAt"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "Created"
+        },
+        "creator": {
+          "$ref": "#/definitions/User"
+        },
+        "id": {
+          "description": "ID is the unique identifier for the task",
+          "type": "integer",
+          "format": "int64",
+          "x-go-name": "ID"
+        },
+        "issue": {
+          "$ref": "#/definitions/Issue"
+        },
+        "name": {
+          "description": "Name is the human-readable title, usually the issue's",
+          "type": "string",
+          "x-go-name": "Name"
+        },
+        "profile_id": {
+          "description": "ProfileID names the repository agent profile the task runs under, by its\nfile identifier, or is empty when no profile was named",
+          "type": "string",
+          "x-go-name": "ProfileID"
+        },
+        "state": {
+          "description": "State is one of queued, in_progress, completed, failed, idle,\nwaiting_for_user, timed_out, cancelled",
+          "type": "string",
+          "x-go-name": "State"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "x-go-name": "Updated"
+        }
+      },
+      "x-go-package": "forgente.com/modules/structs"
+    },
     "AnnotatedTag": {
       "description": "AnnotatedTag represents an annotated tag",
       "type": "object",
@@ -30933,6 +31089,21 @@
         "type": "array",
         "items": {
           "$ref": "#/definitions/Activity"
+        }
+      }
+    },
+    "AgentTask": {
+      "description": "AgentTask",
+      "schema": {
+        "$ref": "#/definitions/AgentTask"
+      }
+    },
+    "AgentTaskList": {
+      "description": "AgentTaskList",
+      "schema": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/AgentTask"
         }
       }
     },
