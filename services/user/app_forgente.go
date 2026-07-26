@@ -155,6 +155,11 @@ func DeleteOrgApp(ctx context.Context, org *organization.Organization, app *user
 	if err := user_model.DeleteForgenteAppRunGrantsByAppID(ctx, app.ID); err != nil {
 		return err
 	}
+	// Tokens already minted key on the app too, and a suspended app is only
+	// refused at authentication — deleting one should leave nothing to refuse.
+	if err := user_model.DeleteForgenteAppRunTokensByAppID(ctx, app.ID); err != nil {
+		return err
+	}
 
 	// Deleting the account drops the ownership row with it.
 	return DeleteUser(ctx, botUser, false)

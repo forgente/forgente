@@ -3032,6 +3032,8 @@
   "admin.dashboard.cron.cancelled": "Cron: %[1]s canceled: %[3]s",
   "admin.dashboard.cron.error": "Error in Cron: %s: %[3]s",
   "admin.dashboard.cron.finished": "Cron: %[1]s has finished",
+  "admin.dashboard.cleanup_app_run_tokens": "Clean up expired app run tokens",
+  "admin.dashboard.cleanup_app_run_tokens.started": "Task to clean up expired app run tokens started",
   "admin.dashboard.delete_inactive_accounts": "Delete all unactivated accounts",
   "admin.dashboard.delete_inactive_accounts.started": "Task to delete all unactivated accounts started",
   "admin.dashboard.delete_repo_archives": "Delete all repositories' archives (ZIP, TAR.GZ, etc..)",

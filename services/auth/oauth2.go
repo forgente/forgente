@@ -134,6 +134,11 @@ func (o *OAuth2) userFromToken(ctx context.Context, tokenSHA string, store DataS
 				log.Trace("Basic Authorization: Valid AccessToken for task[%d]", task.ID)
 				return user_model.NewActionsUserWithTaskID(task.ID), nil
 			}
+			// an app run token: what a running job exchanged its job token for,
+			// so it acts as the app rather than as Actions
+			if appUser := resolveForgenteAppRunToken(ctx, tokenSHA, store); appUser != nil {
+				return appUser, nil
+			}
 		}
 		return nil, err
 	}
