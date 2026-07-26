@@ -11,7 +11,6 @@ import (
 	issues_model "forgente.com/models/issues"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/log"
-	"forgente.com/modules/timeutil"
 	"forgente.com/modules/util"
 )
 
@@ -110,14 +109,20 @@ func appForAssignee(ctx context.Context, assignee *user_model.User) *user_model.
 	return app
 }
 
-// CompleteTask marks a task finished. Exposed for the run-linkage work that
-// follows; nothing calls it from the assignment path.
+// CompleteTask marks a task finished.
+//
+// It deliberately does not archive. An earlier draft did, on the reasoning that
+// finished work is done with — but archiving hides a task from default
+// listings, so completing one would make it vanish at the moment somebody wants
+// to look at what the agent did. Archiving stays a separate, deliberate action.
 func CompleteTask(ctx context.Context, task *agent_model.Task, state agent_model.State) error {
 	if !state.IsTerminal() {
 		return util.NewInvalidArgumentErrorf("cannot complete a task into non-terminal state %q", state)
 	}
-	task.State = state
-	task.ArchivedAt = timeutil.TimeStampNow()
-	_, err := db.GetEngine(ctx).ID(task.ID).Cols("state", "archived_at", "updated_unix").Update(task)
-	return err
+	if task.State.IsTerminal() {
+		// a run that reports twice, or a task cancelled by unassignment while
+		// its run was still going, must not be walked back
+		return nil
+	}
+	return setTaskState(ctx, task, state)
 }
