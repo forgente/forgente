@@ -100,6 +100,16 @@
         },
         "description": "AnnotatedTag"
       },
+      "AppRunToken": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AppRunToken"
+            }
+          }
+        },
+        "description": "AppRunToken"
+      },
       "Artifact": {
         "content": {
           "application/json": {
@@ -2662,6 +2672,31 @@
             "format": "uri",
             "type": "string",
             "x-go-name": "URL"
+          }
+        },
+        "type": "object",
+        "x-go-package": "forgente.com/modules/structs"
+      },
+      "AppRunToken": {
+        "description": "AppRunToken is a short-lived credential for one Actions run. The token is\nreturned once and never retrievable again.",
+        "properties": {
+          "app": {
+            "description": "App is the account the token acts as, so a workflow can attribute what it\ndoes without a second call.",
+            "type": "string",
+            "x-go-name": "App"
+          },
+          "expires_at": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "ExpiresAt"
+          },
+          "scope": {
+            "type": "string",
+            "x-go-name": "Scope"
+          },
+          "token": {
+            "type": "string",
+            "x-go-name": "Token"
           }
         },
         "type": "object",
@@ -7765,6 +7800,21 @@
             "x-go-name": "Updated"
           }
         },
+        "type": "object",
+        "x-go-package": "forgente.com/modules/structs"
+      },
+      "MintAppRunTokenOption": {
+        "description": "MintAppRunTokenOption asks for a short-lived token letting the calling\nActions run act as an app.",
+        "properties": {
+          "app": {
+            "description": "App is the app's account name.",
+            "type": "string",
+            "x-go-name": "App"
+          }
+        },
+        "required": [
+          "app"
+        ],
         "type": "object",
         "x-go-package": "forgente.com/modules/structs"
       },
@@ -15693,6 +15743,57 @@
           }
         },
         "summary": "Edit a repository's properties. Only fields that are set will be changed.",
+        "tags": [
+          "repository"
+        ]
+      }
+    },
+    "/repos/{owner}/{repo}/actions/app-token": {
+      "post": {
+        "operationId": "repoMintAppRunToken",
+        "parameters": [
+          {
+            "description": "owner of the repo",
+            "in": "path",
+            "name": "owner",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "name of the repo",
+            "in": "path",
+            "name": "repo",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MintAppRunTokenOption"
+              }
+            }
+          },
+          "required": true,
+          "x-originalParamName": "body"
+        },
+        "responses": {
+          "201": {
+            "$ref": "#/components/responses/AppRunToken"
+          },
+          "403": {
+            "$ref": "#/components/responses/forbidden"
+          },
+          "404": {
+            "$ref": "#/components/responses/notFound"
+          }
+        },
+        "summary": "Exchange a running job's token for a short-lived app token",
         "tags": [
           "repository"
         ]

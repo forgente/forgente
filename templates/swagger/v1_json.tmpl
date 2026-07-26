@@ -28210,6 +28210,21 @@
       },
       "x-go-package": "forgente.com/modules/structs"
     },
+    "MintAppRunTokenOption": {
+      "description": "MintAppRunTokenOption asks for a short-lived token letting the calling\nActions run act as an app.",
+      "type": "object",
+      "required": [
+        "app"
+      ],
+      "properties": {
+        "app": {
+          "description": "App is the app's account name.",
+          "type": "string",
+          "x-go-name": "App"
+        }
+      },
+      "x-go-package": "forgente.com/modules/structs"
+    },
     "NewIssuePinsAllowed": {
       "description": "NewIssuePinsAllowed represents an API response that says if new Issue Pins are allowed",
       "type": "object",
