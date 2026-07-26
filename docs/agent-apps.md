@@ -73,12 +73,12 @@ jobs:
       - name: Get a token for the app
         id: app-token
         run: |
-          token=$(curl -sSf -X POST \
+          resp=$(curl -sSf -X POST \
             -H "Authorization: Bearer ${{ secrets.GITEA_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d '{"app": "myagent"}' \
-            "${{ github.server_url }}/api/v1/repos/${{ github.repository }}/actions/app-token" \
-            | jq -r .token)
+            "${{ github.server_url }}/api/v1/repos/${{ github.repository }}/actions/app-token")
+          token=$(printf '%s' "$resp" | sed -n 's/.*"token":"\([^"]*\)".*/\1/p')
           echo "::add-mask::$token"
           echo "token=$token" >> "$GITHUB_OUTPUT"
 
@@ -92,6 +92,11 @@ jobs:
             -d '{"body": "on it"}' \
             "${{ github.server_url }}/api/v1/repos/${{ github.repository }}/issues/${{ github.event.issue.number }}/comments"
 ```
+
+This parses with `sed` rather than `jq` on purpose. Common runner images —
+including the `node:*` ones act_runner defaults to — do not ship `jq`, and the
+step fails with `jq: command not found` before it ever reaches the forge. Use
+`jq` if your image has it; do not assume it does.
 
 Mask the token as soon as you have it. It is short-lived, but a log is
 permanent.
@@ -115,10 +120,17 @@ with no profile behind them and no bot label. Push access and attribution are
 separate things, and getting the first right tells you nothing about the
 second.
 
-The address to use is the app's, shown on its profile: its account name at the
-instance's no-reply domain (`NO_REPLY_ADDRESS`, `noreply.example.com` by
-default). Apps are created with a private email, so this is the address the
-forge expects to see.
+The address to use is the app's account name at the instance's no-reply domain:
+`myagent@noreply.example.com` for an instance serving `example.com`. The domain
+comes from `NO_REPLY_ADDRESS`, which defaults to `noreply.` followed by the
+instance's own domain — so it is *your* domain, not `example.com`, unless you
+set it explicitly.
+
+**You cannot look this address up.** Apps are created with a private email, so
+it appears neither on the app's profile nor in the API — construct it from the
+app's name and your no-reply domain. Nothing will tell you that you got it
+wrong: the push succeeds either way, and the only symptom is a commit whose
+author never resolves to an account.
 
 ### Keep an app's work on runners you trust
 
