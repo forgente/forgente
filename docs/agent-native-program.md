@@ -73,6 +73,17 @@ questions is decided); GitLab Duo and Bitbucket Rovo, last checked
 before May 2026 (superseded — the documentation already describes whatever
 survived from it).
 
+**On following the ecosystem's conventions.** This document repeatedly says to
+take names, paths and wire formats from the Gitea ecosystem. It is worth being
+honest about what that means in practice: there is no Gitea documentation on
+building agent integrations, and the only in-tree design-document precedent is
+`services/actions/token_permission_design.md`. The agent-adjacent work upstream
+is a handful of open issues — go-gitea/gitea#36444 (AI code review), #37151
+(kanban API for agentic workflows), #35506 (MCP) and #38181 (bot accounts) —
+not written guidance. So "the ecosystem's conventions" are usually being
+*inferred from code* here rather than followed from a specification, and any
+claim in this document about them should be read at that confidence.
+
 Re-checked on 2026-07-25 by that method; nothing below needed correcting.
 The entries that postdate the original survey fit the map rather than
 breaking it: the GitHub MCP server moved to the next MCP specification
@@ -581,6 +592,21 @@ runs the sandbox — Actions with a runner fleet is exactly the substrate
 GitHub uses — and GitHub's own choice to compile agentic workflows down to
 ordinary Actions YAML is direct evidence this is the right substrate.
 
+**The dispatch trigger already exists (checked 2026-07-26).** This layer was
+scoped as though assignment-to-an-agent had to be built. It does not:
+
+- `CanBeAssigned` excludes organizations but **not bot accounts**, so an app —
+  a `UserTypeBot` account with write access through team membership — can
+  already be assigned to an issue today.
+- `IssueChangeAssignee` already emits an Actions notification with action
+  `assigned` under `HookEventIssueAssign`.
+
+So a workflow declaring `on: issues: types: [assigned]` already runs when an
+issue is assigned to an agent. What L3 adds is not a trigger but a *record*
+attached to the run that already happens, plus the runner routing above. That
+is the second time checking the substrate has shrunk this layer, after the
+permissions half.
+
 The sandbox *contract* is not optional polish, and matching it is a
 precondition for letting agents near real repositories. Less of it is
 outstanding than this document assumed — the permissions half is built, per
@@ -660,6 +686,19 @@ rather than a feature compiled into the server, and each ships as a reference
 implementation in its own repository. Keeping them out of the tree is
 deliberate: it proves the substrate is genuinely usable by third parties, and
 it keeps model-specific behavior out of the forge's release cycle.
+
+**One bound worth knowing before promising anything about projects.**
+Repository projects — the kanban board — have **no REST API at all**; there
+are no project handlers under `routers/api/v1/`. An agent cannot read board
+ordering, move an item between columns, or file a new issue into one. Issues,
+labels and comments are all API-reachable, so triage that works in those terms
+is fine; anything phrased as "the agent manages the board" is not, and would
+need that API to exist first.
+
+This is an ecosystem gap rather than a Forgente one, and upstream already
+tracks it in go-gitea/gitea#37151 — filed explicitly because agentic workflows
+need kanban ordering over the API to pick up work in priority order. Building
+it is a reasonable contribution; assuming it exists is not.
 
 ## What Forgente can honestly claim
 
