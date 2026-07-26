@@ -7,11 +7,11 @@ import (
 	"net/url"
 	"testing"
 
-	repo_model "forgente.com/models/repo"
 	"forgente.com/models/unittest"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/git"
 	agent_service "forgente.com/services/agent"
+	repo_service "forgente.com/services/repository"
 	"forgente.com/tests"
 
 	"github.com/stretchr/testify/assert"
@@ -26,7 +26,15 @@ func TestAgentDefinitionDiscovery(t *testing.T) {
 
 func testAgentDefinitionDiscovery(t *testing.T, _ *url.URL) {
 	user := unittest.AssertExistsAndLoadBean(t, &user_model.User{ID: 2})
-	repo := unittest.AssertExistsAndLoadBean(t, &repo_model.Repository{ID: 1, OwnerID: user.ID})
+	// a dedicated repository: this test pushes files, and doing that to a shared
+	// fixture repository breaks unrelated tests that index or count its contents
+	repo, err := repo_service.CreateRepositoryDirectly(t.Context(), user, user, repo_service.CreateRepoOptions{
+		Name:          "agent-definitions",
+		Readme:        "Default",
+		AutoInit:      true,
+		DefaultBranch: "main",
+	}, true)
+	require.NoError(t, err)
 
 	load := func(t *testing.T) *agent_service.Definitions {
 		t.Helper()
@@ -43,7 +51,7 @@ func testAgentDefinitionDiscovery(t *testing.T, _ *url.URL) {
 		assert.True(t, found.IsEmpty())
 	})
 
-	_, err := createFileInBranch(user, repo, createFileInBranchOptions{OldBranch: repo.DefaultBranch}, map[string]string{
+	_, err = createFileInBranch(user, repo, createFileInBranchOptions{OldBranch: repo.DefaultBranch}, map[string]string{
 		// a well-formed skill in the vendor-neutral location
 		".agents/skills/pdf-processing/SKILL.md": "---\nname: pdf-processing\ndescription: Extracts text from PDFs. Use when handling PDFs.\n---\nStep one.\n",
 		// the same skill name in a lower-precedence location, which must lose
