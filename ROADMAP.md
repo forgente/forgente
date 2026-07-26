@@ -135,7 +135,13 @@ build order, each shippable on its own:
   delivers least privilege. The rest of the contract — egress control, no
   self-approval or self-merge, attributable sessions, propose-and-approve for
   low-confidence actions — is a precondition for the layer, not later polish.
-  Egress control is the piece with nothing behind it yet.
+  Egress control is the piece with nothing behind it yet, and checking the
+  runner protocol showed why: it carries no network field in either
+  direction, so the forge cannot enforce egress at all. What it can offer is
+  routing agent sessions to runners an operator has designated as
+  network-restricted, and refusing to dispatch when none exists —
+  attestation, not enforcement, and the program document says so in those
+  words.
 - **L4 — tenants.** AI code review, issue triage, pull-request summaries —
   built as agents on L0–L3 in their own repositories, not compiled into the
   server.
