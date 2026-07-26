@@ -268,6 +268,7 @@ func prepareIssueViewLoad(ctx *context.Context) *issues_model.Issue {
 	}
 	issue.Repo = ctx.Repo.Repository
 	ctx.Data["Issue"] = issue
+	prepareIssueAgentTasks(ctx, issue)
 
 	if err = issue.LoadPullRequest(ctx); err != nil {
 		ctx.ServerError("LoadPullRequest", err)

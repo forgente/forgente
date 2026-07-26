@@ -48,6 +48,14 @@ func ListTasks(ctx context.Context, opts ListTasksOptions) ([]*agent_model.Task,
 	return tasks, count, err
 }
 
+// TasksForIssue returns every task recorded against an issue, newest first.
+// An issue can carry more than one when several apps were assigned to it.
+func TasksForIssue(ctx context.Context, issueID int64) ([]*agent_model.Task, error) {
+	tasks := make([]*agent_model.Task, 0, 1)
+	err := db.GetEngine(ctx).Where("issue_id = ?", issueID).OrderBy("id DESC").Find(&tasks)
+	return tasks, err
+}
+
 // GetTaskByID returns one task, or nil when it does not exist.
 func GetTaskByID(ctx context.Context, id int64) (*agent_model.Task, error) {
 	task := new(agent_model.Task)

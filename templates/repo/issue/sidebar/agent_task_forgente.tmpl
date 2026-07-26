@@ -1,0 +1,16 @@
+{{if .IssueAgentTasks}}
+	<div class="divider"></div>
+	<div class="ui relaxed list muted-links flex-items-block">
+		<div class="item">
+			<strong>{{ctx.Locale.Tr "repo.issues.agent_tasks"}}</strong>
+		</div>
+		{{range .IssueAgentTasks}}
+			<div class="item">
+				{{if .Agent}}
+					{{ctx.AvatarUtils.Avatar .Agent 20}} {{.Agent.GetDisplayName}}
+				{{end}}
+				<span class="ui basic label">{{ctx.Locale.Tr (printf "repo.issues.agent_state.%s" .State)}}</span>
+			</div>
+		{{end}}
+	</div>
+{{end}}
