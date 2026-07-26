@@ -672,6 +672,16 @@ Two independent pieces of configuration:
   such: encrypted at rest, never rendered back, never logged, and never
   exposed to repository code.
 
+  Designed in [agent-model-providers.md](agent-model-providers.md), which is
+  proposed rather than agreed. Its finding: "never exposed to repository code"
+  rules out the obvious implementation, because `GetSecretsOfTask` loads every
+  organization secret into every task that organization runs — organization
+  secrets are exposed to repository code by design. That forces a choice
+  between delivering the credential to the run anyway (and rewriting the
+  requirement to say so) and having the forge proxy inference so the credential
+  never leaves it. The doc recommends the second, kept deliberately small, and
+  leaves two decisions open.
+
 ### L3 — Agent sessions and the sandbox contract
 
 Partly shipped, and the task half works end to end: the task and session model
