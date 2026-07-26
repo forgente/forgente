@@ -795,6 +795,10 @@ func EditIssue(ctx *context.APIContext) {
 	if len(form.Title) > 0 {
 		err = issue_service.ChangeTitle(ctx, issue, ctx.Doer, form.Title)
 		if err != nil {
+			if errors.Is(err, issue_service.ErrAppCannotReadyOwnPull) {
+				ctx.APIError(http.StatusForbidden, err.Error())
+				return
+			}
 			ctx.APIErrorInternal(err)
 			return
 		}

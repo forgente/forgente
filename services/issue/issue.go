@@ -86,11 +86,17 @@ func NewIssue(ctx context.Context, repo *repo_model.Repository, issue *issues_mo
 // ChangeTitle changes the title of this issue, as the given user.
 func ChangeTitle(ctx context.Context, issue *issues_model.Issue, doer *user_model.User, title string) error {
 	oldTitle := issue.Title
-	issue.Title = title
-
 	if oldTitle == title {
 		return nil
 	}
+
+	// checked before the issue is mutated, so a refusal leaves the caller's
+	// copy untouched
+	if err := checkAppNotReadyingOwnPull(ctx, doer, issue, oldTitle, title); err != nil {
+		return err
+	}
+
+	issue.Title = title
 
 	if err := issue.LoadRepo(ctx); err != nil {
 		return err

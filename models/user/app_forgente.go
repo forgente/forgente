@@ -102,6 +102,18 @@ func CountForgenteAppsByOwnerID(ctx context.Context, ownerID int64) (int64, erro
 	return db.GetEngine(ctx).Where("owner_id = ?", ownerID).Count(new(ForgenteApp))
 }
 
+// IsForgenteApp reports whether an account is an app this forge issued.
+//
+// The governance rules that treat apps differently from people all need this
+// question answered about a doer, so they share one cheap answer: only a bot
+// account can be an app, and most doers are not bots.
+func IsForgenteApp(ctx context.Context, u *User) (bool, error) {
+	if u == nil || !u.IsTypeBot() {
+		return false, nil
+	}
+	return db.GetEngine(ctx).Where("user_id = ?", u.ID).Exist(new(ForgenteApp))
+}
+
 // IsForgenteAppSuspended reports whether the given account is a suspended app.
 // A non-app account is never suspended by this check, so the auth path can call
 // it for any token holder.

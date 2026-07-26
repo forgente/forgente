@@ -36,17 +36,14 @@ func checkAppNotMergingOwnPull(ctx context.Context, doer *user_model.User, issue
 	if doer == nil || issue == nil || !issue.IsPoster(doer.ID) {
 		return nil
 	}
-	// cheap gate first: only a bot account can be an app, and most doers are not
-	if !doer.IsTypeBot() {
-		return nil
-	}
 
-	if _, err := user_model.GetForgenteAppByUserID(ctx, doer.ID); err != nil {
-		if user_model.IsErrForgenteAppNotExist(err) {
-			return nil
-		}
+	isApp, err := user_model.IsForgenteApp(ctx, doer)
+	if err != nil {
 		log.Error("resolve app for merge doer %d: %v", doer.ID, err)
 		return err
+	}
+	if !isApp {
+		return nil
 	}
 	return ErrAppCannotMergeOwnPull
 }
