@@ -272,7 +272,7 @@ row that under-reports invites rebuilding something that exists.
 | AN-IDENT-1 | Agent apps are GitHub Apps; two-step enable (install, then authorize agent features) | Organization-owned apps with scoped tokens | shipped (#66) |
 | AN-IDENT-2 | Partner identity carried by a JWT assertion GitHub issues; no user-managed credentials | A run exchanges the job token it already holds for a short-lived token scoped by an organization's grant. No key or secret is stored anywhere, because the app is owned by the organization and the run is one the forge dispatched | shipped (#89, #90) |
 | AN-IDENT-3 | Third-party agents install as hidden GitHub Apps (`anthropic code agent`, `openai code agent`), fully audit-logged | Apps are visible and org-owned by design | shipped (#66) |
-| AN-IDENT-4 | Attribution: agent-authored PRs in author search; release notes credit them | Bot label on comments; profile and commits pending | L0 follow-up |
+| AN-IDENT-4 | Attribution: agent-authored PRs in author search; release notes credit them | Bot label on comments; a pull request an app opens is attributed to it, and a commit resolves to it when the committer address is the app's own. The bot label still does not reach commit authorship, and the profile badge is pending | L0 follow-up |
 | AN-IDENT-5 | Per-installation permission scoping | Team and collaborator membership | shipped (#66) |
 
 ### Runtime and sessions
