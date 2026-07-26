@@ -30,6 +30,7 @@ Every package registry implementation uses the same underlying models:
 | `PackageProperty` | Additional properties attached to `Package`, `PackageVersion` or `PackageFile` (e.g. used if metadata is needed for routing) |
 
 The following diagram shows the relationship between the models:
+
 ```
 Package <1---*> PackageVersion <1---*> PackageFile <*---1> PackageBlob
 ```
@@ -42,6 +43,7 @@ The upload endpoint is often the heavy part because it must validate the uploade
 The methods to validate and extract the metadata should be added in the `modules/packages/<type>` package.
 If the upload is valid the methods in `services/packages` allow to store the upload and create the corresponding models.
 It depends if the registry type allows multiple files per package version which method should be called:
+
 - `CreatePackageAndAddFile`: error if package version already exists
 - `CreatePackageOrAddFileToExisting`: error if file already exists
 - `AddFileToExistingPackage`: error if package version does not exist or file already exists

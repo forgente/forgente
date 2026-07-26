@@ -140,7 +140,7 @@ WEB_DIRS := web_src/js web_src/css
 
 ESLINT_FILES := web_src/js tools *.ts tests/e2e
 STYLELINT_FILES := web_src/css web_src/js/components/*.vue
-SPELLCHECK_FILES := $(GO_DIRS) $(WEB_DIRS) templates options/locale/locale_en-US.json .github $(filter-out CHANGELOG.md, $(wildcard *.go *.md *.yml *.yaml *.toml))
+SPELLCHECK_FILES := $(GO_DIRS) $(WEB_DIRS) templates docs contrib docker options/locale/locale_en-US.json .github $(filter-out CHANGELOG.md, $(wildcard *.go *.md *.yml *.yaml *.toml))
 EDITORCONFIG_FILES := templates .github/workflows options/locale/locale_en-US.json
 
 GO_SOURCES := $(wildcard *.go)
@@ -321,11 +321,11 @@ lint-swagger: node_modules ## lint swagger files
 
 .PHONY: lint-md
 lint-md: node_modules ## lint markdown files
-	pnpm exec markdownlint *.md
+	pnpm exec markdownlint $$(git ls-files '*.md')
 
 .PHONY: lint-md-fix
 lint-md-fix: node_modules ## lint markdown files and fix issues
-	pnpm exec markdownlint --fix *.md
+	pnpm exec markdownlint --fix $$(git ls-files '*.md')
 
 .PHONY: lint-spell
 lint-spell: ## lint spelling
