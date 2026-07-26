@@ -324,7 +324,7 @@ row that under-reports invites rebuilding something that exists.
 | AN-GOV-1 | Enterprise → org (selectable by custom property) → repo → IDE, enterprise non-overridable | Instance → org → repo ceilings on Actions tokens | partial, shipped |
 | AN-GOV-2 | Agent session audit events; filterable recent view; audit streaming | — | L3 |
 | AN-GOV-3 | Agent output scanned by CodeQL, secret scanning, advisory DB — no GHAS licence needed | No code scanning of any kind | excluded — scanning is security work, on its own merits |
-| AN-GOV-4 | Branch protection applies; no self-approve, self-merge, or self-ready | — | L3 |
+| AN-GOV-4 | Branch protection applies; no self-approve, self-merge, or self-ready | Branch protection already applies, because an app is an ordinary account; self-approve was already refused for everyone; self-merge and self-ready are refused for apps at the one choke point each path funnels through | shipped (#95, #96) |
 | AN-GOV-5 | Egress firewall on agent runs | Not expressible: the runner protocol has no network field in either direction. Reachable as label-based routing and refusal, which is attestation rather than enforcement | **L3 — the real gap** |
 | AN-GOV-6 | Signed agent commits | — | open |
 | AN-GOV-7 | Kill switch: installations can be suspended, and policy can disable agents per organization | Org-wide suspend enforced at the single auth choke point, covering every credential type including git-over-SSH | shipped (#66) |
@@ -676,9 +676,9 @@ Two independent pieces of configuration:
 
 Partly shipped, and the task half works end to end: the task and session model
 (#82), a task recorded when an issue is assigned to an app (#84), the read API
-(#85), and the record surfaced on the issue it belongs to (#86). What remains is
-the harder half — `AN-IDENT-2`, sessions themselves, the egress routing below,
-and the no-self-approve rules.
+(#85), and the record surfaced on the issue it belongs to (#86), with a task
+moving to its final state when its run ends (#93). What remains is the harder
+half — sessions themselves and the egress routing below.
 
 `AN-IDENT-2` is done (#89, #90), and it was first for a reason: until a run
 could obtain a short-lived credential for its app, an operator's only option was
@@ -693,8 +693,26 @@ can reach. No key is stored, because there is none to store: GitHub needs one
 only because their Apps are external to the repository, and an organization's
 own app is not.
 
-What remains in this layer is sessions themselves, the egress routing below,
-the no-self-approve rules, and a settings surface for managing grants.
+The self-review rules are done too (#95, #96), and both were found the same
+way: by trying them against a running instance rather than by reading the code.
+An app could merge a pull request it had opened, and could take its own draft
+out of review, in each case with no human involved at any point.
+
+Both refusals sit at the single choke point their paths funnel through —
+`CheckPullMergeable` and `ChangeTitle` — rather than at the call sites, so a
+path added later cannot miss them, and neither is configurable. A switch to
+turn one off is the whole guarantee.
+
+The self-ready rule is deliberately narrow: it refuses removing a draft
+prefix, not opening a pull request without one. Apps serve ordinary automation
+too, and a release bot that opens finished work is doing nothing wrong. An
+operator who wants the stronger property has the agent open its work as a
+draft, and the forge then holds the promotion for a person. What it does not
+prevent is an app opening a second, non-draft pull request — but that is a
+visible new pull request, not a silent promotion of this one.
+
+What remains in this layer is sessions themselves and the egress routing
+below.
 
 The largest slice, and the one this document originally under-scoped.
 Assigning an issue or a review to an agent starts a *session*: a dispatched

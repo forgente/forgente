@@ -291,6 +291,10 @@ func UpdateIssueTitle(ctx *context.Context) {
 	}
 
 	if err := issue_service.ChangeTitle(ctx, issue, ctx.Doer, title); err != nil {
+		if errors.Is(err, issue_service.ErrAppCannotReadyOwnPull) {
+			ctx.JSONError(ctx.Tr("repo.pulls.no_ready_own_app"))
+			return
+		}
 		ctx.ServerError("ChangeTitle", err)
 		return
 	}
