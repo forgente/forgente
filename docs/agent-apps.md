@@ -66,6 +66,8 @@ on:
 
 jobs:
   work:
+    # without this, every assignment to anyone starts the job
+    if: github.event.assignee.login == 'myagent'
     runs-on: ubuntu-latest
     steps:
       - name: Get a token for the app
@@ -135,11 +137,19 @@ An app can be assigned to an issue like any other member. Assignment emits the
 ordinary `issues.assigned` event, so `on: issues: types: [assigned]` is all a
 workflow needs — which is what the example above listens for.
 
-Guard on the assignee, or every assignment will start the workflow:
+Guard on the assignee, as the example above does, or every assignment to
+anyone will start the workflow:
 
 ```yaml
     if: github.event.assignee.login == 'myagent'
 ```
+
+`github.event.assignee` carries the person or app that was just assigned or
+unassigned, and only on those actions. Reading the issue's own list instead —
+`contains(github.event.issue.assignees.*.login, 'myagent')` — answers a
+different question: whether the agent is among the assignees at all, which
+stays true when somebody else is later assigned to the same issue. Use the
+first unless you specifically want the second.
 
 Where the forge records agent work, it appears on the issue and through
 `/api/v1/repos/{owner}/{repo}/agent/tasks`.

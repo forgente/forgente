@@ -593,6 +593,39 @@ func Test_WebhookIssueAssign(t *testing.T) {
 		assert.Equal(t, "issue2", payloads[0].PullRequest.Title)
 		assert.Equal(t, "content for the second issue", payloads[0].PullRequest.Body)
 		assert.Equal(t, user2.ID, payloads[0].PullRequest.Assignee.ID)
+		// the payload-level assignee, which is what a workflow reads. Without it
+		// an `if:` can only tell that the pull request changed, not who was
+		// assigned, so a job cannot start for one particular assignee.
+		require.NotNil(t, payloads[0].Assignee)
+		assert.Equal(t, user2.ID, payloads[0].Assignee.ID)
+	})
+}
+
+func Test_WebhookIssueAssignCarriesTheAssignee(t *testing.T) {
+	onGiteaRun(t, func(t *testing.T, giteaURL *url.URL) {
+		var payloads []api.IssuePayload
+		provider := newMockWebhookProvider(func(r *http.Request) {
+			content, _ := io.ReadAll(r.Body)
+			var payload api.IssuePayload
+			require.NoError(t, json.Unmarshal(content, &payload))
+			payloads = append(payloads, payload)
+		}, http.StatusOK)
+		defer provider.Close()
+
+		user2 := unittest.AssertExistsAndLoadBean(t, &user_model.User{ID: 2})
+		repo1 := unittest.AssertExistsAndLoadBean(t, &repo.Repository{ID: 1})
+
+		session := loginUser(t, "user2")
+		testAPICreateWebhookForRepo(t, session, "user2", "repo1", provider.URL(), "issue_assign")
+
+		// issue 1 of repo1 is an issue rather than a pull request
+		testIssueAssign(t, session, repo1.Link(), 1, user2.ID)
+
+		require.Len(t, payloads, 1)
+		assert.EqualValues(t, "assigned", payloads[0].Action)
+		require.NotNil(t, payloads[0].Assignee, "an assign event must say who was assigned")
+		assert.Equal(t, user2.ID, payloads[0].Assignee.ID)
+		assert.Equal(t, "user2", payloads[0].Assignee.UserName)
 	})
 }
 

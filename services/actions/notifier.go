@@ -170,7 +170,7 @@ func (n *actionsNotifier) IssueChangeAssignee(ctx context.Context, doer *user_mo
 		hookEvent = webhook_module.HookEventPullRequestAssign
 	}
 
-	notifyIssueChange(ctx, doer, issue, hookEvent, action, nil, nil)
+	notifyIssueChange(ctx, doer, issue, hookEvent, action, assignee, nil, nil)
 }
 
 // IssueChangeMilestone notifies assignee to notifiers
@@ -189,7 +189,7 @@ func (n *actionsNotifier) IssueChangeMilestone(ctx context.Context, doer *user_m
 		hookEvent = webhook_module.HookEventPullRequestMilestone
 	}
 
-	notifyIssueChange(ctx, doer, issue, hookEvent, action, nil, nil)
+	notifyIssueChange(ctx, doer, issue, hookEvent, action, nil, nil, nil)
 }
 
 func (n *actionsNotifier) IssueChangeLabels(ctx context.Context, doer *user_model.User, issue *issues_model.Issue,
@@ -202,10 +202,10 @@ func (n *actionsNotifier) IssueChangeLabels(ctx context.Context, doer *user_mode
 		hookEvent = webhook_module.HookEventPullRequestLabel
 	}
 
-	notifyIssueChange(ctx, doer, issue, hookEvent, api.HookIssueLabelUpdated, addedLabels, removedLabels)
+	notifyIssueChange(ctx, doer, issue, hookEvent, api.HookIssueLabelUpdated, nil, addedLabels, removedLabels)
 }
 
-func notifyIssueChange(ctx context.Context, doer *user_model.User, issue *issues_model.Issue, event webhook_module.HookEventType, action api.HookIssueAction, addedLabels, removedLabels []*issues_model.Label) {
+func notifyIssueChange(ctx context.Context, doer *user_model.User, issue *issues_model.Issue, event webhook_module.HookEventType, action api.HookIssueAction, assignee *user_model.User, addedLabels, removedLabels []*issues_model.Label) {
 	var err error
 	if err = issue.LoadRepo(ctx); err != nil {
 		log.Error("LoadRepo: %v", err)
@@ -244,6 +244,7 @@ func notifyIssueChange(ctx context.Context, doer *user_model.User, issue *issues
 			Action:      action,
 			Index:       issue.Index,
 			PullRequest: convert.ToAPIPullRequest(ctx, issue.PullRequest, nil),
+			Assignee:    convert.ToUser(ctx, assignee, nil),
 			Repository:  convert.ToRepo(ctx, issue.Repo, access_model.Permission{AccessMode: perm_model.AccessModeNone}),
 			Sender:      convert.ToUser(ctx, doer, nil),
 			Changes: &api.ChangesPayload{
@@ -265,6 +266,7 @@ func notifyIssueChange(ctx context.Context, doer *user_model.User, issue *issues
 		Action:     action,
 		Index:      issue.Index,
 		Issue:      convert.ToAPIIssue(ctx, doer, issue),
+		Assignee:   convert.ToUser(ctx, assignee, nil),
 		Repository: convert.ToRepo(ctx, issue.Repo, permission),
 		Sender:     convert.ToUser(ctx, doer, nil),
 		Changes: &api.ChangesPayload{
