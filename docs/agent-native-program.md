@@ -325,7 +325,7 @@ row that under-reports invites rebuilding something that exists.
 | AN-GOV-2 | Agent session audit events; filterable recent view; audit streaming | — | L3 |
 | AN-GOV-3 | Agent output scanned by CodeQL, secret scanning, advisory DB — no GHAS licence needed | No code scanning of any kind | excluded — scanning is security work, on its own merits |
 | AN-GOV-4 | Branch protection applies; no self-approve, self-merge, or self-ready | Branch protection already applies, because an app is an ordinary account; self-approve was already refused for everyone; self-merge and self-ready are refused for apps at the one choke point each path funnels through | shipped (#95, #96) |
-| AN-GOV-5 | Egress firewall on agent runs | Not expressible: the runner protocol has no network field in either direction. Reachable as label-based routing and refusal, which is attestation rather than enforcement | **L3 — the real gap** |
+| AN-GOV-5 | Egress firewall on agent runs | Not expressible: the runner protocol has no network field in either direction. A grant may require a runner label, checked when a run asks to act as the app — attestation rather than enforcement, and worded as such | shipped (#97) |
 | AN-GOV-6 | Signed agent commits | — | open |
 | AN-GOV-7 | Kill switch: installations can be suspended, and policy can disable agents per organization | Org-wide suspend enforced at the single auth choke point, covering every credential type including git-over-SSH | shipped (#66) |
 
@@ -678,7 +678,7 @@ Partly shipped, and the task half works end to end: the task and session model
 (#82), a task recorded when an issue is assigned to an app (#84), the read API
 (#85), and the record surfaced on the issue it belongs to (#86), with a task
 moving to its final state when its run ends (#93). What remains is the harder
-half — sessions themselves and the egress routing below.
+half: sessions themselves.
 
 `AN-IDENT-2` is done (#89, #90), and it was first for a reason: until a run
 could obtain a short-lived credential for its app, an operator's only option was
@@ -711,8 +711,11 @@ draft, and the forge then holds the promotion for a person. What it does not
 prevent is an app opening a second, non-draft pull request — but that is a
 visible new pull request, not a silent promotion of this one.
 
-What remains in this layer is sessions themselves and the egress routing
-below.
+The egress restriction below is done too (#97), though not in the shape this
+document specified — see the correction there.
+
+What remains in this layer is sessions themselves. Every other governance row
+is shipped or excluded.
 
 The largest slice, and the one this document originally under-scoped.
 Assigning an issue or a review to an agent starts a *session*: a dispatched
@@ -733,7 +736,7 @@ scoped as though assignment-to-an-agent had to be built. It does not:
 
 So a workflow declaring `on: issues: types: [assigned]` already runs when an
 issue is assigned to an agent. What L3 adds is not a trigger but a *record*
-attached to the run that already happens, plus the runner routing above. That
+attached to the run that already happens, plus the runner-label policy above. That
 is the second time checking the substrate has shrunk this layer, after the
 permissions half.
 
@@ -808,19 +811,42 @@ That leaves three routes, and naming them is what makes the layer scopeable:
    field is a poor trade.
 3. **Use the mechanism that already exists: labels.** An operator configures a
    network-restricted runner — act_runner can already do this — and registers
-   it under a label. The forge routes agent sessions to runners carrying that
-   label, refuses to dispatch a session when none is available, and shows which
-   runners qualify. No protocol change, no fork.
+   it under a label. No protocol change, no fork.
 
 Route 3 is the one to build, and its limit has to be stated plainly rather
 than discovered later: **labels are self-asserted, so this is attestation, not
 enforcement.** A runner that claims the label without restricting anything
 defeats it. That is not a new weakness — the forge already trusts registered
 runners to execute arbitrary workflow code — but it means the honest claim is
-"agent sessions only dispatch to runners the operator has designated as
+"agent sessions only run on runners the operator has designated as
 network-restricted", never "Forgente enforces an egress firewall". The
 enforcement lives in the operator's runner deployment, and the forge's job is
-to make the designation explicit, routable and visible.
+to make the designation explicit, checked and visible.
+
+**Corrected while building it (#97).** Route 3 above said the forge should
+"route agent sessions to runners carrying that label". It already does. A job's
+`runs-on` is matched against a runner's labels by `CanMatchLabels` in
+`CreateTaskForRunner`, and an operator can write `runs-on: egress-restricted`
+today without any of this. Building routing would have built nothing — which is
+the fourth time a substrate check has shrunk this layer.
+
+What was missing was not routing but a **policy**: nothing held a run there.
+Whoever can edit a workflow can edit that line, and the app token was minted
+regardless, so the restriction was one commit deep. The check therefore belongs
+where the run asks to *become the app* — a boundary it must cross — rather than
+where it is scheduled, which is merely where it happens to land. A run on an
+undesignated runner is refused the identity outright.
+
+That also makes the guarantee stronger than routing would have been. Routing
+decides where work executes; this decides whether work that executed in the
+wrong place gets to act as anyone. It fails closed: a grant naming a label and a
+run whose runner cannot be established is refused, because issuing a
+location-restricted identity to a run of unknown location is precisely what the
+restriction exists to stop.
+
+The designation lives on the grant, next to the scope, because the grant is
+already the authorization record — it says what the app may do, and now also
+where it may be claimed from.
 
 **How strong that is depends on who operates the runners, and that is what makes
 it shippable.** Attestation is weak when the forge operator and the runner

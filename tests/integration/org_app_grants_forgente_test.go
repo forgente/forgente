@@ -33,7 +33,7 @@ func TestOrgAppRunGrants(t *testing.T) {
 
 		// "unspecified" must not read as "everything" — the OAuth2 grant default
 		// corrected during L1 was exactly this mistake
-		_, err := user_service.GrantAppToRepoRuns(t.Context(), doer, org, app.ID, ownRepoID, "")
+		_, err := user_service.GrantAppToRepoRuns(t.Context(), doer, org, app.ID, ownRepoID, "", "")
 		assert.True(t, user_service.IsErrForgenteAppRunGrantScope(err), "got %v", err)
 	})
 
@@ -42,7 +42,7 @@ func TestOrgAppRunGrants(t *testing.T) {
 
 		// otherwise an organization could hand its app's identity to whoever can
 		// land a workflow in somebody else's repository
-		_, err := user_service.GrantAppToRepoRuns(t.Context(), doer, org, app.ID, foreignRepoID, auth_model.AccessTokenScopeReadIssue)
+		_, err := user_service.GrantAppToRepoRuns(t.Context(), doer, org, app.ID, foreignRepoID, auth_model.AccessTokenScopeReadIssue, "")
 		require.Error(t, err)
 		assert.ErrorContains(t, err, "not owned by organization")
 	})
@@ -50,7 +50,7 @@ func TestOrgAppRunGrants(t *testing.T) {
 	t.Run("Grant", func(t *testing.T) {
 		defer tests.PrintCurrentTest(t)()
 
-		grant, err := user_service.GrantAppToRepoRuns(t.Context(), doer, org, app.ID, ownRepoID, auth_model.AccessTokenScopeReadIssue)
+		grant, err := user_service.GrantAppToRepoRuns(t.Context(), doer, org, app.ID, ownRepoID, auth_model.AccessTokenScopeReadIssue, "")
 		require.NoError(t, err)
 		assert.Equal(t, auth_model.AccessTokenScopeReadIssue, grant.Scope)
 		assert.Equal(t, doer.ID, grant.GrantedByID)
@@ -62,7 +62,7 @@ func TestOrgAppRunGrants(t *testing.T) {
 		before, err := user_model.GetForgenteAppRunGrant(t.Context(), app.ID, ownRepoID)
 		require.NoError(t, err)
 
-		after, err := user_service.GrantAppToRepoRuns(t.Context(), doer, org, app.ID, ownRepoID, auth_model.AccessTokenScopeWriteIssue)
+		after, err := user_service.GrantAppToRepoRuns(t.Context(), doer, org, app.ID, ownRepoID, auth_model.AccessTokenScopeWriteIssue, "")
 		require.NoError(t, err)
 
 		// the same authorization changed, not a second one added
@@ -78,7 +78,7 @@ func TestOrgAppRunGrants(t *testing.T) {
 		defer tests.PrintCurrentTest(t)()
 
 		otherOrg := unittest.AssertExistsAndLoadBean(t, &organization.Organization{Name: "org6"})
-		_, err := user_service.GrantAppToRepoRuns(t.Context(), doer, otherOrg, app.ID, 0, auth_model.AccessTokenScopeReadIssue)
+		_, err := user_service.GrantAppToRepoRuns(t.Context(), doer, otherOrg, app.ID, 0, auth_model.AccessTokenScopeReadIssue, "")
 		assert.True(t, user_model.IsErrForgenteAppNotExist(err), "got %v", err)
 	})
 
@@ -97,7 +97,7 @@ func TestOrgAppRunGrants(t *testing.T) {
 	t.Run("DeletingTheAppTakesItsGrants", func(t *testing.T) {
 		defer tests.PrintCurrentTest(t)()
 
-		_, err := user_service.GrantAppToRepoRuns(t.Context(), doer, org, app.ID, 0, auth_model.AccessTokenScopeReadIssue)
+		_, err := user_service.GrantAppToRepoRuns(t.Context(), doer, org, app.ID, 0, auth_model.AccessTokenScopeReadIssue, "")
 		require.NoError(t, err)
 
 		botUser := unittest.AssertExistsAndLoadBean(t, &user_model.User{ID: app.UserID})

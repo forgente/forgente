@@ -120,6 +120,37 @@ instance's no-reply domain (`NO_REPLY_ADDRESS`, `noreply.example.com` by
 default). Apps are created with a private email, so this is the address the
 forge expects to see.
 
+### Keep an app's work on runners you trust
+
+A grant can name a **required runner label**. When it does, a run can act as the
+app only while it is executing on a runner carrying that label:
+
+1. Configure a runner however your policy requires — a restricted egress
+   network, an isolated host, whatever you enforce — and register it with a
+   label such as `egress-restricted`.
+2. On the grant, set that label as the required one.
+3. Point the workflow at it: `runs-on: egress-restricted`.
+
+Step 3 alone is not a policy. Anyone who can edit the workflow can change
+`runs-on` back to an ordinary runner, and before the grant field existed the app
+token was minted anyway. Setting the label on the grant is what makes step 3
+load-bearing: a run on any other runner is refused the app's identity, so the
+workflow cannot quietly relocate itself out of the restriction.
+
+**This is a designation, not an enforcement.** Labels are self-asserted by each
+runner, so a runner that claims `egress-restricted` while restricting nothing
+defeats it. The forge cannot check the claim — the runner protocol has no field
+for network policy in either direction — so what it does is make the designation
+explicit, checked at the moment identity is handed over, and visible on the
+page. The enforcement lives in your runner's own configuration.
+
+That makes the honest claim *"this app is only claimable from runners we
+designated as network-restricted"* — never *"the forge enforces an egress
+firewall"*. How much the designation is worth depends on who operates the
+runners: an organization designating its own fleet is asserting something about
+its own machines, which is meaningful; accepting a label from a runner somebody
+else operates is trusting their word.
+
 ### What the exchange refuses
 
 - **A fork pull request run.** Such a run executes code the repository's
@@ -128,6 +159,9 @@ forge expects to see.
   refused identically, so names cannot be probed.
 - **A suspended app.**
 - **A job that is no longer running.**
+- **A runner that does not carry the grant's required label**, when one is set.
+  A run whose runner cannot be established is refused too, rather than given the
+  benefit of the doubt.
 
 ### How long the token lasts
 

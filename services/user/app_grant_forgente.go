@@ -49,7 +49,14 @@ func (err ErrForgenteAppRunGrantScope) Unwrap() error {
 //   - A scope carrying no permission. An empty scope reads like "harmless" and
 //     would be the second time this lineage treated "unspecified" as "all" —
 //     see the OAuth2 grant default corrected during L1.
-func GrantAppToRepoRuns(ctx context.Context, doer *user_model.User, org *organization.Organization, appID, repoID int64, scope auth_model.AccessTokenScope) (*user_model.ForgenteAppRunGrant, error) {
+//
+// runnerLabel is optional and restricts which runners may claim the app under
+// this grant. It is not validated against the runners that exist today: a
+// designated runner may legitimately be registered after the policy is set,
+// and refusing the grant until then would invert the order operators work in.
+// The settings page shows which runners currently match so the mismatch is
+// visible rather than silent.
+func GrantAppToRepoRuns(ctx context.Context, doer *user_model.User, org *organization.Organization, appID, repoID int64, scope auth_model.AccessTokenScope, runnerLabel string) (*user_model.ForgenteAppRunGrant, error) {
 	normalized, err := scope.Normalize()
 	if err != nil {
 		return nil, err
@@ -81,6 +88,7 @@ func GrantAppToRepoRuns(ctx context.Context, doer *user_model.User, org *organiz
 		switch {
 		case err == nil && existing.RepoID == repoID:
 			existing.Scope = normalized
+			existing.RunnerLabel = runnerLabel
 			existing.GrantedByID = doer.ID
 			grant = existing
 			return user_model.UpdateForgenteAppRunGrantScope(ctx, existing)
@@ -92,6 +100,7 @@ func GrantAppToRepoRuns(ctx context.Context, doer *user_model.User, org *organiz
 			AppID:       app.ID,
 			RepoID:      repoID,
 			Scope:       normalized,
+			RunnerLabel: runnerLabel,
 			GrantedByID: doer.ID,
 		}
 		return db.Insert(ctx, grant)

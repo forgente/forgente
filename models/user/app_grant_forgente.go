@@ -46,6 +46,23 @@ type ForgenteAppRunGrant struct {
 	// treated as full access, and nothing advertised that narrower scopes
 	// existed. A grant that cannot say what it is for should not be created.
 	Scope auth.AccessTokenScope `xorm:"NOT NULL"`
+	// RunnerLabel restricts which runners a run may claim this app from. Empty
+	// means any runner the job would otherwise land on.
+	//
+	// Routing by label already exists — a job's `runs-on` decides which runner
+	// picks it up. What did not exist is a policy holding it there: anyone who
+	// can edit a workflow can change `runs-on` back to an unrestricted runner,
+	// and until this field the app token was minted anyway. So the label is
+	// checked where the run asks to become the app rather than where it is
+	// scheduled, and a run on an undesignated runner simply cannot be the app.
+	//
+	// This is attestation, not enforcement: labels are self-asserted, and a
+	// runner claiming the label without restricting anything defeats it. The
+	// forge cannot do better — the runner protocol has no field for network
+	// policy in either direction — so its job is to make the designation
+	// explicit, checkable and visible, and to leave the enforcing to the
+	// operator's runner deployment.
+	RunnerLabel string `xorm:"NOT NULL DEFAULT ''"`
 	// GrantedByID records which organization owner authorized this, and is kept
 	// if that account is deleted — an escalation should not lose its origin.
 	GrantedByID int64              `xorm:"NOT NULL"`
@@ -115,11 +132,15 @@ func CountForgenteAppRunGrants(ctx context.Context, appID int64) (int64, error) 
 	return db.GetEngine(ctx).Where("app_id = ?", appID).Count(new(ForgenteAppRunGrant))
 }
 
-// UpdateForgenteAppRunGrantScope rewrites an existing grant's scope and who
-// authorized it. Only those two columns move: re-granting is a change to an
-// existing authorization, not a new one, so its creation time stays put.
+// UpdateForgenteAppRunGrantScope rewrites an existing grant's scope, its runner
+// restriction and who authorized it. Only those columns move: re-granting is a
+// change to an existing authorization, not a new one, so its creation time
+// stays put.
+//
+// runner_label is listed explicitly because it is often being cleared, and an
+// empty string is exactly what xorm's non-zero update would drop.
 func UpdateForgenteAppRunGrantScope(ctx context.Context, grant *ForgenteAppRunGrant) error {
-	_, err := db.GetEngine(ctx).ID(grant.ID).Cols("scope", "granted_by_id").Update(grant)
+	_, err := db.GetEngine(ctx).ID(grant.ID).Cols("scope", "runner_label", "granted_by_id").Update(grant)
 	return err
 }
 

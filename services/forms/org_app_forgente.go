@@ -30,6 +30,9 @@ func (f *CreateOrgAppForm) Validate(req *http.Request, errs binding.Errors) bind
 // scope arrives through the same checkboxes access tokens use.
 type GrantAppRunForm struct {
 	RepoName string `binding:"MaxSize(100)"`
+	// RunnerLabel restricts which runners may claim the app under this grant.
+	// Empty means any runner the job lands on.
+	RunnerLabel string `binding:"MaxSize(255)"`
 }
 
 // Validate validates the fields

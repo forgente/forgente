@@ -4,6 +4,8 @@
 package org
 
 import (
+	"strings"
+
 	repo_model "forgente.com/models/repo"
 	user_model "forgente.com/models/user"
 	"forgente.com/modules/web"
@@ -86,7 +88,9 @@ func AppGrantPost(ctx *context.Context) {
 		return
 	}
 
-	if _, err := user_service.GrantAppToRepoRuns(ctx, ctx.Doer, ctx.Org.Organization, app.ID, repoID, scope); err != nil {
+	runnerLabel := strings.TrimSpace(form.RunnerLabel)
+
+	if _, err := user_service.GrantAppToRepoRuns(ctx, ctx.Doer, ctx.Org.Organization, app.ID, repoID, scope, runnerLabel); err != nil {
 		if user_service.IsErrForgenteAppRunGrantScope(err) {
 			ctx.Flash.Error(ctx.Tr("settings.at_least_one_permission"))
 		} else {
