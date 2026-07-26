@@ -1008,6 +1008,8 @@ func registerWebRoutes(m *web.Router, webAuth *AuthMiddleware) {
 							m.Post("/suspend", org.AppSuspendPost)
 							m.Post("/tokens", web.Bind(forms.NewAccessTokenForm{}), org.AppTokenPost)
 							m.Post("/tokens/delete", org.AppTokenDelete)
+							m.Post("/grants", web.Bind(forms.GrantAppRunForm{}), org.AppGrantPost)
+							m.Post("/grants/delete", org.AppGrantDelete)
 						})
 					})
 					// org-owned apps do not depend on the OAuth2 provider, so only
