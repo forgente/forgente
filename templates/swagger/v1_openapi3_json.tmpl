@@ -67,6 +67,29 @@
         },
         "description": "ActivityFeedsList"
       },
+      "AgentTask": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AgentTask"
+            }
+          }
+        },
+        "description": "AgentTask"
+      },
+      "AgentTaskList": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "items": {
+                "$ref": "#/components/schemas/AgentTask"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "description": "AgentTaskList"
+      },
       "AnnotatedTag": {
         "content": {
           "application/json": {
@@ -2529,6 +2552,58 @@
         "required": [
           "time"
         ],
+        "type": "object",
+        "x-go-package": "forgente.com/modules/structs"
+      },
+      "AgentTask": {
+        "description": "AgentTask is a unit of work given to an agent. The field names follow\nGitHub's agent task object so a client written against that surface reads\nthis one, minus the usage and billing fields Forgente does not have.",
+        "properties": {
+          "agent": {
+            "$ref": "#/components/schemas/User"
+          },
+          "archived_at": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "ArchivedAt"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "Created"
+          },
+          "creator": {
+            "$ref": "#/components/schemas/User"
+          },
+          "id": {
+            "description": "ID is the unique identifier for the task",
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "ID"
+          },
+          "issue": {
+            "$ref": "#/components/schemas/Issue"
+          },
+          "name": {
+            "description": "Name is the human-readable title, usually the issue's",
+            "type": "string",
+            "x-go-name": "Name"
+          },
+          "profile_id": {
+            "description": "ProfileID names the repository agent profile the task runs under, by its\nfile identifier, or is empty when no profile was named",
+            "type": "string",
+            "x-go-name": "ProfileID"
+          },
+          "state": {
+            "description": "State is one of queued, in_progress, completed, failed, idle,\nwaiting_for_user, timed_out, cancelled",
+            "type": "string",
+            "x-go-name": "State"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "Updated"
+          }
+        },
         "type": "object",
         "x-go-package": "forgente.com/modules/structs"
       },
@@ -17899,6 +17974,122 @@
           }
         },
         "summary": "List a repository's activity feeds",
+        "tags": [
+          "repository"
+        ]
+      }
+    },
+    "/repos/{owner}/{repo}/agent/tasks": {
+      "get": {
+        "operationId": "repoListAgentTasks",
+        "parameters": [
+          {
+            "description": "owner of the repo",
+            "in": "path",
+            "name": "owner",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "name of the repo",
+            "in": "path",
+            "name": "repo",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "filter by state, one of queued, in_progress, completed, failed, idle, waiting_for_user, timed_out, cancelled",
+            "in": "query",
+            "name": "state",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "include tasks archived on completion",
+            "in": "query",
+            "name": "include_archived",
+            "schema": {
+              "type": "boolean"
+            }
+          },
+          {
+            "description": "page number of results to return (1-based)",
+            "in": "query",
+            "name": "page",
+            "schema": {
+              "type": "integer"
+            }
+          },
+          {
+            "description": "page size of results",
+            "in": "query",
+            "name": "limit",
+            "schema": {
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/AgentTaskList"
+          },
+          "422": {
+            "$ref": "#/components/responses/validationError"
+          }
+        },
+        "summary": "List a repository's agent tasks",
+        "tags": [
+          "repository"
+        ]
+      }
+    },
+    "/repos/{owner}/{repo}/agent/tasks/{id}": {
+      "get": {
+        "operationId": "repoGetAgentTask",
+        "parameters": [
+          {
+            "description": "owner of the repo",
+            "in": "path",
+            "name": "owner",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "name of the repo",
+            "in": "path",
+            "name": "repo",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "id of the task",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/AgentTask"
+          },
+          "404": {
+            "$ref": "#/components/responses/notFound"
+          }
+        },
+        "summary": "Get an agent task",
         "tags": [
           "repository"
         ]
