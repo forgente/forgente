@@ -34,6 +34,7 @@ import (
 	"forgente.com/routers/private"
 	web_routers "forgente.com/routers/web"
 	actions_service "forgente.com/services/actions"
+	agent_service "forgente.com/services/agent"
 	asymkey_service "forgente.com/services/asymkey"
 	"forgente.com/services/auth"
 	"forgente.com/services/auth/source/oauth2"
@@ -129,6 +130,7 @@ func InitWebInstalled(ctx context.Context) {
 	mustInit(cache.Init)
 	mustInit(feed_service.Init)
 	mustInit(uinotification.Init)
+	mustInit(agent_service.Init)
 	mustInitCtx(ctx, archiver.Init)
 
 	external.RegisterRenderers()
