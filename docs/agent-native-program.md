@@ -253,8 +253,17 @@ backlog and is considered at the next re-survey, not mid-flight.
 
 Rows carry stable IDs so pull requests and issues can cite `AN-IDENT-2`
 rather than re-describing the capability. Status is one of **shipped**,
-**Ln** (assigned to a layer), **open** (accepted, unassigned), or
+**Ln, part shipped** (a layer has landed some of it — say which pull
+requests, and say in the Forgente column what is *not* built), **Ln**
+(assigned to a layer, nothing landed), **open** (accepted, unassigned), or
 **excluded** (with a reason — those rows are the most useful ones here).
+
+**Update the row in the pull request that ships the capability, not in a
+later documentation pass.** These rows went stale within a single session of
+shipping once already: the layer sections below recorded what had landed
+while six rows here still read `—`, which is worse than a vague row, because
+this table is what a pull request cites *instead of* re-reading the code. A
+row that under-reports invites rebuilding something that exists.
 
 ### Identity and installation
 
