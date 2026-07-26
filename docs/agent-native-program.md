@@ -247,7 +247,7 @@ rather than re-describing the capability. Status is one of **shipped**,
 | AN-GOV-2 | Agent session audit events; filterable recent view; audit streaming | — | L3 |
 | AN-GOV-3 | Agent output scanned by CodeQL, secret scanning, advisory DB — no GHAS licence needed | No code scanning of any kind | excluded — scanning is security work, on its own merits |
 | AN-GOV-4 | Branch protection applies; no self-approve, self-merge, or self-ready | — | L3 |
-| AN-GOV-5 | Egress firewall on agent runs | Nothing; runner exposes `network_mode`/`privileged` only | **L3 — the real gap** |
+| AN-GOV-5 | Egress firewall on agent runs | Not expressible: the runner protocol has no network field in either direction. Reachable as label-based routing and refusal, which is attestation rather than enforcement | **L3 — the real gap** |
 | AN-GOV-6 | Signed agent commits | — | open |
 | AN-GOV-7 | Kill switch: installations can be suspended, and policy can disable agents per organization | Org-wide suspend enforced at the single auth choke point, covering every credential type including git-over-SSH | shipped (#66) |
 
@@ -591,11 +591,10 @@ the ecosystem survey above — so the list is marked with what remains:
   repository ceilings. What an agent session adds is choosing the mode
   deliberately at dispatch rather than inheriting the repository's default.
 - Egress control on agent runs — the operator decides what the sandbox may
-  reach. **This is the real gap.** Nothing in the tree expresses an egress
-  policy; the runner exposes container `network_mode` and `privileged`, which
-  are deployment settings, not policy the forge can state or enforce. Of the
-  whole contract this is the piece that most needs designing, and shipping
-  agent sessions without it is probably not defensible.
+  reach. **This is the real gap, and it is a different shape than assumed.**
+  See the substrate check below; the short version is that the forge cannot
+  enforce egress and cannot be made to without an ecosystem-wide protocol
+  change, so what it can honestly offer is routing and refusal.
 - Agents cannot approve, cannot merge, and cannot mark their own work ready
   for review. Branch protection and required checks apply unchanged.
 - Untrusted input is treated as untrusted: the issue body an agent reads is
@@ -611,6 +610,47 @@ the ecosystem survey above — so the list is marked with what remains:
   rather than apply, with its reasoning attached, and a human accepts or
   declines. This pattern is cheap, it is proven, and it fits a self-hosted
   audience better than silent automation does.
+
+**Egress: what the substrate actually permits (checked 2026-07-26).** Against
+`gitea.dev/actions-proto-go` v0.6.0, the wire protocol between forge and
+runner:
+
+- The `Task` message the forge sends has seven fields — `id`,
+  `workflow_payload`, `context`, `secrets`, `machine` (marked unused), `needs`
+  and `vars`. **There is no network or egress field of any kind.**
+- The `Runner` message sent at registration carries `id`, `uuid`, `token`,
+  `name`, `status`, `agent_labels`, `custom_labels`, `version`, `labels` and
+  `ephemeral`. **No network capability is reported either.**
+
+So the earlier framing — "the runner exposes `network_mode` and `privileged`"
+— understated it. Those are act_runner's own configuration; the forge never
+sees them and has no field in which to express a policy about them. Egress is
+not an unimplemented forge feature. It is **not expressible** in the protocol,
+in either direction.
+
+That leaves three routes, and naming them is what makes the layer scopeable:
+
+1. **Extend the protocol upstream.** Correct, and slow: `actions-proto-go` is
+   shared with Gitea and the runner, exactly the wire surface
+   [AGENTS.md](../AGENTS.md) says not to diverge from unilaterally.
+2. **Fork the runner.** The fork-on-divergence bar in
+   [FORGENTE.md](../FORGENTE.md) governs, and a permanent merge burden for one
+   field is a poor trade.
+3. **Use the mechanism that already exists: labels.** An operator configures a
+   network-restricted runner — act_runner can already do this — and registers
+   it under a label. The forge routes agent sessions to runners carrying that
+   label, refuses to dispatch a session when none is available, and shows which
+   runners qualify. No protocol change, no fork.
+
+Route 3 is the one to build, and its limit has to be stated plainly rather
+than discovered later: **labels are self-asserted, so this is attestation, not
+enforcement.** A runner that claims the label without restricting anything
+defeats it. That is not a new weakness — the forge already trusts registered
+runners to execute arbitrary workflow code — but it means the honest claim is
+"agent sessions only dispatch to runners the operator has designated as
+network-restricted", never "Forgente enforces an egress firewall". The
+enforcement lives in the operator's runner deployment, and the forge's job is
+to make the designation explicit, routable and visible.
 
 ### L4 — Tenants
 
