@@ -100,7 +100,7 @@ Measured on 2026-07-27 by pointing each harness at a recording endpoint and
 reading what arrived:
 
 | Harness | Endpoint | Wire shape | Auth | Streaming |
-|---|---|---|---|---|
+| --- | --- | --- | --- | --- |
 | Claude Code 2.1.220 | `POST /v1/messages?beta=true` | Anthropic Messages | `Authorization: Bearer` | `stream: true` |
 | Codex 0.145.0 | `POST /v1/responses` | OpenAI **Responses** | `Authorization: Bearer` | `stream: true` |
 
