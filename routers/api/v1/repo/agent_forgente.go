@@ -163,3 +163,126 @@ func GetAgentTask(ctx *context.APIContext) {
 
 	ctx.JSON(http.StatusOK, toAPIAgentTask(ctx, task))
 }
+
+// toAPIAgentSession expands one attempt for the API.
+func toAPIAgentSession(session *agent_model.Session) *api.AgentSession {
+	out := &api.AgentSession{
+		ID:           session.ID,
+		TaskID:       session.TaskID,
+		State:        string(session.State),
+		RunID:        session.RunID,
+		Prompt:       session.Prompt,
+		HeadRef:      session.HeadRef,
+		BaseRef:      session.BaseRef,
+		Model:        session.Model,
+		ErrorMessage: session.ErrorMessage,
+		Created:      session.CreatedUnix.AsTime(),
+		Updated:      session.UpdatedUnix.AsTime(),
+	}
+	if !session.CompletedAt.IsZero() {
+		completed := session.CompletedAt.AsTime()
+		out.CompletedAt = &completed
+	}
+	return out
+}
+
+// ListAgentTaskSessions lists every attempt at one task, newest first.
+func ListAgentTaskSessions(ctx *context.APIContext) {
+	// swagger:operation GET /repos/{owner}/{repo}/agent/tasks/{id}/sessions repository repoListAgentTaskSessions
+	// ---
+	// summary: List the attempts at an agent task
+	// produces:
+	// - application/json
+	// parameters:
+	// - name: owner
+	//   in: path
+	//   description: owner of the repo
+	//   type: string
+	//   required: true
+	// - name: repo
+	//   in: path
+	//   description: name of the repo
+	//   type: string
+	//   required: true
+	// - name: id
+	//   in: path
+	//   description: id of the task
+	//   type: integer
+	//   format: int64
+	//   required: true
+	// responses:
+	//   "200":
+	//     "$ref": "#/responses/AgentSessionList"
+	//   "404":
+	//     "$ref": "#/responses/notFound"
+
+	task, err := agent_service.GetTaskByID(ctx, ctx.PathParamInt64("id"))
+	if err != nil {
+		ctx.APIErrorInternal(err)
+		return
+	}
+	if task == nil || task.RepoID != ctx.Repo.Repository.ID {
+		ctx.APIErrorNotFound()
+		return
+	}
+
+	sessions, err := agent_service.SessionsForTask(ctx, task.ID)
+	if err != nil {
+		ctx.APIErrorInternal(err)
+		return
+	}
+
+	out := make([]*api.AgentSession, 0, len(sessions))
+	for _, session := range sessions {
+		out = append(out, toAPIAgentSession(session))
+	}
+
+	ctx.SetTotalCountHeader(int64(len(out)))
+	ctx.JSON(http.StatusOK, out)
+}
+
+// GetAgentSession returns one attempt.
+func GetAgentSession(ctx *context.APIContext) {
+	// swagger:operation GET /repos/{owner}/{repo}/agent/sessions/{id} repository repoGetAgentSession
+	// ---
+	// summary: Get one attempt at an agent task
+	// produces:
+	// - application/json
+	// parameters:
+	// - name: owner
+	//   in: path
+	//   description: owner of the repo
+	//   type: string
+	//   required: true
+	// - name: repo
+	//   in: path
+	//   description: name of the repo
+	//   type: string
+	//   required: true
+	// - name: id
+	//   in: path
+	//   description: id of the session
+	//   type: integer
+	//   format: int64
+	//   required: true
+	// responses:
+	//   "200":
+	//     "$ref": "#/responses/AgentSession"
+	//   "404":
+	//     "$ref": "#/responses/notFound"
+
+	session, err := agent_service.GetSessionByID(ctx, ctx.PathParamInt64("id"))
+	if err != nil {
+		ctx.APIErrorInternal(err)
+		return
+	}
+	// the session carries its own repository, denormalised from its task, so
+	// this needs no join; as with tasks, one belonging elsewhere is reported
+	// missing rather than forbidden
+	if session == nil || session.RepoID != ctx.Repo.Repository.ID {
+		ctx.APIErrorNotFound()
+		return
+	}
+
+	ctx.JSON(http.StatusOK, toAPIAgentSession(session))
+}

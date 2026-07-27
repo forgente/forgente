@@ -1569,9 +1569,13 @@ func Routes() *web.Router {
 			m.Get("/issues/search", repo.SearchIssues)
 
 			m.Group("/{username}/{reponame}", func() {
-				m.Group("/agent/tasks", func() {
-					m.Get("", repo.ListAgentTasks)
-					m.Get("/{id}", repo.GetAgentTask)
+				m.Group("/agent", func() {
+					m.Group("/tasks", func() {
+						m.Get("", repo.ListAgentTasks)
+						m.Get("/{id}", repo.GetAgentTask)
+						m.Get("/{id}/sessions", repo.ListAgentTaskSessions)
+					})
+					m.Get("/sessions/{id}", repo.GetAgentSession)
 				}, reqRepoReader(unit.TypeIssues))
 				m.Group("/issues", func() {
 					m.Combo("").Get(repo.ListIssues).

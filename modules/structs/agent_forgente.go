@@ -32,3 +32,36 @@ type AgentTask struct {
 	// swagger:strfmt date-time
 	Updated time.Time `json:"updated_at"`
 }
+
+// AgentSession is one attempt at a task. A task has many over time — a retry,
+// or a continuation after a human answered a question — and each keeps its own
+// outcome, so an earlier attempt stays readable after a later one ends
+// differently.
+type AgentSession struct {
+	// ID is the unique identifier for the session
+	ID int64 `json:"id"`
+	// TaskID is the task this is an attempt at
+	TaskID int64 `json:"task_id"`
+	// State is one of queued, in_progress, completed, failed, idle,
+	// waiting_for_user, timed_out, cancelled
+	State string `json:"state"`
+	// RunID is the Actions run that carried out the attempt, or 0 before one
+	// has been attached. Actions is the sandbox, so logs, timing and
+	// cancellation live on the run rather than being duplicated here.
+	RunID int64 `json:"run_id,omitempty"`
+	// Prompt is what the agent was asked
+	Prompt string `json:"prompt,omitempty"`
+	// HeadRef is the branch the agent works on, BaseRef what it targets
+	HeadRef string `json:"head_ref,omitempty"`
+	BaseRef string `json:"base_ref,omitempty"`
+	// Model records which model served the session, for provenance
+	Model string `json:"model,omitempty"`
+	// ErrorMessage explains a failed state to a human
+	ErrorMessage string `json:"error_message,omitempty"`
+	// swagger:strfmt date-time
+	CompletedAt *time.Time `json:"completed_at,omitempty"`
+	// swagger:strfmt date-time
+	Created time.Time `json:"created_at"`
+	// swagger:strfmt date-time
+	Updated time.Time `json:"updated_at"`
+}
