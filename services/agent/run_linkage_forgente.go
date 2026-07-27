@@ -27,7 +27,13 @@ import (
 // record that filled in only when an agent posted to it would stay empty for
 // exactly the agents worth attracting.
 func (n *agentNotifier) WorkflowRunStatusUpdate(ctx context.Context, repo *repo_model.Repository, _ *user_model.User, run *actions_model.ActionRun) {
-	if run == nil || !run.Status.IsDone() {
+	if run == nil {
+		return
+	}
+	// A run that has merely been queued or blocked has not started work, and a
+	// cancelling run is on its way to a terminal status that will arrive here
+	// anyway. Only starting and finishing are worth recording.
+	if !run.Status.IsRunning() && !run.Status.IsDone() {
 		return
 	}
 	// Only a run an issue assignment started can belong to a task. Note this
@@ -72,6 +78,13 @@ func (n *agentNotifier) WorkflowRunStatusUpdate(ctx context.Context, repo *repo_
 		return
 	}
 	if task == nil {
+		return
+	}
+
+	if run.Status.IsRunning() {
+		if err := BeginAttempt(ctx, task, run.ID); err != nil {
+			log.Error("agent: begin attempt on task %d from run %d: %v", task.ID, run.ID, err)
+		}
 		return
 	}
 

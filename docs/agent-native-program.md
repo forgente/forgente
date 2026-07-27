@@ -283,7 +283,7 @@ row that under-reports invites rebuilding something that exists.
 | AN-RUN-2 | Confidence rating; low-confidence changes held for review | — | L3 |
 | AN-RUN-3 | Cloud **and local** sandboxes (MXC; macOS/Linux/Windows) | Runners are already operator-hosted | shipped (substrate) |
 | AN-RUN-4 | Scheduled and event-triggered agent tasks | Assignment to an app records a task; scheduled dispatch not built | L3, part shipped (#84) |
-| AN-RUN-5 | Agent tasks REST API: 5 endpoints, task/session objects, 8 states | Task and session model with the same 8 states. Every attempt is recorded as its own session and the task's state is derived from them, so a retry no longer overwrites the previous outcome. Four of the five endpoints exist — task list and get, session list and get — all read-only; the write half is not built, and a session still only reaches `queued` and a terminal state because the run linkage acts on finished runs only | L3, part shipped (#82, #85, #102, #104) |
+| AN-RUN-5 | Agent tasks REST API: 5 endpoints, task/session objects, 8 states | Task and session model with the same 8 states. Every attempt is recorded as its own session and the task's state is derived from them, so a retry no longer overwrites the previous outcome. Four of the five endpoints exist — task list and get, session list and get — all read-only; the write half is not built. A session moves `queued` → `in_progress` → terminal from the run alone; the three states no run can imply (`idle`, `waiting_for_user`, `timed_out`) need the write half or a timeout the forge does not yet keep | L3, part shipped (#82, #85, #102, #104, #105) |
 | AN-RUN-6 | Session control page, session filters, cross-session insight | The task record on the issue it belongs to; no session view, no cross-session anything | L3, part shipped (#86) |
 | AN-RUN-7 | *No agent webhook events exist* — 75 events, none agent-related | — | open — see below |
 
@@ -738,14 +738,19 @@ read-only, newest first, so a task reporting `failed` can be opened to find the
 attempt that succeeded. A session or task belonging to another repository is
 reported missing rather than forbidden, so an id cannot be probed across them.
 
-Three things are still open, and are worth knowing before building on this.
+Made to move in #105. A session goes `queued` → `in_progress` → terminal,
+with the run attached when it starts rather than only when it ends, so a task
+being worked on says so. Only `running` and the terminal statuses are recorded:
+a queued or blocked run has not started work, and a cancelling one is on its way
+to a terminal status that arrives here anyway.
+
+Two things are still open, and are worth knowing before building on this.
 Writing a session from outside is absent on purpose — an agent reporting its own
 progress is an agent that can lie about it, so that surface deserves its own
-decision. A session only ever reaches `queued` and then a terminal state,
-because the run linkage acts on finished runs alone, which leaves most of the
-eight-state vocabulary unreachable. And there is no backfill: tasks created
-before #102 have no sessions and keep whatever state they were left with until
-their next attempt.
+decision, and the three states no run can imply (`idle`, `waiting_for_user`,
+`timed_out`) wait on it. And there is no backfill: tasks created before #102
+have no sessions and keep whatever state they were left with until their next
+attempt.
 
 The largest slice, and the one this document originally under-scoped.
 Assigning an issue or a review to an agent starts a *session*: a dispatched
