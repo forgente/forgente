@@ -67,6 +67,29 @@
         },
         "description": "ActivityFeedsList"
       },
+      "AgentSession": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/AgentSession"
+            }
+          }
+        },
+        "description": "AgentSession"
+      },
+      "AgentSessionList": {
+        "content": {
+          "application/json": {
+            "schema": {
+              "items": {
+                "$ref": "#/components/schemas/AgentSession"
+              },
+              "type": "array"
+            }
+          }
+        },
+        "description": "AgentSessionList"
+      },
       "AgentTask": {
         "content": {
           "application/json": {
@@ -2562,6 +2585,76 @@
         "required": [
           "time"
         ],
+        "type": "object",
+        "x-go-package": "forgente.com/modules/structs"
+      },
+      "AgentSession": {
+        "description": "or a continuation after a human answered a question — and each keeps its own\noutcome, so an earlier attempt stays readable after a later one ends\ndifferently.",
+        "properties": {
+          "base_ref": {
+            "type": "string",
+            "x-go-name": "BaseRef"
+          },
+          "completed_at": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "CompletedAt"
+          },
+          "created_at": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "Created"
+          },
+          "error_message": {
+            "description": "ErrorMessage explains a failed state to a human",
+            "type": "string",
+            "x-go-name": "ErrorMessage"
+          },
+          "head_ref": {
+            "description": "HeadRef is the branch the agent works on, BaseRef what it targets",
+            "type": "string",
+            "x-go-name": "HeadRef"
+          },
+          "id": {
+            "description": "ID is the unique identifier for the session",
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "ID"
+          },
+          "model": {
+            "description": "Model records which model served the session, for provenance",
+            "type": "string",
+            "x-go-name": "Model"
+          },
+          "prompt": {
+            "description": "Prompt is what the agent was asked",
+            "type": "string",
+            "x-go-name": "Prompt"
+          },
+          "run_id": {
+            "description": "RunID is the Actions run that carried out the attempt, or 0 before one\nhas been attached. Actions is the sandbox, so logs, timing and\ncancellation live on the run rather than being duplicated here.",
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "RunID"
+          },
+          "state": {
+            "description": "State is one of queued, in_progress, completed, failed, idle,\nwaiting_for_user, timed_out, cancelled",
+            "type": "string",
+            "x-go-name": "State"
+          },
+          "task_id": {
+            "description": "TaskID is the task this is an attempt at",
+            "format": "int64",
+            "type": "integer",
+            "x-go-name": "TaskID"
+          },
+          "updated_at": {
+            "format": "date-time",
+            "type": "string",
+            "x-go-name": "Updated"
+          }
+        },
+        "title": "AgentSession is one attempt at a task. A task has many over time — a retry,",
         "type": "object",
         "x-go-package": "forgente.com/modules/structs"
       },
@@ -18080,6 +18173,53 @@
         ]
       }
     },
+    "/repos/{owner}/{repo}/agent/sessions/{id}": {
+      "get": {
+        "operationId": "repoGetAgentSession",
+        "parameters": [
+          {
+            "description": "owner of the repo",
+            "in": "path",
+            "name": "owner",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "name of the repo",
+            "in": "path",
+            "name": "repo",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "id of the session",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/AgentSession"
+          },
+          "404": {
+            "$ref": "#/components/responses/notFound"
+          }
+        },
+        "summary": "Get one attempt at an agent task",
+        "tags": [
+          "repository"
+        ]
+      }
+    },
     "/repos/{owner}/{repo}/agent/tasks": {
       "get": {
         "operationId": "repoListAgentTasks",
@@ -18191,6 +18331,53 @@
           }
         },
         "summary": "Get an agent task",
+        "tags": [
+          "repository"
+        ]
+      }
+    },
+    "/repos/{owner}/{repo}/agent/tasks/{id}/sessions": {
+      "get": {
+        "operationId": "repoListAgentTaskSessions",
+        "parameters": [
+          {
+            "description": "owner of the repo",
+            "in": "path",
+            "name": "owner",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "name of the repo",
+            "in": "path",
+            "name": "repo",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "description": "id of the task",
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "schema": {
+              "format": "int64",
+              "type": "integer"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/AgentSessionList"
+          },
+          "404": {
+            "$ref": "#/components/responses/notFound"
+          }
+        },
+        "summary": "List the attempts at an agent task",
         "tags": [
           "repository"
         ]

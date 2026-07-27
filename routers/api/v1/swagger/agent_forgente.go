@@ -20,3 +20,17 @@ type swaggerResponseAgentTaskList struct {
 	// in:body
 	Body []api.AgentTask `json:"body"`
 }
+
+// AgentSession
+// swagger:response AgentSession
+type swaggerResponseAgentSession struct {
+	// in:body
+	Body api.AgentSession `json:"body"`
+}
+
+// AgentSessionList
+// swagger:response AgentSessionList
+type swaggerResponseAgentSessionList struct {
+	// in:body
+	Body []api.AgentSession `json:"body"`
+}

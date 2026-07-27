@@ -19,6 +19,16 @@ func SessionsForTask(ctx context.Context, taskID int64) ([]*agent_model.Session,
 	return sessions, err
 }
 
+// GetSessionByID returns one attempt, or nil when it does not exist.
+func GetSessionByID(ctx context.Context, id int64) (*agent_model.Session, error) {
+	session := new(agent_model.Session)
+	has, err := db.GetEngine(ctx).ID(id).Get(session)
+	if err != nil || !has {
+		return nil, err
+	}
+	return session, nil
+}
+
 // LatestSessionForTask returns the most recent attempt, or nil when a task has
 // none yet.
 func LatestSessionForTask(ctx context.Context, taskID int64) (*agent_model.Session, error) {
