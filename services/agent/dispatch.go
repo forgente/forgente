@@ -117,6 +117,27 @@ func appForAssignee(ctx context.Context, assignee *user_model.User) *user_model.
 	return app
 }
 
+// BeginAttempt marks the attempt a task has under way as running, and records
+// which run is carrying it out.
+//
+// Until this existed a session went straight from queued to a terminal state,
+// which left most of the eight-state vocabulary unreachable and made the
+// record less informative than the run it points at. A task with no attempt
+// under way is left alone, as everywhere else.
+func BeginAttempt(ctx context.Context, task *agent_model.Task, runID int64) error {
+	session, err := ActiveSessionForTask(ctx, task.ID)
+	if err != nil || session == nil {
+		return err
+	}
+	if err := AttachRunToSession(ctx, session, runID); err != nil {
+		return err
+	}
+	if session.State == agent_model.StateInProgress {
+		return nil
+	}
+	return SetSessionState(ctx, session, agent_model.StateInProgress)
+}
+
 // CompleteAttempt finishes the attempt a task currently has under way, and
 // records which run carried it out. A task with no attempt under way is left
 // alone: there is nothing to finish, and writing a state onto it anyway is

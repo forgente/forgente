@@ -90,12 +90,47 @@ func testAgentTaskFollowsItsRun(t *testing.T, _ *url.URL) {
 		return got
 	}
 
-	t.Run("ARunStillGoingLeavesTheTaskAlone", func(t *testing.T) {
+	t.Run("ARunStillGoingMarksTheAttemptInProgress", func(t *testing.T) {
 		defer tests.PrintCurrentTest(t)()
 
+		// this used to assert the task stayed queued, which made sense when a
+		// task had no attempts to speak for it; a run that is executing is work
+		// in progress, and saying so is what makes the state vocabulary usable
 		run := newRun(t, actions_model.StatusRunning, &api.User{UserName: botUser.Name})
 		notifier.WorkflowRunStatusUpdate(t.Context(), repo, owner, run)
-		assert.Equal(t, agent_model.StateQueued, reload(t).State)
+		assert.Equal(t, agent_model.StateInProgress, reload(t).State)
+
+		session, err := agent_service.ActiveSessionForTask(t.Context(), reload(t).ID)
+		require.NoError(t, err)
+		require.NotNil(t, session)
+		assert.Equal(t, agent_model.StateInProgress, session.State)
+		assert.Equal(t, run.ID, session.RunID, "the run is attached when it starts, not only when it ends")
+	})
+
+	t.Run("AQueuedRunIsNotYetInProgress", func(t *testing.T) {
+		defer tests.PrintCurrentTest(t)()
+
+		// waiting and blocked runs have not started work; only running and the
+		// terminal statuses are worth recording
+		second := unittest.AssertExistsAndLoadBean(t, &issues_model.Issue{RepoID: repo.ID, Index: 5})
+		require.NoError(t, second.LoadRepo(t.Context()))
+		_, _, err := issue_service.ToggleAssigneeWithNotify(t.Context(), second, owner, botUser.ID)
+		require.NoError(t, err)
+
+		waiting := newRun(t, actions_model.StatusWaiting, &api.User{UserName: botUser.Name})
+		payload, err := json.Marshal(&api.IssuePayload{
+			Action:   api.HookIssueAssigned,
+			Index:    second.Index,
+			Assignee: &api.User{UserName: botUser.Name},
+		})
+		require.NoError(t, err)
+		waiting.EventPayload = string(payload)
+		notifier.WorkflowRunStatusUpdate(t.Context(), repo, owner, waiting)
+
+		task, err := agent_service.TaskForIssue(t.Context(), second.ID, app.ID)
+		require.NoError(t, err)
+		require.NotNil(t, task)
+		assert.Equal(t, agent_model.StateQueued, task.State)
 	})
 
 	t.Run("AnUnrelatedEventIsIgnored", func(t *testing.T) {
@@ -104,10 +139,13 @@ func testAgentTaskFollowsItsRun(t *testing.T, _ *url.URL) {
 		// the run carries the specific hook event, issue_assign; the tasks API
 		// reports the coarser "issues", and believing that listing is what made
 		// the first version of this match nothing at all
+		before := reload(t).State
 		run := newRun(t, actions_model.StatusSuccess, &api.User{UserName: botUser.Name})
 		run.Event = webhook_module.HookEventIssues
 		notifier.WorkflowRunStatusUpdate(t.Context(), repo, owner, run)
-		assert.Equal(t, agent_model.StateQueued, reload(t).State)
+		// asserted as unchanged rather than as a literal, so this keeps testing
+		// that the run was ignored when the surrounding states move
+		assert.Equal(t, before, reload(t).State)
 	})
 
 	t.Run("ARunWithoutAnAssigneeIsNotOurs", func(t *testing.T) {
@@ -115,9 +153,10 @@ func testAgentTaskFollowsItsRun(t *testing.T, _ *url.URL) {
 
 		// before the assignee reached the payload this was every run, which is
 		// why the task could never advance
+		before := reload(t).State
 		run := newRun(t, actions_model.StatusSuccess, nil)
 		notifier.WorkflowRunStatusUpdate(t.Context(), repo, owner, run)
-		assert.Equal(t, agent_model.StateQueued, reload(t).State)
+		assert.Equal(t, before, reload(t).State)
 	})
 
 	t.Run("SuccessCompletesTheTask", func(t *testing.T) {
