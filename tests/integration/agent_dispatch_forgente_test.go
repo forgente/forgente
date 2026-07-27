@@ -70,12 +70,14 @@ func testAgentDispatchOnAssignment(t *testing.T, _ *url.URL) {
 		assert.Equal(t, agent_model.StateCancelled, task.State)
 	})
 
-	t.Run("ReassignmentRevivesRatherThanDuplicates", func(t *testing.T) {
+	t.Run("ReassignmentStartsAnotherAttemptOnTheSameTask", func(t *testing.T) {
 		defer tests.PrintCurrentTest(t)()
 
 		before, err := agent_service.TaskForIssue(t.Context(), issue.ID, app.ID)
 		require.NoError(t, err)
 		require.NotNil(t, before)
+		sessionsBefore, err := agent_service.SessionsForTask(t.Context(), before.ID)
+		require.NoError(t, err)
 
 		_, _, err = issue_service.ToggleAssigneeWithNotify(t.Context(), issue, owner, botUser.ID)
 		require.NoError(t, err)
@@ -83,9 +85,14 @@ func testAgentDispatchOnAssignment(t *testing.T, _ *url.URL) {
 		after, err := agent_service.TaskForIssue(t.Context(), issue.ID, app.ID)
 		require.NoError(t, err)
 		require.NotNil(t, after)
-		// the same task comes back to life; asking twice is not two requests
+		// asking twice is not two requests: the task keeps its identity, and the
+		// retry is recorded as another attempt rather than by rewriting the row
 		assert.Equal(t, before.ID, after.ID)
 		assert.Equal(t, agent_model.StateQueued, after.State)
+
+		sessionsAfter, err := agent_service.SessionsForTask(t.Context(), after.ID)
+		require.NoError(t, err)
+		assert.Len(t, sessionsAfter, len(sessionsBefore)+1, "a retry should add an attempt, not replace one")
 	})
 
 	t.Run("SuspendedAppRecordsNothing", func(t *testing.T) {

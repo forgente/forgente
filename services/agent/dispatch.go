@@ -42,12 +42,19 @@ func StartTaskForIssue(ctx context.Context, doer *user_model.User, issue *issues
 		return nil, err
 	}
 	if existing != nil {
-		// re-assignment of an app already working is not a new request; only
-		// a finished task is worth reviving
-		if !existing.State.IsTerminal() {
+		// re-assignment of an app already working is not a new request
+		active, err := ActiveSessionForTask(ctx, existing.ID)
+		if err != nil {
+			return nil, err
+		}
+		if active != nil {
 			return existing, nil
 		}
-		if err := setTaskState(ctx, existing, agent_model.StateQueued); err != nil {
+		// asking again after the work finished is a retry, and a retry is a new
+		// attempt on the same task rather than a rewrite of the old one. An
+		// earlier version revived the task row here instead, which is what
+		// erased the outcome of the attempt before it.
+		if _, err := StartSession(ctx, existing, issue.Title); err != nil {
 			return nil, err
 		}
 		return existing, nil
@@ -65,6 +72,9 @@ func StartTaskForIssue(ctx context.Context, doer *user_model.User, issue *issues
 	if err := db.Insert(ctx, task); err != nil {
 		return nil, err
 	}
+	if _, err := StartSession(ctx, task, issue.Title); err != nil {
+		return nil, err
+	}
 	return task, nil
 }
 
@@ -76,16 +86,14 @@ func CancelTaskForIssue(ctx context.Context, issueID, appID int64) error {
 	if err != nil || task == nil {
 		return err
 	}
-	if task.State.IsTerminal() {
-		return nil
+	// what unassignment stops is the attempt under way; a task with none is
+	// already finished, and cancelling it would rewrite history rather than
+	// stop anything
+	session, err := ActiveSessionForTask(ctx, task.ID)
+	if err != nil || session == nil {
+		return err
 	}
-	return setTaskState(ctx, task, agent_model.StateCancelled)
-}
-
-func setTaskState(ctx context.Context, task *agent_model.Task, state agent_model.State) error {
-	task.State = state
-	_, err := db.GetEngine(ctx).ID(task.ID).Cols("state", "updated_unix").Update(task)
-	return err
+	return SetSessionState(ctx, session, agent_model.StateCancelled)
 }
 
 // appForAssignee resolves an assignee to the app it acts as, or nil when the
@@ -109,20 +117,25 @@ func appForAssignee(ctx context.Context, assignee *user_model.User) *user_model.
 	return app
 }
 
-// CompleteTask marks a task finished.
+// CompleteAttempt finishes the attempt a task currently has under way, and
+// records which run carried it out. A task with no attempt under way is left
+// alone: there is nothing to finish, and writing a state onto it anyway is
+// what the session layer exists to stop.
 //
 // It deliberately does not archive. An earlier draft did, on the reasoning that
 // finished work is done with — but archiving hides a task from default
 // listings, so completing one would make it vanish at the moment somebody wants
 // to look at what the agent did. Archiving stays a separate, deliberate action.
-func CompleteTask(ctx context.Context, task *agent_model.Task, state agent_model.State) error {
+func CompleteAttempt(ctx context.Context, task *agent_model.Task, state agent_model.State, runID int64) error {
 	if !state.IsTerminal() {
-		return util.NewInvalidArgumentErrorf("cannot complete a task into non-terminal state %q", state)
+		return util.NewInvalidArgumentErrorf("cannot complete an attempt into non-terminal state %q", state)
 	}
-	if task.State.IsTerminal() {
-		// a run that reports twice, or a task cancelled by unassignment while
-		// its run was still going, must not be walked back
-		return nil
+	session, err := ActiveSessionForTask(ctx, task.ID)
+	if err != nil || session == nil {
+		return err
 	}
-	return setTaskState(ctx, task, state)
+	if err := AttachRunToSession(ctx, session, runID); err != nil {
+		return err
+	}
+	return SetSessionState(ctx, session, state)
 }
