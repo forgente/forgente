@@ -733,7 +733,7 @@ ownership rather than care. Verified on the same instance the defect was found
 on: three attempts, two successes and a failure, all three still readable
 afterwards.
 
-#104 made them readable: a session list per task and a single session get, both
+Made readable in #104: a session list per task and a single session get, both
 read-only, newest first, so a task reporting `failed` can be opened to find the
 attempt that succeeded. A session or task belonging to another repository is
 reported missing rather than forbidden, so an id cannot be probed across them.
