@@ -1,7 +1,8 @@
 # Agent sessions: design
 
-**Status: decided, not yet built.** This is the remaining slice of L3 in
-[agent-native-program.md](agent-native-program.md).
+**Status: built in #102.** This is the design it was built to, kept because the
+reasoning outlives the change. What shipped is the record itself; sessions are
+not yet exposed over the API, which is the next slice.
 
 It is not a new feature. The task and session pair was designed together and
 half of it shipped; this document is about finishing the half that did not, and
