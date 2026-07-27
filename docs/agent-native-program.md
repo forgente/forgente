@@ -283,7 +283,7 @@ row that under-reports invites rebuilding something that exists.
 | AN-RUN-2 | Confidence rating; low-confidence changes held for review | — | L3 |
 | AN-RUN-3 | Cloud **and local** sandboxes (MXC; macOS/Linux/Windows) | Runners are already operator-hosted | shipped (substrate) |
 | AN-RUN-4 | Scheduled and event-triggered agent tasks | Assignment to an app records a task; scheduled dispatch not built | L3, part shipped (#84) |
-| AN-RUN-5 | Agent tasks REST API: 5 endpoints, task/session objects, 8 states | Task and session model with the same 8 states, plus list and get; the write half and sessions themselves are not built | L3, part shipped (#82, #85) |
+| AN-RUN-5 | Agent tasks REST API: 5 endpoints, task/session objects, 8 states | Task and session model with the same 8 states, plus list and get. The write half is not built, and the session table is registered but dead — nothing reads or writes it, so a retry overwrites the previous attempt's outcome instead of recording a second one | L3, part shipped (#82, #85) |
 | AN-RUN-6 | Session control page, session filters, cross-session insight | The task record on the issue it belongs to; no session view, no cross-session anything | L3, part shipped (#86) |
 | AN-RUN-7 | *No agent webhook events exist* — 75 events, none agent-related | — | open — see below |
 
@@ -716,6 +716,15 @@ document specified — see the correction there.
 
 What remains in this layer is sessions themselves. Every other governance row
 is shipped or excluded.
+
+Designed in [agent-sessions.md](agent-sessions.md), which corrects the framing
+above: this is not the "harder half" of a feature but the missing half of a
+pair, and the shipped half is lossy without it. The session table is registered
+and entirely dead, so with nowhere to record an attempt, a re-assignment revives
+the task row and overwrites the previous outcome — observed on a live instance,
+where a task whose first run succeeded ended up reporting `failed`. Fixing the
+record does not require the session view, the write API, or anything else in
+`AN-RUN-6`.
 
 The largest slice, and the one this document originally under-scoped.
 Assigning an issue or a review to an agent starts a *session*: a dispatched
