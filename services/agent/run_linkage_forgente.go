@@ -75,8 +75,8 @@ func (n *agentNotifier) WorkflowRunStatusUpdate(ctx context.Context, repo *repo_
 		return
 	}
 
-	if err := CompleteTask(ctx, task, stateForRunStatus(run.Status)); err != nil {
-		log.Error("agent: complete task %d from run %d: %v", task.ID, run.ID, err)
+	if err := CompleteAttempt(ctx, task, stateForRunStatus(run.Status), run.ID); err != nil {
+		log.Error("agent: complete attempt on task %d from run %d: %v", task.ID, run.ID, err)
 	}
 }
 
