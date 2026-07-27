@@ -73,12 +73,16 @@ jobs:
       - name: Get a token for the app
         id: app-token
         run: |
-          resp=$(curl -sSf -X POST \
+          code=$(curl -sS -o /tmp/resp.json -w '%{http_code}' -X POST \
             -H "Authorization: Bearer ${{ secrets.GITEA_TOKEN }}" \
             -H "Content-Type: application/json" \
             -d '{"app": "myagent"}' \
             "${{ github.server_url }}/api/v1/repos/${{ github.repository }}/actions/app-token")
-          token=$(printf '%s' "$resp" | sed -n 's/.*"token":"\([^"]*\)".*/\1/p')
+          if [ "$code" != "201" ]; then
+            echo "app token refused ($code): $(cat /tmp/resp.json)"
+            exit 1
+          fi
+          token=$(sed -n 's/.*"token":"\([^"]*\)".*/\1/p' /tmp/resp.json)
           echo "::add-mask::$token"
           echo "token=$token" >> "$GITHUB_OUTPUT"
 
@@ -97,6 +101,16 @@ This parses with `sed` rather than `jq` on purpose. Common runner images —
 including the `node:*` ones act_runner defaults to — do not ship `jq`, and the
 step fails with `jq: command not found` before it ever reaches the forge. Use
 `jq` if your image has it; do not assume it does.
+
+It also checks the status itself instead of using `curl -sSf`. The forge
+explains every refusal in the response body — which runner label was required,
+that the app is suspended, that the run is a fork pull request — and `-f`
+discards that body, leaving `curl: (22) The requested URL returned error: 403`
+and nothing to act on. Every refusal listed below looks identical that way.
+
+Print the status and the body **on one line**. A step that exits immediately
+after writing can lose its last output before the runner uploads it, and the
+line you lose is the one you needed.
 
 Mask the token as soon as you have it. It is short-lived, but a log is
 permanent.
@@ -126,11 +140,15 @@ comes from `NO_REPLY_ADDRESS`, which defaults to `noreply.` followed by the
 instance's own domain — so it is *your* domain, not `example.com`, unless you
 set it explicitly.
 
-**You cannot look this address up.** Apps are created with a private email, so
-it appears neither on the app's profile nor in the API — construct it from the
-app's name and your no-reply domain. Nothing will tell you that you got it
-wrong: the push succeeds either way, and the only symptom is a commit whose
-author never resolves to an account.
+The API will also tell you, in a second form. Apps are created with a private
+email, so the app's profile page shows no address at all — but
+`GET /api/v1/users/myagent` returns the id-prefixed no-reply form,
+`42+myagent@noreply.example.com`. Both forms attribute to the app; use whichever
+you prefer.
+
+**Nothing will tell you that you got it wrong.** A plausible-looking address the
+app does not own pushes exactly as successfully as a correct one, and the only
+symptom is a commit whose author never resolves to an account.
 
 ### Keep an app's work on runners you trust
 
