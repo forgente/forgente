@@ -2,7 +2,7 @@
 
 **Status: proposed, not built.** This is the last unstarted piece of L2 in
 [agent-native-program.md](agent-native-program.md). It exists to be argued
-with — two decisions in it are not mine to make, and they are marked.
+with — one decision in it is not mine to make, and it is marked.
 
 The layer's requirement, as recorded: *endpoint, credential, and model
 selection at the instance and organization level. Credentials are secrets and
@@ -51,10 +51,10 @@ The forge hands the provider key to the job, in the environment, and the
 harness uses it exactly as it would outside Forgente.
 
 - **For:** nothing to build beyond storage and delivery. Every existing harness
-  works unmodified — they already read `ANTHROPIC_API_KEY`, `OPENAI_API_KEY`
-  and friends from the environment. Zero inference surface for the forge to
-  maintain. No latency added, no streaming to proxy, no provider API shapes to
-  track.
+  works unmodified — a credential in the environment, or in the harness's own
+  config file, is the arrangement they are all built for. Zero inference
+  surface for the forge to maintain. No latency added, no streaming to proxy,
+  no provider API shapes to track.
 - **Against:** it *is* the thing the requirement forbids. A run is repository
   code. Anyone who can edit a workflow can print the key. Narrowing delivery to
   designated runners (`AN-GOV-5`, shipped) reduces the blast radius but does not
@@ -85,28 +85,67 @@ configured provider and returns the response.
   to it (fork-PR refusal, suspension, runner-label designation, grant scoping)
   comes along without new work.
 - **Against:** the forge joins the inference data path. Streaming, latency,
-  timeouts, retries, token accounting, and at least one provider API shape
-  become the forge's problem. This is a real, ongoing surface, and it is the
-  reason to be suspicious of my own preference for it.
+  timeouts, retries, token accounting, and — as measured below — two provider
+  API shapes become the forge's problem. This is a real, ongoing surface, and
+  it is the reason to be suspicious of my own preference for it.
 
-### Recommendation: B, deliberately small
+### What the harnesses actually send
 
-Take Option B, and hold its surface down to one thing: **an
-OpenAI-compatible endpoint in, a configured provider out.**
+An earlier draft of this document recommended holding Option B down to *"an
+OpenAI-compatible endpoint in, a configured provider out"*, on the reasoning
+that it is the one shape the largest number of harnesses can already emit. That
+reasoning was from memory, and it was wrong.
 
-The forge should not attempt to normalise every provider's API. It should
-accept the one request shape that the largest number of harnesses can already
-emit, and forward. Where a configured provider speaks something else, that is a
-per-provider adapter, added when a real user needs it — not a framework built
-in advance.
+Measured on 2026-07-27 by pointing each harness at a recording endpoint and
+reading what arrived:
 
-> **Verify before building.** My understanding is that most current providers
-> either expose an OpenAI-compatible endpoint or are commonly fronted by
-> something that does, and that some — Anthropic's own API, Bedrock — do not
-> natively. That claim is from training data, not from reading their docs
-> today, and it is load-bearing for how small this stays. Check it against
-> primary sources first; if it is wrong, Option B gets more expensive and the
-> fork deserves re-litigating.
+| Harness | Endpoint | Wire shape | Auth | Streaming |
+|---|---|---|---|---|
+| Claude Code 2.1.220 | `POST /v1/messages?beta=true` | Anthropic Messages | `Authorization: Bearer` | `stream: true` |
+| Codex 0.145.0 | `POST /v1/responses` | OpenAI **Responses** | `Authorization: Bearer` | `stream: true` |
+
+**Neither speaks OpenAI Chat Completions.** Codex refuses it outright — a
+provider configured with `wire_api = "chat"` fails to load with *"`wire_api =
+"chat"` is no longer supported"*. So the shape the earlier draft chose as the
+common denominator is one that neither of the two most likely harnesses would
+have used.
+
+Two things survive the correction, and they are the ones that matter:
+
+- **Both can be pointed at an operator-controlled URL**, and both then send
+  *everything* there — Claude Code through `ANTHROPIC_BASE_URL`, Codex through
+  a `model_providers` entry in its config. Option B is mechanically possible
+  for both.
+- **Both authenticate with a bearer token.** That is the same shape as the app
+  token a run already exchanges its job token for (`AN-IDENT-2`), so the
+  credential half of this needs no new mechanism.
+
+### Recommendation: B, sized honestly
+
+Take Option B. It is still the right side of the fork — but it is bigger than
+the earlier draft claimed, and the difference should be budgeted rather than
+discovered.
+
+**Two wire APIs, not one.** Anthropic Messages and OpenAI Responses, forwarded
+as opaquely as possible. The forge should authenticate the caller, swap in the
+configured provider's credential, and get out of the way — it should not parse,
+normalise, or unify the two shapes. A request body carrying `thinking`,
+`context_management`, `output_config` and 28 tool definitions is not a schema
+worth tracking; it is a payload worth forwarding untouched.
+
+**Streaming is mandatory, not an optimisation.** Both harnesses set
+`stream: true` on the main path, and Codex fails with *"stream disconnected
+before completion"* against a non-streaming endpoint. A buffering proxy does
+not work at all. This was listed as a cost in the earlier draft; it is a
+requirement.
+
+**Pointing a harness at your endpoint does not confine its egress.** In the
+same measurement, Codex independently called
+`https://chatgpt.com/backend-api/plugins/featured` — unrelated to the
+configured provider. Configuring inference through the forge restricts where
+*inference* goes and nothing else. This is worth stating because it is easy to
+assume otherwise, and because it is the same distinction `AN-GOV-5` already
+makes: what the forge designates, the runner's own configuration enforces.
 
 ## What this does *not* decide
 
@@ -153,26 +192,40 @@ the app token, which is readable exactly once at creation.
 **Configuration surface.** Organization settings, beside Apps. The natural home
 is the page that already exists rather than a new section.
 
-## Open questions — these are yours, not mine
+## What has to run for this to count as done
 
-1. **Is the recorded requirement the real one?** Option B follows from *"never
-   exposed to repository code."* If that clause is aspirational rather than
-   binding, Option A is dramatically cheaper and the whole design collapses to
-   a table and a delivery step. I would rather be told the requirement is
-   softer than build a proxy nobody wanted.
+Neutrality is a claim until two *different* harnesses run against one
+configuration. The measurement above settles which two: **Claude Code and
+Codex**, because they span the two wire APIs rather than merely being two
+popular names. A proxy that serves both has demonstrated the adapter boundary
+is real; a proxy that serves either one alone has demonstrated nothing about
+neutrality, however well it works.
 
-2. **What has to run for this to count as done?** Neutrality is a claim until
-   two *different* harnesses run against one configuration. Which two is a
-   product decision. My instinct is one harness that speaks OpenAI-compatible
-   natively and one that does not, because the pair proves the adapter boundary
-   is real rather than assumed — but the specific choices should be agents you
-   expect early users to actually bring.
+## The open question — this one is yours
 
-## Prior finding worth not repeating
+**Is the recorded requirement the real one?** Option B follows from *"never
+exposed to repository code."* If that clause is aspirational rather than
+binding, Option A is dramatically cheaper and the whole design collapses to a
+table and a delivery step. I would rather be told the requirement is softer
+than build a proxy nobody wanted.
 
-Three times in this program, the substrate already contained what a layer
-planned to build: assignment-as-trigger, self-approval refusal, and runner
-label routing. Before building any of the above, check whether some part of it
-already exists — the check is cheap and it has paid every time. The egress
+The measurement makes this question sharper rather than softer. Option B now
+costs two wire APIs and a streaming data path, not one buffered shape — so the
+gap between the two options is wider than when the question was first asked,
+and the answer decides more.
+
+## Prior findings worth not repeating
+
+**Check whether it already exists.** Four times in this program, the substrate
+already contained what a layer planned to build: assignment-as-trigger,
+self-approval refusal, runner label routing, and permissions. The egress
 correction (#97) is the worked example: the spec named routing, routing was
 already there, and the actual gap was one field away in a different place.
+
+**Measure the thing you are designing around.** The wire-shape table above
+replaced a claim this document had already committed to, and the claim was
+load-bearing — it was the entire argument for how small Option B could be.
+Recalled facts about other people's software age badly and give no signal when
+they have. Pointing the two harnesses at a recording endpoint took under an
+hour and changed the recommendation; reading about them for a day would not
+have, because the earlier draft was written by exactly that method.

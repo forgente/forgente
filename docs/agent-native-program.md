@@ -679,8 +679,15 @@ Two independent pieces of configuration:
   secrets are exposed to repository code by design. That forces a choice
   between delivering the credential to the run anyway (and rewriting the
   requirement to say so) and having the forge proxy inference so the credential
-  never leaves it. The doc recommends the second, kept deliberately small, and
-  leaves two decisions open.
+  never leaves it. The doc recommends the second, and leaves one decision open:
+  whether the recorded requirement is binding or aspirational.
+
+  Measurement corrected that doc once already. Claude Code speaks Anthropic
+  Messages and Codex speaks OpenAI Responses — neither speaks OpenAI Chat
+  Completions, which an earlier draft had picked as the common denominator. A
+  proxy therefore costs two wire APIs and real streaming, not one buffered
+  shape. The same pair is what "harness-neutral" has to be demonstrated
+  against, because they span the two shapes.
 
 ### L3 — Agent sessions and the sandbox contract
 
