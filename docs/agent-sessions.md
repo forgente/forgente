@@ -1,6 +1,6 @@
 # Agent sessions: design
 
-**Status: proposed, not built.** This is the remaining slice of L3 in
+**Status: decided, not yet built.** This is the remaining slice of L3 in
 [agent-native-program.md](agent-native-program.md).
 
 It is not a new feature. The task and session pair was designed together and
@@ -75,25 +75,55 @@ is `AN-RUN-6` and can follow. None of it is needed to stop losing history.
 The decision that matters is **where a task's state comes from once sessions
 exist.**
 
-Two candidates:
+First, a correction to how this was originally framed here. Derived-versus-
+stored does not decide whether history survives. Once sessions exist at all,
+each attempt's outcome lives on its own row and is safe either way; what loses
+it today is the *revive*, and giving an attempt somewhere to go removes the
+revive on its own. The real question is narrower: **what does `task.state`
+mean, and who is allowed to write it.**
 
-- **Derived.** A task's state is a function of its sessions: active if any
-  session is active, otherwise the outcome of the most recent one. No task
-  state is ever written directly.
-- **Stored, updated by the session.** The task keeps its `State` column and a
-  session's terminal transition writes it.
+### Decided
 
-**Recommend derived**, for one reason: stored state is what produced the bug
-above. A column that two code paths write and neither owns is exactly the shape
-that lost the successful run. Deriving it makes the lossy case unrepresentable
-rather than merely fixed.
+`agent_task.state` is a **derived value, materialised into the existing column
+by exactly one writer, in the same transaction that changes a session's state.**
+No other code path writes it.
 
-The cost is real and should be stated: derivation means a listing cannot filter
-on `agent_task.state` with a plain `WHERE`, and the task table already indexes
-that column. Either the listing joins, or the column stays as a maintained
-cache with the sessions as the source of truth. The second is a middle path and
-is probably where this lands, but it should be chosen deliberately, because a
-cache that drifts is the original bug wearing a different hat.
+Derivation, in order:
+
+1. Any session active → the task is active (`in_progress` if any session is,
+   otherwise `queued`).
+2. Otherwise → the state of the **most recent** session.
+3. No sessions yet → `queued`.
+
+And the change that actually fixes the loss: **`StartTaskForIssue` stops
+reviving.** Re-assignment creates a new session and the task's state follows
+from it. The task row becomes immutable after creation apart from `ArchivedAt`
+and the derived column.
+
+### Why this shape
+
+**The column stays because the listing needs it.** `ListTasks`
+(`services/agent/list.go:31`) filters state with a plain `WHERE` and pages with
+`FindAndCount`. Computing state per row turns that into a join plus an
+aggregate, and pagination over an aggregate, which is a real cost imposed on a
+listing that works today.
+
+**Single writer in one transaction is the load-bearing part, not the caching.**
+The original loss was not caused by storing state. It was caused by two paths
+writing one column with neither owning it — `CompleteTask` writing outcomes and
+`StartTaskForIssue` writing revivals, each correct in isolation. Funnelling
+every write through the function that changes a session makes a task state that
+contradicts its sessions unrepresentable, which is the same choke-point
+discipline `CheckPullMergeable` and `MintAppRunToken` already use.
+
+**Most recent wins, not sticky-completed.** If attempt one succeeded and
+attempt two failed, the task reads `failed`. That is honest: the last attempt
+did fail, whatever attempt one produced still exists, and session one still
+records `completed`. A best-outcome rule would hide real failures, which is a
+worse fault than the one it fixes.
+
+**No schema change.** Both tables exist and `Session.RunID` is already there for
+the run linkage. This is entirely code.
 
 ## What this does not decide
 
@@ -115,17 +145,16 @@ the `IsTerminal` reading — `idle` and `waiting_for_user` are pauses, not
 endings — is already recorded in `models/agent/state.go` as ours rather than
 theirs.
 
-## Open question
+## Retry trigger
 
-**Should a re-assignment start a new session, or is unassign-then-reassign the
-only way to retry?** Today re-assigning an app whose task is finished revives
-it. With sessions, that becomes "new session on the same task", which is
-probably right — but it means the assignment event is the retry trigger, and an
-accidental double-assign creates an attempt. The alternative is an explicit
-retry action, which is more deliberate and less discoverable.
+**Re-assignment creates a session.** The alternative was an explicit retry
+action, which is more deliberate and less discoverable; this keeps one trigger
+rather than two, and it is what the current code is already reaching for when
+it revives the row.
 
-I lean towards re-assignment creating a session, because it keeps one trigger
-rather than two and matches what the current code already tries to express.
+The cost accepted: an accidental double-assign creates an attempt. That is
+visible in the session list rather than silent, which is the property that
+matters.
 
 ## Prior finding worth not repeating
 
