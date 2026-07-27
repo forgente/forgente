@@ -283,7 +283,7 @@ row that under-reports invites rebuilding something that exists.
 | AN-RUN-2 | Confidence rating; low-confidence changes held for review | — | L3 |
 | AN-RUN-3 | Cloud **and local** sandboxes (MXC; macOS/Linux/Windows) | Runners are already operator-hosted | shipped (substrate) |
 | AN-RUN-4 | Scheduled and event-triggered agent tasks | Assignment to an app records a task; scheduled dispatch not built | L3, part shipped (#84) |
-| AN-RUN-5 | Agent tasks REST API: 5 endpoints, task/session objects, 8 states | Task and session model with the same 8 states. Every attempt is recorded as its own session and the task's state is derived from them, so a retry no longer overwrites the previous outcome. Two of the five endpoints exist (task list and get); sessions are recorded but not yet exposed over the API, and the write half is not built | L3, part shipped (#82, #85, #102) |
+| AN-RUN-5 | Agent tasks REST API: 5 endpoints, task/session objects, 8 states | Task and session model with the same 8 states. Every attempt is recorded as its own session and the task's state is derived from them, so a retry no longer overwrites the previous outcome. Four of the five endpoints exist — task list and get, session list and get — all read-only; the write half is not built, and a session still only reaches `queued` and a terminal state because the run linkage acts on finished runs only | L3, part shipped (#82, #85, #102, #104) |
 | AN-RUN-6 | Session control page, session filters, cross-session insight | The task record on the issue it belongs to; no session view, no cross-session anything | L3, part shipped (#86) |
 | AN-RUN-7 | *No agent webhook events exist* — 75 events, none agent-related | — | open — see below |
 
@@ -714,8 +714,8 @@ visible new pull request, not a silent promotion of this one.
 The egress restriction below is done too (#97), though not in the shape this
 document specified — see the correction there.
 
-What remains in this layer is surfacing sessions and the write half of their
-API. Every other governance row is shipped or excluded.
+What remains in this layer is the write half of the session API and the session
+view. Every other governance row is shipped or excluded.
 
 Designed in [agent-sessions.md](agent-sessions.md), which corrected the framing
 above: this was never the "harder half" of a feature but the missing half of a
@@ -733,9 +733,17 @@ ownership rather than care. Verified on the same instance the defect was found
 on: three attempts, two successes and a failure, all three still readable
 afterwards.
 
-What that does *not* yet do is let anyone see them. Sessions are recorded and
-exposed nowhere — no endpoint returns one — so the next slice is the read API,
-and after it `AN-RUN-6`'s session view. There is also no backfill: tasks created
+#104 made them readable: a session list per task and a single session get, both
+read-only, newest first, so a task reporting `failed` can be opened to find the
+attempt that succeeded. A session or task belonging to another repository is
+reported missing rather than forbidden, so an id cannot be probed across them.
+
+Three things are still open, and are worth knowing before building on this.
+Writing a session from outside is absent on purpose — an agent reporting its own
+progress is an agent that can lie about it, so that surface deserves its own
+decision. A session only ever reaches `queued` and then a terminal state,
+because the run linkage acts on finished runs alone, which leaves most of the
+eight-state vocabulary unreachable. And there is no backfill: tasks created
 before #102 have no sessions and keep whatever state they were left with until
 their next attempt.
 
